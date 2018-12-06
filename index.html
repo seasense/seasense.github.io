@@ -19,6 +19,70 @@
 
 						
 		</script> 
+
+
+		<script>
+			function secondCellFx(secondCell_state,thirdCell_state){
+	if(secondCell_state=="off"){
+		var secondCell = document.createElement("TD");
+		secondCell.setAttribute("id","Cell2");
+
+		document.getElementById("row1").appendChild(secondCell);
+
+		var list_of_links = document.createElement("ul");
+		secondCell.appendChild(list_of_links);
+		secondCell.setAttribute("style","text-decoration:underline")
+
+		point_about = document.createElement("li");
+		point_about.setAttribute("id","link_about");
+		point_about.setAttribute("style","cursor:pointer");
+		point_about.setAttribute("onclick","about_cellFx()");
+		var link_about = document.createTextNode("about");
+		point_about.appendChild(link_about);
+		list_of_links.appendChild(point_about);
+
+		point_related = document.createElement("li");
+		point_related.setAttribute("id","link_related");
+		point_related.setAttribute("style","cursor:pointer")
+		point_related.setAttribute("onclick","related_cellFx()");
+		var link_related = document.createTextNode("related");
+		point_related.appendChild(link_related)
+		list_of_links.appendChild(point_related);
+
+		point_tools = document.createElement("li");
+		point_tools.setAttribute("id","link_OS");
+		point_tools.setAttribute("style","cursor:pointer")
+		point_tools.setAttribute("onclick","tools_cellFx()");
+		var link_tools = document.createTextNode("tools");
+		point_tools.appendChild(link_tools)
+		list_of_links.appendChild(point_tools);
+
+		point_papers = document.createElement("li");
+		point_papers.setAttribute("id","link_papers");
+		point_papers.setAttribute("style","cursor:pointer")
+		point_papers.setAttribute("onclick","papers_cellFx()");
+		var link_papers = document.createTextNode("papers");
+		point_papers.appendChild(link_papers)
+		list_of_links.appendChild(point_papers);
+		
+		secondCell_state[0] = "on"
+
+		/*var close_button = document.createElement("BUTTON");
+		close_button.appendChild(document.createTextNode("close"));
+		close_button.setAttribute("align","center");
+		secondCell.appendChild(close_button);*/
+		
+		
+	}else{
+		if(thirdCell_state=="off"){
+			secondCell_state[0] = "off"
+			document.getElementById("Cell2").remove()};
+		}
+
+};
+		</script>
+
+
 		<table class="center" style="text-align:center" id="table">
 
 			<tr id = "row1" >
