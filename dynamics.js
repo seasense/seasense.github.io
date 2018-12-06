@@ -404,7 +404,7 @@ function papers_cellFx(){
 
 				var CogSci_Link = document.createElement('a');
 				CogSci_Link.setAttribute("style","color:black");
-				CogSci_Link.href = "./Abstract_CogNetSci2018_PSeitiTLeyHFlemDAlbert.PDF";
+				CogSci_Link.href = "./Abstract_CogNetSci2018_PSeitiTLeyHFlemDAlbert.pdf";
 				CogSci_Link.appendChild(document.createTextNode("Talk at NetSci 2018 Satellite, Paris"));
 				papersCellDiv.appendChild(CogSci_Link);
 
