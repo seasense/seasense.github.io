@@ -246,13 +246,20 @@ function related_cellFx(){
 				relatedCellDiv.appendChild(document.createTextNode("***"));
 				relatedCellDiv.appendChild(document.createElement("p"));
 
-				var CEITER_Link = document.createElement('a');
-				CEITER_Link.setAttribute("style","color:black");
-				CEITER_Link.href = "http://ceiter.tlu.ee/";
-				CEITER_Link.appendChild(document.createTextNode("School of Educational Sciences"));
-				relatedCellDiv.appendChild(CEITER_Link);
-				relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
+				var Merits_Link = document.createElement('a');
+				Merits_Link.setAttribute("style","color:black");
+				Merits_Link.href = "https://meritsblog.wordpress.com/";
+				Merits_Link.appendChild(document.createTextNode("merits"));
+				relatedCellDiv.appendChild(Merits_Link);
+				relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
+				relatedCellDiv.appendChild(document.createElement("p"));
 
+				var OMFix_Link = document.createElement('a');
+				OMFix_Link.setAttribute("style","color:black");
+				OMFix_Link.href = "https://omfix.wordpress.com/";
+				OMFix_Link.appendChild(document.createTextNode("omfix"));
+				relatedCellDiv.appendChild(OMFix_Link);
+				relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
 				relatedCellDiv.appendChild(document.createElement("p"));
 
 				var CSS_Link = document.createElement('a');
@@ -261,7 +268,14 @@ function related_cellFx(){
 				CSS_Link.appendChild(document.createTextNode("Cognitive Science Section"));
 				relatedCellDiv.appendChild(CSS_Link);
 				relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
+				relatedCellDiv.appendChild(document.createElement("p"));
 
+				var CEITER_Link = document.createElement('a');
+				CEITER_Link.setAttribute("style","color:black");
+				CEITER_Link.href = "http://ceiter.tlu.ee/";
+				CEITER_Link.appendChild(document.createTextNode("School of Educational Sciences"));
+				relatedCellDiv.appendChild(CEITER_Link);
+				relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
 				relatedCellDiv.appendChild(document.createElement("p"));
 
 				relatedCellDiv.appendChild(document.createTextNode("***"));
