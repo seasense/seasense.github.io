@@ -1,26 +1,6 @@
 /*var cell_i = (Math.floor(Math.random()*4));
 console.log(cell_i);*/
 
-function bgc() {document.getElementById("about").style.backgroundColor = "white";}
-
-function picFx() {
-	bgc();
-	var newPic = document.createElement("IMG");
-	newPic.setAttribute("src","./imgHP/logo_seasenseLab.png");
-	newPic.setAttribute("class","image");
-	newPic.setAttribute("align","center");
-	document.getElementById("about").innerHTML = "";
-	document.getElementById("about").appendChild(newPic);
-}
-
-//setInterval(function bgc() {document.getElementById("1").style.backgroundColor = "black";},1000);
-
-function timeout_On(ci,ti){
-      setTimeout(function(){ document.querySelector('[id='+ CSS.escape(ci) +']').style.backgroundColor = "white";}, ti);
-};
-function timeout_Off(ci,ti){
-      setTimeout(function(){ document.querySelector('[id='+ CSS.escape(ci) +']').style.backgroundColor = "black";}, ti);
-};
 
 
 
@@ -89,9 +69,10 @@ function about_cellFx(){
 		
 			var secondRow = document.getElementById("table").insertRow(1);
 			secondRow.setAttribute("id","row2")
-			/*var placeHolderCell = document.createElement("TD");
-			document.getElementById("row2").appendChild(placeHolderCell);
-			placeHolderCell.setAttribute("style","border:0px")*/
+			
+			/*var thirdRow = document.getElementById("table").insertRow(2);
+			thirdRow.setAttribute("id","row3")*/
+
 			var thirdCell = document.createElement("TD");	
 			thirdCell.setAttribute("id","ThirdCell")
 			
@@ -392,7 +373,7 @@ function papers_cellFx(){
 
 			var CogSci_Link = document.createElement('a');
 			CogSci_Link.setAttribute("style","color:black");
-			CogSci_Link.href = "./Abstract_CogNetSci2018_PSeitiTLeyHFlemDAlbert.PDF";
+			CogSci_Link.href = "./Abstract_CogNetSci2018_PSeitiTLeyHFlemDAlbert.pdf";
 			CogSci_Link.appendChild(document.createTextNode("Talk at NetSci 2018 Satellite, Paris"));
 			papersCellDiv.appendChild(CogSci_Link);
 			
