@@ -1,0 +1,186 @@
+<html>
+	<head>
+		<title>ACT</title>
+		
+		<script src="jspsych-5.0.3-act/jspsych.js"></script>
+		<script src="jspsych-5.0.3-act/plugins/jspsych-button-response-ACT.js"></script>
+		<script src="jspsych-5.0.3-act/plugins/jspsych-instructions.js"></script>
+		<script src="jspsych-5.0.3-act/plugins/jspsych-survey-text.js"></script>
+		<script src="jspsych-5.0.3-act/plugins/jspsych-survey-text_persCode.js"></script>
+		<script src="jspsych-5.0.3-act/plugins/jspsych-survey-multi-choice.js"></script>
+		
+		<link href="jspsych-5.0.3-act/css/jspsych_act.css" rel="stylesheet" type="text/css"></link>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	</head>
+	
+	<script>
+		function lettersFx () {
+			letters_trial_x = jsPsych.randomization.repeat(letters, 1),
+			letters_trial_x = letters_trial_x.slice(0,t_SetSize)
+			return letters_trial_x
+		};
+	</script>
+		
+	<script>
+		function eqGenerator () {
+			var eq_array_display = []
+			var eq_array_respCorrect = []
+			for (j = 0; j < nEqs; j++){
+				eqGeneFx_result = eqGeneFx ()
+				display_j = eqGeneFx_result.displayed_equation
+				response_j = eqGeneFx_result.required_response
+				eq_array_display.push(display_j)
+				eq_array_respCorrect.push(response_j);
+			}
+			return {eq_array_display:eq_array_display, eq_array_respCorrect: eq_array_respCorrect}
+		};
+	</script>
+
+	<script>
+
+		function pick_a_stimulus(){
+			return Math.floor(Math.random()*stimuli.length)
+		};
+
+	</script>
+
+	<script>
+		
+		function pick_a_stimulus2(){
+			for(i=0;i<stimuli.length;i++){
+				if(i==0){
+					var stimuli_ordered=[]
+					var stimuli_IDs=[]
+					for(x=0;x<stimuli.length;x++){stimuli_IDs.push(x)}
+				}
+				sample_i = Math.floor(Math.random()*stimuli_IDs.length)
+				
+				stimuli_ordered.push(stimuli_IDs[sample_i])
+				sample_i_ID = stimuli_IDs.indexOf(sample_i)
+				stimuli_IDs.splice(sample_i,1)
+				
+			}
+			return stimuli_ordered
+		}
+
+
+	</script>
+	
+	
+	<script>
+
+
+	var stimuli = ["rot","Meer"];
+	var nAsso_per_stim = 4;
+	
+	
+///////// Intro
+/////////
+	var welcome = {
+			type: 'instructions',
+			pages: [function(){return("Willkommen zum Associative Chaining Task (act), einer Aufgabe zum Bilden von Assoziationsketten.")}],
+			show_clickable_nav: true,
+			on_finish: function(data) { 
+				
+				stimulus_x = 0;
+				stimulus_order = pick_a_stimulus2();
+			},	
+	};
+	var informedConsent1 = {
+		type: 'survey-multi-choice',
+		questions: ["..."],
+		options: [["Ich stimme zu, dass meine pseudonymisierten Daten zur Ver&oumlffentlichung wissenschaftlicher Arbeiten verwendet werden"]],
+		required: [true]
+    };
+    var informedConsent2 = {
+		type: 'survey-multi-choice',
+		questions: ["..."],
+		options: [["Ich stimme zu, dass meine pseudonymisierten Daten zum Zweck der wissenschaftlichen Transparenz f&uumlr andere WissenschaftlerInnen im Open Science Framework (siehe https://osf.io/) verf&uumlgbar gemacht werden."]],
+		required: [true]
+    };
+    var informedConsent3 = {
+		type: 'survey-multi-choice',
+		questions: ["..."],
+		options: [["Ich habe die obigen Instruktionen gelesen und erkl&aumlre mich bereit zur Teilnahme."]],
+		required: [true]
+    };
+	
+	
+///////// Practice
+	var practice_overview = {
+		type: 'instructions',
+		pages: [""],
+		show_clickable_nav: true,
+	};
+
+	var prepare_for_next_stimulus = {
+		type: 'instructions',
+		pages: [function(){
+			if(stimulus_x==0){return "Es folgt nun der 1. Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""};
+			if(stimulus_x==(nAsso_per_stim-2)){return "Vielen Dank! Der Task ist nun zu Ende."};
+			if(stimulus_x>0&stimulus_x<(nAsso_per_stim-2)){ return "... Es folgt nun der n\xe4chste Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""}
+		}],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+			iter_i=0
+			
+		},
+	};
+
+	var associate = {
+  		type: 'button-response-act',
+  		is_html: true,
+		iteration: function(){return iter_i},
+		stimulus: function(){if(iter_i==0){stimulus_iter_i = stimuli[stimulus_order[stimulus_x]], cue="Begriff"}else{stimulus_iter_i = current_associate, cue="Vorherige Assoziation"};return ["<span style='font-size:30px; padding:30px'>"+cue+": "+stimulus_iter_i+""]},
+		showEndButton: true,
+		//prompt: "Zur Eingabe Deiner Assoziation klicke bzw. tippe auf die Buchstaben-Buttons.",
+		letters1: [["Q"],["W"],["E"],["R"],["T"],["Z"],["U"],["I"],["O"],["P"],["\xDC"],["L\xf6schen"]],
+		letters2: [["A"],["S"],["D"],["F"],["G"],["H"],["J"],["K"],["L"],["\xD6"],["\xC4"]],
+		letters3: [["Y"],["X"],["C"],["V"],["B"],["N"],["M"],["_"],["\xDF"]],	
+		prompt2: function(){return ("<br>"+"Anzahl noch zu produzierender Assoziationen: "+(nAsso_per_stim-(iter_i+1))+"")},
+		response_ends_trial: false,
+		on_finish: function(data) {  
+			iter_i+=1
+			if(iter_i==(nAsso_per_stim-1)){stimulus_x+=1;}
+			current_associate = data.clickedLetters
+		},	
+	};
+	
+	
+	
+	var associate_loop = {
+		timeline: [associate],
+		loop_function: function(data){
+				if(iter_i<nAsso_per_stim){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+	};
+	var stimulus_loop = {
+		timeline: [associate_loop,prepare_for_next_stimulus],
+		loop_function: function(data){
+				if(stimulus_x<stimuli.length){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+	};
+			
+	jsPsych.init({
+		timeline: [welcome,/*informedConsent1,informedConsent2,informedConsent3,*/prepare_for_next_stimulus,stimulus_loop],
+	   	fullscreen: false,
+	   	on_finish: function(data){
+	        jsPsych.data.localSave('myData_sendMeTo_pseiti@tlu.ee.txt', 'csv');
+	        $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
+	   }
+	});
+	
+		
+	</script>
+		
+</html>

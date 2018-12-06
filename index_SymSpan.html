@@ -1,0 +1,383 @@
+<html>
+	<head>
+		<title>SymmetrySpan</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="jspsych-5.0.3-sym/jspsych.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-text.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-button-response.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-button-response-judgeSym.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-button-response-hitCells.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-instructions.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-survey-likert.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-survey-text.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-survey-text_persCode.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-survey-multi-choice.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-single-stim.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/equations.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/matrices.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-rememberCells.js"></script>
+		<script src="jspsych-5.0.3-sym/plugins/jspsych-rememberCells-practice.js"></script>
+		<link href="jspsych-5.0.3-sym/css/jspsych_symSpan.css" rel="stylesheet" type="text/css"></link>
+			
+	</head>
+	
+	
+	<script>
+		function rememberCellsFx (t_SetSize) {
+			
+			var cells_trial_x = [];
+			var alreadySampled = [];
+			for(i=0;i<t_SetSize;i++){
+				var sample_i = Math.floor(Math.random()*16);
+				if(alreadySampled.includes(sample_i)===false){
+					cells_trial_x.push(sample_i);
+					alreadySampled.push(sample_i);
+				};
+			};
+			
+			return cells_trial_x
+		};
+
+		function successCountrFx (successCountr_sym,pattern,b_pressed){
+			if(pattern=="sym"&b_pressed==1){successCountr_sym+=1}
+			if(pattern=="asym"&b_pressed==0){successCountr_sym+=1}
+			return(successCountr_sym)
+		}
+
+		function symFeedback (nErrorFreeTrials_symPractice,successCountr_sym,pattern,b_pressed){
+			
+
+			if(pattern=="sym"){
+					if(b_pressed==1){
+						
+						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
+						if(nTrials_remaining==0){ feedText = "Correct. The presented pattern was symmetrical."+"<br>"+"You have passed this practice trial."+"<br>"+"Click Next to proceed."}else{feedText = "Correct. The presented pattern was symmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}	
+					}else{
+						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
+						feedText = "Wrong. The presented pattern was symmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}
+				}
+				if(pattern=="asym"){
+					if(b_pressed==0){
+						
+						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
+						if(nTrials_remaining==0){feedText = "Correct. The presented pattern was asymmetrical."+"<br>"+"You have passed this practice trial."+"<br>"+"Click Next to proceed."}else{feedText = "Correct. The presented pattern was asymmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}
+					}else{
+						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
+						feedText = "Wrong. The presented pattern was asymmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}
+				}
+
+				return feedText
+		}
+
+	</script>
+
+	<script>
+		function add(a, b) {
+    		return a + b;
+		}
+	</script>
+	
+	<script>
+	var trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
+	//var trials = [3,4];
+	var trials_seq = jsPsych.randomization.repeat(trials, 1);
+	var nTrials = trials_seq.length;
+	var nPerSetSize = 3;
+	
+	var rangePracticeSetSize = {min:3,max:3};
+	var practiceCriterion = 1;
+
+	var nErrorFreeTrials_symPractice = 3;
+	
+
+	
+///////// Intro
+/////////
+	var welcome = {
+			type: 'instructions',
+			pages: [
+					"<p class='center-content'> Welcome to the <b style='color:#008080'>Symmetry Span task</b>! <p> From our everyday life, we all know that it is difficult to attend to different things at the same time, so to be multi tasker. <br> The present task is a simple way to tap and measure such multi-tasking ability. It simulates a situation, in which you need to perform two tasks in parallel. In the 'symmetry judgment task' you have to decide whether the pattern of a matrix is symmetrical or not. In the 'memory task', you need to rember a random sequence of consecutively flashing cells inside a 4x4 matrix. <p>It will take you about 12-15 minutes to complete the task and some preceding practice trials. <p>Click on the <i>Next</i>-button to get information on our data management."],
+			show_clickable_nav: true
+			};
+	var informedConsent = {
+		type: 'survey-multi-choice',
+		questions: ["<p> <b>Data Management & Informed Consent</b> <p> <i> Voluntariness </i> <br> You may revoke your consent to participate at any time and without stating any reasons. <p> <i> Storage of data </i> <br>All your data will be written automatically to a database on a server of Tallinn University. <p> <i> Protection of data privacy </i> <br> The entire dataset will be made fully anonymous, which means that your data cannot be related to you as an individual. <p> <i> Usage of anonymized data </i> <br> The results and data from this study will be used for a scientific publication. Anonymity of the participants will be ensured in this process. The fully anonymized data from this study will be made accessible as open data on the internet via the data archive <i> PsychData (Research Data for Psychology, Leibnitz Institute for Psychology Information ZPID) </i> <b> <br> <br> <p> If you agree on our data management, click the radio button below and hit <i>Submit Answer</i>. Otherwise, press <i>Escape</i> on your keyboard to exit the environment."],
+		options: [["I hereby confirm that I have read, understood and accept the provided information concerning storage, protection and usage of my data."]],
+		required: [true]
+    };
+
+	var persData_code = ["<p> Please type in your personal code:"];
+	var demographics = {
+	  		type: "survey-text-persCode",
+	  		questions: persData_code,
+			preamble: "<b>How to generate your code</b>: <br>Position 1: First letter of your mother's surname <br> Position 2: First letter of your father's surname <br> Positions 3 and 4: Your year of birth <br> Position 5: The first letter of your residential street <br> Position 6: The first digit of your street number <p> Example: FC84M4"
+	};
+	
+///////// Practice
+	var practice_overview = {
+		type: 'instructions',
+		pages: ["<p>***</p>Before performing the Operation Span task, you will be guided through 3 short practice units, explaining the task step by step:<p><b>Unit 1</b>: Math task<br><b>Unit 2</b>: Memory task<br><b>Unit 3</b>: Both tasks simultaneously<p>***</p>Click <i>Next</i> to enter the first practice unit."],
+		show_clickable_nav: true,
+	};
+///////// Practice Symmetry
+	
+	var intro_symmetry_practice = {
+			type: 'instructions',
+			pages: function(){return ["<p class='center-content'><b>Memory task: Instruction</b></p> After clicking the <i>Next</i>-Button, a plus-sign <b>+</b> will appear, followed by consecutively presented matrices (about 1 second per matrix). After the last matrix, you will be asked to recall ....</p> Any mistake (recalling too many or too few, or recalling them in the wrong order) counts as incorrect. </p><p class='center-content'> Click <i>Next</i> to start practicing.</p><p>"]},
+			show_clickable_nav: true,
+			on_finish: function(data) { 
+				successCountr_sym = 0;
+			},
+	};
+
+	var symmetry_buttons = [ ["No"] , ["Yes"] ];
+	var symmetry = {
+		    type: 'judgeSym',
+			is_html: true, 
+			prompt: "Is the pattern symmetrical?",
+		    choices: symmetry_buttons,
+	 	   	on_finish: function(data){
+	 	   		pattern = data.matrixPattern
+				b_pressed = data.button_pressed
+				successCountr_sym = successCountr(successCountr_sym, pattern, b_pressed)
+	 	   	},
+		};
+
+	var feedback_symmetry_0 = {
+		type: 'text',
+		text: function(){return symFeedback (nErrorFreeTrials_symPractice,successCountr_sym,pattern,b_pressed) },
+		on_finish: function(data) { 
+						
+		}
+	};
+
+	var symmetry_loop_practice = {
+		timeline: [symmetry,feedback_symmetry_0],
+		loop_function: function(data){
+		        
+				if(successCountr_sym == (nErrorFreeTrials_symPractice-1)){
+		            return false;
+		        } else {
+		            return true;
+		        }
+		  },
+	};
+
+///////// Practice Remember
+	var intro_remember_practice = {
+			type: 'instructions',
+			pages: function(){return ["<p class='center-content'><b>Memory task: Instruction</b></p> After clicking the <i>Next</i>-Button, a plus-sign <b>+</b> will appear, followed by consecutively presented matrices (about 1 second per matrix). After the last matrix, you will be asked to recall ....</p> Any mistake (recalling too many or too few, or recalling them in the wrong order) counts as incorrect. </p><p class='center-content'> Click <i>Next</i> to start practicing.</p><p>"]},
+			show_clickable_nav: true,
+			on_finish: function(data) { 
+				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
+				remememberCells_trial_x = rememberCellsFx(t_SetSize);
+				successCountr = 0;
+			},
+	};
+	var plusSign = {
+  	  	type: "single-stim",
+		stimulus: "<p><p><b>+",
+  	  	choices: [100], timing_response: 1200, data: {phase: 'remember'},
+  	  	is_html: true
+	};
+
+	var remember = {
+  	  	//type: "single-stim",
+  	  	type: "rememberCells-practice",
+  	  	flashingCells: function(){return(remememberCells_trial_x)},
+		//stimulus: function(){var mat = matRememberFx(remememberCells_trial_x[rem_i]); return(mat)},
+  	  	choices: [100], timing_response: function(){return(1000*(t_SetSize))}, data: {phase: 'remember'},
+  	  	is_html: true,
+ 	   	on_finish: function(data){
+ 		   	 	   	},
+		
+	};
+
+	var recall = {
+  		type: 'button-response-hitCells',
+  		is_html: true,
+		stimulus: "Click on the cells according to their order of presentation!",
+		showEndButton: true,
+		flashedCells: function(){return remememberCells_trial_x},
+		response_ends_trial: false,
+		on_finish: function(data) { 
+			cells_presented = data.flashed_cells
+			cells_clicked = data.clicked_cells
+			
+			cells_RecCorPos = data.Cells_RecCorPos
+        	cells_RecIncorPos = data.Cells_RecIncorPos
+        	cells_Missed = data.Cells_missed
+        	cells_FalseMem = data.Cells_FalseMem
+
+        	accuracy_score_rem = cells_RecCorPos.length/(cells_RecCorPos.length+cells_RecIncorPos.length+cells_Missed.length+cells_FalseMem.length);
+        	accuracy_score_rem = Math.floor(accuracy_score_rem*100)
+        	
+		},	
+	};
+
+
+	var feedback_recall_0 = {
+		type: 'instructions',
+		pages: [ function(){return matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_RecIncorPos, cells_Missed, cells_FalseMem, accuracy_score_rem) } ],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+			if(accuracy_score_rem==100){
+				feedback_recall_message = "Well done! You have passed this practice trial.";
+				successCountr+=1;
+			}else{
+				feedback_recall_message = "You can do better. You need to be 100% accurate in order to proceed.";
+				remememberCells_trial_x = rememberCellsFx(t_SetSize);
+			}
+		}
+	};
+
+	var feedback_recall_1 = {
+		type: 'instructions',
+		pages: [ function(){return ""+feedback_recall_message+"" } ],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+			
+		},
+	};
+
+	var recall_loop_practice = {
+		timeline: [remember,recall,feedback_recall_0,feedback_recall_1],
+		loop_function: function(data){
+		        
+				if(successCountr == 0){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+	};
+   
+///////// Practice Symmetry & Remember
+	var intro_RemAndSym_practice = {
+			type: 'instructions',
+			pages: function(){return ["<p class='center-content'><b>Practice trial instruction</b></p> After clicking the <i>Next</i>-Button, an 8x8 matrix with a certain pattern of black-filled cells will appear. Your task is to judge whether the pattern is symmetrical around the horizontal or not.<p> Then, a smaller 4x4 matrix with one cell filled green will be presented. Try to memorize that cell's position before .... <p class='center-content'> Click <i>Next</i> to start practicing.</p><p>"]},
+			show_clickable_nav: true,
+			on_finish: function(data) { 
+				successCountr_sym = 0
+				successCountr_rem = 0
+				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
+				remememberCells_trial_x = rememberCellsFx(t_SetSize);
+				rem_i = 0
+				symDecisions = []
+				symPatterns = []
+				console.log(remememberCells_trial_x)
+			},
+	};
+
+	var rem_RemAndSym = {
+  	  	type: "single-stim",
+  	  	stimulus: function(){var mat = matRememberFx(remememberCells_trial_x[rem_i]); return(mat)},
+  	  	choices: [100], timing_response: function(){return(500*(t_SetSize))}, data: {phase: 'remember'},
+  	  	is_html: true,
+ 	   	on_finish: function(data){
+ 	   		rem_i+=1
+ 		},
+		
+	};
+	var sym_RemAndSym = {
+		    type: 'judgeSym',
+			is_html: true, 
+			prompt: "Is the pattern symmetrical?",
+		    choices: symmetry_buttons,
+	 	   	on_finish: function(data){
+	 	   		pattern = data.matrixPattern
+				b_pressed = data.button_pressed
+				response = ["asymmetrical","symmetrical"][b_pressed]
+				if(pattern==response){successCountr_sym+=1}
+				symDecisions.push(response)
+				symPatterns.push(pattern)
+				console.log(symDecisions.length)
+				console.log(successCountr_sym)
+	 	   	},
+		};
+
+	var RemAndSym_loop = {
+		timeline: [sym_RemAndSym,rem_RemAndSym],
+		loop_function: function(data){
+		        
+				if(rem_i==remememberCells_trial_x.length){
+		            return false;
+		        } else {
+		            return true;
+		        }
+		  },
+	};
+
+	var feedback_RemAndSym_0 = {
+		type: 'instructions',
+		pages: [ function(){return matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_RecIncorPos, cells_Missed, cells_FalseMem, accuracy_score_rem) } ],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+			accuracy_score_sym = Math.floor((successCountr_sym/symDecisions.length)*100)
+			if(accuracy_score_rem==100&accuracy_score_sym==100){
+				feedback_recall_message = "Well done! You have passed this practice trial."
+			}else{
+				feedback_recall_message = "You can do better. You need to be 100% accurate in both tasks.";
+			}
+		}
+	};
+
+	var feedback_RemAndSym_1 = {
+		type: 'instructions',
+		pages: [ function(){return ""+"<b>"+"Symmetry judgment task:"+"</b>"+"<br>"+"The presented patterns were: "+symPatterns+"<br>"+"Your judgments were: "+symDecisions+"<br>"+"<b>"+"Accuracy: "+accuracy_score_sym+"%" } ],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+				
+			}
+		
+	};
+
+	var feedback_RemAndSym_2 = {
+		type: 'instructions',
+		pages: [ function(){return feedback_recall_message } ],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
+				remememberCells_trial_x = rememberCellsFx(t_SetSize);
+				rem_i = 0
+				successCountr_rem = 0
+				successCountr_sym = 0
+				symDecisions = []
+				symPatterns = []
+			}
+		
+	};
+
+	var RemAndSym_loop2 = {
+		timeline: [RemAndSym_loop,recall,feedback_RemAndSym_0,feedback_RemAndSym_1,feedback_RemAndSym_2],
+		loop_function: function(data){
+		        
+				if(accuracy_score_rem==100&accuracy_score_sym==100){
+		            return false;
+		        } else {
+		            return true;
+		        }
+		  },
+	}
+
+	
+
+
+
+/////////
+	jsPsych.init({
+		/*timeline: [welcome,intro_symmetry_practice, symmetry_loop_practice,
+							intro_remember_practice, recall_loop_practice],*/
+		//timeline: [intro_RemAndSym_practice,RemAndSym_loop,recall,feedback_RemAndSym_0],
+		timeline: [welcome, intro_RemAndSym_practice,RemAndSym_loop2],
+	   	fullscreen: false,
+	   	on_finish: function(data){
+	       jsPsych.data.localSave('myData_sendMeTo_pseiti@tlu.ee.txt', 'csv');
+	   }
+	});
+	
+	
+		
+	</script>
+		
+</html>
