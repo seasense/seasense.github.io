@@ -75,8 +75,17 @@ function about_cellFx(){
 
 			var thirdCell = document.createElement("TD");	
 			thirdCell.setAttribute("id","ThirdCell")
-			
-			document.getElementById("row1").appendChild(thirdCell);
+			var fourthCell = document.createElement("TD");	
+			fourthCell.setAttribute("id","FourthCell")
+
+			document.getElementById("row2").appendChild(thirdCell);
+			document.getElementById("row2").appendChild(fourthCell);
+
+			var cell4_image = document.createElement("IMG");
+			/*cell4_image.setAttribute("src","./imgHP/logo.png");
+			cell4_image.setAttribute("class","image");
+			fourthCell.appendChild(cell4_image);*/
+
 			//document.getElementById("row2").appendChild(thirdCell);
 			var aboutCellDiv = document.createElement("DIV");
 			aboutCellDiv.setAttribute("class","scrollable");
@@ -122,11 +131,16 @@ function about_cellFx(){
 		if(about_state=="off"){
 
 			document.getElementById("ThirdCell").remove();
+			document.getElementById("FourthCell").remove();
 
 			var thirdCell = document.createElement("TD");	
 			thirdCell.setAttribute("id","ThirdCell")
-			
-			document.getElementById("row1").appendChild(thirdCell);
+			var fourthCell = document.createElement("TD");	
+			fourthCell.setAttribute("id","FourthCell")
+
+			document.getElementById("row2").appendChild(thirdCell);
+			document.getElementById("row2").appendChild(fourthCell);
+
 			var aboutCellDiv = document.createElement("DIV");
 			aboutCellDiv.setAttribute("class","scrollable");
 			thirdCell.appendChild(aboutCellDiv);
@@ -170,18 +184,88 @@ function about_cellFx(){
 		}else{
 			thirdCell_state[0]="off";
 			document.getElementById("ThirdCell").remove();
+			document.getElementById("FourthCell").remove();
 			about_state[0]="off";}
 		}
 	
 };
 
+function MERITS_Fx(link){
+	if(merits_state[0]=="off"){
+		var newPic = document.createElement("IMG");
+		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png']
+		newPic.setAttribute("src",picture_addresses[0]);
+		newPic.setAttribute("class","imageRelated");
+
+		newLink = document.createElement("a");
+		newLink.href = link;
+		newLink.appendChild(newPic);
+		console.log(link)
+		var placeOfPic = document.getElementById("FourthCell");
+		placeOfPic.appendChild(newLink);
+		
+		
+		merits_state[0]="on"
+
+	}
+
+}
+function CEITER_Fx(link){
+	
+	if(ceiter_state[0]=="off"){
+		var newPic = document.createElement("IMG");
+		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png']
+		newPic.setAttribute("src",picture_addresses[1]);
+		newPic.setAttribute("class","imageRelated");
+
+		newLink = document.createElement("a");
+		newLink.href = link;
+		newLink.appendChild(newPic);
+		console.log(link)
+		var placeOfPic = document.getElementById("FourthCell");
+		placeOfPic.appendChild(newLink);
+		
+
+		ceiter_state[0]="on"
+	}
+
+}
+
+function CSS_Fx(link){
+	
+	if(css_state[0]=="off"){
+		var newPic = document.createElement("IMG");
+		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png','./imgHP/TUGraz.png']
+		newPic.setAttribute("src",picture_addresses[2]);
+		newPic.setAttribute("class","imageRelated");
+
+		newLink = document.createElement("a");
+		newLink.href = link;
+		newLink.appendChild(newPic);
+		console.log(link)
+		var placeOfPic = document.getElementById("FourthCell");
+		placeOfPic.appendChild(newLink);
+		
+
+		css_state[0]="on"
+	}
+
+}
+
 function related_cellFx(){
 	if(thirdCell_state=="off"){
-		
+			
+			var secondRow = document.getElementById("table").insertRow(1);
+			secondRow.setAttribute("id","row2")
+
 			var thirdCell = document.createElement("TD");	
 			thirdCell.setAttribute("id","ThirdCell")
-			
-			document.getElementById("row1").appendChild(thirdCell);
+			var fourthCell = document.createElement("TD");	
+			fourthCell.setAttribute("id","FourthCell")
+
+			document.getElementById("row2").appendChild(thirdCell);
+			document.getElementById("row2").appendChild(fourthCell);
+
 			var relatedCellDiv = document.createElement("DIV");
 			relatedCellDiv.setAttribute("class","scrollable");
 			thirdCell.appendChild(relatedCellDiv);
@@ -191,12 +275,31 @@ function related_cellFx(){
 			relatedCellDiv.appendChild(document.createElement("p"));
 
 			var Merits_Link = document.createElement('a');
-			Merits_Link.setAttribute("style","color:black");
-			Merits_Link.href = "https://meritsblog.wordpress.com/";
+			picAdress = "./imgHP/meritsLogo.jpg";
+			Merits_Link.setAttribute("onclick","MERITS_Fx('https://meritsblog.wordpress.com/')");
+			Merits_Link.setAttribute("class","LinkToImage");
 			Merits_Link.appendChild(document.createTextNode("merits"));
 			relatedCellDiv.appendChild(Merits_Link);
 			relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
 			relatedCellDiv.appendChild(document.createElement("p"));
+
+			var CEITER_Link = document.createElement('a');
+			CEITER_Link.setAttribute("onclick","CEITER_Fx('http://ceiter.tlu.ee/')");
+			CEITER_Link.setAttribute("class","LinkToImage");
+			CEITER_Link.appendChild(document.createTextNode("CEITER"));
+			relatedCellDiv.appendChild(CEITER_Link);
+			relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
+			relatedCellDiv.appendChild(document.createElement("p"));
+
+			var CSS_Link = document.createElement('a');
+			CSS_Link.setAttribute("onclick","CSS_Fx('http://cognitive-science.at/')");
+			CSS_Link.setAttribute("class","LinkToImage");
+			CSS_Link.setAttribute("style","color:black");
+			CSS_Link.appendChild(document.createTextNode("CSS"));
+			relatedCellDiv.appendChild(CSS_Link);
+			relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
+			relatedCellDiv.appendChild(document.createElement("p"));
+
 
 			var OMFix_Link = document.createElement('a');
 			OMFix_Link.setAttribute("style","color:black");
@@ -206,26 +309,11 @@ function related_cellFx(){
 			relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
 			relatedCellDiv.appendChild(document.createElement("p"));
 
-			var CSS_Link = document.createElement('a');
-			CSS_Link.setAttribute("style","color:black");
-			CSS_Link.href = "http://cognitive-science.at/";
-			CSS_Link.appendChild(document.createTextNode("Cognitive Science Section"));
-			relatedCellDiv.appendChild(CSS_Link);
-			relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
-			relatedCellDiv.appendChild(document.createElement("p"));
-
-			var CEITER_Link = document.createElement('a');
-			CEITER_Link.setAttribute("style","color:black");
-			CEITER_Link.href = "http://ceiter.tlu.ee/";
-			CEITER_Link.appendChild(document.createTextNode("School of Educational Sciences"));
-			relatedCellDiv.appendChild(CEITER_Link);
-			relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
-			relatedCellDiv.appendChild(document.createElement("p"));
+			
+			
 			
 			relatedCellDiv.appendChild(document.createTextNode("***"));
 			relatedCellDiv.appendChild(document.createElement("p"));
-
-			
 
 			thirdCell_state[0] = "on";
 			related_state[0] = "on";
@@ -233,11 +321,16 @@ function related_cellFx(){
 	}else{
 			if(related_state=="off"){
 				document.getElementById("ThirdCell").remove();
+				document.getElementById("FourthCell").remove();
 
 				var thirdCell = document.createElement("TD");	
 				thirdCell.setAttribute("id","ThirdCell")
+				var fourthCell = document.createElement("TD");	
+				fourthCell.setAttribute("id","FourthCell");
 			
-				document.getElementById("row1").appendChild(thirdCell);
+				document.getElementById("row2").appendChild(thirdCell);
+				document.getElementById("row2").appendChild(fourthCell);
+
 				var relatedCellDiv = document.createElement("DIV");
 				relatedCellDiv.setAttribute("class","scrollable");
 				thirdCell.appendChild(relatedCellDiv);
@@ -247,12 +340,31 @@ function related_cellFx(){
 				relatedCellDiv.appendChild(document.createElement("p"));
 
 				var Merits_Link = document.createElement('a');
-				Merits_Link.setAttribute("style","color:black");
-				Merits_Link.href = "https://meritsblog.wordpress.com/";
+				picAdress = "./imgHP/meritsLogo.jpg";
+				Merits_Link.setAttribute("onclick","MERITS_Fx('https://meritsblog.wordpress.com/')");
+				Merits_Link.setAttribute("class","LinkToImage");
 				Merits_Link.appendChild(document.createTextNode("merits"));
 				relatedCellDiv.appendChild(Merits_Link);
 				relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
 				relatedCellDiv.appendChild(document.createElement("p"));
+
+				var CEITER_Link = document.createElement('a');
+				CEITER_Link.setAttribute("onclick","CEITER_Fx('http://ceiter.tlu.ee/')");
+				CEITER_Link.setAttribute("class","LinkToImage");
+				CEITER_Link.appendChild(document.createTextNode("CEITER"));
+				relatedCellDiv.appendChild(CEITER_Link);
+				relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
+				relatedCellDiv.appendChild(document.createElement("p"));
+
+				var CSS_Link = document.createElement('a');
+				CSS_Link.setAttribute("onclick","CSS_Fx('http://cognitive-science.at/')");
+				CSS_Link.setAttribute("class","LinkToImage");
+				CSS_Link.setAttribute("style","color:black");
+				CSS_Link.appendChild(document.createTextNode("CSS"));
+				relatedCellDiv.appendChild(CSS_Link);
+				relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
+				relatedCellDiv.appendChild(document.createElement("p"));
+
 
 				var OMFix_Link = document.createElement('a');
 				OMFix_Link.setAttribute("style","color:black");
@@ -260,22 +372,6 @@ function related_cellFx(){
 				OMFix_Link.appendChild(document.createTextNode("omfix"));
 				relatedCellDiv.appendChild(OMFix_Link);
 				relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
-				relatedCellDiv.appendChild(document.createElement("p"));
-
-				var CSS_Link = document.createElement('a');
-				CSS_Link.setAttribute("style","color:black");
-				CSS_Link.href = "http://cognitive-science.at/";
-				CSS_Link.appendChild(document.createTextNode("Cognitive Science Section"));
-				relatedCellDiv.appendChild(CSS_Link);
-				relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
-				relatedCellDiv.appendChild(document.createElement("p"));
-
-				var CEITER_Link = document.createElement('a');
-				CEITER_Link.setAttribute("style","color:black");
-				CEITER_Link.href = "http://ceiter.tlu.ee/";
-				CEITER_Link.appendChild(document.createTextNode("School of Educational Sciences"));
-				relatedCellDiv.appendChild(CEITER_Link);
-				relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
 				relatedCellDiv.appendChild(document.createElement("p"));
 
 				relatedCellDiv.appendChild(document.createTextNode("***"));
@@ -290,6 +386,7 @@ function related_cellFx(){
 			}else{
 				thirdCell_state[0]="off";
 				document.getElementById("ThirdCell").remove();
+				document.getElementById("FourthCell").remove();
 				related_state[0]="off";
 			}
 			
@@ -298,13 +395,21 @@ function related_cellFx(){
 };
 
 
+
 function tools_cellFx(){
 	if(thirdCell_state=="off"){
-		
+
+			var row2 = table.insertRow(1);
+			row2.setAttribute("id","row2")
+
 			var thirdCell = document.createElement("TD");	
 			thirdCell.setAttribute("id","ThirdCell")
-			
-			document.getElementById("row1").appendChild(thirdCell);
+			var fourthCell = document.createElement("TD");	
+			fourthCell.setAttribute("id","FourthCell")
+
+			document.getElementById("row2").appendChild(thirdCell);
+			document.getElementById("row2").appendChild(fourthCell);
+
 			var toolsCellDiv = document.createElement("DIV");
 			toolsCellDiv.setAttribute("class","scrollable");
 			thirdCell.appendChild(toolsCellDiv);
@@ -316,6 +421,7 @@ function tools_cellFx(){
 			var ACT_Link = document.createElement('a');
 			ACT_Link.setAttribute("style","color:black");
 			ACT_Link.href = "./index_ACT.html";
+			//ACT_Link.setAttribute("onclick","ACT_Fx()");
 			ACT_Link.appendChild(document.createTextNode("act"));
 			toolsCellDiv.appendChild(ACT_Link);
 
@@ -337,11 +443,16 @@ function tools_cellFx(){
 	}else{
 			if(tools_state=="off"){
 				document.getElementById("ThirdCell").remove();
+				document.getElementById("FourthCell").remove();
 
 				var thirdCell = document.createElement("TD");	
 				thirdCell.setAttribute("id","ThirdCell")
-				
-				document.getElementById("row1").appendChild(thirdCell);
+				var fourthCell = document.createElement("TD");	
+				fourthCell.setAttribute("id","FourthCell")
+
+				document.getElementById("row2").appendChild(thirdCell);
+				document.getElementById("row2").appendChild(fourthCell);
+
 				var toolsCellDiv = document.createElement("DIV");
 				toolsCellDiv.setAttribute("class","scrollable");
 				thirdCell.appendChild(toolsCellDiv);
@@ -377,6 +488,7 @@ function tools_cellFx(){
 			}else{
 				thirdCell_state[0]="off";
 				document.getElementById("ThirdCell").remove();
+				document.getElementById("FourthCell").remove();
 				tools_state[0]="off";
 			}
 			
@@ -386,11 +498,17 @@ function tools_cellFx(){
 
 function papers_cellFx(){
 	if(thirdCell_state=="off"){
-		
+			var row2 = table.insertRow(1);
+			row2.setAttribute("id","row2")
+
 			var thirdCell = document.createElement("TD");	
 			thirdCell.setAttribute("id","ThirdCell")
+			var fourthCell = document.createElement("TD");	
+			fourthCell.setAttribute("id","FourthCell")
+
+			document.getElementById("row2").appendChild(thirdCell);
+			document.getElementById("row2").appendChild(fourthCell);
 			
-			document.getElementById("row1").appendChild(thirdCell);
 			var papersCellDiv = document.createElement("DIV");
 			papersCellDiv.setAttribute("class","scrollable");
 			thirdCell.appendChild(papersCellDiv);
@@ -417,11 +535,16 @@ function papers_cellFx(){
 			if(papers_state=="off"){
 				
 				document.getElementById("ThirdCell").remove();
+				document.getElementById("FourthCell").remove();
 
 				var thirdCell = document.createElement("TD");	
 				thirdCell.setAttribute("id","ThirdCell")
+				var fourthCell = document.createElement("TD");	
+				fourthCell.setAttribute("id","FourthCell")
+
+				document.getElementById("row2").appendChild(thirdCell);
+				document.getElementById("row2").appendChild(fourthCell);
 				
-				document.getElementById("row1").appendChild(thirdCell);
 				var papersCellDiv = document.createElement("DIV");
 				papersCellDiv.setAttribute("class","scrollable");
 				thirdCell.appendChild(papersCellDiv);
@@ -449,6 +572,7 @@ function papers_cellFx(){
 			}else{
 				thirdCell_state[0]="off";
 				document.getElementById("ThirdCell").remove();
+				document.getElementById("FourthCell").remove();
 				papers_state[0]="off";
 			}
 			
