@@ -37,6 +37,12 @@ th, td{
 	padding-right: 0px;
 	padding-bottom: 50px;
 }
+.imageTools{
+	width:150px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-bottom: 10px;
+}
 .LinkToImage{
 	color:black;
 	text-decoration: underline;

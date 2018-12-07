@@ -401,10 +401,75 @@ function related_cellFx(){
 	
 };
 
+function dinoNimi_Fx(link){
+	
+	if(dinoNimi_state[0]=="off"){
+		var newPic = document.createElement("IMG");
+		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png','./imgHP/TUGraz.png','./imgHP/dinoNimi.png']
+		newPic.setAttribute("src",picture_addresses[3]);
+		newPic.setAttribute("class","imageTools");
 
+		newLink = document.createElement("a");
+		newLink.href = link;
+		newLink.appendChild(newPic);
+		console.log(link)
+		var placeOfPic = document.getElementById("FourthCell");
+		placeOfPic.appendChild(newLink);
+
+		dinoNimi_state[0]="on"
+	}
+
+}
+
+function act_Fx(link){
+	
+	if(act_state[0]=="off"){
+		var newPic = document.createElement("IMG");
+		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png','./imgHP/TUGraz.png','./imgHP/dinoNimi.png','./imgHP/act.png']
+		newPic.setAttribute("src",picture_addresses[4]);
+		newPic.setAttribute("class","imageTools");
+
+		newLink = document.createElement("a");
+		newLink.href = link;
+		newLink.appendChild(newPic);
+		console.log(link)
+		var placeOfPic = document.getElementById("FourthCell");
+		placeOfPic.appendChild(newLink);
+		
+
+		act_state[0]="on"
+	}
+
+}
+
+function symspan_Fx(link){
+	
+	if(symspan_state[0]=="off"){
+		var newPic = document.createElement("IMG");
+		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png','./imgHP/TUGraz.png',
+		'./imgHP/dinoNimi.png','./imgHP/act.png','./imgHP/symspan_logo.png']
+		newPic.setAttribute("src",picture_addresses[5]);
+		newPic.setAttribute("class","imageTools");
+
+		newLink = document.createElement("a");
+		newLink.href = link;
+		newLink.appendChild(newPic);
+		console.log(link)
+		var placeOfPic = document.getElementById("FourthCell");
+		placeOfPic.appendChild(newLink);
+		
+
+		symspan_state[0]="on"
+	}
+
+}
 
 function tools_cellFx(){
 	if(thirdCell_state=="off"){
+
+			act_state[0] = ["off"]
+			dinoNimi_state[0] = ["off"]
+			symspan_state[0] = ["off"]
 
 			var row2 = table.insertRow(1);
 			row2.setAttribute("id","row2")
@@ -426,19 +491,29 @@ function tools_cellFx(){
 			toolsCellDiv.appendChild(document.createElement("p"));
 
 			var ACT_Link = document.createElement('a');
+			ACT_Link.setAttribute("onclick","act_Fx('./index_ACT.html')");
+			ACT_Link.setAttribute("class","LinkToImage");
 			ACT_Link.setAttribute("style","color:black");
-			ACT_Link.href = "./index_ACT.html";
-			//ACT_Link.setAttribute("onclick","ACT_Fx()");
 			ACT_Link.appendChild(document.createTextNode("act"));
 			toolsCellDiv.appendChild(ACT_Link);
 
 			toolsCellDiv.appendChild(document.createElement("p"));
 
-			var SymSpan_Link = document.createElement('a');
-			SymSpan_Link.setAttribute("style","color:black");
-			SymSpan_Link.href = "./index_SymSpan.html";
-			SymSpan_Link.appendChild(document.createTextNode("symmetry span"));
-			toolsCellDiv.appendChild(SymSpan_Link);
+			var dinoNimi_Link = document.createElement('a');
+			dinoNimi_Link.setAttribute("onclick","dinoNimi_Fx('./dinoNimi_review.html')");
+			dinoNimi_Link.setAttribute("class","LinkToImage");
+			dinoNimi_Link.setAttribute("style","color:black");
+			dinoNimi_Link.appendChild(document.createTextNode("dinoNimi"));
+			toolsCellDiv.appendChild(dinoNimi_Link);
+
+			toolsCellDiv.appendChild(document.createElement("p"));
+
+			var symspan_Link = document.createElement('a');
+			symspan_Link.setAttribute("onclick","symspan_Fx('./index_SymSpan.html')");
+			symspan_Link.setAttribute("class","LinkToImage");
+			symspan_Link.setAttribute("style","color:black");
+			symspan_Link.appendChild(document.createTextNode("symmetry span"));
+			toolsCellDiv.appendChild(symspan_Link);
 
 			toolsCellDiv.appendChild(document.createElement("p"));
 			toolsCellDiv.appendChild(document.createTextNode("***"));
@@ -449,6 +524,9 @@ function tools_cellFx(){
 		
 	}else{
 			if(tools_state=="off"){
+				act_state[0] = ["off"]
+				dinoNimi_state[0] = ["off"]
+
 				document.getElementById("ThirdCell").remove();
 				document.getElementById("FourthCell").remove();
 
@@ -469,18 +547,29 @@ function tools_cellFx(){
 				toolsCellDiv.appendChild(document.createElement("p"));
 
 				var ACT_Link = document.createElement('a');
+				ACT_Link.setAttribute("onclick","act_Fx('./index_ACT.html')");
+				ACT_Link.setAttribute("class","LinkToImage");
 				ACT_Link.setAttribute("style","color:black");
-				ACT_Link.href = "./index_ACT.html";
 				ACT_Link.appendChild(document.createTextNode("act"));
 				toolsCellDiv.appendChild(ACT_Link);
 
 				toolsCellDiv.appendChild(document.createElement("p"));
 
-				var SymSpan_Link = document.createElement('a');
-				SymSpan_Link.setAttribute("style","color:black");
-				SymSpan_Link.href = "./index_SymSpan.html";
-				SymSpan_Link.appendChild(document.createTextNode("symmetry span"));
-				toolsCellDiv.appendChild(SymSpan_Link);
+				var dinoNimi_Link = document.createElement('a');
+				dinoNimi_Link.setAttribute("onclick","dinoNimi_Fx('./dinoNimi_review.html')");
+				dinoNimi_Link.setAttribute("class","LinkToImage");
+				dinoNimi_Link.setAttribute("style","color:black");
+				dinoNimi_Link.appendChild(document.createTextNode("dinoNimi"));
+				toolsCellDiv.appendChild(dinoNimi_Link);
+
+				toolsCellDiv.appendChild(document.createElement("p"));
+
+				var symspan_Link = document.createElement('a');
+				symspan_Link.setAttribute("onclick","symspan_Fx('./index_SymSpan.html')");
+				symspan_Link.setAttribute("class","LinkToImage");
+				symspan_Link.setAttribute("style","color:black");
+				symspan_Link.appendChild(document.createTextNode("symmetry span"));
+				toolsCellDiv.appendChild(symspan_Link);
 
 				toolsCellDiv.appendChild(document.createElement("p"));
 				toolsCellDiv.appendChild(document.createTextNode("***"));
