@@ -255,6 +255,10 @@ function CSS_Fx(link){
 function related_cellFx(){
 	if(thirdCell_state=="off"){
 			
+			merits_state[0] = ["off"]
+			ceiter_state[0] = ["off"]
+			css_state[0] = ["off"]
+
 			var secondRow = document.getElementById("table").insertRow(1);
 			secondRow.setAttribute("id","row2")
 
@@ -286,7 +290,7 @@ function related_cellFx(){
 			var CEITER_Link = document.createElement('a');
 			CEITER_Link.setAttribute("onclick","CEITER_Fx('http://ceiter.tlu.ee/')");
 			CEITER_Link.setAttribute("class","LinkToImage");
-			CEITER_Link.appendChild(document.createTextNode("CEITER"));
+			CEITER_Link.appendChild(document.createTextNode("ceiter"));
 			relatedCellDiv.appendChild(CEITER_Link);
 			relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
 			relatedCellDiv.appendChild(document.createElement("p"));
@@ -295,7 +299,7 @@ function related_cellFx(){
 			CSS_Link.setAttribute("onclick","CSS_Fx('http://cognitive-science.at/')");
 			CSS_Link.setAttribute("class","LinkToImage");
 			CSS_Link.setAttribute("style","color:black");
-			CSS_Link.appendChild(document.createTextNode("CSS"));
+			CSS_Link.appendChild(document.createTextNode("css"));
 			relatedCellDiv.appendChild(CSS_Link);
 			relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
 			relatedCellDiv.appendChild(document.createElement("p"));
@@ -310,8 +314,6 @@ function related_cellFx(){
 			relatedCellDiv.appendChild(document.createElement("p"));
 
 			
-			
-			
 			relatedCellDiv.appendChild(document.createTextNode("***"));
 			relatedCellDiv.appendChild(document.createElement("p"));
 
@@ -320,6 +322,11 @@ function related_cellFx(){
 		
 	}else{
 			if(related_state=="off"){
+
+				merits_state[0] = ["off"]
+				ceiter_state[0] = ["off"]
+				css_state[0] = ["off"]
+
 				document.getElementById("ThirdCell").remove();
 				document.getElementById("FourthCell").remove();
 
@@ -351,7 +358,7 @@ function related_cellFx(){
 				var CEITER_Link = document.createElement('a');
 				CEITER_Link.setAttribute("onclick","CEITER_Fx('http://ceiter.tlu.ee/')");
 				CEITER_Link.setAttribute("class","LinkToImage");
-				CEITER_Link.appendChild(document.createTextNode("CEITER"));
+				CEITER_Link.appendChild(document.createTextNode("ceiter"));
 				relatedCellDiv.appendChild(CEITER_Link);
 				relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
 				relatedCellDiv.appendChild(document.createElement("p"));
@@ -360,7 +367,7 @@ function related_cellFx(){
 				CSS_Link.setAttribute("onclick","CSS_Fx('http://cognitive-science.at/')");
 				CSS_Link.setAttribute("class","LinkToImage");
 				CSS_Link.setAttribute("style","color:black");
-				CSS_Link.appendChild(document.createTextNode("CSS"));
+				CSS_Link.appendChild(document.createTextNode("css"));
 				relatedCellDiv.appendChild(CSS_Link);
 				relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
 				relatedCellDiv.appendChild(document.createElement("p"));
