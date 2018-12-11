@@ -46,11 +46,11 @@ function secondCellFx(secondCell_state){
 		list_of_links.appendChild(bullet_points_fx("related","related_cellFx()"));
 		list_of_links.appendChild(bullet_points_fx("instruments","battery_cellFx()"));
 
-		var closeButton = document.createElement("BUTTON");
+		/*var closeButton = document.createElement("BUTTON");
 		closeButton.appendChild(document.createTextNode("close"));
 		closeButton.setAttribute("class","button");
 		closeButton.setAttribute("onclick","close_allCells_fx()");
-		secondCell_DIV.appendChild(closeButton);
+		secondCell_DIV.appendChild(closeButton);*/
 
 		secondCell_state[0] = "on"		
 	}
