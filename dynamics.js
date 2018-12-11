@@ -367,7 +367,10 @@ function battery_cellFx(){
 							LinkTask.appendChild(document.createTextNode("Participate: "));
 							document.getElementById("task_info_box").appendChild(LinkTask);
 							var task_a = document.createElement("a");
-							task_a.appendChild(document.createTextNode("Link to task"));
+							//task_a.appendChild(document.createTextNode("Link to task"));
+							var task_a_pic = document.createElement("IMG");
+							task_a_pic.setAttribute("src","./imgHP/dinoNimi.png")
+							task_a.appendChild(task_a_pic);
 							task_a.href = task_link;
 							task_a.setAttribute("class","LinkToImage");
 							document.getElementById("task_info_box").appendChild(task_a);
