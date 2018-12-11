@@ -98,33 +98,20 @@ function about_cellFx(){
 
 			sea_bold.onclick = function(){
 
-				if(lexiconEntries_states.search=="off"){
-					// delete glossary title
+				
 					document.getElementById("lexicon").remove();
 					var lexiconCellDiv = document.createElement("DIV");
 					lexiconCellDiv.setAttribute("id","lexicon");
 					lexiconCellDiv.setAttribute("class","scrollable_lexicon");
 					fourthCell.appendChild(lexiconCellDiv);
 
-					lexiconEntries_states.search="on"
-
-					if(lexiconEntries_states.sense=="on"){
-
-						document.getElementById("lexicon").remove();
-						var lexiconCellDiv = document.createElement("DIV");
-						lexiconCellDiv.setAttribute("class","scrollable_lexicon");
-						lexiconCellDiv.setAttribute("id","lexicon");
-						fourthCell.appendChild(lexiconCellDiv);
-
-						lexiconEntries_states.sense="off"
-
-					}
+						
 					lexicon_Fx("searching: ",1);
 					lexicon_Fx("a cognitive activity that aims to retrieve relevant pieces of "
 						+"information either from an environmental or psychological space"
 						+", such as the Internet or long-term memory",0);
 				}
-			}
+			
 
 			var aboutText2 = document.createTextNode("rch & ");
 			aboutCellDiv.appendChild(aboutText2);
@@ -137,29 +124,19 @@ function about_cellFx(){
 			aboutCellDiv.appendChild(sense_bold);
 
 			sense_bold.onclick = function(){
-				if(lexiconEntries_states.sense=="off"){
-					// delete glossary title
+				
 					document.getElementById("lexicon").remove();
 					var lexiconCellDiv = document.createElement("DIV");
 					lexiconCellDiv.setAttribute("id","lexicon");
 					lexiconCellDiv.setAttribute("class","scrollable_lexicon");
 					fourthCell.appendChild(lexiconCellDiv);
 
-					lexiconEntries_states.sense="on"
-					if(lexiconEntries_states.search=="on"){
-						document.getElementById("lexicon").remove();
-						var lexiconCellDiv = document.createElement("DIV");
-						lexiconCellDiv.setAttribute("class","scrollable_lexicon");
-						lexiconCellDiv.setAttribute("id","lexicon");
-						fourthCell.appendChild(lexiconCellDiv);
-
-						lexiconEntries_states.search="off"
-					}
+					
 					lexicon_Fx("sensemaking: ",1);
 					lexicon_Fx("an attempt to "
 						+"understand a retrieved piece of information by drawing on and adjusting "
 						+"knowledge structures that evolve dynamically in long-term memory.",0);
-				}
+				
 			}
 
 			var aboutText3 = document.createTextNode("-making attempts.");
