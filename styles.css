@@ -1,4 +1,13 @@
-
+.button {
+  
+  /*border: 1px;
+  text-align: center;*/
+  text-decoration: none;
+  padding-top: 1%;
+  font-size: var(--lexicon-textSize);
+  
+  cursor: pointer;
+}
 
 
 table.center{

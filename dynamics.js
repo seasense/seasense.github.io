@@ -8,6 +8,17 @@ function bullet_points_fx(linkTxt,point_fx){
 	return(newPoint)
 }
 
+function close_allCells_fx(){
+	if(secondRow_state=="on"){
+		document.getElementById("row2").remove();
+		secondRow_state[0] = "off";
+	}else{
+		document.getElementById("Cell2").remove();
+		secondCell_state[0] = "off";
+	}
+	
+}
+
 function secondCellFx(secondCell_state){
 	
 	if(secondCell_state=="off"){
@@ -16,13 +27,30 @@ function secondCellFx(secondCell_state){
 		secondCell.setAttribute("id","Cell2");
 		document.getElementById("row1").appendChild(secondCell);
 
+		var secondCell_DIV = document.createElement("DIV");
+		secondCell_DIV.setAttribute("class","scrollable");
+		secondCell.appendChild(secondCell_DIV);
+		
+		var stars = document.createElement("strong");
+		stars.appendChild(document.createElement("p"))
+		stars.appendChild(document.createTextNode("***"))
+		secondCell_DIV.appendChild(stars);
+		secondCell_DIV.appendChild(document.createElement("p"));
+
 		var list_of_links = document.createElement("ul");
-		secondCell.appendChild(list_of_links);
-		secondCell.setAttribute("style","text-decoration:underline")
+		list_of_links.setAttribute("style","text-decoration:underline");
+		secondCell_DIV.appendChild(list_of_links);
+		
 
 		list_of_links.appendChild(bullet_points_fx("about","about_cellFx()"));
 		list_of_links.appendChild(bullet_points_fx("related","related_cellFx()"));
 		list_of_links.appendChild(bullet_points_fx("instruments","battery_cellFx()"));
+
+		var closeButton = document.createElement("BUTTON");
+		closeButton.appendChild(document.createTextNode("close"));
+		closeButton.setAttribute("class","button");
+		closeButton.setAttribute("onclick","close_allCells_fx()");
+		secondCell_DIV.appendChild(closeButton);
 
 		secondCell_state[0] = "on"		
 	}
