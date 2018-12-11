@@ -327,13 +327,15 @@ function battery_cellFx(){
 				fourthCell_DIV.appendChild(lexicon_instruction);
 
 
-				function point_in_listTasks_Fx(point_name,fullTitle,description,construct,task_link){
+				function point_in_listTasks_Fx(point_name,fullTitle,description,construct,task_link,
+					task_logo, task_logo_address){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
 					newPoint.setAttribute("class","LinkToImage");
 					
-						function show_info_in_fourthCell(fullTitle,description,construct,task_link){
+						function show_info_in_fourthCell(fullTitle,description,construct,task_link,task_logo,
+							task_logo_address){
 							
 							document.getElementById("task_info_box").remove();
 
@@ -367,10 +369,14 @@ function battery_cellFx(){
 							LinkTask.appendChild(document.createTextNode("Participate: "));
 							document.getElementById("task_info_box").appendChild(LinkTask);
 							var task_a = document.createElement("a");
-							//task_a.appendChild(document.createTextNode("Link to task"));
-							var task_a_pic = document.createElement("IMG");
-							task_a_pic.setAttribute("src","./imgHP/dinoNimi.png")
-							task_a.appendChild(task_a_pic);
+							
+							if(task_logo==1){
+								var task_a_pic = document.createElement("IMG");
+								task_a_pic.setAttribute("src",task_logo_address);
+								task_a.appendChild(task_a_pic);
+							}else{
+								task_a.appendChild(document.createTextNode("Link to task"));
+							}
 							task_a.href = task_link;
 							task_a.setAttribute("class","LinkToImage");
 							document.getElementById("task_info_box").appendChild(task_a);
@@ -380,7 +386,8 @@ function battery_cellFx(){
 					
 						newPoint.onclick = function(){
 							
-								show_info_in_fourthCell(fullTitle,description,construct,task_link)		
+								show_info_in_fourthCell(fullTitle,description,construct,task_link,task_logo,
+									task_logo_address)		
 							
 						}
 
@@ -389,13 +396,13 @@ function battery_cellFx(){
 				
 				listTasks.appendChild(point_in_listTasks_Fx("act","Associative Chaining Task",
 					"Generating a sequence of words each connecting to the preceding word",
-					"Verbal flexibility","./index_ACT.html"));
+					"Verbal flexibility","./index_ACT.html",0,""));
 				listTasks.appendChild(point_in_listTasks_Fx("symspan","Symmetry Span task",
 					"Remembering a sequence of flashing cells while judging the symmetry of patterns",
-					"Working memory capacity","./index_SymSpan.html"));
+					"Working memory capacity","./index_SymSpan.html",0,""));
 				listTasks.appendChild(point_in_listTasks_Fx("dinoNimi","dinoNimi",
 					"Self-guided search of a taxonomy of dinosaurs to learn certain dinosaur categories",
-					"Category learning","./dinoNimi_review.html"));
+					"Category learning","./dinoNimi_review.html",1,"./imgHP/dinoNimi.png"));
 
 
 				secondRow_state[0] = "on";
