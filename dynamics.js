@@ -1,77 +1,40 @@
-/*var cell_i = (Math.floor(Math.random()*4));
-console.log(cell_i);*/
 
+function bullet_points_fx(linkTxt,point_fx){
+	var newPoint = document.createElement("li");
+	newPoint.setAttribute("style","cursor:pointer");
+	newPoint.setAttribute("onclick",point_fx);
+	var newPoint_txt = document.createTextNode(linkTxt);
+	newPoint.appendChild(newPoint_txt);
+	return(newPoint)
+}
 
-
-
-function secondCellFx(secondCell_state,thirdCell_state){
+function secondCellFx(secondCell_state){
+	
 	if(secondCell_state=="off"){
+		
 		var secondCell = document.createElement("TD");
 		secondCell.setAttribute("id","Cell2");
-
 		document.getElementById("row1").appendChild(secondCell);
 
 		var list_of_links = document.createElement("ul");
 		secondCell.appendChild(list_of_links);
 		secondCell.setAttribute("style","text-decoration:underline")
 
-		point_about = document.createElement("li");
-		point_about.setAttribute("id","link_about");
-		point_about.setAttribute("style","cursor:pointer");
-		point_about.setAttribute("onclick","about_cellFx()");
-		var link_about = document.createTextNode("about");
-		point_about.appendChild(link_about);
-		list_of_links.appendChild(point_about);
+		list_of_links.appendChild(bullet_points_fx("about","about_cellFx()"));
+		list_of_links.appendChild(bullet_points_fx("related","related_cellFx()"));
+		list_of_links.appendChild(bullet_points_fx("instruments","battery_cellFx()"));
 
-		point_related = document.createElement("li");
-		point_related.setAttribute("id","link_related");
-		point_related.setAttribute("style","cursor:pointer")
-		point_related.setAttribute("onclick","related_cellFx()");
-		var link_related = document.createTextNode("related");
-		point_related.appendChild(link_related)
-		list_of_links.appendChild(point_related);
-
-		point_tools = document.createElement("li");
-		point_tools.setAttribute("id","link_OS");
-		point_tools.setAttribute("style","cursor:pointer")
-		point_tools.setAttribute("onclick","tools_cellFx()");
-		var link_tools = document.createTextNode("tools");
-		point_tools.appendChild(link_tools)
-		list_of_links.appendChild(point_tools);
-
-		point_papers = document.createElement("li");
-		point_papers.setAttribute("id","link_papers");
-		point_papers.setAttribute("style","cursor:pointer")
-		point_papers.setAttribute("onclick","papers_cellFx()");
-		var link_papers = document.createTextNode("papers");
-		point_papers.appendChild(link_papers)
-		list_of_links.appendChild(point_papers);
-		
-		secondCell_state[0] = "on"
-
-		/*var close_button = document.createElement("BUTTON");
-		close_button.appendChild(document.createTextNode("close"));
-		close_button.setAttribute("align","center");
-		secondCell.appendChild(close_button);*/
-		
-		
-	}else{
-		if(thirdCell_state=="off"){
-			secondCell_state[0] = "off"
-			document.getElementById("Cell2").remove()};
-		}
+		secondCell_state[0] = "on"		
+	}
 
 };
 
 
 function about_cellFx(){
-	if(thirdCell_state=="off"){
-		
+	
+	function about_content_fx(){ 
 			var secondRow = document.getElementById("table").insertRow(1);
 			secondRow.setAttribute("id","row2")
-			
-			/*var thirdRow = document.getElementById("table").insertRow(2);
-			thirdRow.setAttribute("id","row3")*/
 
 			var thirdCell = document.createElement("TD");	
 			thirdCell.setAttribute("id","ThirdCell")
@@ -80,600 +43,399 @@ function about_cellFx(){
 
 			document.getElementById("row2").appendChild(thirdCell);
 			document.getElementById("row2").appendChild(fourthCell);
+			
+			var lexiconCellDiv = document.createElement("DIV");
+			lexiconCellDiv.setAttribute("id","lexicon");
+			lexiconCellDiv.setAttribute("class","scrollable_lexicon");
+			fourthCell.appendChild(lexiconCellDiv);
+			var lexicon_title1 = document.createElement("strong");
+			lexicon_title1.appendChild(document.createTextNode("Glossary"));
+			lexiconCellDiv.appendChild(lexicon_title1);
 
-			var cell4_image = document.createElement("IMG");
-			/*cell4_image.setAttribute("src","./imgHP/logo.png");
-			cell4_image.setAttribute("class","image");
-			fourthCell.appendChild(cell4_image);*/
 
-			//document.getElementById("row2").appendChild(thirdCell);
+			var lexicon_instruction = document.createTextNode("Click on a bold word in the left box for a brief explanation.");
+			lexiconCellDiv.appendChild(document.createElement("p"));
+			lexiconCellDiv.appendChild(lexicon_instruction);
+
 			var aboutCellDiv = document.createElement("DIV");
 			aboutCellDiv.setAttribute("class","scrollable");
 			thirdCell.appendChild(aboutCellDiv);
 			
-			aboutCellDiv.appendChild(document.createElement("p"));
-			aboutCellDiv.appendChild(document.createTextNode("***"));
+			var stars = document.createElement("strong");
+			stars.appendChild(document.createTextNode("***"))
+			aboutCellDiv.appendChild(stars);
 			aboutCellDiv.appendChild(document.createElement("p"));
 
 			var aboutText1 = document.createTextNode("Conceiving a space with and for people intrigued in investigating"
-				+" and supporting the mental processes involved in discovery learning "
-				+"- a process of adaptation and self-actualization that unfolds cyclically in individual acts of ");
+				+" and supporting the cognitive mechanisms involved in discovery learning "
+				+"- a process of self-actualization that unfolds cyclically in mental acts of ");
 			
 			aboutCellDiv.appendChild(aboutText1);
-			
+
+			function lexicon_Fx(explanation,explanation_Style){
+	
+				var newEntry_txt = document.createTextNode(explanation);			
+				
+				if(explanation_Style == 1){
+					var newEntry = document.createElement("strong")
+					newEntry.appendChild(newEntry_txt);
+				}else{
+					var newEntry = newEntry_txt
+				}
+				placeOfNewEntry = document.getElementById("lexicon");
+				placeOfNewEntry.appendChild(newEntry);
+
+				console.log(explanation_Style)
+
+			};
 
 			var sea = document.createTextNode("sea");
 			var sea_bold = document.createElement("strong");
+			sea_bold.setAttribute("style","text-decoration: underline");
+			sea_bold.setAttribute("style","cursor:pointer");
 			sea_bold.appendChild(sea);
 			aboutCellDiv.appendChild(sea_bold);
+
+			sea_bold.onclick = function(){
+
+				if(lexiconEntries_states.search=="off"){
+					// delete glossary title
+					document.getElementById("lexicon").remove();
+					var lexiconCellDiv = document.createElement("DIV");
+					lexiconCellDiv.setAttribute("id","lexicon");
+					lexiconCellDiv.setAttribute("class","scrollable_lexicon");
+					fourthCell.appendChild(lexiconCellDiv);
+
+					lexiconEntries_states.search="on"
+
+					if(lexiconEntries_states.sense=="on"){
+
+						document.getElementById("lexicon").remove();
+						var lexiconCellDiv = document.createElement("DIV");
+						lexiconCellDiv.setAttribute("class","scrollable_lexicon");
+						lexiconCellDiv.setAttribute("id","lexicon");
+						fourthCell.appendChild(lexiconCellDiv);
+
+						lexiconEntries_states.sense="off"
+
+					}
+					lexicon_Fx("searching: ",1);
+					lexicon_Fx("a cognitive activity that aims to retrieve relevant pieces of "
+						+"information either from an environmental or psychological space"
+						+", such as the Internet or long-term memory",0);
+				}
+			}
 
 			var aboutText2 = document.createTextNode("rch & ");
 			aboutCellDiv.appendChild(aboutText2);
 
 			var sense = document.createTextNode("sense");
 			var sense_bold = document.createElement("strong");
+			sense_bold.setAttribute("style","text-decoration:underline");
+			sense_bold.setAttribute("style","cursor:pointer");
 			sense_bold.appendChild(sense);
 			aboutCellDiv.appendChild(sense_bold);
+
+			sense_bold.onclick = function(){
+				if(lexiconEntries_states.sense=="off"){
+					// delete glossary title
+					document.getElementById("lexicon").remove();
+					var lexiconCellDiv = document.createElement("DIV");
+					lexiconCellDiv.setAttribute("id","lexicon");
+					lexiconCellDiv.setAttribute("class","scrollable_lexicon");
+					fourthCell.appendChild(lexiconCellDiv);
+
+					lexiconEntries_states.sense="on"
+					if(lexiconEntries_states.search=="on"){
+						document.getElementById("lexicon").remove();
+						var lexiconCellDiv = document.createElement("DIV");
+						lexiconCellDiv.setAttribute("class","scrollable_lexicon");
+						lexiconCellDiv.setAttribute("id","lexicon");
+						fourthCell.appendChild(lexiconCellDiv);
+
+						lexiconEntries_states.search="off"
+					}
+					lexicon_Fx("sensemaking: ",1);
+					lexicon_Fx("an attempt to "
+						+"understand a retrieved piece of information by drawing on and adjusting "
+						+"knowledge structures that evolve dynamically in long-term memory.",0);
+				}
+			}
 
 			var aboutText3 = document.createTextNode("-making attempts.");
 			aboutCellDiv.appendChild(aboutText3);
 			aboutCellDiv.appendChild(document.createElement("p"));
 			aboutCellDiv.appendChild(document.createTextNode("***"));
 			aboutCellDiv.appendChild(document.createElement("p"));
-			
-			thirdCell_state[0] = "on";
-			about_state[0] = "on";
+		}
 
+	if(secondRow_state=="off"){
+		
+			about_content_fx();
+
+			secondRow_state[0] = "on";
 			
 		
 	}else{
 
-		if(about_state=="off"){
+		
 
-			document.getElementById("ThirdCell").remove();
-			document.getElementById("FourthCell").remove();
-
-			var thirdCell = document.createElement("TD");	
-			thirdCell.setAttribute("id","ThirdCell")
-			var fourthCell = document.createElement("TD");	
-			fourthCell.setAttribute("id","FourthCell")
-
-			document.getElementById("row2").appendChild(thirdCell);
-			document.getElementById("row2").appendChild(fourthCell);
-
-			var aboutCellDiv = document.createElement("DIV");
-			aboutCellDiv.setAttribute("class","scrollable");
-			thirdCell.appendChild(aboutCellDiv);
-			
-			aboutCellDiv.appendChild(document.createElement("p"));
-			aboutCellDiv.appendChild(document.createTextNode("***"));
-			aboutCellDiv.appendChild(document.createElement("p"));
-
-			var aboutText1 = document.createTextNode("Conceiving a space with and for people intrigued in investigating"
-				+" and supporting the mental processes involved in discovery learning "
-				+"- a process of adaptation and self-actualization that unfolds cyclically in individual acts of ");
-			
-			aboutCellDiv.appendChild(aboutText1);
+			document.getElementById("row2").remove();
 			
 
-			var sea = document.createTextNode("sea");
-			var sea_bold = document.createElement("strong");
-			sea_bold.appendChild(sea);
-			aboutCellDiv.appendChild(sea_bold);
+			about_content_fx();
 
-			var aboutText2 = document.createTextNode("rch & ");
-			aboutCellDiv.appendChild(aboutText2);
 
-			var sense = document.createTextNode("sense");
-			var sense_bold = document.createElement("strong");
-			sense_bold.appendChild(sense);
-			aboutCellDiv.appendChild(sense_bold);
-
-			var aboutText3 = document.createTextNode("-making attempts.");
-			aboutCellDiv.appendChild(aboutText3);
-			aboutCellDiv.appendChild(document.createElement("p"));
-			aboutCellDiv.appendChild(document.createTextNode("***"));
-			aboutCellDiv.appendChild(document.createElement("p"));
-
-			thirdCell_state[0] = "on";
-			about_state[0] = "on";
-			related_state[0] = "off"
-			papers_state[0] = "off";
-			tools_state[0] = "off"
-
-		}else{
-			thirdCell_state[0]="off";
-			document.getElementById("ThirdCell").remove();
-			document.getElementById("FourthCell").remove();
-			about_state[0]="off";}
 		}
+		
 	
 };
 
-function MERITS_Fx(link){
-	if(merits_state[0]=="off"){
-		var newPic = document.createElement("IMG");
-		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png']
-		newPic.setAttribute("src",picture_addresses[0]);
-		newPic.setAttribute("class","imageRelated");
 
-		newLink = document.createElement("a");
-		newLink.href = link;
-		newLink.appendChild(newPic);
-		console.log(link)
-		var placeOfPic = document.getElementById("FourthCell");
-		placeOfPic.appendChild(newLink);
-		
-		
-		merits_state[0]="on"
 
-	}
-
-}
-function CEITER_Fx(link){
-	
-	if(ceiter_state[0]=="off"){
-		var newPic = document.createElement("IMG");
-		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png']
-		newPic.setAttribute("src",picture_addresses[1]);
-		newPic.setAttribute("class","imageRelated");
-
-		newLink = document.createElement("a");
-		newLink.href = link;
-		newLink.appendChild(newPic);
-		console.log(link)
-		var placeOfPic = document.getElementById("FourthCell");
-		placeOfPic.appendChild(newLink);
-		
-
-		ceiter_state[0]="on"
-	}
-
-}
-
-function CSS_Fx(link){
-	
-	if(css_state[0]=="off"){
-		var newPic = document.createElement("IMG");
-		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png','./imgHP/TUGraz.png']
-		newPic.setAttribute("src",picture_addresses[2]);
-		newPic.setAttribute("class","imageRelated");
-
-		newLink = document.createElement("a");
-		newLink.href = link;
-		newLink.appendChild(newPic);
-		console.log(link)
-		var placeOfPic = document.getElementById("FourthCell");
-		placeOfPic.appendChild(newLink);
-		
-
-		css_state[0]="on"
-	}
-
-}
 
 function related_cellFx(){
-	if(thirdCell_state=="off"){
-			
-			merits_state[0] = ["off"]
-			ceiter_state[0] = ["off"]
-			css_state[0] = ["off"]
+	
+	function related_content_fx(){
+				var secondRow = document.getElementById("table").insertRow(1);
+				secondRow.setAttribute("id","row2")
 
-			var secondRow = document.getElementById("table").insertRow(1);
-			secondRow.setAttribute("id","row2")
-
-			var thirdCell = document.createElement("TD");	
-			thirdCell.setAttribute("id","ThirdCell")
-			var fourthCell = document.createElement("TD");	
-			fourthCell.setAttribute("id","FourthCell")
-
-			document.getElementById("row2").appendChild(thirdCell);
-			document.getElementById("row2").appendChild(fourthCell);
-
-			var relatedCellDiv = document.createElement("DIV");
-			relatedCellDiv.setAttribute("class","scrollable");
-			thirdCell.appendChild(relatedCellDiv);
-			
-			relatedCellDiv.appendChild(document.createElement("p"));
-			relatedCellDiv.appendChild(document.createTextNode("***"));
-			relatedCellDiv.appendChild(document.createElement("p"));
-
-			var Merits_Link = document.createElement('a');
-			picAdress = "./imgHP/meritsLogo.jpg";
-			Merits_Link.setAttribute("onclick","MERITS_Fx('https://meritsblog.wordpress.com/')");
-			Merits_Link.setAttribute("class","LinkToImage");
-			Merits_Link.appendChild(document.createTextNode("merits"));
-			relatedCellDiv.appendChild(Merits_Link);
-			relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
-			relatedCellDiv.appendChild(document.createElement("p"));
-
-			var CEITER_Link = document.createElement('a');
-			CEITER_Link.setAttribute("onclick","CEITER_Fx('http://ceiter.tlu.ee/')");
-			CEITER_Link.setAttribute("class","LinkToImage");
-			CEITER_Link.appendChild(document.createTextNode("ceiter"));
-			relatedCellDiv.appendChild(CEITER_Link);
-			relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
-			relatedCellDiv.appendChild(document.createElement("p"));
-
-			var CSS_Link = document.createElement('a');
-			CSS_Link.setAttribute("onclick","CSS_Fx('http://cognitive-science.at/')");
-			CSS_Link.setAttribute("class","LinkToImage");
-			CSS_Link.setAttribute("style","color:black");
-			CSS_Link.appendChild(document.createTextNode("css"));
-			relatedCellDiv.appendChild(CSS_Link);
-			relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
-			relatedCellDiv.appendChild(document.createElement("p"));
-
-
-			var OMFix_Link = document.createElement('a');
-			OMFix_Link.setAttribute("style","color:black");
-			OMFix_Link.href = "https://omfix.wordpress.com/";
-			OMFix_Link.appendChild(document.createTextNode("omfix"));
-			relatedCellDiv.appendChild(OMFix_Link);
-			relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
-			relatedCellDiv.appendChild(document.createElement("p"));
-
-			
-			relatedCellDiv.appendChild(document.createTextNode("***"));
-			relatedCellDiv.appendChild(document.createElement("p"));
-
-			thirdCell_state[0] = "on";
-			related_state[0] = "on";
-		
-	}else{
-			if(related_state=="off"){
-
-				merits_state[0] = ["off"]
-				ceiter_state[0] = ["off"]
-				css_state[0] = ["off"]
-
-				document.getElementById("ThirdCell").remove();
-				document.getElementById("FourthCell").remove();
-
-				var thirdCell = document.createElement("TD");	
-				thirdCell.setAttribute("id","ThirdCell")
-				var fourthCell = document.createElement("TD");	
+				var thirdCell = document.createElement("TD");
+				var fourthCell = document.createElement("TD");
+				thirdCell.setAttribute("id","ThirdCell");
 				fourthCell.setAttribute("id","FourthCell");
-			
+
 				document.getElementById("row2").appendChild(thirdCell);
 				document.getElementById("row2").appendChild(fourthCell);
-
-				var relatedCellDiv = document.createElement("DIV");
-				relatedCellDiv.setAttribute("class","scrollable");
-				thirdCell.appendChild(relatedCellDiv);
 				
-				relatedCellDiv.appendChild(document.createElement("p"));
-				relatedCellDiv.appendChild(document.createTextNode("***"));
-				relatedCellDiv.appendChild(document.createElement("p"));
+				var listRelated = document.createElement("UL");
+				listRelated.setAttribute("id","list_related");
+				var list_related_DIV = document.createElement("DIV");
+				list_related_DIV.setAttribute("class","scrollable");
+				var stars = document.createElement("strong");
+				stars.appendChild(document.createTextNode("***"))
+				list_related_DIV.appendChild(stars);
+				list_related_DIV.appendChild(document.createElement("p"));
+				list_related_DIV.appendChild(listRelated);
+				thirdCell.appendChild(list_related_DIV);
 
-				var Merits_Link = document.createElement('a');
-				picAdress = "./imgHP/meritsLogo.jpg";
-				Merits_Link.setAttribute("onclick","MERITS_Fx('https://meritsblog.wordpress.com/')");
-				Merits_Link.setAttribute("class","LinkToImage");
-				Merits_Link.appendChild(document.createTextNode("merits"));
-				relatedCellDiv.appendChild(Merits_Link);
-				relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
-				relatedCellDiv.appendChild(document.createElement("p"));
+				var fourthCell_DIV = document.createElement("DIV");
+				fourthCell_DIV.setAttribute("class","scrollable_lexicon");
+				fourthCell_DIV.setAttribute("id","project_info_box");
+				fourthCell.appendChild(fourthCell_DIV);
 
-				var CEITER_Link = document.createElement('a');
-				CEITER_Link.setAttribute("onclick","CEITER_Fx('http://ceiter.tlu.ee/')");
-				CEITER_Link.setAttribute("class","LinkToImage");
-				CEITER_Link.appendChild(document.createTextNode("ceiter"));
-				relatedCellDiv.appendChild(CEITER_Link);
-				relatedCellDiv.appendChild(document.createTextNode("(Tallinn)"));
-				relatedCellDiv.appendChild(document.createElement("p"));
-
-				var CSS_Link = document.createElement('a');
-				CSS_Link.setAttribute("onclick","CSS_Fx('http://cognitive-science.at/')");
-				CSS_Link.setAttribute("class","LinkToImage");
-				CSS_Link.setAttribute("style","color:black");
-				CSS_Link.appendChild(document.createTextNode("css"));
-				relatedCellDiv.appendChild(CSS_Link);
-				relatedCellDiv.appendChild(document.createTextNode("(Graz)"));
-				relatedCellDiv.appendChild(document.createElement("p"));
+				var projectBoxTitle = document.createElement("strong");
+				projectBoxTitle.appendChild(document.createTextNode("Project information"));
+				fourthCell_DIV.appendChild(projectBoxTitle);
+				projectBoxTitle.appendChild(document.createElement("p"));
+				var lexicon_instruction = document.createTextNode("Hit a link in the left box.");
+				fourthCell_DIV.appendChild(lexicon_instruction);
 
 
-				var OMFix_Link = document.createElement('a');
-				OMFix_Link.setAttribute("style","color:black");
-				OMFix_Link.href = "https://omfix.wordpress.com/";
-				OMFix_Link.appendChild(document.createTextNode("omfix"));
-				relatedCellDiv.appendChild(OMFix_Link);
-				relatedCellDiv.appendChild(document.createTextNode("(FWF project)"));
-				relatedCellDiv.appendChild(document.createElement("p"));
+				function point_in_listRelated_Fx(point_name,fullTitle,sponsor,homepage_link){
+					var newPoint = document.createElement("li");
+					var newPoint_name = document.createTextNode(point_name);
+					newPoint.appendChild(newPoint_name);
+					newPoint.setAttribute("class","LinkToImage");
+					
+						function show_info_in_fourthCell(fullTitle,sponsor,homepage_link){
+							
+							document.getElementById("project_info_box").remove();
 
-				relatedCellDiv.appendChild(document.createTextNode("***"));
-				relatedCellDiv.appendChild(document.createElement("p"));
+							var fourthCell_DIV = document.createElement("DIV");
+							fourthCell_DIV.setAttribute("class","scrollable_lexicon");
+							fourthCell_DIV.setAttribute("id","project_info_box");
+							fourthCell.appendChild(fourthCell_DIV);
 
-				thirdCell_state[0] = "on";
-				related_state[0] = "on";
-				about_state[0] = "off"
-				papers_state[0] = "off";
-				tools_state[0] = "off"
+							var fullTitle_I = document.createElement("strong");
+							fullTitle_I.appendChild(document.createTextNode("Project title: "))
+							document.getElementById("project_info_box").appendChild(fullTitle_I);
+							var fullTitle = document.createTextNode(fullTitle);
+							document.getElementById("project_info_box").appendChild(fullTitle);
+							document.getElementById("project_info_box").appendChild(document.createElement("p"));
 
-			}else{
-				thirdCell_state[0]="off";
-				document.getElementById("ThirdCell").remove();
-				document.getElementById("FourthCell").remove();
-				related_state[0]="off";
-			}
-			
+							var sponsor_I = document.createElement("strong");
+							sponsor_I.appendChild(document.createTextNode("Funding: "));
+							document.getElementById("project_info_box").appendChild(sponsor_I);
+							var sponsor = document.createTextNode(sponsor);
+							document.getElementById("project_info_box").appendChild(sponsor);
+							document.getElementById("project_info_box").appendChild(document.createElement("p"));
+
+							var LinkToHomepgae = document.createElement("strong");
+							LinkToHomepgae.appendChild(document.createTextNode("More details: "));
+							document.getElementById("project_info_box").appendChild(LinkToHomepgae);
+							var homepage_a = document.createElement("a");
+							homepage_a.appendChild(document.createTextNode("Project homepage"));
+							homepage_a.href = homepage_link;
+							homepage_a.setAttribute("class","LinkToImage");
+							document.getElementById("project_info_box").appendChild(homepage_a);
+
+						}
+					
+					
+						newPoint.onclick = function(){
+							
+								show_info_in_fourthCell(fullTitle,sponsor,homepage_link)		
+							
+						}
+
+					return(newPoint)
+				}
+				
+				listRelated.appendChild(point_in_listRelated_Fx("merits","MEmory Retrieval In Tagging Socially",
+					"Austrian Science Fund (FWF)","https://meritsblog.wordpress.com/"));
+				listRelated.appendChild(point_in_listRelated_Fx("ceiter",
+					"Cross-Border Educational Innovation thru Technology-Enhanced Research",
+					"EU ERA Chair project","http://ceiter.tlu.ee/"));
+
+
+				secondRow_state[0] = "on";
+				
 		}
-	
-};
 
-function dinoNimi_Fx(link){
-	
-	if(dinoNimi_state[0]=="off"){
-		var newPic = document.createElement("IMG");
-		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png','./imgHP/TUGraz.png','./imgHP/dinoNimi.png']
-		newPic.setAttribute("src",picture_addresses[3]);
-		newPic.setAttribute("class","imageTools");
-
-		newLink = document.createElement("a");
-		newLink.href = link;
-		newLink.appendChild(newPic);
-		console.log(link)
-		var placeOfPic = document.getElementById("FourthCell");
-		placeOfPic.appendChild(newLink);
-
-		dinoNimi_state[0]="on"
-	}
-
-}
-
-function act_Fx(link){
-	
-	if(act_state[0]=="off"){
-		var newPic = document.createElement("IMG");
-		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png','./imgHP/TUGraz.png','./imgHP/dinoNimi.png','./imgHP/act.png']
-		newPic.setAttribute("src",picture_addresses[4]);
-		newPic.setAttribute("class","imageTools");
-
-		newLink = document.createElement("a");
-		newLink.href = link;
-		newLink.appendChild(newPic);
-		console.log(link)
-		var placeOfPic = document.getElementById("FourthCell");
-		placeOfPic.appendChild(newLink);
-		
-
-		act_state[0]="on"
-	}
-
-}
-
-function symspan_Fx(link){
-	
-	if(symspan_state[0]=="off"){
-		var newPic = document.createElement("IMG");
-		picture_addresses = ["./imgHP/meritsLogo.jpg",'./imgHP/ceiterLogo.png','./imgHP/TUGraz.png',
-		'./imgHP/dinoNimi.png','./imgHP/act.png','./imgHP/symspan_logo.png']
-		newPic.setAttribute("src",picture_addresses[5]);
-		newPic.setAttribute("class","imageTools");
-
-		newLink = document.createElement("a");
-		newLink.href = link;
-		newLink.appendChild(newPic);
-		console.log(link)
-		var placeOfPic = document.getElementById("FourthCell");
-		placeOfPic.appendChild(newLink);
-		
-
-		symspan_state[0]="on"
-	}
-
-}
-
-function tools_cellFx(){
-	if(thirdCell_state=="off"){
-
-			act_state[0] = ["off"]
-			dinoNimi_state[0] = ["off"]
-			symspan_state[0] = ["off"]
-
-			var row2 = table.insertRow(1);
-			row2.setAttribute("id","row2")
-
-			var thirdCell = document.createElement("TD");	
-			thirdCell.setAttribute("id","ThirdCell")
-			var fourthCell = document.createElement("TD");	
-			fourthCell.setAttribute("id","FourthCell")
-
-			document.getElementById("row2").appendChild(thirdCell);
-			document.getElementById("row2").appendChild(fourthCell);
-
-			var toolsCellDiv = document.createElement("DIV");
-			toolsCellDiv.setAttribute("class","scrollable");
-			thirdCell.appendChild(toolsCellDiv);
+	if(secondRow_state=="off"){
 			
-			toolsCellDiv.appendChild(document.createElement("p"));
-			toolsCellDiv.appendChild(document.createTextNode("***"));
-			toolsCellDiv.appendChild(document.createElement("p"));
-
-			var ACT_Link = document.createElement('a');
-			ACT_Link.setAttribute("onclick","act_Fx('./index_ACT.html')");
-			ACT_Link.setAttribute("class","LinkToImage");
-			ACT_Link.setAttribute("style","color:black");
-			ACT_Link.appendChild(document.createTextNode("act"));
-			toolsCellDiv.appendChild(ACT_Link);
-
-			toolsCellDiv.appendChild(document.createElement("p"));
-
-			var dinoNimi_Link = document.createElement('a');
-			dinoNimi_Link.setAttribute("onclick","dinoNimi_Fx('./dinoNimi_review.html')");
-			dinoNimi_Link.setAttribute("class","LinkToImage");
-			dinoNimi_Link.setAttribute("style","color:black");
-			dinoNimi_Link.appendChild(document.createTextNode("dinoNimi"));
-			toolsCellDiv.appendChild(dinoNimi_Link);
-
-			toolsCellDiv.appendChild(document.createElement("p"));
-
-			var symspan_Link = document.createElement('a');
-			symspan_Link.setAttribute("onclick","symspan_Fx('./index_SymSpan.html')");
-			symspan_Link.setAttribute("class","LinkToImage");
-			symspan_Link.setAttribute("style","color:black");
-			symspan_Link.appendChild(document.createTextNode("symmetry span"));
-			toolsCellDiv.appendChild(symspan_Link);
-
-			toolsCellDiv.appendChild(document.createElement("p"));
-			toolsCellDiv.appendChild(document.createTextNode("***"));
-			toolsCellDiv.appendChild(document.createElement("p"));
-
-			thirdCell_state[0] = "on";
-			tools_state[0] = "on";
+		related_content_fx()
 		
 	}else{
-			if(tools_state=="off"){
-				act_state[0] = ["off"]
-				dinoNimi_state[0] = ["off"]
+			
 
-				document.getElementById("ThirdCell").remove();
-				document.getElementById("FourthCell").remove();
-
-				var thirdCell = document.createElement("TD");	
-				thirdCell.setAttribute("id","ThirdCell")
-				var fourthCell = document.createElement("TD");	
-				fourthCell.setAttribute("id","FourthCell")
-
-				document.getElementById("row2").appendChild(thirdCell);
-				document.getElementById("row2").appendChild(fourthCell);
-
-				var toolsCellDiv = document.createElement("DIV");
-				toolsCellDiv.setAttribute("class","scrollable");
-				thirdCell.appendChild(toolsCellDiv);
+				document.getElementById("row2").remove();
 				
-				toolsCellDiv.appendChild(document.createElement("p"));
-				toolsCellDiv.appendChild(document.createTextNode("***"));
-				toolsCellDiv.appendChild(document.createElement("p"));
+				related_content_fx()
 
-				var ACT_Link = document.createElement('a');
-				ACT_Link.setAttribute("onclick","act_Fx('./index_ACT.html')");
-				ACT_Link.setAttribute("class","LinkToImage");
-				ACT_Link.setAttribute("style","color:black");
-				ACT_Link.appendChild(document.createTextNode("act"));
-				toolsCellDiv.appendChild(ACT_Link);
-
-				toolsCellDiv.appendChild(document.createElement("p"));
-
-				var dinoNimi_Link = document.createElement('a');
-				dinoNimi_Link.setAttribute("onclick","dinoNimi_Fx('./dinoNimi_review.html')");
-				dinoNimi_Link.setAttribute("class","LinkToImage");
-				dinoNimi_Link.setAttribute("style","color:black");
-				dinoNimi_Link.appendChild(document.createTextNode("dinoNimi"));
-				toolsCellDiv.appendChild(dinoNimi_Link);
-
-				toolsCellDiv.appendChild(document.createElement("p"));
-
-				var symspan_Link = document.createElement('a');
-				symspan_Link.setAttribute("onclick","symspan_Fx('./index_SymSpan.html')");
-				symspan_Link.setAttribute("class","LinkToImage");
-				symspan_Link.setAttribute("style","color:black");
-				symspan_Link.appendChild(document.createTextNode("symmetry span"));
-				toolsCellDiv.appendChild(symspan_Link);
-
-				toolsCellDiv.appendChild(document.createElement("p"));
-				toolsCellDiv.appendChild(document.createTextNode("***"));
-				toolsCellDiv.appendChild(document.createElement("p"));
-
-				thirdCell_state[0] = "on";
-				related_state[0] = "off";
-				about_state[0] = "off"
-				papers_state[0] = "off";
-				tools_state[0] = "on"
-
-			}else{
-				thirdCell_state[0]="off";
-				document.getElementById("ThirdCell").remove();
-				document.getElementById("FourthCell").remove();
-				tools_state[0]="off";
-			}
 			
 		}
 	
 };
 
-function papers_cellFx(){
-	if(thirdCell_state=="off"){
-			var row2 = table.insertRow(1);
-			row2.setAttribute("id","row2")
 
-			var thirdCell = document.createElement("TD");	
-			thirdCell.setAttribute("id","ThirdCell")
-			var fourthCell = document.createElement("TD");	
-			fourthCell.setAttribute("id","FourthCell")
 
-			document.getElementById("row2").appendChild(thirdCell);
-			document.getElementById("row2").appendChild(fourthCell);
-			
-			var papersCellDiv = document.createElement("DIV");
-			papersCellDiv.setAttribute("class","scrollable");
-			thirdCell.appendChild(papersCellDiv);
-			
-			papersCellDiv.appendChild(document.createElement("p"));
-			papersCellDiv.appendChild(document.createTextNode("***"));
-			papersCellDiv.appendChild(document.createElement("p"));
+function battery_cellFx(){
+	
+	function battery_content_fx(){
 
-			var CogSci_Link = document.createElement('a');
-			CogSci_Link.setAttribute("style","color:black");
-			CogSci_Link.href = "./Abstract_CogNetSci2018_PSeitiTLeyHFlemDAlbert.pdf";
-			CogSci_Link.appendChild(document.createTextNode("Talk at NetSci 2018 Satellite, Paris"));
-			papersCellDiv.appendChild(CogSci_Link);
-			
+				var secondRow = document.getElementById("table").insertRow(1);
+				secondRow.setAttribute("id","row2")
 
-			papersCellDiv.appendChild(document.createElement("p"));
-			papersCellDiv.appendChild(document.createTextNode("***"));
-			papersCellDiv.appendChild(document.createElement("p"));
+				var thirdCell = document.createElement("TD");
+				var fourthCell = document.createElement("TD");
+				thirdCell.setAttribute("id","ThirdCell");
+				fourthCell.setAttribute("id","FourthCell");
 
-			thirdCell_state[0] = "on";
-			papers_state[0] = "on";
+				document.getElementById("row2").appendChild(thirdCell);
+				document.getElementById("row2").appendChild(fourthCell);
+				
+				var listTasks = document.createElement("UL");
+				listTasks.setAttribute("id","list_tasks");
+				var listTasks_DIV = document.createElement("DIV");
+				listTasks_DIV.setAttribute("class","scrollable");
+				var stars = document.createElement("strong");
+				stars.appendChild(document.createTextNode("***"))
+				listTasks_DIV.appendChild(stars);
+				listTasks_DIV.appendChild(document.createElement("p"));
+				listTasks_DIV.appendChild(listTasks);
+				thirdCell.appendChild(listTasks_DIV);
+
+				var fourthCell_DIV = document.createElement("DIV");
+				fourthCell_DIV.setAttribute("class","scrollable_lexicon");
+				fourthCell_DIV.setAttribute("id","task_info_box");
+				fourthCell.appendChild(fourthCell_DIV);
+
+				var taskBoxTitle = document.createElement("strong");
+				taskBoxTitle.appendChild(document.createTextNode("Information about the instrument"));
+				fourthCell_DIV.appendChild(taskBoxTitle);
+				taskBoxTitle.appendChild(document.createElement("p"));
+				var lexicon_instruction = document.createTextNode("Hit a link in the left box.");
+				fourthCell_DIV.appendChild(lexicon_instruction);
+
+
+				function point_in_listTasks_Fx(point_name,fullTitle,description,construct,task_link){
+					var newPoint = document.createElement("li");
+					var newPoint_name = document.createTextNode(point_name);
+					newPoint.appendChild(newPoint_name);
+					newPoint.setAttribute("class","LinkToImage");
+					
+						function show_info_in_fourthCell(fullTitle,description,construct,task_link){
+							
+							document.getElementById("task_info_box").remove();
+
+							var fourthCell_DIV = document.createElement("DIV");
+							fourthCell_DIV.setAttribute("class","scrollable_lexicon");
+							fourthCell_DIV.setAttribute("id","task_info_box");
+							fourthCell.appendChild(fourthCell_DIV);
+
+							var fullTitle_I = document.createElement("strong");
+							fullTitle_I.appendChild(document.createTextNode("Task name: "))
+							document.getElementById("task_info_box").appendChild(fullTitle_I);
+							var fullTitle = document.createTextNode(fullTitle);
+							document.getElementById("task_info_box").appendChild(fullTitle);
+							document.getElementById("task_info_box").appendChild(document.createElement("p"));
+
+							var description_I = document.createElement("strong");
+							description_I.appendChild(document.createTextNode("Description: "));
+							document.getElementById("task_info_box").appendChild(description_I);
+							var description = document.createTextNode(description);
+							document.getElementById("task_info_box").appendChild(description);
+							document.getElementById("task_info_box").appendChild(document.createElement("p"));
+
+							var construct_I = document.createElement("strong");
+							construct_I.appendChild(document.createTextNode("Targeted construct: "));
+							document.getElementById("task_info_box").appendChild(construct_I);
+							var construct = document.createTextNode(construct);
+							document.getElementById("task_info_box").appendChild(construct);
+							document.getElementById("task_info_box").appendChild(document.createElement("p"));
+
+							var LinkTask = document.createElement("strong");
+							LinkTask.appendChild(document.createTextNode("Participate: "));
+							document.getElementById("task_info_box").appendChild(LinkTask);
+							var task_a = document.createElement("a");
+							task_a.appendChild(document.createTextNode("Link to task"));
+							task_a.href = task_link;
+							task_a.setAttribute("class","LinkToImage");
+							document.getElementById("task_info_box").appendChild(task_a);
+
+						}
+					
+					
+						newPoint.onclick = function(){
+							
+								show_info_in_fourthCell(fullTitle,description,construct,task_link)		
+							
+						}
+
+					return(newPoint)
+				}
+				
+				listTasks.appendChild(point_in_listTasks_Fx("act","Associative Chaining Task",
+					"Generating a sequence of words each connecting to the preceding word",
+					"Verbal flexibility","./index_ACT.html"));
+				listTasks.appendChild(point_in_listTasks_Fx("symspan","Symmetry Span task",
+					"Remembering a sequence of flashing cells while judging the symmetry of patterns",
+					"Working memory capacity","./index_SymSpan.html"));
+				listTasks.appendChild(point_in_listTasks_Fx("dinoNimi","dinoNimi",
+					"Self-guided search of a taxonomy of dinosaurs to learn certain dinosaur categories",
+					"Category learning","./dinoNimi_review.html"));
+
+
+				secondRow_state[0] = "on";
+
+		};
+
 		
-	}else{
-			if(papers_state=="off"){
-				
-				document.getElementById("ThirdCell").remove();
-				document.getElementById("FourthCell").remove();
 
-				var thirdCell = document.createElement("TD");	
-				thirdCell.setAttribute("id","ThirdCell")
-				var fourthCell = document.createElement("TD");	
-				fourthCell.setAttribute("id","FourthCell")
+	if(secondRow_state=="off"){
 
-				document.getElementById("row2").appendChild(thirdCell);
-				document.getElementById("row2").appendChild(fourthCell);
-				
-				var papersCellDiv = document.createElement("DIV");
-				papersCellDiv.setAttribute("class","scrollable");
-				thirdCell.appendChild(papersCellDiv);
-				
-				papersCellDiv.appendChild(document.createElement("p"));
-				papersCellDiv.appendChild(document.createTextNode("***"));
-				papersCellDiv.appendChild(document.createElement("p"));
+			battery_content_fx()
+		
+	}else{	
 
-				var CogSci_Link = document.createElement('a');
-				CogSci_Link.setAttribute("style","color:black");
-				CogSci_Link.href = "./Abstract_CogNetSci2018_PSeitiTLeyHFlemDAlbert.PDF";
-				CogSci_Link.appendChild(document.createTextNode("Talk at NetSci 2018 Satellite, Paris"));
-				papersCellDiv.appendChild(CogSci_Link);
+				document.getElementById("row2").remove();		
 
-				papersCellDiv.appendChild(document.createElement("p"));
-				papersCellDiv.appendChild(document.createTextNode("***"));
-				papersCellDiv.appendChild(document.createElement("p"));
+				battery_content_fx();
 
-				thirdCell_state[0] = "on";
-				related_state[0] = "off";
-				about_state[0] = "off"
-				papers_state[0] = "on";
-				tools_state[0] = "off"
-
-			}else{
-				thirdCell_state[0]="off";
-				document.getElementById("ThirdCell").remove();
-				document.getElementById("FourthCell").remove();
-				papers_state[0]="off";
-			}
 			
 		}
 	
 };
-
 
