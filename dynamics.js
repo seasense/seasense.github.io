@@ -94,12 +94,6 @@ function about_cellFx(){
 			aboutCellDiv.appendChild(stars);
 			aboutCellDiv.appendChild(document.createElement("p"));
 
-			var aboutText1 = document.createTextNode("Conceiving a space with and for people intrigued in investigating"
-				+" and supporting the cognitive mechanisms involved in discovery learning "
-				+"- a process of self-actualization that unfolds cyclically in mental acts of ");
-			
-			aboutCellDiv.appendChild(aboutText1);
-
 			function lexicon_Fx(explanation,explanation_Style){
 	
 				var newEntry_txt = document.createTextNode(explanation);			
@@ -117,10 +111,38 @@ function about_cellFx(){
 
 			};
 
+			var aboutText1 = document.createTextNode("Making a space with and for people intrigued in investigating"
+				+" and supporting the ");
+			
+			aboutCellDiv.appendChild(aboutText1);
+
+			var cogMechs = document.createTextNode("cognitive mechanisms");
+			var cogMechs_bold = document.createElement("strong");
+			cogMechs_bold.setAttribute("style","text-decoration: underline;cursor:pointer");
+			
+			cogMechs_bold.appendChild(cogMechs);
+			aboutCellDiv.appendChild(cogMechs_bold);
+
+			cogMechs_bold.onclick = function(){
+				
+					document.getElementById("lexicon").remove();
+					var lexiconCellDiv = document.createElement("DIV");
+					lexiconCellDiv.setAttribute("id","lexicon");
+					lexiconCellDiv.setAttribute("class","scrollable_lexicon");
+					fourthCell.appendChild(lexiconCellDiv);
+						
+					lexicon_Fx("cognitive mechanisms. ",1);
+					lexicon_Fx("a concept used here to refer to those neural structures and processes that "
+						+"underlie the development of long-term memory and critical reasonig" ,0);
+				}
+
+			var aboutText2 = document.createTextNode(" involved in discovery learning "
+				+"- a process of self-actualization that unfolds cyclically in mental acts of ");
+			aboutCellDiv.appendChild(aboutText2);
+
 			var sea = document.createTextNode("sea");
 			var sea_bold = document.createElement("strong");
-			sea_bold.setAttribute("style","text-decoration: underline");
-			sea_bold.setAttribute("style","cursor:pointer");
+			sea_bold.setAttribute("style","text-decoration: underline;cursor:pointer");
 			sea_bold.appendChild(sea);
 			aboutCellDiv.appendChild(sea_bold);
 
@@ -134,20 +156,19 @@ function about_cellFx(){
 					fourthCell.appendChild(lexiconCellDiv);
 
 						
-					lexicon_Fx("searching: ",1);
+					lexicon_Fx("searching. ",1);
 					lexicon_Fx("a cognitive activity that aims to retrieve relevant pieces of "
 						+"information either from an environmental or psychological space"
 						+", such as the Internet or long-term memory",0);
 				}
 			
 
-			var aboutText2 = document.createTextNode("rch & ");
-			aboutCellDiv.appendChild(aboutText2);
+			var aboutText3 = document.createTextNode("rch & ");
+			aboutCellDiv.appendChild(aboutText3);
 
 			var sense = document.createTextNode("sense");
 			var sense_bold = document.createElement("strong");
-			sense_bold.setAttribute("style","text-decoration:underline");
-			sense_bold.setAttribute("style","cursor:pointer");
+			sense_bold.setAttribute("style","text-decoration: underline;cursor:pointer");
 			sense_bold.appendChild(sense);
 			aboutCellDiv.appendChild(sense_bold);
 
@@ -160,15 +181,15 @@ function about_cellFx(){
 					fourthCell.appendChild(lexiconCellDiv);
 
 					
-					lexicon_Fx("sensemaking: ",1);
+					lexicon_Fx("sensemaking. ",1);
 					lexicon_Fx("an attempt to "
 						+"understand a retrieved piece of information by drawing on and adjusting "
 						+"knowledge structures that evolve dynamically in long-term memory.",0);
 				
 			}
 
-			var aboutText3 = document.createTextNode("-making attempts.");
-			aboutCellDiv.appendChild(aboutText3);
+			var aboutText4 = document.createTextNode("-making attempts.");
+			aboutCellDiv.appendChild(aboutText4);
 			aboutCellDiv.appendChild(document.createElement("p"));
 			aboutCellDiv.appendChild(document.createTextNode("***"));
 			aboutCellDiv.appendChild(document.createElement("p"));
@@ -423,7 +444,7 @@ function battery_cellFx(){
 				}
 				
 				listTasks.appendChild(point_in_listTasks_Fx("act","Associative Chaining Task",
-					"Generating a sequence of words each connecting to the preceding word",
+					"Quickly generating a diverse sequence of words each connecting to its predecessor",
 					"Verbal flexibility","./index_ACT.html",0,""));
 				listTasks.appendChild(point_in_listTasks_Fx("symspan","Symmetry Span task",
 					"Remembering a sequence of flashing cells while judging the symmetry of patterns",
