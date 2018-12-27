@@ -113,7 +113,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     $trial_form.append($('<input>', {
       'type': 'submit',
       'id': plugin_id_name + '-next',
-      'class': plugin_id_name + ' jspsych-btn',
+      'class': plugin_id_name + ' jspsych-btn-weiter',
       'value': nameOfButton
     }));
 
