@@ -13,6 +13,8 @@
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+		<base target="_blank">
+
 	</head>
 	
 	<script>
@@ -48,7 +50,7 @@
 
 	<script>
 		
-		function pick_a_stimulus2(){
+		function pick_a_stimulus2(stimuli){
 			for(i=0;i<stimuli.length;i++){
 				if(i==0){
 					var stimuli_ordered=[]
@@ -71,56 +73,86 @@
 	
 	<script>
 
-
-	var stimuli = ["rot","Meer"];
-	var nAsso_per_stim = 4;
+	var stimuli_training = ["Haus"];
+	var stimuli_test = ["rot","Meer"];
+	var nAsso_per_stim = 2;
 	
 	
 ///////// Intro
 /////////
 	var welcome = {
 			type: 'instructions',
-			pages: [function(){return("Willkommen zum Associative Chaining Task (act), einer Aufgabe zum Bilden von Assoziationsketten.")}],
+			pages: [function(){return("Willkommen zu ACT, einer Ged&#xE4;chtnisaufgabe zum Bilden von Assoziationsketten. <br>Klicke <i>Weiter</i>, um zur Aufgabenbeschreibung zu gelangen.")}],
 			show_clickable_nav: true,
 			on_finish: function(data) { 
-				
+				stimuli = stimuli_training;
 				stimulus_x = 0;
-				stimulus_order = pick_a_stimulus2();
+				stimulus_order = pick_a_stimulus2(stimuli);
 			},	
+	};
+	var task_description = {
+			type: 'instructions',
+			pages: ["Jede Assoziationskette beginnt mit der Darbietung eines Begriffes, ...<p>Klicke <i>Weiter</i>, um dich f&#xFC;r die Teilnahme einverstanden zu erkl&#xE4;ren."],
+			show_clickable_nav: true,
+			
 	};
 	var informedConsent1 = {
 		type: 'survey-multi-choice',
-		questions: ["..."],
-		options: [["Ich stimme zu, dass meine pseudonymisierten Daten zur Ver&oumlffentlichung wissenschaftlicher Arbeiten verwendet werden"]],
+		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>1/3"],
+		options: [["Ich habe die obigen Instruktionen gelesen und erkl&aumlre mich bereit zur Teilnahme."]],
 		required: [true]
     };
-    var informedConsent2 = {
+	var informedConsent2 = {
 		type: 'survey-multi-choice',
-		questions: ["..."],
-		options: [["Ich stimme zu, dass meine pseudonymisierten Daten zum Zweck der wissenschaftlichen Transparenz f&uumlr andere WissenschaftlerInnen im Open Science Framework (siehe https://osf.io/) verf&uumlgbar gemacht werden."]],
+		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>2/3"],
+		options: [["Ich stimme zu, dass meine pseudonymisierten Daten zur Ver&oumlffentlichung wissenschaftlicher Arbeiten verwendet werden"]],
 		required: [true]
     };
     var informedConsent3 = {
 		type: 'survey-multi-choice',
-		questions: ["..."],
-		options: [["Ich habe die obigen Instruktionen gelesen und erkl&aumlre mich bereit zur Teilnahme."]],
+		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>3/3"],
+		options: function(){return([["Ich stimme zu, dass meine pseudonymisierten Daten zum Zweck der wissenschaftlichen Transparenz f&uumlr andere WissenschaftlerInnen im <a href='https://osf.io/'> Open Science Framework </a> verf&uumlgbar gemacht werden."]])},
 		required: [true]
     };
-	
 	
 ///////// Practice
 	var practice_overview = {
 		type: 'instructions',
-		pages: [""],
+		pages: ["Es folgt zun&#xE4;chst ein Trainingsdurchgang, ... . <p> Klicke <i>Weiter</i>, um das Training zu beginnen."],
 		show_clickable_nav: true,
+		
 	};
+	var announce_endOfTraining = {
+		type: 'instructions',
+		pages: ["Der Trainingsdurchgang ist zu Ende. <p> Klicke <i>Weiter</i>, um nun den offiziellen Teil der Aufgabe zu absolvieren."],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+				stimuli = stimuli_test;
+				stimulus_x = 0;
+				stimulus_order = pick_a_stimulus2(stimuli);
+		},
+	}
 
 	var prepare_for_next_stimulus = {
 		type: 'instructions',
 		pages: [function(){
 			if(stimulus_x==0){return "Es folgt nun der 1. Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""};
-			if(stimulus_x==(nAsso_per_stim-2)){return "Vielen Dank! Der Task ist nun zu Ende."};
-			if(stimulus_x>0&stimulus_x<(nAsso_per_stim-2)){ return "... Es folgt nun der n\xe4chste Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""}
+			if(stimulus_x==stimuli.length){return "Vielen Dank! Der Task ist nun zu Ende."};
+			if(stimulus_x>0&stimulus_x<stimuli.length){ return "... Es folgt nun der n\xe4chste Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""}
+		}],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+			iter_i=0
+			
+		},
+	};
+
+	var prepare_for_next_stimulus_training = {
+		type: 'instructions',
+		pages: [function(){
+			if(stimulus_x==0){return "Es folgt nun der Begriff: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""};
+			if(stimulus_x==stimuli.length){return "Vielen Dank! Das Training ist nun zu Ende."};
+			if(stimulus_x>0&stimulus_x<stimuli.length){ return "Der n\xe4chste Begriff lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""}
 		}],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
@@ -142,8 +174,8 @@
 		prompt2: function(){return ("<br>"+"Anzahl noch zu produzierender Assoziationen: "+(nAsso_per_stim-(iter_i+1))+"")},
 		response_ends_trial: false,
 		on_finish: function(data) {  
-			iter_i+=1
 			if(iter_i==(nAsso_per_stim-1)){stimulus_x+=1;}
+			iter_i+=1
 			current_associate = data.clickedLetters
 		},	
 	};
@@ -170,9 +202,21 @@
 		        }
 		  },
 	};
+
+	var training_loop = {
+		timeline: [associate_loop,prepare_for_next_stimulus_training],
+		loop_function: function(data){
+				if(stimulus_x<stimuli.length){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+	};
 			
 	jsPsych.init({
-		timeline: [welcome,/*informedConsent1,informedConsent2,informedConsent3,*/prepare_for_next_stimulus,stimulus_loop],
+		timeline: [welcome,/*task_description,informedConsent1,informedConsent2,informedConsent3,*/practice_overview,prepare_for_next_stimulus_training,training_loop,
+			announce_endOfTraining,prepare_for_next_stimulus, stimulus_loop],
 	   	fullscreen: false,
 	   	on_finish: function(data){
 	        jsPsych.data.localSave('myData_sendMeTo_pseiti@tlu.ee.txt', 'csv');
