@@ -55,7 +55,7 @@ jsPsych.plugins["button-response-hitCells"] = (function() {
     // http://www.dotnetlearners.com/javascript/find%20table%20cell%20value%20on%20cell%20(table)%20click%20using%20javascript.aspx
       var mat = document.createElement("TABLE");
       mat.setAttribute("id", "rememberMat");
-      mat.setAttribute("border", "1");
+      //mat.setAttribute("border", "1");
       mat.setAttribute('align','center');
       mat.setAttribute('style','text-align:center; color:white');
       
@@ -63,8 +63,9 @@ jsPsych.plugins["button-response-hitCells"] = (function() {
    
       var click_nr = [1];
       
-      function changeColor_and_save(id,click_nr,vector_score){
-          id.style.backgroundColor = "#008080"; 
+      function changeColor_and_save(id,vector_score){
+          
+          id.setAttribute("style","font-size: var(--numberSize_remMat)");
           var id_number = id.getAttribute("cellNumber");
           if(clicked_cells.includes(id_number)===false){
             clicked_cells.push(id_number);
@@ -89,11 +90,13 @@ jsPsych.plugins["button-response-hitCells"] = (function() {
 
           for( i=0; i<4 ; i++) {
               var z = document.createElement("TD");
-              z.setAttribute("height", "30");
-              z.setAttribute("width", "30");
+              z.setAttribute("class","remStim");
+              var z_button = document.createElement("button");
+              z_button.setAttribute("class","recallMat");
               var cellNumber = j*3+j+i;
-              z.setAttribute("cellNumber",cellNumber);
-              z.onclick = function() { changeColor_and_save(this,click_nr,vector_score); };
+              z_button.setAttribute("cellNumber",cellNumber);
+              z.appendChild(z_button);
+              z_button.onclick = function() { changeColor_and_save(this,vector_score); };
               document.getElementById("newRow").appendChild(z);
               c=c+1;
           }

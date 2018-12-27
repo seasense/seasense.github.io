@@ -211,8 +211,7 @@ function matSymmetryFx() {
 
         for( i=0; i <8 ; i++) {
             var z = document.createElement("TD");
-            z.setAttribute("height", "20");
-            z.setAttribute("width", "20");
+            z.setAttribute("class","symStim");
             if(sampled_cell_IDs.includes(c)){z.setAttribute("style","background-color: black")}
             document.getElementById("newRow").appendChild(z);
             c=c+1;
@@ -228,6 +227,7 @@ function matRememberFx(cellFilled){
 
 	var mat = document.createElement("TABLE");
     mat.setAttribute("id", "rememberMat");
+    mat.setAttribute("style","margin-top: 2em");
     mat.setAttribute("border", "1");
     mat.setAttribute('align','center');
     document.body.appendChild(mat);
@@ -242,8 +242,7 @@ function matRememberFx(cellFilled){
 
         for( i=0; i<nRows ; i++) {
             var z = document.createElement("TD");
-            z.setAttribute("height", "30");
-            z.setAttribute("width", "30");
+            z.setAttribute("class","remStim");
             var cellNumber = j*3+j+i;
             z.setAttribute("cellNumber",cellNumber);
             if(c==cellFilled){z.setAttribute("style","background-color: #008080")}
@@ -274,8 +273,10 @@ function matEmptyFx(){
 
         for( i=0; i<nRows ; i++) {
             var z = document.createElement("TD");
-            z.setAttribute("height", "30");
-            z.setAttribute("width", "30");
+            /*z.setAttribute("height", "30");
+            z.setAttribute("width", "30");*/
+            z.setAttribute("class","remStim");
+            z.setAttribute("style","font-size: var(--numberSize_remMat)");
             var cellNumber = j*3+j+i;
             z.setAttribute("cellNumber",cellNumber);
             document.getElementById("newRow").appendChild(z);
@@ -304,8 +305,10 @@ function matEmptyFx2(){
 
         for( i=0; i<nRows ; i++) {
             var z2 = document.createElement("TD");
-            z2.setAttribute("height", "30");
-            z2.setAttribute("width", "30");
+            /*z2.setAttribute("height", "30");
+            z2.setAttribute("width", "30");*/
+            z2.setAttribute("class","remStim");
+            z2.setAttribute("style","font-size: var(--numberSize_remMat)");
             var cellNumber2 = j*3+j+i;
             z2.setAttribute("cellNumber2",cellNumber2);
             document.getElementById("newRoW").appendChild(z2);
@@ -332,6 +335,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
     row0.setAttribute("style","font-weight:bold")
     for(k=0;k<3;k++){
             var tdk = document.createElement("TD");
+            tdk.setAttribute("style","font-size: var(--normalTextSize)");
             row0.appendChild(tdk);
             if(k==0){
                 tdk.appendChild(document.createTextNode("Feedback: "));
@@ -356,7 +360,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
 
 		var matCorCaption = document.createElement("CAPTION");
 		var captionText2 = document.createTextNode("Presented sequence");
-		matCorCaption.setAttribute('style','color:black')
+		matCorCaption.setAttribute('style','color:black; font-size: var(--normalTextSize)'); 
 		matCorCaption.appendChild(captionText2);
 		matCor.appendChild(matCorCaption);
 
@@ -369,16 +373,17 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
 
 	        for( k=0; k<nRows ; k++) {
 	            var z = document.createElement("TD");
-	            z.setAttribute("height", "30");
-	            z.setAttribute("width", "30");
+                z.setAttribute("class","remStim")
+	            /*z.setAttribute("height", "30");
+	            z.setAttribute("width", "30");*/
 	         
 	            if(cells_presented.includes(c)){
 	            	for(sx=0; sx<cells_presented.length; sx++){
 	            		if(c==cells_presented[sx]){var posNr = document.createTextNode((sx+1)+".")}
 	            	}
-	            	z.setAttribute("style","background-color: black")
+	            	z.setAttribute("style","background-color: black; font-size: var(--numberSize_remMat)");
 	            	//var posNr = document.createTextNode(posNr)
-	            	z.appendChild(posNr)
+                    z.appendChild(posNr)
 	            }
 	            document.getElementById("newRow2").appendChild(z);
 	            c+=1;
@@ -400,7 +405,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
         mat2_cell.appendChild(matResponse);
 
         var matResponseCaption = document.createElement("CAPTION");
-        matResponseCaption.setAttribute('style','color:black');
+        matResponseCaption.setAttribute('style','color:black; font-size: var(--normalTextSize)'); 
         var captionText3 = document.createTextNode("Your recalled sequence");
 
         matResponseCaption.appendChild(captionText3);
@@ -429,7 +434,8 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
         row4.setAttribute("id", "row4");
         var accu_title = document.createTextNode("Scoring: ");
         var accuTitle_td = document.createElement("TD");
-        row4.setAttribute("style","font-weight:bold")
+        
+        row4.setAttribute("style","font-weight:bold; font-size: var(--normalTextSize)");
         accuTitle_td.appendChild(accu_title);
         row4.appendChild(accu_title);
         
@@ -466,6 +472,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
                     function addRow (table,rowPos,rowText,td,textCol){
                         var newRowAdded = AbbrevTab.insertRow(rowPos);
                         var newTDAdded = document.createElement("TD");
+                        newTDAdded.setAttribute("style","font-size:var(--normalTextSize)")
                         if(textCol=="G"){newRowAdded.setAttribute("style","color:green")}else{newRowAdded.setAttribute("style","color:red")}
                         newTDAdded.appendChild(document.createTextNode(rowText));
                         newRowAdded.appendChild(newTDAdded);
@@ -509,6 +516,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
             if(k==0){
                 var accu_txtNode = document.createTextNode("Accuracy: "+accuracy_score+"%");
                 tdk.appendChild(accu_txtNode);
+                tdk.setAttribute("style","font-size: var(--normalTextSize)");
                 
             }
         }
