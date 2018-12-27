@@ -3,22 +3,33 @@
 		<title>SymmetrySpan</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="jspsych-5.0.3-sym/jspsych.js"></script>
+
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-text.js"></script>
-		<script src="jspsych-5.0.3-sym/plugins/jspsych-button-response.js"></script>
+		
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-button-response-judgeSym.js"></script>
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-button-response-hitCells.js"></script>
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-instructions.js"></script>
-		<script src="jspsych-5.0.3-sym/plugins/jspsych-survey-likert.js"></script>
-		<script src="jspsych-5.0.3-sym/plugins/jspsych-survey-text.js"></script>
+		
+		<script src="jspsych-5.0.3-sym/plugins/equations.js"></script>
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-survey-text_persCode.js"></script>
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-survey-multi-choice.js"></script>
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-single-stim.js"></script>
-		<script src="jspsych-5.0.3-sym/plugins/equations.js"></script>
+		
 		<script src="jspsych-5.0.3-sym/plugins/matrices.js"></script>
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-rememberCells.js"></script>
 		<script src="jspsych-5.0.3-sym/plugins/jspsych-rememberCells-practice.js"></script>
 		<link href="jspsych-5.0.3-sym/css/jspsych_symSpan.css" rel="stylesheet" type="text/css"></link>
-			
+		
+		<style>
+			:root{
+				--normalTextSize: 20px;
+				--cellSize_symMat: 40px;
+				--cellSize_remMat: 60px;
+				--numberSize_remMat: 40px;
+				
+			}
+		</style>
+
 	</head>
 	
 	
@@ -271,7 +282,8 @@
 
 	var rem_RemAndSym = {
   	  	type: "single-stim",
-  	  	stimulus: function(){var mat = matRememberFx(remememberCells_trial_x[rem_i]); return(mat)},
+  	  	stimulus: function(){
+  	  		var mat = matRememberFx(remememberCells_trial_x[rem_i]);return(mat)},
   	  	choices: [100], timing_response: function(){return(500*(t_SetSize))}, data: {phase: 'remember'},
   	  	is_html: true,
  	   	on_finish: function(data){
@@ -366,9 +378,7 @@
 
 /////////
 	jsPsych.init({
-		/*timeline: [welcome,intro_symmetry_practice, symmetry_loop_practice,
-							intro_remember_practice, recall_loop_practice],*/
-		//timeline: [intro_RemAndSym_practice,RemAndSym_loop,recall,feedback_RemAndSym_0],
+		
 		timeline: [welcome, intro_RemAndSym_practice,RemAndSym_loop2],
 	   	fullscreen: false,
 	   	on_finish: function(data){
