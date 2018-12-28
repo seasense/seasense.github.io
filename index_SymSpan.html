@@ -50,15 +50,15 @@
 		};
 
 		function successCountrFx (successCountr_sym,pattern,b_pressed){
-			if(pattern=="sym"&b_pressed==1){successCountr_sym+=1}
-			if(pattern=="asym"&b_pressed==0){successCountr_sym+=1}
+			if(pattern=="symmetrical"&b_pressed==1){successCountr_sym+=1}
+			if(pattern=="asymmetrical"&b_pressed==0){successCountr_sym+=1}
 			return(successCountr_sym)
 		}
 
 		function symFeedback (nErrorFreeTrials_symPractice,successCountr_sym,pattern,b_pressed){
 			
 
-			if(pattern=="sym"){
+			if(pattern=="symmetrical"){
 					if(b_pressed==1){
 						
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
@@ -67,7 +67,7 @@
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
 						feedText = "Wrong. The presented pattern was symmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}
 				}
-				if(pattern=="asym"){
+				if(pattern=="asymmetrical"){
 					if(b_pressed==0){
 						
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
@@ -127,14 +127,14 @@
 ///////// Practice
 	var practice_overview = {
 		type: 'instructions',
-		pages: ["<p>***</p>Before performing the Operation Span task, you will be guided through 3 short practice units, explaining the task step by step:<p><b>Unit 1</b>: Math task<br><b>Unit 2</b>: Memory task<br><b>Unit 3</b>: Both tasks simultaneously<p>***</p>Click <i>Next</i> to enter the first practice unit."],
+		pages: ["<p>***</p>Before performing the Symmetry Span task, you will be guided through 3 short practice units, explaining the task step by step:<p><b>Unit 1</b>: Symmetry judgment task<br><b>Unit 2</b>: Memory task<br><b>Unit 3</b>: Both tasks simultaneously<p>***</p>Click <i>Next</i> to enter the first practice unit."],
 		show_clickable_nav: true,
 	};
 ///////// Practice Symmetry
 	
 	var intro_symmetry_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Memory task: Instruction</b></p> After clicking the <i>Next</i>-Button, a plus-sign <b>+</b> will appear, followed by consecutively presented matrices (about 1 second per matrix). After the last matrix, you will be asked to recall ....</p> Any mistake (recalling too many or too few, or recalling them in the wrong order) counts as incorrect. </p><p class='center-content'> Click <i>Next</i> to start practicing.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Symmetry judgment task: Instruction</b></p> After clicking the <i>Next</i>-Button, a plus-sign <b>+</b> will appear, followed by consecutively presented matrices (about 1 second per matrix). After the last matrix, you will be asked to recall ....</p> Any mistake (recalling too many or too few, or recalling them in the wrong order) counts as incorrect. </p><p class='center-content'> Click <i>Next</i> to start practicing.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				successCountr_sym = 0;
@@ -150,7 +150,8 @@
 	 	   	on_finish: function(data){
 	 	   		pattern = data.matrixPattern
 				b_pressed = data.button_pressed
-				successCountr_sym = successCountr(successCountr_sym, pattern, b_pressed)
+				successCountr_sym = successCountrFx(successCountr_sym, pattern, b_pressed)
+				console.log(successCountr_sym);
 	 	   	},
 		};
 
@@ -373,13 +374,24 @@
 	}
 
 	
-
+	var goodbye = {
+			type: 'instructions',
+			pages: [function(){return("Vielen Dank f&#xFC;r deine Teilnahme! <br>Klicke <i>Weiter</i>, um den Download deiner Daten in deinen Download-Folder zu veranlassen. Sende dieses File anschlie&#xDF;end an die Adresse ... ")}],
+			show_clickable_nav: true,	
+	};
 
 
 /////////
 	jsPsych.init({
 		
-		timeline: [welcome, intro_RemAndSym_practice,RemAndSym_loop2],
+		timeline: [welcome, 
+					practice_overview,
+					intro_symmetry_practice,symmetry_loop_practice,
+					intro_remember_practice,recall_loop_practice,
+					intro_RemAndSym_practice,RemAndSym_loop2,
+					goodbye
+					],
+
 	   	fullscreen: false,
 	   	on_finish: function(data){
 	       jsPsych.data.localSave('myData_sendMeTo_pseiti@tlu.ee.txt', 'csv');
