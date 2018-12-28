@@ -132,6 +132,8 @@ jsPsych.plugins["button-response-act"] = (function() {
     
     
     //display doneButton
+    var buttonsClicked = [];
+
     if (trial.showEndButton) {
       if(iter_i<(nAsso_per_stim-1)){var doneButton = "<button id='doneButton' class='jspsych-btn-weiter' style=margin:50px>Weiter zur "+(iter_i+2)+". Assoziation</div>"}else{
         var doneButton = "<button id='doneButton' class='jspsych-btn-weiter' style=margin:50px>Assoziationskette beenden</div>"
@@ -139,8 +141,9 @@ jsPsych.plugins["button-response-act"] = (function() {
       display_element.append(doneButton);
     }
     $("#doneButton").on('click', function(e) {
-          end_trial();
+          if(buttonsClicked.length>0){end_trial();}
     })
+    
 
     //show 2nd prompt if there is one
     if (trial.prompt2 !== "") {
@@ -156,7 +159,7 @@ jsPsych.plugins["button-response-act"] = (function() {
     // function to display already clicked buttons
     function showClickedLetters (buttonsClicked){document.getElementById('alreadyClicked').innerHTML='<span style = font-size:18>'+(iter_i+1)+'. Assoziation: </span>'+'<b style=font-size:30>'+buttonsClicked.join("")};
     
-    var buttonsClicked = [];
+    
     
     // start time
     var start_time = 0;
