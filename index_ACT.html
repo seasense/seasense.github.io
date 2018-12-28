@@ -122,45 +122,6 @@
 		show_clickable_nav: true,
 		
 	};
-	var announce_endOfTraining = {
-		type: 'instructions',
-		pages: ["Der Trainingsdurchgang ist zu Ende. <p> Klicke <i>Weiter</i>, um nun den offiziellen Teil der Aufgabe zu absolvieren."],
-		show_clickable_nav: true,
-		on_finish: function(data) { 
-				stimuli = stimuli_test;
-				stimulus_x = 0;
-				stimulus_order = pick_a_stimulus2(stimuli);
-		},
-	}
-
-	var prepare_for_next_stimulus = {
-		type: 'instructions',
-		pages: [function(){
-			if(stimulus_x==0){return "Es folgt nun der 1. Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""};
-			if(stimulus_x==stimuli.length){return "Vielen Dank! Der Task ist nun zu Ende."};
-			if(stimulus_x>0&stimulus_x<stimuli.length){ return "... Es folgt nun der n\xe4chste Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""}
-		}],
-		show_clickable_nav: true,
-		on_finish: function(data) { 
-			iter_i=0
-			
-		},
-	};
-
-	var prepare_for_next_stimulus_training = {
-		type: 'instructions',
-		pages: [function(){
-			if(stimulus_x==0){return "Es folgt nun der Begriff: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""};
-			if(stimulus_x==stimuli.length){return "Vielen Dank! Das Training ist nun zu Ende."};
-			if(stimulus_x>0&stimulus_x<stimuli.length){ return "Der n\xe4chste Begriff lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""}
-		}],
-		show_clickable_nav: true,
-		on_finish: function(data) { 
-			iter_i=0
-			
-		},
-	};
-
 	var associate = {
   		type: 'button-response-act',
   		is_html: true,
@@ -179,9 +140,6 @@
 			current_associate = data.clickedLetters
 		},	
 	};
-	
-	
-	
 	var associate_loop = {
 		timeline: [associate],
 		loop_function: function(data){
@@ -191,6 +149,52 @@
 		            return false;
 		        }
 		  },
+	};
+	var training_loop = {
+		timeline: [associate_loop,prepare_for_next_stimulus_training],
+		loop_function: function(data){
+				if(stimulus_x<stimuli.length){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+	};
+	var announce_endOfTraining = {
+		type: 'instructions',
+		pages: ["Der Trainingsdurchgang ist zu Ende. <p> Klicke <i>Weiter</i>, um nun den offiziellen Teil der Aufgabe zu absolvieren."],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+				stimuli = stimuli_test;
+				stimulus_x = 0;
+				stimulus_order = pick_a_stimulus2(stimuli);
+		},
+	}
+	var prepare_for_next_stimulus = {
+		type: 'instructions',
+		pages: [function(){
+			if(stimulus_x==0){return "Es folgt nun der 1. Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""};
+			if(stimulus_x==stimuli.length){return "Vielen Dank! Der Task ist nun zu Ende."};
+			if(stimulus_x>0&stimulus_x<stimuli.length){ return "... Es folgt nun der n\xe4chste Begriff."+"<br>"+" Dieser lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""}
+		}],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+			iter_i=0
+			
+		},
+	};
+	var prepare_for_next_stimulus_training = {
+		type: 'instructions',
+		pages: [function(){
+			if(stimulus_x==0){return "Es folgt nun der Begriff: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""};
+			if(stimulus_x==stimuli.length){return "Vielen Dank! Das Training ist nun zu Ende."};
+			if(stimulus_x>0&stimulus_x<stimuli.length){ return "Der n\xe4chste Begriff lautet: "+"<b>"+stimuli[stimulus_order[stimulus_x]]+""}
+		}],
+		show_clickable_nav: true,
+		on_finish: function(data) { 
+			iter_i=0
+			
+		},
 	};
 	var stimulus_loop = {
 		timeline: [associate_loop,prepare_for_next_stimulus],
@@ -202,21 +206,17 @@
 		        }
 		  },
 	};
-
-	var training_loop = {
-		timeline: [associate_loop,prepare_for_next_stimulus_training],
-		loop_function: function(data){
-				if(stimulus_x<stimuli.length){
-		            return true;
-		        } else {
-		            return false;
-		        }
-		  },
+	var goodbye = {
+			type: 'instructions',
+			pages: [function(){return("Vielen Dank f&#xFC;r deine Teilnahme! <br>Klicke <i>Weiter</i>, um den Download deiner Daten in deinen Download-Folder zu veranlassen. Sende dieses File anschlie&#xDF;end an die Adresse ... ")}],
+			show_clickable_nav: true,	
 	};
 			
 	jsPsych.init({
-		timeline: [welcome,/*task_description,informedConsent1,informedConsent2,informedConsent3,*/practice_overview,prepare_for_next_stimulus_training,training_loop,
-			announce_endOfTraining,prepare_for_next_stimulus, stimulus_loop],
+		timeline: [welcome,task_description,
+					informedConsent1,informedConsent2,informedConsent3,
+					practice_overview,prepare_for_next_stimulus_training,training_loop,announce_endOfTraining,prepare_for_next_stimulus, stimulus_loop,
+					goodbye],
 	   	fullscreen: false,
 	   	on_finish: function(data){
 	        jsPsych.data.localSave('myData_sendMeTo_pseiti@tlu.ee.txt', 'csv');
