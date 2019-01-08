@@ -257,7 +257,7 @@
 				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist zu Ende.";
 				successCountr+=1;
 			}else{
-				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden m&#xFC;ssen alle &#xDC;bungseinheiten richtig abgeschlossen werden.";
+				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen alle Felder richtig erinnert werden.";
 				remememberCells_trial_x = rememberCellsFx(t_SetSize);
 			}
 		}
@@ -287,7 +287,7 @@
 ///////// Practice Symmetry & Remember
 	var intro_RemAndSym_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Beide Tasks zeitgleich: Aufgabenbeschreibung</b></p> In jedem Durchgang werden abwechselnd eine 'symmetry judgment task' und eine 'Ged&#xE4;chtnisaufgabe' gezeigt. <br>Die Aufgabe besteht wieder darin <p>a) zu entscheiden, ob das gezeigte Muster symmetrisch entlang der horizontalen ist oder nicht und <p>b) sich die Reihenfolge der farbigen Felder zu merken. <p class='center-content'> Klicke <i>Weiter</i> um die &#xDC;bung zu beginnen.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Beide Tasks zugleich (SymSpan-Task) Aufgabenbeschreibung</b></p> In jedem Durchgang sind abwechselnd eine Symmetrie-Aufgabe und eine Ged&#xE4;chtnisaufgabe zu absolvieren. <br>Die Aufgabe besteht wieder darin <p>(a) zu entscheiden, ob das gezeigte Muster symmetrisch entlang seiner horizontalen ist oder nicht und <p>(b) sich die Reihenfolge der farbig erleuchteten Felder zu merken. <p class='center-content'> Klicke <i>Weiter</i> um die &#xDC;bung zu beginnen.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				successCountr_sym = 0
@@ -350,14 +350,14 @@
 			if(accuracy_score_rem==100&accuracy_score_sym==100){
 				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist nun beendet."
 			}else{
-				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden m&#xFC;ssen alle &#xDC;bungseinheiten richtig abgeschlossen werden.";
+				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden m&#xFC;ssen alle gezeigten Felder richtig erinnert werden.";
 			}
 		}
 	};
 
 	var feedback_RemAndSym_1 = {
 		type: 'instructions',
-		pages: [ function(){return ""+"<b>"+"Symmetry judgment task:"+"</b>"+"<br>"+"Die pr&#xE4;sentierten Muster waren: "+symPatterns+"<br>"+"Ihre Beurteilung war: "+symDecisions+"<br>"+"<b>"+"Genauigkeit: "+accuracy_score_sym+"%" } ],
+		pages: [ function(){return ""+"<b>"+"Symmetrie-Aufgabe"+"</b>"+"<br>"+"Die pr&#xE4;sentierten Muster waren: "+symPatterns+"<br>"+"Ihre Antworten waren: "+symDecisions+"<br>"+"<b>"+"Genauigkeit: "+accuracy_score_sym+"%" } ],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 				
@@ -396,7 +396,7 @@
 	
 	var goodbye = {
 			type: 'instructions',
-			pages: [function(){return("Vielen Dank f&#xFC;r Ihre Teilnahme! <br>Klicke <i>Weiter</i>, um den Download ihrer Daten in ihren Download-Folder zu veranlassen. Senden Sie dieses File anschlie&#xDF;end an die E-Mail Adresse: a01314341@unet.univie.ac.at ")}],
+			pages: [function(){return("Vielen Dank f&#xFC;r Ihre Teilnahme! <br>Klicken Sie <i>Weiter</i>, um den Download ihrer Daten in ihren Download-Folder zu veranlassen. Senden Sie dieses File anschlie&#xDF;end an die E-Mail Adresse: a01314341@unet.univie.ac.at ")}],
 			show_clickable_nav: true,	
 	};
 
