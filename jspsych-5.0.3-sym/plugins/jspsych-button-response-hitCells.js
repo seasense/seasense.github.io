@@ -123,7 +123,7 @@ jsPsych.plugins["button-response-hitCells"] = (function() {
     
     //display doneButton
     if (trial.showEndButton) {
-      var doneButton = "<button id='doneButton' class='jspsych-btn' style='margin:20px'>Submit recalled squares </button></div>" /*Submit recalled letters*/
+      var doneButton = "<button id='doneButton' class='jspsych-btn' style='margin:20px'>Best&#xE4;tigen und Weiter </button></div>" /*Submit recalled letters*/
       display_element.append(doneButton);
     }
     $("#doneButton").on('click', function(e) {
