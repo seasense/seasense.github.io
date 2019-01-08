@@ -62,19 +62,19 @@
 					if(b_pressed==1){
 						
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						if(nTrials_remaining==0){ feedText = "Correct. The presented pattern was symmetrical."+"<br>"+"You have passed this practice trial."+"<br>"+"Click Next to proceed."}else{feedText = "Correct. The presented pattern was symmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}	
+						if(nTrials_remaining==0){ feedText = "Richtig. Das pr&#xE4;sentierte Muster war symmetrisch."+"<br>"+"Der &#xDC;bungsdurchgang ist beendet!"+"<br>"+"Klicke Weiter um fortzufahren."}else{feedText = "Richtig. Das pr&#xE4;sentierte Muster war symmetrisch."+"<br>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}	
 					}else{
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						feedText = "Wrong. The presented pattern was symmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}
+						feedText = "Falsch. Das pr&#xE4;sentierte Muster war symmetrisch."+"<br>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}
 				}
 				if(pattern=="asymmetrical"){
 					if(b_pressed==0){
 						
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						if(nTrials_remaining==0){feedText = "Correct. The presented pattern was asymmetrical."+"<br>"+"You have passed this practice trial."+"<br>"+"Click Next to proceed."}else{feedText = "Correct. The presented pattern was asymmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}
+						if(nTrials_remaining==0){feedText = "Richtig. Das gezeigte Muster war asymetrisch."+"<br>"+"Vielen Dank! Der &#xDC;bungsdurchgang (a) ist nun zu Ende."+"<br>"+" Klicken Sie <i>Weiter</i>, um nun mit der &#xDC;bung (b) zu beginnen."}else{feedText = "Richtig. Das gezeigte Muster war asymmetrisch."+"<br>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}
 					}else{
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						feedText = "Wrong. The presented pattern was asymmetrical."+"<br>"+nTrials_remaining+" out of "+(nErrorFreeTrials_symPractice-1)+" error-free trials remaining."}
+						feedText = "Falsch. Das gezeigte Muster war asymmetrisch."+"<br>"+nTrials_remaining+" von of "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}
 				}
 
 				return feedText
@@ -107,45 +107,65 @@
 	var welcome = {
 			type: 'instructions',
 			pages: [
-					"<p class='center-content'> Welcome to the <b style='color:#008080'>Symmetry Span task</b>! <p> From our everyday life, we all know that it is difficult to attend to different things at the same time, so to be multi tasker. <br> The present task is a simple way to tap and measure such multi-tasking ability. It simulates a situation, in which you need to perform two tasks in parallel. In the 'symmetry judgment task' you have to decide whether the pattern of a matrix is symmetrical or not. In the 'memory task', you need to rember a random sequence of consecutively flashing cells inside a 4x4 matrix. <p>It will take you about 12-15 minutes to complete the task and some preceding practice trials. <p>Click on the <i>Next</i>-button to get information on our data management."],
+			//<p>Aus unserem allt&#xE4;glichen Leben ist uns wahrscheinlich allen bekannt, dass es schwierig sein kann mehrere Aufgaben gleichzeitig, zu absolvieren. 
+					"<p class='center-content'> Willkommen zum <b style='color:#008080'>SymSpan-Task</b>! <p> In dieser Aufgabe werden Ihre Multitasking-F&#xE4;higkeiten auf die Probe gestellt, indem Sie in einer simulierten Situation zwei Aufgaben parallel bearbeiten m&#xFC;ssen. <p>(a) In der Symmetrie-Aufgabe muss entschieden werden, ob das gezeigte Muster (schwarz und wei&#xDF; eingef&#xE4;rbter Felder innerhalb einer Matrix) symmetrisch entlang seiner Horizontalen ist oder nicht. <br>(b) In der Ged&#xE4;chtnisaufgabe gilt es, sich die Positionen von  farbig erscheinenden Feldern innerhalb einer 4x4 Matrix zu merken. <p>Der gesamte Task (inklusive &#xDC;bungsdurchgang) dauert 12-15 Minuten.<p>Klicken Sie <i>Weiter</i>, um fortzusetzen und zun&#xE4;chst Ihre Einwilligungserkl&#xE4;rung zur Teilnahme abzugeben."],
 			show_clickable_nav: true
 			};
 	var informedConsent = {
 		type: 'survey-multi-choice',
-		questions: ["<p> <b>Data Management & Informed Consent</b> <p> <i> Voluntariness </i> <br> You may revoke your consent to participate at any time and without stating any reasons. <p> <i> Storage of data </i> <br>All your data will be written automatically to a database on a server of Tallinn University. <p> <i> Protection of data privacy </i> <br> The entire dataset will be made fully anonymous, which means that your data cannot be related to you as an individual. <p> <i> Usage of anonymized data </i> <br> The results and data from this study will be used for a scientific publication. Anonymity of the participants will be ensured in this process. The fully anonymized data from this study will be made accessible as open data on the internet via the data archive <i> PsychData (Research Data for Psychology, Leibnitz Institute for Psychology Information ZPID) </i> <b> <br> <br> <p> If you agree on our data management, click the radio button below and hit <i>Submit Answer</i>. Otherwise, press <i>Escape</i> on your keyboard to exit the environment."],
+		questions: ["<p> <b>Aufgabenbeschreibung & Einverst&#xE4;ndniserkl&#xE4;rung</b> <p> <i> Voluntariness </i> <br> You may revoke your consent to participate at any time and without stating any reasons. <p> <i> Storage of data </i> <br>All your data will be written automatically to a database on a server of Tallinn University. <p> <i> Protection of data privacy </i> <br> The entire dataset will be made fully anonymous, which means that your data cannot be related to you as an individual. <p> <i> Usage of anonymized data </i> <br> The results and data from this study will be used for a scientific publication. Anonymity of the participants will be ensured in this process. The fully anonymized data from this study will be made accessible as open data on the internet via the data archive <i> PsychData (Research Data for Psychology, Leibnitz Institute for Psychology Information ZPID) </i> <b> <br> <br> <p> If you agree on our data management, click the radio button below and hit <i>Submit Answer</i>. Otherwise, press <i>Escape</i> on your keyboard to exit the environment."],
 		options: [["I hereby confirm that I have read, understood and accept the provided information concerning storage, protection and usage of my data."]],
 		required: [true]
     };
 
-	var persData_code = ["<p> Please type in your personal code:"];
+    var informedConsent1 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>1/3"],
+		options: [["Ich habe die Aufgabenbeschreibung gelesen und erkl&aumlre mich bereit zur Teilnahme."]],
+		required: [true]
+    };
+	var informedConsent2 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>2/3"],
+		options: [["Ich stimme zu, dass meine pseudonymisierten Daten zur Ver&oumlffentlichung wissenschaftlicher Arbeiten verwendet werden."]],
+		required: [true]
+    };
+    var informedConsent3 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>3/3"],
+		options: function(){return([["Ich stimme zu, dass meine pseudonymisierten Daten zum Zweck der wissenschaftlichen Transparenz f&uumlr andere WissenschaftlerInnen im <a href='https://osf.io/'> Open Science Framework </a> verf&uumlgbar gemacht werden."]])},
+		required: [true]
+    };
+
+	var persData_code = ["<p> Generieren Sie Ihren anonymisierten Personencode:"];
 	var demographics = {
 	  		type: "survey-text-persCode",
 	  		questions: persData_code,
-			preamble: "<b>How to generate your code</b>: <br>Position 1: First letter of your mother's surname <br> Position 2: First letter of your father's surname <br> Positions 3 and 4: Your year of birth <br> Position 5: The first letter of your residential street <br> Position 6: The first digit of your street number <p> Example: FC84M4"
+			preamble: "<b>Personencode</b>: <br>Position 1: Erste Buchstabe des Vornamens ihrer Mutter <br> Position 2: Erste Buchstabe des Vornamens ihres Vaters <br> Positions 3 und 4: Ihr Geburtsjahr <br> Position 5: Der erste Buchstabe ihrer Adresse <br> Position 6: Die erste Zahl ihrer Hausnummer <p> Beispiel: FC84M4"
 	};
 	
 ///////// Practice
 	var practice_overview = {
 		type: 'instructions',
-		pages: ["<p>***</p>Before performing the Symmetry Span task, you will be guided through 3 short practice units, explaining the task step by step:<p><b>Unit 1</b>: Symmetry judgment task<br><b>Unit 2</b>: Memory task<br><b>Unit 3</b>: Both tasks simultaneously<p>***</p>Click <i>Next</i> to enter the first practice unit."],
+		pages: ["<p>***</p> Es folgen zun&#xE4;chst drei kurze &#xDC;bungseinheiten, welche den SymSpan-Task Schritt f&#xFC;r Schritt erkl&#xE4;ren:<p><b>a)</b> Symmetrie-Aufgabe<br><b>b)</b> Ged&#xE4;chtnisaufgabe<br><b>ab)</b> Beide Aufgaben zugleich (SymSpan-Task) <p>***</p>Klicken Sie <i>Weiter</i>, um mit der ersten &#xDC;bungseinheit zu beginnen."],
 		show_clickable_nav: true,
 	};
 ///////// Practice Symmetry
 	
 	var intro_symmetry_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Symmetry judgment task: Instruction</b></p> After clicking the <i>Next</i>-Button, a plus-sign <b>+</b> will appear, followed by consecutively presented matrices (about 1 second per matrix). After the last matrix, you will be asked to recall ....</p> Any mistake (recalling too many or too few, or recalling them in the wrong order) counts as incorrect. </p><p class='center-content'> Click <i>Next</i> to start practicing.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Symmetrie-Aufgabe: Instruktion</b></p> Wenn Sie auf den <i>Weiter</i>-Button klicken, erscheint ein Plus-Zeichen <b>+</b>, gefolgt von hintereinander pr&#xE4;sentierten Matrizen, die jeweils ein bestimmtes Muster aus schwarzen und wei&#xDF;en Feldern darstellen. Bei jeder dieser Matrizen gilt es zu entscheiden, ob das jeweilige Muster symmetrisch entlang seiner Horizontalen ist oder nicht.</p> Der &#xDC;bungsdurchgang muss fehlerfrei absolviert werden, um zur n&#xE4;chsten &#xDC;bungseinheit zu gelangen. </p><p class='center-content'> Klicken Sie <i>Weiter</i>, um zu beginnen.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				successCountr_sym = 0;
 			},
 	};
 
-	var symmetry_buttons = [ ["No"] , ["Yes"] ];
+	var symmetry_buttons = [ ["Nein"] , ["Ja"] ];
 	var symmetry = {
 		    type: 'judgeSym',
 			is_html: true, 
-			prompt: "Is the pattern symmetrical?",
+			prompt: "Ist das Muster symmetrisch?",
 		    choices: symmetry_buttons,
 	 	   	on_finish: function(data){
 	 	   		pattern = data.matrixPattern
@@ -178,7 +198,7 @@
 ///////// Practice Remember
 	var intro_remember_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Memory task: Instruction</b></p> After clicking the <i>Next</i>-Button, a plus-sign <b>+</b> will appear, followed by consecutively presented matrices (about 1 second per matrix). After the last matrix, you will be asked to recall ....</p> Any mistake (recalling too many or too few, or recalling them in the wrong order) counts as incorrect. </p><p class='center-content'> Click <i>Next</i> to start practicing.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Ged&#xE4;chtnisaufgabe: Instruktion</b></p> Wenn Sie auf <i>Weiter</i> klicken, erscheint eine 4x4-Matrix, innerhalb derer einzelne Felder hintereinander farbig aufleuchten werden. Anschlie&#xDF;end gilt es, alle zuvor erleuchteten Felder in der dargebotenen Reihenfolge zu erinnern (durch Klicken der Felder der Matrix).</p></p><p class='center-content'> Klicken Sie <i>Weiter</i>, um den &#xDC;bungsdurchgang zu starten.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
@@ -208,7 +228,7 @@
 	var recall = {
   		type: 'button-response-hitCells',
   		is_html: true,
-		stimulus: "Click on the cells according to their order of presentation!",
+		stimulus: "Klicken Sie die Felder in der pr&#xE4;sentierten Reihenfolge an!",
 		showEndButton: true,
 		flashedCells: function(){return remememberCells_trial_x},
 		response_ends_trial: false,
@@ -234,10 +254,10 @@
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 			if(accuracy_score_rem==100){
-				feedback_recall_message = "Well done! You have passed this practice trial.";
+				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist zu Ende.";
 				successCountr+=1;
 			}else{
-				feedback_recall_message = "You can do better. You need to be 100% accurate in order to proceed.";
+				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden m&#xFC;ssen alle &#xDC;bungseinheiten richtig abgeschlossen werden.";
 				remememberCells_trial_x = rememberCellsFx(t_SetSize);
 			}
 		}
@@ -267,7 +287,7 @@
 ///////// Practice Symmetry & Remember
 	var intro_RemAndSym_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Practice trial instruction</b></p> After clicking the <i>Next</i>-Button, an 8x8 matrix with a certain pattern of black-filled cells will appear. Your task is to judge whether the pattern is symmetrical around the horizontal or not.<p> Then, a smaller 4x4 matrix with one cell filled green will be presented. Try to memorize that cell's position before .... <p class='center-content'> Click <i>Next</i> to start practicing.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Beide Tasks zeitgleich: Aufgabenbeschreibung</b></p> In jedem Durchgang werden abwechselnd eine 'symmetry judgment task' und eine 'Ged&#xE4;chtnisaufgabe' gezeigt. <br>Die Aufgabe besteht wieder darin <p>a) zu entscheiden, ob das gezeigte Muster symmetrisch entlang der horizontalen ist oder nicht und <p>b) sich die Reihenfolge der farbigen Felder zu merken. <p class='center-content'> Klicke <i>Weiter</i> um die &#xDC;bung zu beginnen.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				successCountr_sym = 0
@@ -295,7 +315,7 @@
 	var sym_RemAndSym = {
 		    type: 'judgeSym',
 			is_html: true, 
-			prompt: "Is the pattern symmetrical?",
+			prompt: "Ist das Muster symmetrisch?",
 		    choices: symmetry_buttons,
 	 	   	on_finish: function(data){
 	 	   		pattern = data.matrixPattern
@@ -328,16 +348,16 @@
 		on_finish: function(data) { 
 			accuracy_score_sym = Math.floor((successCountr_sym/symDecisions.length)*100)
 			if(accuracy_score_rem==100&accuracy_score_sym==100){
-				feedback_recall_message = "Well done! You have passed this practice trial."
+				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist nun beendet."
 			}else{
-				feedback_recall_message = "You can do better. You need to be 100% accurate in both tasks.";
+				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden m&#xFC;ssen alle &#xDC;bungseinheiten richtig abgeschlossen werden.";
 			}
 		}
 	};
 
 	var feedback_RemAndSym_1 = {
 		type: 'instructions',
-		pages: [ function(){return ""+"<b>"+"Symmetry judgment task:"+"</b>"+"<br>"+"The presented patterns were: "+symPatterns+"<br>"+"Your judgments were: "+symDecisions+"<br>"+"<b>"+"Accuracy: "+accuracy_score_sym+"%" } ],
+		pages: [ function(){return ""+"<b>"+"Symmetry judgment task:"+"</b>"+"<br>"+"Die pr&#xE4;sentierten Muster waren: "+symPatterns+"<br>"+"Ihre Beurteilung war: "+symDecisions+"<br>"+"<b>"+"Genauigkeit: "+accuracy_score_sym+"%" } ],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 				
@@ -376,7 +396,7 @@
 	
 	var goodbye = {
 			type: 'instructions',
-			pages: [function(){return("Vielen Dank f&#xFC;r deine Teilnahme! <br>Klicke <i>Weiter</i>, um den Download deiner Daten in deinen Download-Folder zu veranlassen. Sende dieses File anschlie&#xDF;end an die Adresse ... ")}],
+			pages: [function(){return("Vielen Dank f&#xFC;r Ihre Teilnahme! <br>Klicke <i>Weiter</i>, um den Download ihrer Daten in ihren Download-Folder zu veranlassen. Senden Sie dieses File anschlie&#xDF;end an die E-Mail Adresse: a01314341@unet.univie.ac.at ")}],
 			show_clickable_nav: true,	
 	};
 
@@ -384,7 +404,7 @@
 /////////
 	jsPsych.init({
 		
-		timeline: [welcome, 
+		timeline: [welcome, /*informedConsent1, informedConsent2, informedConsent3,*/
 					practice_overview,
 					intro_symmetry_practice,symmetry_loop_practice,
 					intro_remember_practice,recall_loop_practice,

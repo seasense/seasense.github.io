@@ -452,6 +452,9 @@ function battery_cellFx(){
 				listTasks.appendChild(point_in_listTasks_Fx("dinoNimi","dinoNimi",
 					"Self-guided search of a taxonomy of dinosaurs to learn certain dinosaur categories",
 					"Category learning","./dinoNimi_review.html",1,"./imgHP/dinoNimi.png"));
+				listTasks.appendChild(point_in_listTasks_Fx("ospan","Operation Span task",
+					"Remembering a sequence of consecutively presented letters while solving arithmetic problems",
+					"Working memory capacity","./index_OSpan.html",0,""));
 
 
 				secondRow_state[0] = "on";

@@ -168,7 +168,7 @@ input[type="text"] {
 /* PLUGIN: jspsych-multi-choice */
 
 .jspsych-survey-multi-choice-question {
-  margin-top: -8em;
+  margin-top: 0em;
   margin-bottom: 2em;
  }
 

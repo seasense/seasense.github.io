@@ -108,7 +108,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       }
     }
 
-    var nameOfButton = "Edasta n\xF5usolek";
+    var nameOfButton = "Weiter";
     // add submit button
     $trial_form.append($('<input>', {
       'type': 'submit',
