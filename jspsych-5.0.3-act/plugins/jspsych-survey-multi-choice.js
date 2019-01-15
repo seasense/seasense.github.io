@@ -108,7 +108,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       }
     }
 
-    var nameOfButton = "Best\xE4tige Deine Antwort";
+    var nameOfButton = "Best\xE4tigen Sie Ihre Antwort";
     // add submit button
     $trial_form.append($('<input>', {
       'type': 'submit',

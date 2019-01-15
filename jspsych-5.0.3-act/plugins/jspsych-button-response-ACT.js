@@ -51,7 +51,7 @@ jsPsych.plugins["button-response-act"] = (function() {
 
 
     // display already clicked letters
-    var alreadyClicked = "<p style='color:green; font-size:30; margin:50px' id='alreadyClicked'>"+'<b>'+(iter_i+1)+". Assoziation</b>"+"<span style=font-size:18>"+": Zur Eingabe klicke die Buchstaben-Buttons... </p>"
+    var alreadyClicked = "<p style='color:green; font-size:30; margin:50px' id='alreadyClicked'>"+'<b>'+(iter_i+1)+". Assoziation</b>"+"<span style=font-size:18>"+": Zur Eingabe die Buchstaben-Buttons klicken </p>"
     display_element.append(alreadyClicked);
 
     //show prompt if there is one
@@ -135,13 +135,15 @@ jsPsych.plugins["button-response-act"] = (function() {
     var buttonsClicked = [];
 
     if (trial.showEndButton) {
-      if(iter_i<(nAsso_per_stim-1)){var doneButton = "<button id='doneButton' class='jspsych-btn-weiter' style=margin:50px>Weiter zur "+(iter_i+2)+". Assoziation</div>"}else{
+      /*if(iter_i<(nAsso_per_stim-1)){var doneButton = "<button id='doneButton' class='jspsych-btn-weiter' style=margin:50px>Weiter zur "+(iter_i+2)+". Assoziation</div>"}else{
         var doneButton = "<button id='doneButton' class='jspsych-btn-weiter' style=margin:50px>Assoziationskette beenden</div>"
-      }
+      }*/
+      var doneButton = "<button id='doneButton' class='jspsych-btn-weiter' style=margin:50px>Submit</div>"
+      
       display_element.append(doneButton);
     }
     $("#doneButton").on('click', function(e) {
-          if(buttonsClicked.length>0){end_trial();}
+          if(buttonsClicked.length>0){end_trial();}else{alert("Bitte geben Sie zuerst eine Assoziation anhand der virtuellen Tastatur ein.")}
     })
     
 

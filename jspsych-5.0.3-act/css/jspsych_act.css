@@ -26,6 +26,12 @@ a {
 }
 
 /* Classes for changing location of things */
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
 
 .left {
   float: left;

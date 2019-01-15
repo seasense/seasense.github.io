@@ -48,7 +48,7 @@ jsPsych.plugins['survey-text-persCode'] = (function() {
       
 
       // add text box
-      $("#jspsych-survey-text-" + i).append('<textarea name="#jspsych-survey-text-response-' + i + '" cols="' + trial.columns[i] + '" rows="' + trial.rows[i] + '"></textarea>');
+      $("#jspsych-survey-text-" + i).append('<textarea rows="1" style="font-size:20px;" name="#jspsych-survey-text-response-' + i + '" cols="' + trial.columns[i] + '" rows="' + trial.rows[i] + '"></textarea>');
     }
 
  // show preamble text
@@ -60,28 +60,33 @@ jsPsych.plugins['survey-text-persCode'] = (function() {
     $('#jspsych-survey-text-preamble').html(trial.preamble);
     
     // add submit button
-    display_element.append($('<button>', {
+    
+      display_element.append($('<button>', {
       'id': 'jspsych-survey-text-next',
       'class': 'jspsych-btn jspsych-survey-text'
-    }));
-    $("#jspsych-survey-text-next").html('Edasta n\xF5usolek'); /*Submit Answer*/
-    $("#jspsych-survey-text-next").click(function() {
+      }));
+      $("#jspsych-survey-text-next").html('Weiter');
+      $("#jspsych-survey-text-next").click(function() {
       // measure response time
       var endTime = (new Date()).getTime();
       var response_time = endTime - startTime;
 
       // create object to hold responses
       var question_data = {};
+      var code_length = []; 
       $("div.jspsych-survey-text-question").each(function(index) {
         var id = "Q" + index;
         var val = $(this).children('textarea').val();
+        code_length.push(val.length);
         var obje = {};
         obje[id] = val;
         $.extend(question_data, obje);
+        
       });
 
       // save data
       var trialdata = {
+        "code_length": code_length,
         "rt": response_time,
         "responses": JSON.stringify(question_data)
       };
@@ -89,8 +94,14 @@ jsPsych.plugins['survey-text-persCode'] = (function() {
       display_element.html('');
 
       // next trial
+      
       jsPsych.finishTrial(trialdata);
+      
     });
+    
+    
+
+    
 
     var startTime = (new Date()).getTime();
   };
