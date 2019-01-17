@@ -62,19 +62,19 @@
 					if(b_pressed==1){
 						
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						if(nTrials_remaining==0){ feedText = "Richtig. Das pr&#xE4;sentierte Muster war symmetrisch."+"<br>"+"Der &#xDC;bungsdurchgang ist beendet!"+"<br>"+"Klicke Weiter um fortzufahren."}else{feedText = "Richtig. Das pr&#xE4;sentierte Muster war symmetrisch."+"<br>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}	
+						if(nTrials_remaining==0){ feedText = "Richtig. Das pr&#xE4;sentierte Muster war symmetrisch."+"<p>"+"Der &#xDC;bungsdurchgang ist beendet!"+"<p>"+"Klicken Sie Weiter, um fortzufahren."}else{feedText = "Richtig. Das pr&#xE4;sentierte Muster war symmetrisch."+"<p>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Versuchen."}	
 					}else{
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						feedText = "Falsch. Das pr&#xE4;sentierte Muster war symmetrisch."+"<br>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}
+						feedText = "Falsch. Das pr&#xE4;sentierte Muster war symmetrisch."+"<p>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Versuchen."}
 				}
 				if(pattern=="asymmetrical"){
 					if(b_pressed==0){
 						
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						if(nTrials_remaining==0){feedText = "Richtig. Das gezeigte Muster war asymetrisch."+"<br>"+"Vielen Dank! Der &#xDC;bungsdurchgang (a) ist nun zu Ende."+"<br>"+" Klicken Sie <i>Weiter</i>, um nun mit der &#xDC;bung (b) zu beginnen."}else{feedText = "Richtig. Das gezeigte Muster war asymmetrisch."+"<br>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}
+						if(nTrials_remaining==0){feedText = "Richtig. Das gezeigte Muster war asymmetrisch."+"<p>"+"Vielen Dank! Der &#xDC;bungsdurchgang (a) ist nun zu Ende."+"<p>"+" Klicken Sie <i>Weiter</i>, um nun mit der &#xDC;bung (b) zu beginnen."}else{feedText = "Richtig. Das gezeigte Muster war asymmetrisch."+"<p>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}
 					}else{
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						feedText = "Falsch. Das gezeigte Muster war asymmetrisch."+"<br>"+nTrials_remaining+" von of "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}
+						feedText = "Falsch. Das gezeigte Muster war asymmetrisch."+"<p>"+nTrials_remaining+" von of "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Versuchen."}
 				}
 
 				return feedText
@@ -90,8 +90,9 @@
 	
 	<script>
 	var trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
-	//var trials = [3,4];
+	//var trials = [2,2];
 	var trials_seq = jsPsych.randomization.repeat(trials, 1);
+	var maxSetSize = 6;
 	var nTrials = trials_seq.length;
 	var nPerSetSize = 3;
 	
@@ -108,15 +109,9 @@
 			type: 'instructions',
 			pages: [
 			//<p>Aus unserem allt&#xE4;glichen Leben ist uns wahrscheinlich allen bekannt, dass es schwierig sein kann mehrere Aufgaben gleichzeitig, zu absolvieren. 
-					"<p class='center-content'> Willkommen zum <b style='color:#008080'>SymSpan-Task</b>! <p> In dieser Aufgabe werden Ihre Multitasking-F&#xE4;higkeiten auf die Probe gestellt, indem Sie in einer simulierten Situation zwei Aufgaben parallel bearbeiten m&#xFC;ssen. <p>(a) In der Symmetrie-Aufgabe muss entschieden werden, ob das gezeigte Muster (schwarz und wei&#xDF; eingef&#xE4;rbter Felder innerhalb einer Matrix) symmetrisch entlang seiner Horizontalen ist oder nicht. <br>(b) In der Ged&#xE4;chtnisaufgabe gilt es, sich die Positionen von  farbig erscheinenden Feldern innerhalb einer 4x4 Matrix zu merken. <p>Der gesamte Task (inklusive &#xDC;bungsdurchgang) dauert 12-15 Minuten.<p>Klicken Sie <i>Weiter</i>, um fortzusetzen und zun&#xE4;chst Ihre Einwilligungserkl&#xE4;rung zur Teilnahme abzugeben."],
+					"<p class='center-content'> <h2> Willkommen zum <b style='color:#008080'>SymSpan</b>-Task!</h2><p> Der <b style='color:#008080'>SymSpan</b>-Task stellt Ihre Multitasking-F&#xE4;higkeiten auf die Probe, indem er eine Situation simuliert, in der zwei Aufgaben parallel zu bew&#xe4;ltigen sind: <p>(a) In der Symmetrie-Aufgabe muss entschieden werden, ob ein gezeigtes Muster (bestehend aus schwarzen und wei&#xDF;en Quadraten) symmetrisch entlang seiner Horizontalen ist oder nicht. <br>(b) In der Ged&#xE4;chtnisaufgabe gilt es, sich die Positionen von farbig aufleuchtenden Feldern innerhalb einer 4x4-Matrix zu merken. <p>Der gesamte Task (inklusive &#xDC;bungsdurchgang) dauert 12-15 Minuten.<p>Klicken Sie <i>Weiter</i>, um fortzusetzen und zun&#xE4;chst Ihre Einwilligungserkl&#xE4;rung zur Teilnahme abzugeben."],
 			show_clickable_nav: true
 			};
-	var informedConsent = {
-		type: 'survey-multi-choice',
-		questions: ["<p> <b>Aufgabenbeschreibung & Einverst&#xE4;ndniserkl&#xE4;rung</b> <p> <i> Voluntariness </i> <br> You may revoke your consent to participate at any time and without stating any reasons. <p> <i> Storage of data </i> <br>All your data will be written automatically to a database on a server of Tallinn University. <p> <i> Protection of data privacy </i> <br> The entire dataset will be made fully anonymous, which means that your data cannot be related to you as an individual. <p> <i> Usage of anonymized data </i> <br> The results and data from this study will be used for a scientific publication. Anonymity of the participants will be ensured in this process. The fully anonymized data from this study will be made accessible as open data on the internet via the data archive <i> PsychData (Research Data for Psychology, Leibnitz Institute for Psychology Information ZPID) </i> <b> <br> <br> <p> If you agree on our data management, click the radio button below and hit <i>Submit Answer</i>. Otherwise, press <i>Escape</i> on your keyboard to exit the environment."],
-		options: [["I hereby confirm that I have read, understood and accept the provided information concerning storage, protection and usage of my data."]],
-		required: [true]
-    };
 
     var informedConsent1 = {
 		type: 'survey-multi-choice',
@@ -141,20 +136,35 @@
 	var demographics = {
 	  		type: "survey-text-persCode",
 	  		questions: persData_code,
-			preamble: "<b>Personencode</b>: <br>Position 1: Erste Buchstabe des Vornamens ihrer Mutter <br> Position 2: Erste Buchstabe des Vornamens ihres Vaters <br> Positions 3 und 4: Ihr Geburtsjahr <br> Position 5: Der erste Buchstabe ihrer Adresse <br> Position 6: Die erste Zahl ihrer Hausnummer <p> Beispiel: FC84M4"
+			preamble: "<b>Anleitung zum Generieren des Codes</b>: <br> 1.Stelle: Erster Buchstabe des Vornamens Ihrer Mutter (z.B. <b>M</b>artha) <br> 2.Stelle: Erster Buchstabe des Vornamens Ihres Vaters (z.B. <b>S</b>igmund) <br> Stellen 3-4: Ihr Geburtsjahr (z.B. 18<b>95</b>)<br> 5.Stelle: Erster Buchstabe Ihrer aktuellen Wohnadresse (z.B. <b>B</b>erggasse) <br> 6.Stelle: Erste Ziffer Ihrer Hausnummer (z.B. <b>1</b>9) <p> Beispiel vollst&#xE4;ndiger Code: <b>MS95B1</b>",
+			on_finish: function(data) { 
+		 		code_length = data.code_length;
+		 		if(code_length!=6){alert("Bitte geben Sie einen 6-stelligen Personencode ein.")}
+		 		console.log(code_length)
+		 	}
 	};
-	
+	var persCode_loop = {
+		timeline: [demographics],
+		loop_function: function(data){
+				if(code_length!=6){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+
+	};
 ///////// Practice
 	var practice_overview = {
 		type: 'instructions',
-		pages: ["<p>***</p> Es folgen zun&#xE4;chst drei kurze &#xDC;bungseinheiten, welche den SymSpan-Task Schritt f&#xFC;r Schritt erkl&#xE4;ren:<p><b>a)</b> Symmetrie-Aufgabe<br><b>b)</b> Ged&#xE4;chtnisaufgabe<br><b>ab)</b> Beide Aufgaben zugleich (SymSpan-Task) <p>***</p>Klicken Sie <i>Weiter</i>, um mit der ersten &#xDC;bungseinheit zu beginnen."],
+		pages: ["<p>***</p> Es folgen zun&#xE4;chst drei kurze &#xDC;bungseinheiten, welche den SymSpan-Task Schritt f&#xFC;r Schritt erkl&#xE4;ren:<p><b>(a)</b> Symmetrie-Aufgabe<br><b>(b)</b> Ged&#xE4;chtnisaufgabe<br><b>(ab)</b> Beide Aufgaben zugleich (SymSpan-Task) <p>***</p>Klicken Sie <i>Weiter</i>, um mit der ersten &#xDC;bungseinheit zu beginnen."],
 		show_clickable_nav: true,
 	};
 ///////// Practice Symmetry
 	
 	var intro_symmetry_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Symmetrie-Aufgabe: Instruktion</b></p> Wenn Sie auf den <i>Weiter</i>-Button klicken, erscheint ein Plus-Zeichen <b>+</b>, gefolgt von hintereinander pr&#xE4;sentierten Matrizen, die jeweils ein bestimmtes Muster aus schwarzen und wei&#xDF;en Feldern darstellen. Bei jeder dieser Matrizen gilt es zu entscheiden, ob das jeweilige Muster symmetrisch entlang seiner Horizontalen ist oder nicht.</p> Der &#xDC;bungsdurchgang muss fehlerfrei absolviert werden, um zur n&#xE4;chsten &#xDC;bungseinheit zu gelangen. </p><p class='center-content'> Klicken Sie <i>Weiter</i>, um zu beginnen.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Symmetrie-Aufgabe: Instruktion</b></p> Nachfolgend werden Ihnen Muster (Matrizen) pr&#xE4;sentiert, die sich aus schwarzen und wei&#xDF;en Quadraten zusammensetzen. Es gilt jeweils zu entscheiden, ob das Muster der Matrix symmetrisch entlang seiner Horizontalen ist oder nicht (siehe untere Abbildung).</p></p><IMG src='symspan_example.png'></IMG></p> <p class='center-content'> Klicken Sie <i>Weiter</i>, um zu beginnen.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				successCountr_sym = 0;
@@ -198,7 +208,7 @@
 ///////// Practice Remember
 	var intro_remember_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Ged&#xE4;chtnisaufgabe: Instruktion</b></p> Wenn Sie auf <i>Weiter</i> klicken, erscheint eine 4x4-Matrix, innerhalb derer einzelne Felder hintereinander farbig aufleuchten werden. Anschlie&#xDF;end gilt es, alle zuvor erleuchteten Felder in der dargebotenen Reihenfolge zu erinnern (durch Klicken der Felder der Matrix).</p></p><p class='center-content'> Klicken Sie <i>Weiter</i>, um den &#xDC;bungsdurchgang zu starten.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Ged&#xE4;chtnisaufgabe: Instruktion</b></p> Wenn Sie auf <i>Weiter</i> klicken, erscheint eine 4x4-Matrix, innerhalb derer einzelne Felder hintereinander farbig aufleuchten werden. Anschlie&#xDF;end gilt es, alle zuvor aufgeleuchteten Felder in der dargebotenen Reihenfolge zu erinnern (durch Klicken der Felder der Matrix).</p></p><p class='center-content'> Klicken Sie <i>Weiter</i>, um den &#xDC;bungsdurchgang zu starten.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
@@ -257,7 +267,7 @@
 				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist zu Ende.";
 				successCountr+=1;
 			}else{
-				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen alle Felder richtig erinnert werden.";
+				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen die aufleuchtenden Felder fehlerfrei erinnert werden.";
 				remememberCells_trial_x = rememberCellsFx(t_SetSize);
 			}
 		}
@@ -287,7 +297,7 @@
 ///////// Practice Symmetry & Remember
 	var intro_RemAndSym_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Beide Tasks zugleich (SymSpan-Task) Aufgabenbeschreibung</b></p> In jedem Durchgang sind abwechselnd eine Symmetrie-Aufgabe und eine Ged&#xE4;chtnisaufgabe zu absolvieren. <br>Die Aufgabe besteht wieder darin <p>(a) zu entscheiden, ob das gezeigte Muster symmetrisch entlang seiner horizontalen ist oder nicht und <p>(b) sich die Reihenfolge der farbig erleuchteten Felder zu merken. <p class='center-content'> Klicke <i>Weiter</i> um die &#xDC;bung zu beginnen.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Beide Aufgaben zugleich (SymSpan-Task): Instruktion</b></p> In jedem Durchgang sind abwechselnd eine Symmetrie-Aufgabe und eine Ged&#xE4;chtnisaufgabe zu absolvieren. <p>Die Aufgabe besteht nun darin <br>(a) zu entscheiden, ob das gezeigte Muster symmetrisch entlang seiner horizontalen ist oder nicht und <br>(b) sich die Reihenfolge der farbig aufleuchtenden Felder zu merken. <p class='center-content'> Klicken Sie <i>Weiter</i>, um die &#xDC;bung zu beginnen.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				successCountr_sym = 0
@@ -297,7 +307,7 @@
 				rem_i = 0
 				symDecisions = []
 				symPatterns = []
-				console.log(remememberCells_trial_x)
+				
 			},
 	};
 
@@ -305,7 +315,8 @@
   	  	type: "single-stim",
   	  	stimulus: function(){
   	  		var mat = matRememberFx(remememberCells_trial_x[rem_i]);return(mat)},
-  	  	choices: [100], timing_response: function(){return(500*(t_SetSize))}, data: {phase: 'remember'},
+  	  	choices: [100], 
+  	  	timing_response: function(){return(500*(t_SetSize))}, data: {phase: 'remember'},
   	  	is_html: true,
  	   	on_finish: function(data){
  	   		rem_i+=1
@@ -324,8 +335,7 @@
 				if(pattern==response){successCountr_sym+=1}
 				symDecisions.push(response)
 				symPatterns.push(pattern)
-				console.log(symDecisions.length)
-				console.log(successCountr_sym)
+				
 	 	   	},
 		};
 
@@ -350,14 +360,14 @@
 			if(accuracy_score_rem==100&accuracy_score_sym==100){
 				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist nun beendet."
 			}else{
-				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden m&#xFC;ssen alle gezeigten Felder richtig erinnert werden.";
+				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen die aufleuchtenden Felder fehlerfrei erinnert werden.";
 			}
 		}
 	};
 
 	var feedback_RemAndSym_1 = {
 		type: 'instructions',
-		pages: [ function(){return ""+"<b>"+"Symmetrie-Aufgabe"+"</b>"+"<br>"+"Die pr&#xE4;sentierten Muster waren: "+symPatterns+"<br>"+"Ihre Antworten waren: "+symDecisions+"<br>"+"<b>"+"Genauigkeit: "+accuracy_score_sym+"%" } ],
+		pages: [ function(){return ""+"<b>"+"Feedback Symmetrie-Aufgabe"+"</b>"+"<p>"+"Die pr&#xE4;sentierten Muster waren: "+symPatterns+"<br>"+"Ihre Antworten waren: "+symDecisions+"<p>"+"<b>"+"Genauigkeit: "+accuracy_score_sym+"%" } ],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 				
@@ -396,19 +406,83 @@
 	
 	var goodbye = {
 			type: 'instructions',
-			pages: [function(){return("Vielen Dank f&#xFC;r Ihre Teilnahme! <br>Klicken Sie <i>Weiter</i>, um den Download ihrer Daten in ihren Download-Folder zu veranlassen. Senden Sie dieses File anschlie&#xDF;end an die E-Mail Adresse: a01314341@unet.univie.ac.at ")}],
+			pages: [function(){return("Vielen Dank f&#xFC;r Ihre Teilnahme! <p>Klicken Sie <i>Weiter</i>, um den Download Ihrer Daten in Ihren Download-Folder zu veranlassen. Senden Sie dieses File anschlie&#xDF;end an die E-Mail Adresse: a01314341@unet.univie.ac.at ")}],
 			show_clickable_nav: true,	
 	};
 
+///////// Official Task
+var intro_realTrials = {
+			type: 'instructions',
+			pages: function(){return ["<p>***</p><b> SymSpan-Task:</b> Instruktion <p> Es folgen nun "+trials.length+" Durchg&#xE4;nge, in denen wie zuletzt beide Aufgaben simultan auszuf&#xFC;hren sind. <p>Bitte beachten Sie, dass einzelne Durchg&#xE4;nge sehr herausfordernd sind, da gelegentlich bis zu "+maxSetSize+" Felder der 4x4-Matrix zu merken sind. <p>Ihr Ergebnis (in Punkten) erfahren Sie erst nach dem letzten Durchgang.</p><p><b>Versuchen Sie, so genau wie m&#xF6;glich zu arbeiten.</b><p>***</p><p>Klicken Sie  <i>Weiter</i>, um zu beginnen."]},
+			show_clickable_nav: true,
+			on_finish: function(data) {
+				x = 0
+				//t_SetSize = trials_seq[x]
+				t_SetSize=1
+				remememberCells_trial_x = rememberCellsFx(t_SetSize);
+				rem_i = 0
+				cells_RecCorPos_total = 0
+				cells_RecIncorPos_total = 0
+				cells_Missed_total = 0
+				cells_FalseMem_total = 0
+				nCells_total = 0
+
+				successCountr_sym = 0
+				sym_trials_total = 0
+				symDecisions = []
+				symPatterns = []
+			},
+	};
+	var feedback_progress = {
+		type: 'instructions',
+		pages: function(){if((x+1)<trials.length){return ["<p>***</p><p>Sie haben bisher <b>"+(x+1)+"</b> von <b>"+trials.length+"</b> Durchg&#xE4;ngen absolviert. </p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}else{return["<p>***</p><b> </b><br><b></b>Vielen Dank! Der SymSpan-Task ist nun zu Ende.<p>***</p><b>Punktestand</b><p></p><b>Symmetrie-Aufgabe:</b><p>Anzahl dargebotener Muster: <b>"+(sym_trials_total+symDecisions.length)+"</b><br>Richtige Antworten: <b>"+successCountr_sym+"</b><br>Genauigkeit: <b>"+ Math.round((successCountr_sym/(sym_trials_total+symDecisions.length))*10000)/100+"%</b><p>***</p> <p> <b>Ged&#xE4;chtnisaufgabe:</b><p>Anzahl zu merkender Felder: <b>"+(nCells_total+t_SetSize)+"</b><br>Anzahl richtig erinnert: <b>"+(cells_RecCorPos_total+cells_RecCorPos.length)+"</b><br>Genauigkeit: <b>"+Math.round((cells_RecCorPos_total+cells_RecCorPos.length)/(nCells_total+t_SetSize)*10000)/100+"%</b><p>***</p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}},
+		show_clickable_nav: true,
+		data: function(){},
+		on_finish: function(data) {
+			// for final feedback
+			x += 1 
+			rem_i = 0
+			//t_SetSize = trials_seq[x]
+			t_SetSize=1
+			remememberCells_trial_x = rememberCellsFx(t_SetSize);
+			cells_RecCorPos_total = cells_RecCorPos_total+cells_RecCorPos.length
+			cells_RecIncorPos_total = cells_RecIncorPos_total+cells_RecIncorPos.length
+			cells_Missed_total = cells_Missed_total+cells_Missed.length
+			cells_FalseMem_total = cells_FalseMem_total+cells_FalseMem.length
+			
+			nCells_total = nCells_total+t_SetSize
+			current_accuracy_rem = cells_RecCorPos_total/nCells_total
+
+			sym_trials_total = sym_trials_total+symDecisions.length
+			symDecisions = []
+			symPatterns = []
+			current_accuracy_sym = successCountr_sym/sym_trials_total
+
+			console.log(current_accuracy_rem)
+			console.log(current_accuracy_sym)
+		},
+	}
+	var Symspan_loop = {
+		timeline: [RemAndSym_loop,recall,feedback_progress],
+		loop_function: function(data){
+				if(x<trials.length){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+	};
 
 /////////
 	jsPsych.init({
 		
-		timeline: [welcome, /*informedConsent1, informedConsent2, informedConsent3,*/
-					practice_overview,
+		timeline: [welcome, /*informedConsent1, informedConsent2, informedConsent3,
+					persCode_loop,
+					practice_overview,*/
 					intro_symmetry_practice,symmetry_loop_practice,
 					intro_remember_practice,recall_loop_practice,
 					intro_RemAndSym_practice,RemAndSym_loop2,
+					intro_realTrials,Symspan_loop,
 					goodbye
 					],
 
