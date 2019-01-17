@@ -56,7 +56,7 @@ jsPsych.plugins["rememberCells-practice"] = (function() {
     matEmptyFx();
     // let selected cells turn on and off
     function timeout_On(cf,tx){
-      setTimeout(function(){ document.querySelector('[cellNumber='+ CSS.escape(cf) +']').style.backgroundColor = "black";}, tx);
+      setTimeout(function(){ document.querySelector('[cellNumber='+ CSS.escape(cf) +']').style.backgroundColor = "#008080";}, tx);
     };
     function timeout_Off(cf,tx){
       setTimeout(function(){ document.querySelector('[cellNumber='+ CSS.escape(cf) +']').style.backgroundColor = "white";}, tx);
