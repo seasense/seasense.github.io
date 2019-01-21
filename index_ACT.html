@@ -81,7 +81,7 @@
     var stimuli_ext = ["kalt" , "Musik" , "Schaf" , "Mond" , "Hand" , "Ozean" ];
     //var stimuli_ext = ["kalt" , "Musik" ];
 
-	nAsso_per_stim = 3;
+	nAsso_per_stim = 10;
 	nStimuli_ext = stimuli_ext.length;
 	sHigh_pos = 0;
 	sMed_pos = 4;
@@ -337,8 +337,8 @@
 			
 	jsPsych.init({
 		timeline: [welcome,
-					/*informedConsent1,informedConsent2,informedConsent3,
-					persCode_loop,*/
+					informedConsent1,informedConsent2,informedConsent3,
+					persCode_loop,
 					practice_overview,prepare_for_next_stimulus_training,training_loop,announce_endOfTraining,prepare_for_next_stimulus, stimulus_loop,
 					goodbye],
 	   	fullscreen: false,
