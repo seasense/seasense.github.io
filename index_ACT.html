@@ -50,12 +50,12 @@
 
 	<script>
 		
-		function pick_a_stimulus2(stimuli){
-			for(i=0;i<stimuli.length;i++){
+		function pick_a_stimulus2(nStimuli_ext){
+			for(i=0;i<nStimuli_ext;i++){
 				if(i==0){
 					var stimuli_ordered=[]
 					var stimuli_IDs=[]
-					for(x=0;x<stimuli.length;x++){stimuli_IDs.push(x)}
+					for(x=0;x<nStimuli_ext;x++){stimuli_IDs.push(x)}
 				}
 				sample_i = Math.floor(Math.random()*stimuli_IDs.length)
 				
@@ -70,34 +70,60 @@
 
 	</script>
 	
-	
+	<script>
+		function strengths_fx(){return(["sH","sM","sL"])}
+	</script>
 	<script>
 
 	var stimuli_training = ["Katze"];
-	var stimuli_test = ["kalt" , "Musik" , "Schaf" , "Mond" , "Hand" , "Ozean" , 
-                      "Stra&#xDF;e" , "rot" , "K&#xF6;nig" , "Licht" , "Berg" , "L&#xF6;we"];
+	/*var stimuli_test = ["kalt" , "Musik" , "Schaf" , "Mond" , "Hand" , "Ozean" , 
+                      "Stra&#xDF;e" , "rot" , "K&#xF6;nig" , "Licht" , "Berg" , "L&#xF6;we"];*/
+    var stimuli_ext = ["kalt" , "Musik" , "Schaf" , "Mond" , "Hand" , "Ozean" ];
+    //var stimuli_ext = ["kalt" , "Musik" ];
 
-	var nAsso_per_stim = 10;
-	
+	nAsso_per_stim = 3;
+	nStimuli_ext = stimuli_ext.length;
+	sHigh_pos = 0;
+	sMed_pos = 4;
+	sLow_pos = 9;
+	nPerStrength = 2;
+	//strength_order = ["sH","sM","sL"];
 	
 ///////// Intro
 /////////
 	var welcome = {
 			type: 'instructions',
-			pages: [function(){return("<h2>Willkommen zum <b>Association Chain-Task (<span style='color:#ff6699'>ACT</span>)</b>!</h2> <p><b style='color:#ff6699'>ACT</b> stellt Ihre verbale Flexibilit&#xE4;t auf die Probe.<br> Ausgehend von einem Startbegriff sollen Sie m&#xF6;glichst <i>z&#xFC;gig</i> eine m&#xF6;glichst <i>abwechslungsreiche</i> Kette von "+nAsso_per_stim+" Assoziationen bilden, in der sich jedes neu produzierte Wort auf das vorherige bezieht.<p><b>Beispiel</b>: <br>Lebkuchen &#x2192; Zimt, Weihnachten, Krippe, Esel, Ohren, h&#xF6;ren, Musik, Geige, Bogen, rund <p>Klicken Sie <i>Weiter</i>, um sich f&#xFC;r die Teilnahme einverstanden zu erkl&#xE4;ren.  <br>Anschlie&#xDF;end folgt ein kurzer &#xDC;bungsdurchgang.")}],
-			//<p>In jedem Durchgang, sollen 10 Assoziationen produziert werden. Antworten Sie mit einzelnen W&#xF6;rtern (d.h. keine Phrasen). Gewertet wird die Flexibilit&#xE4;t ihrer Antworten. 
+			pages: [function(){return("<h2>Willkommen zum <b>Association Chain-Task (<span style='color:#ff6699'>ACT</span>)</b>!</h2> <p><b style='color:#ff6699'>ACT</b> stellt Ihre verbale Flexibilit&#xE4;t auf die Probe.<br> Ausgehend von einem Startbegriff sollen Sie m&#xF6;glichst <i>z&#xFC;gig</i> eine m&#xF6;glichst <i>abwechslungsreiche</i> Kette von "+nAsso_per_stim+" Assoziationen bilden, in der sich jedes neu produzierte Wort auf das vorherige bezieht. Als Assoziation kann grunds&#xE4;tzliches jedes gebr&#xE4;uchliche Inhaltswort der deutschen Sprache genannt werden, sei es ein Hauptwort, ein Verb, ein Adjektiv, oder ein Adverb. <p><b>Beispiel</b>: <br>Lebkuchen &#x2192; Zimt, weihnachtlich, Krippe, Esel, Ohren, h&#xF6;ren, Musik, Geige, Bogen, rund <p>Klicken Sie <i>Weiter</i>, um sich f&#xFC;r die Teilnahme einverstanden zu erkl&#xE4;ren.  <br>Anschlie&#xDF;end folgt ein kurzer &#xDC;bungsdurchgang. <h3> Bitte vergewissern Sie sich, dass sie <span style='color:#ff6699'>ACT</span> entweder mit dem Browser <i>Firefox</i> oder <i>Chrome</i> durchf&#xFC;ren. Bitte verwenden Sie weder den Browser <i>Safari</i> noch <i>Windows Internet Explorer</i>!</h3>")}],
+			
 			show_clickable_nav: true,
 			on_finish: function(data) { 
+				training = true;
 				stimuli = stimuli_training;
 				stimulus_x = 0;
 				stimulus_order = pick_a_stimulus2(stimuli);
+				
+				sHigh_assos = []
+				sMed_assos = []
+				sLow_assos = []
+
+				origin_of_intStim = []
+
+				all_chains = []
+
+				strength_order_rand = []
+				for(sy=0; sy<nPerStrength; sy++){
+					
+					dimSample = strengths_fx();
+					for(sx=0; sx<strengths_fx().length; sx++){
+						sx_sample = Math.floor(Math.random()*dimSample.length)
+						strength_order_rand.push(dimSample[sx_sample])
+						dimSample.splice(sx_sample,1)
+					}
+					
+				}
+				console.log(strength_order_rand)
 			},	
 	};
-	/*var task_description = {
-			type: 'instructions',
-			pages: ["<b>Instruktion</b> <p>Ausgehend von einem Startbegriff soll eine Assoziationskette gebildet werden. <br>Daf&#xFC;r bilden Sie jeweils eine Assoziation zum zuletzt genannten Wort und geben Sie diese &#xFC;ber die Buchstaben-Buttons in das daf&#xFC;r vorhergesehene Antwortfeld ein.<p>D.h. nennen Sie zuerst Ihre erste Assoziation zum vorgegebenen Wort, dann Ihre erste Assoziation zu ihrer vorherigen Antwort u.s.w.<br>So entsteht eine Kette von Assoziationen, wobei sich jede auf ihren Vorg&#xE4;nger bezieht.<p><b>Beispiel:</b><p>Sommer &#x2212;&#x2212;&#x3E;    Strand, Sandburg, Schlo&#xDF;, Ritter, k&#xE4;mpfen, ..<p>In jedem Durchgang, sollen 10 Assoziationen produziert werden. Antworten Sie mit einzelnen W&#xF6;rtern (d.h. keine Phrasen). Gewertet wird die Flexibilit&#xE4;t ihrer Antworten. <p>Klicken Sie <i>Weiter</i>, um sich f&#xFC;r die Teilnahme einverstanden zu erkl&#xE4;ren.  <br>Anschlie&#xDF;end folgt ein kurzer &#xDC;bungsdurchgang."],
-			show_clickable_nav: true,
-	};*/
 
 	var informedConsent1 = {
 		type: 'survey-multi-choice',
@@ -125,7 +151,6 @@
 			on_finish: function(data) { 
 		 		code_length = data.code_length;
 		 		if(code_length!=6){alert("Bitte geben Sie einen 6-stelligen Personencode ein.")}
-		 		console.log(code_length)
 		 	}
 	};
 	var persCode_loop = {
@@ -150,7 +175,24 @@
   		type: 'button-response-act',
   		is_html: true,
 		iteration: function(){return iter_i},
-		stimulus: function(){if(iter_i==0){stimulus_iter_i = stimuli[stimulus_order[stimulus_x]], cue="Begriff"}else{stimulus_iter_i = current_associate, cue="Vorherige Assoziation"};return ["<span style='font-size:30px; padding:30px'>"+cue+": "+stimulus_iter_i+""]},
+		stimulus: function(){
+				if(iter_i>0){
+					stimulus_iter_i = current_associate;
+					cue = "Vorherige Assoziation";
+				}else{
+					cue = "Begriff";
+					if(training==true){
+						stimulus_iter_i = stimuli_training[stimulus_x]
+					}else{
+						if(stimulus_x>(nStimuli_ext-1)){
+							stimulus_iter_i = stimSet_secondHalf[stimulus_order[stimulus_x]];
+						}else{
+							stimulus_iter_i = stimSet_firstHalf[stimulus_order[stimulus_x]];
+						}
+					}
+					
+				}; return(""+cue+": "+stimulus_iter_i+"")
+			},
 		showEndButton: true,
 		//prompt: "Zur Eingabe Ihrer Assoziation klicke bzw. tippe auf die Buchstaben-Buttons.",
 		letters1: [["Q"],["W"],["E"],["R"],["T"],["Z"],["U"],["I"],["O"],["P"],["\xDC"],["L\xf6schen"]],
@@ -160,8 +202,18 @@
 		response_ends_trial: false,
 		on_finish: function(data) {  
 			if(iter_i==(nAsso_per_stim-1)){stimulus_x+=1;}
-			iter_i+=1
 			current_associate = data.clickedLetters
+			if(stimulus_x<=nStimuli_ext&&training==false){
+				if(iter_i==sHigh_pos){sHigh_assos.push(current_associate)}
+				if(iter_i==sMed_pos){sMed_assos.push(current_associate)}
+				if(iter_i==sLow_pos){sLow_assos.push(current_associate)}
+			
+			}
+			if(iter_i==0){new_chain = [current_associate]}else{new_chain.push(current_associate)}
+			if(iter_i==(nAsso_per_stim-1)){all_chains = [all_chains,new_chain]}
+			console.log(all_chains[stimulus_x])
+			iter_i+=1
+			all_associates.push(current_associate)	
 		},	
 	};
 	var associate_loop = {
@@ -184,68 +236,116 @@
 		        }
 		  },
 	};
+	/*var test = {
+		type: 'instructions',
+		pages: [function(){return("<p><p><p>Der &#xDC;bungsdurchgang ist zu Ende. Die von Ihnen produzierte Assoziationskette zum Begriff <b>"+1+"</b> lautete: <p><b>"+1+"</b> <p>Nachfolgend sind insgesamt 12 Assoziationsketten zu produzieren. <p>Versuchen Sie den folgenden drei Kriterien zu entsprechen! <ul><li>Spontanit&#xE4;t: Teilen Sie Ihre Assoziationen m&#xF6;glichst schnell mit.</li><li>Einfallsreichtum: Versuchen Sie, Wortwiederholungen zu vermeiden, und zwar sowohl innerhalb einer Kette als auch &#xFC;ber die verschiedenen Ketten hinweg.</li> <li>Koh&#xE4;renz: Jede neue Assoziation sollte in ihrer Bedeutung auf die vorherige bezogen sein.</li></p><p> Klicken Sie <i>Weiter</i>, um nun den offiziellen Teil der Aufgabe zu absolvieren.")}]
+	}*/
 	var announce_endOfTraining = {
 		type: 'instructions',
-		pages: ["<p><p><p>Der &#xDC;bungsdurchgang ist zu Ende. <p> Klicken Sie <i>Weiter</i>, um nun den offiziellen Teil der Aufgabe zu absolvieren."],
+		pages: [function(){return("<p><p><p>Der &#xDC;bungsdurchgang ist zu Ende. Die von Ihnen produzierte Assoziationskette zum Begriff <b>"+stimuli_training+"</b> lautete: <p><b>"+all_associates.join(" <br>")+"</b> <p>Nachfolgend sind insgesamt 12 Assoziationsketten zu produzieren. <p>Versuchen Sie jeweils den folgenden drei Kriterien zu entsprechen! <ul><li>Spontanit&#xE4;t: Teilen Sie Ihre Assoziationen m&#xF6;glichst schnell mit.</li><li>Einfallsreichtum: Versuchen Sie, Wortwiederholungen zu vermeiden, und zwar sowohl innerhalb einer Kette als auch &#xFC;ber die verschiedenen Ketten hinweg.</li> <li>Koh&#xE4;renz: Jede neue Assoziation sollte in ihrer Bedeutung auf die vorherige bezogen sein.</li></p><p> Klicken Sie <i>Weiter</i>, um nun den offiziellen Teil der Aufgabe zu absolvieren.")}],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
-				stimuli = stimuli_test;
+				training = false;
+				stimSet_firstHalf = stimuli_ext;
 				stimulus_x = 0;
-				stimulus_order = pick_a_stimulus2(stimuli);
+				/*stimulus_order = pick_a_stimulus2(nStimuli_ext).concat(pick_a_stimulus2(nStimuli_ext));*/
+				stim_order_h2 = [];
+				for(sox=0;sox<nStimuli_ext;sox++){stim_order_h2.push(sox)}
+				stimulus_order = pick_a_stimulus2(nStimuli_ext).concat(stim_order_h2);
+				console.log(stimulus_order)
+
+				sHigh_assos = []
+				sMed_assos = []
+				sLow_assos = []
 		},
 	}
+	
 	var prepare_for_next_stimulus = {
 		type: 'instructions',
 		pages: [function(){
-			if(stimulus_x==0){return "Es folgt nun der 1. Begriff."};
-			if(stimulus_x==stimuli.length){return "Vielen Dank! Der Task ist nun zu Ende."};
-			if(stimulus_x>0&stimulus_x<stimuli.length){ return "Es folgt nun der n\xe4chste Begriff."}
+			if(stimulus_x==0){return "Es folgt nun der 1. von "+(nStimuli_ext*2)+" Begriffen."};
+			if(stimulus_x==(nStimuli_ext*2)){return "Vielen Dank! Der Task ist nun zu Ende."};
+			if(stimulus_x>0&stimulus_x<(nStimuli_ext*2)){ return "Es folgt nun der "+(stimulus_x+1)+". von "+(nStimuli_ext*2)+" Begriffen."}
 		}],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 			iter_i=0
-			
+			all_associates = [];
+			/*all_chains = */
+			if(stimulus_x==nStimuli_ext){
+				stimSet_secondHalf = [];
+				for(sx=0;sx<nStimuli_ext;sx++){
+					if(strength_order_rand[sx]=="sH"){
+						sx_sample = Math.floor(Math.random()*sHigh_assos.length)
+						stimSet_secondHalf.push(sHigh_assos[sx_sample])
+						sHigh_assos.splice(sx_sample,1)
+					}
+					if(strength_order_rand[sx]=="sM"){
+						sx_sample = Math.floor(Math.random()*sMed_assos.length)
+						stimSet_secondHalf.push(sMed_assos[sx_sample])
+						sMed_assos.splice(sx_sample,1)
+					}
+					if(strength_order_rand[sx]=="sL"){
+						sx_sample = Math.floor(Math.random()*sHigh_assos.length)
+						stimSet_secondHalf.push(sHigh_assos[sx_sample])
+						sHigh_assos.splice(sx_sample,1)
+					}
+				}
+				
+				console.log(stimSet_secondHalf)
+				console.log(strength_order_rand)
+			}
 		},
 	};
 	var prepare_for_next_stimulus_training = {
 		type: 'instructions',
 		pages: [function(){
-			if(stimulus_x==0){return "Es folgt nun der 1. Begriff."};
-			if(stimulus_x==stimuli.length){return "Vielen Dank! Der &#xDC;bungsdurchgang ist nun zu Ende."};
-			if(stimulus_x>0&stimulus_x<stimuli.length){ return "Es folgt nun der n\xe4chste Begriff."}
+			if(stimulus_x==0){return "Es folgt nun der 1. &#xDC;bungsbegriff."};
+			if(stimulus_x==stimuli_training.length){return "Vielen Dank! Der &#xDC;bungsdurchgang ist nun zu Ende."};
+			if(stimulus_x>0&stimulus_x<stimuli_training.length){ return "Es folgt nun der n\xe4chste &#xDC;bungsbegriff."}
 		}],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 			iter_i=0
+			all_associates = [];
 			
+
 		},
 	};
 	var stimulus_loop = {
 		timeline: [associate_loop,prepare_for_next_stimulus],
 		loop_function: function(data){
-				if(stimulus_x<stimuli.length){
+				if(stimulus_x<(nStimuli_ext*2)){
 		            return true;
 		        } else {
 		            return false;
 		        }
 		  },
 	};
-	var goodbye = {
+	var feedback = {
 			type: 'instructions',
-			pages: [function(){return("Vielen Dank f&#xFC;r ihre Teilnahme! <br>Klicken Sie <i>Weiter</i>, um den Download ihrer Daten in ihren Download-Folder zu veranlassen. Senden Sie dieses File anschlie&#xDF;end an die E-Mail Adresse: a01314341@unet.univie.ac.at.  <br>Hinweis: wenn mit Safari gearbeitet wurde, laden Sie die Datei nachdem Sie <i>Weiter</i> geklickt haben, &#xFC;ber den Befehl cmd+s herunter. ")}],
+			pages: [function(){return("Vielen Dank f&#xFC;r ihre Teilnahme! Die von Ihnen generierten Assoziationsketten lauten:"+all_chains+"")}],
 			show_clickable_nav: true,	
 	};
+	var goodbye = {
+			type: 'instructions',
+			pages: [function(){return("Vielen Dank f&#xFC;r ihre Teilnahme! <br>Klicken Sie <i>Weiter</i>, um den Download ihrer Daten in ihren Download-Folder zu veranlassen. Senden Sie dieses File anschlie&#xDF;end an die E-Mail Adresse: a01314341@unet.univie.ac.at.  <br>Hinweis: wenn mit Safari gearbeitet wurde, markieren und kopieren Sie alle nachfolgend angezeigten Daten mit den Befehlen cmd+a und cmd+s. Fügen Sie diese kopierten Daten anschlie&#xDF;end in ein Textfile Ihrer Wahl und schicken Sie es ebenfalls an die Adresse a01314341@unet.univie.ac.at ")}],
+			show_clickable_nav: true,	
+	};
+
+	
 			
 	jsPsych.init({
 		timeline: [welcome,
-					informedConsent1,informedConsent2,informedConsent3,
-					persCode_loop,
+					/*informedConsent1,informedConsent2,informedConsent3,
+					persCode_loop,*/
 					practice_overview,prepare_for_next_stimulus_training,training_loop,announce_endOfTraining,prepare_for_next_stimulus, stimulus_loop,
 					goodbye],
 	   	fullscreen: false,
 	   	on_finish: function(data){
-	        jsPsych.data.localSave('myData_sendMeTo_pseiti@tlu.ee.txt', 'csv');
-	        $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
+	        jsPsych.data.localSave('myData_sendMeTo_onne.uus@tlu.ee.txt', 'csv');
+	        /*j$.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );*/
+
 	   }
 	});
 	
