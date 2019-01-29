@@ -87,7 +87,7 @@
 	sHigh_pos = 0;
 	//sMed_pos = 1;
 	sLow_pos = 4;
-	nPerStrength = 9;
+	nPerStrength = 3;
 	//strength_order = ["sH","sM","sL"];
 	
 ///////// Intro
@@ -256,7 +256,7 @@
 	}*/
 	var announce_endOfTraining = {
 		type: 'instructions',
-		pages: [function(){return("<p><p><p>Der &#xDC;bungsdurchgang ist zu Ende. Die von Ihnen produzierte Assoziationskette zum Begriff <b>"+stimuli_training+"</b> lautete: <p><b>"+all_associates.join(" <br>")+"</b> <p>Nachfolgend sind insgesamt "+nStimuli_ext*nAsso_per_stim+" Assoziationsketten zu produzieren. <p>Versuchen Sie jeweils den folgenden drei Kriterien zu entsprechen! <ul><li>Spontaneit&#xE4;t: Teilen Sie Ihre Assoziationen m&#xF6;glichst schnell mit.</li><li>Einfallsreichtum: Versuchen Sie, Wortwiederholungen zu vermeiden, und zwar sowohl innerhalb einer Kette als auch &#xFC;ber die verschiedenen Ketten hinweg.</li> <li>Koh&#xE4;renz: Jede neue Assoziation sollte in ihrer Bedeutung auf die vorherige bezogen sein.</li></p><p> Klicken Sie <i>Weiter</i>, um nun den offiziellen Teil der Aufgabe zu absolvieren.")}],
+		pages: [function(){return("<p><p><p>Der &#xDC;bungsdurchgang ist zu Ende. Die von Ihnen produzierte Assoziationskette zum Begriff <b>"+stimuli_training+"</b> lautete: <p><b>"+all_associates.join(" <br>")+"</b> <p>Nachfolgend sind insgesamt "+9+" Assoziationsketten zu produzieren. <p>Versuchen Sie jeweils den folgenden drei Kriterien zu entsprechen! <ul><li>Spontaneit&#xE4;t: Teilen Sie Ihre Assoziationen m&#xF6;glichst schnell mit.</li><li>Einfallsreichtum: Versuchen Sie, Wortwiederholungen zu vermeiden, und zwar sowohl innerhalb einer Kette als auch &#xFC;ber die verschiedenen Ketten hinweg.</li> <li>Koh&#xE4;renz: Jede neue Assoziation sollte in ihrer Bedeutung auf die vorherige bezogen sein.</li></p><p> Klicken Sie <i>Weiter</i>, um nun den offiziellen Teil der Aufgabe zu absolvieren.")}],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 				training = false;
@@ -297,9 +297,9 @@
 	var prepare_for_next_stimulus = {
 		type: 'instructions',
 		pages: [function(){
-			if(stimulus_x==0){return "Es folgt nun der 1. von "+(nStimuli_ext*nPerStrength)+" Begriffen."};
+			if(stimulus_x==0){return "Es folgt nun der 1. von "+9+" Begriffen."};
 			if(stimulus_x==(nStimuli_ext*nPerStrength)){return "Vielen Dank! Der Task ist nun zu Ende."};
-			if(stimulus_x>0&stimulus_x<(nStimuli_ext*nPerStrength)){ return "Es folgt nun der "+(stimulus_x+1)+". von "+(nStimuli_ext*nPerStrength)+" Begriffen."}
+			if(stimulus_x>0&stimulus_x<9){ return "Es folgt nun der "+(stimulus_x+1)+". von "+9+" Begriffen."}
 		}],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
