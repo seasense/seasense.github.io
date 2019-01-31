@@ -48,7 +48,7 @@ jsPsych.plugins['survey-text-persCode'] = (function() {
       
 
       // add text box
-      $("#jspsych-survey-text-" + i).append('<textarea rows="1" style="font-size:20px;" name="#jspsych-survey-text-response-' + i + '" cols="' + trial.columns[i] + '" rows="' + trial.rows[i] + '"></textarea>');
+      $("#jspsych-survey-text-" + i).append('<textarea cols="8" rows="1" style="font-size:20px;" name="#jspsych-survey-text-response-' + i + '" cols="' + trial.columns[i] + '" rows="' + trial.rows[i] + '"></textarea>');
     }
 
  // show preamble text
