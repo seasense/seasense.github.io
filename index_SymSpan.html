@@ -437,7 +437,7 @@ var intro_realTrials = {
 		type: 'instructions',
 		pages: function(){if((x+1)<trials.length){return ["<p>***</p><p>Sie haben bisher <b>"+(x+1)+"</b> von <b>"+trials.length+"</b> Durchg&#xE4;ngen absolviert. </p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}else{return["<p>***</p><b> </b><br><b></b>Vielen Dank! Der SymSpan-Task ist nun zu Ende.<p>***</p><b>Punktestand</b><p></p><b>Symmetrie-Aufgabe:</b><p>Anzahl dargebotener Muster: <b>"+(sym_trials_total+symDecisions.length)+"</b><br>Richtige Antworten: <b>"+successCountr_sym+"</b><br>Genauigkeit: <b>"+ Math.round((successCountr_sym/(sym_trials_total+symDecisions.length))*10000)/100+"%</b><p>***</p> <p> <b>Ged&#xE4;chtnisaufgabe:</b><p>Anzahl zu merkender Felder: <b>"+(nCells_total+t_SetSize)+"</b><br>Anzahl richtig erinnert: <b>"+(cells_RecCorPos_total+cells_RecCorPos.length)+"</b><br>Genauigkeit: <b>"+Math.round((cells_RecCorPos_total+cells_RecCorPos.length)/(nCells_total+t_SetSize)*10000)/100+"%</b><p>***</p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}},
 		show_clickable_nav: true,
-		data: function(){},
+		data: function(){var recall_accuracy = cells_RecCorPos.length/(cells_RecCorPos.length+cells_RecIncorPos.length+cells_Missed.length+cells_FalseMem.length);return{cells_RecCorPos:cells_RecCorPos.length, cells_RecIncorPos: cells_RecIncorPos.length, cells_Missed: cells_Missed.length, cells_FalseMem: cells_FalseMem.length, recall_accuracy: recall_accuracy, summary: "summary_realTask" }},
 		on_finish: function(data) {
 			// for final feedback
 			x += 1 
