@@ -97,7 +97,12 @@ jsPsych.plugins["judgeSym"] = (function() {
       var rt = end_time - start_time;
       response.button = choice;
       response.rt = rt;
-      
+      responseToPattern = ["asymmetrical","symmetrical"][response.button]
+      if(gene_matrix.pattern==responseToPattern){
+        correct_judgment = 1
+      }else{
+        correct_judgment = 0
+      }
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
       $("#jspsych-button-response-stimulus").addClass('responded');
@@ -117,7 +122,7 @@ jsPsych.plugins["judgeSym"] = (function() {
       for (var i = 0; i < setTimeoutHandlers.length; i++) {
         clearTimeout(setTimeoutHandlers[i]);
       }
-
+      
       // gather the data to store for the trial
       var trial_data = {
         "rt": response.rt,
@@ -125,7 +130,8 @@ jsPsych.plugins["judgeSym"] = (function() {
         "button_pressed": response.button,
         "choicesAvailable": trial.choices,
         "matrixPresented": gene_matrix.mat,
-        "matrixPattern": gene_matrix.pattern
+        "matrixPattern": gene_matrix.pattern,
+        "correct_judgment": correct_judgment
       };
 
       // clear the display

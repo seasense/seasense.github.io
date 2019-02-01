@@ -34,20 +34,21 @@
 	
 	
 	<script>
-		function rememberCellsFx (t_SetSize) {
+		function rememberCellsFx(t_SetSize){
+	
+			cells_trial_x = []
+			potential_cells = []
+			for(j=0;j<16;j++){potential_cells.push(j)}
 			
-			var cells_trial_x = [];
-			var alreadySampled = [];
-			for(i=0;i<t_SetSize;i++){
-				var sample_i = Math.floor(Math.random()*16);
-				if(alreadySampled.includes(sample_i)===false){
-					cells_trial_x.push(sample_i);
-					alreadySampled.push(sample_i);
-				};
-			};
-			
-			return cells_trial_x
-		};
+			for(t_i=0;t_i<t_SetSize;t_i++){
+						t_i_sample = Math.floor(Math.random()* potential_cells.length)
+						t_i_sample_name = potential_cells[t_i_sample]
+						cells_trial_x.push(t_i_sample_name)
+						potential_cells.splice(t_i_sample,1)
+					};
+					
+			return(cells_trial_x)
+		}
 
 		function successCountrFx (successCountr_sym,pattern,b_pressed){
 			if(pattern=="symmetrical"&b_pressed==1){successCountr_sym+=1}
@@ -97,14 +98,12 @@
 	//var trials_seq = jsPsych.randomization.repeat(trials, 1);
 	for(t_i=0;t_i<trials_gene().length;t_i++){
 		if(t_i==0){trials_seq=[]}
-						t_i_sample = Math.floor(Math.random()*trials_copy.length)
-						t_i_sample_name = trials_copy[t_i_sample]
-						trials_seq.push(t_i_sample_name)
-						trials_copy.splice(t_i_sample,1)
+		t_i_sample = Math.floor(Math.random()*trials_copy.length)
+		t_i_sample_name = trials_copy[t_i_sample]
+		trials_seq.push(t_i_sample_name)
+		trials_copy.splice(t_i_sample,1)
 	}				
-	console.log(trials)
-	console.log(trials_copy)
-	console.log(trials_seq)
+	
 	var maxSetSize = 6;
 	var nTrials = trials_seq.length;
 	var nPerSetSize = 3;
@@ -124,11 +123,7 @@
 			//<p>Aus unserem allt&#xE4;glichen Leben ist uns wahrscheinlich allen bekannt, dass es schwierig sein kann mehrere Aufgaben gleichzeitig, zu absolvieren. 
 					"<p class='center-content'> <h2> Willkommen zum <b style='color:#008080'>SymSpan</b>-Task!</h2><p> Der <b style='color:#008080'>SymSpan</b>-Task stellt Ihre Multitasking-F&#xE4;higkeiten auf die Probe, indem er eine Situation simuliert, in der zwei Aufgaben parallel zu bew&#xe4;ltigen sind: <p>(a) In der Symmetrie-Aufgabe muss entschieden werden, ob ein gezeigtes Muster (bestehend aus schwarzen und wei&#xDF;en Quadraten) symmetrisch entlang seiner Horizontalen ist oder nicht. <br>(b) In der Ged&#xE4;chtnisaufgabe gilt es, sich die Positionen von farbig aufleuchtenden Feldern innerhalb einer 4x4-Matrix zu merken. <p>Der gesamte Task (inklusive &#xDC;bungsdurchgang) dauert etwa 15 Minuten.<ul><h3><li> Bitte vergewissern Sie sich, dass Sie den Task entweder mit dem Browser <i>Firefox</i> oder <i>Chrome</i> durchf&#xFC;ren. Bitte verwenden Sie weder <i>Safari</i> noch <i>Windows Internet Explorer</i>!</li><li>Au&#xDF;erdem m&#xF6;chten wir Sie bitten, den Task nur dann zu bearbeiten, wenn Sie sich ausreichend ausgeruht und konzentriert f&#XFC;hlen. </li></h3></ul><p>Klicken Sie <i>Weiter</i>, um fortzusetzen und zun&#xE4;chst Ihre Einverst&#xE4;ndniserkl&#xE4;rung zur Teilnahme abzugeben."],
 			show_clickable_nav: true,
-			on_finish: function(data) { 
-				
-					remememberCells_trial_x = rememberCellsFx(6);
-					console.log(remememberCells_trial_x)
-				}
+			
 			};
 
 
@@ -159,7 +154,7 @@
 			on_finish: function(data) { 
 		 		code_length = data.code_length;
 		 		if(code_length!=6){alert("Bitte geben Sie einen 6-stelligen Personencode ein.")}
-		 		console.log(code_length)
+		 		
 		 	}
 	};
 	var persCode_loop = {
@@ -200,7 +195,7 @@
 	 	   		pattern = data.matrixPattern
 				b_pressed = data.button_pressed
 				successCountr_sym = successCountrFx(successCountr_sym, pattern, b_pressed)
-				console.log(successCountr_sym);
+				
 	 	   	},
 		};
 
@@ -232,7 +227,7 @@
 			on_finish: function(data) { 
 				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
 				remememberCells_trial_x = rememberCellsFx(t_SetSize);
-				console.log(remememberCells_trial_x)
+				
 				successCountr = 0;
 				
 				nCells_RecCorPos_total = 0;
@@ -287,10 +282,10 @@
 
         	accuracy_rem_current = cells_RecCorPos.length/(cells_RecCorPos.length+cells_RecIncorPos.length+cells_Missed.length+cells_FalseMem.length);
         	accuracy_rem_current = Math.floor(accuracy_rem_current*100)
-        	//console.log(accuracy_rem_current)
+        	
         	accuracy_rem_cumu = nCells_RecCorPos_total/(nCells_RecCorPos_total+nCells_RecIncorPos_total+nCells_Missed_total+nCells_FalseMem_total)
         	accuracy_rem_cumu = Math.floor(accuracy_rem_cumu*100)
-        	//console.log(accuracy_rem_cumu)
+        	
         	
 		},	
 	};
@@ -366,7 +361,7 @@
   	  	timing_response: function(){return(500*(t_SetSize))}, data: {phase: 'remember'},
   	  	is_html: true,
  	   	on_finish: function(data){
- 	   		console.log(remememberCells_trial_x[rem_i])
+ 	   		
  	   		rem_i+=1
  		},
 		
@@ -380,12 +375,16 @@
 	 	   		pattern = data.matrixPattern
 				b_pressed = data.button_pressed
 				response = ["asymmetrical","symmetrical"][b_pressed]
-				if(pattern==response){
+				/*if(pattern==response){
 					//sym_decision_curr = true
 					successCountr_sym += 1
+					
 				}else{
 					//sym_decision_curr = false
-				}
+					
+				}*/
+				if(correct_judgment==1){successCountr_sym += 1}
+				
 				symDecisions.push(response)
 				symPatterns.push(pattern)
 				nSymDecisions_total += 1
@@ -495,9 +494,9 @@ var intro_realTrials = {
 	};
 	var feedback_progress = {
 		type: 'instructions',
-		pages: function(){if((x+1)<trials.length){return ["<p>***</p><p>Sie haben bisher <b>"+(x+1)+"</b> von <b>"+trials.length+"</b> Durchg&#xE4;ngen absolviert. </p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}else{return["<p>***</p><b> </b><br><b></b>Vielen Dank! Der SymSpan-Task ist nun zu Ende.<p>***</p><b>Punktestand</b><p></p><b>Symmetrie-Aufgabe:</b><p>Anzahl dargebotener Muster: <b>"+nSymDecisions_total+"</b><br>Richtige Antworten: <b>"+successCountr_sym+"</b><br>Genauigkeit: <b>"+accuracy_sym_cumu+"%</b><p>***</p> <p> <b>Ged&#xE4;chtnisaufgabe:</b><p>Anzahl zu merkender Felder: <b>"+nCells_total+"</b><br>Anzahl richtig erinnerte Felder: <b>"+nCells_RecCorPos_total+"</b><br>Anzahl falsch erinnerte Felder: <b>"+(nCells_RecIncorPos_total+nCells_Missed_total+nCells_FalseMem_total)+"</b><br>Genauigkeit: <b>"+accuracy_rem_cumu+"%</b><p>***</p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}},
+		pages: function(){if((x+1)<trials.length){return ["<p>***</p><p>Sie haben bisher <b>"+(x+1)+"</b> von <b>"+trials.length+"</b> Durchg&#xE4;ngen absolviert. </p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}else{return["<p>***</p><b> </b><br><b></b>Vielen Dank! Der SymSpan-Task ist nun zu Ende.<p>***</p><b>Punktestand</b><p></p><b>Symmetrie-Aufgabe:</b><p>Anzahl dargebotener Muster: <b>"+nSymDecisions_total+"</b><br>Richtige Antworten: <b>"+successCountr_sym+"</b><br>Genauigkeit: <b>"+accuracy_sym_cumu+"%</b><p>***</p> <p> <b>Ged&#xE4;chtnisaufgabe:</b><p>In richtiger Reihenfolge geklickte Felder: <b>"+nCells_RecCorPos_total+"</b><br>In falscher Reihenfolge geklickte Felder: <b>"+nCells_RecIncorPos_total+"</b><br>Ausgelassene (zuvor aber pr&#xE4;sentierte) Felder: <b>"+nCells_Missed_total+"</b><br>Irrt&#xFC;mlich geklickte (zuvor aber nicht pr&#xE4;sentierte) Felder: <b>"+nCells_FalseMem_total+"</b><br>Genauigkeit: <b>"+accuracy_rem_cumu+"%</b><p>***</p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}},
 		show_clickable_nav: true,
-		data: function(){return{cells_RecCorPos:cells_RecCorPos.length, cells_RecIncorPos: cells_RecIncorPos.length, cells_Missed: cells_Missed.length, cells_FalseMem: cells_FalseMem.length, recall_accuracy: accuracy_rem_current, summary: "summary_realTask" }},
+		data: function(){return{successCountr_sym: successCountr_sym, cells_RecCorPos:cells_RecCorPos.length, cells_RecIncorPos: cells_RecIncorPos.length, cells_Missed: cells_Missed.length, cells_FalseMem: cells_FalseMem.length, recall_accuracy: accuracy_rem_current, summary: "summary_symAndRem" }},
 		on_finish: function(data) {
 			// for final feedback
 			x += 1 
@@ -513,10 +512,7 @@ var intro_realTrials = {
 			
 			t_SetSize = trials_seq[x]
 			remememberCells_trial_x = rememberCellsFx(t_SetSize);
-			console.log(remememberCells_trial_x)
-			/*console.log(accuracy_rem_cumu)
-			console.log(accuracy_rem_current)
-			console.log(accuracy_sym_cumu)*/
+			
 		},
 	}
 	var Symspan_loop = {
@@ -533,10 +529,10 @@ var intro_realTrials = {
 /////////
 	jsPsych.init({
 		
-		timeline: [welcome, /*informedConsent1, informedConsent2, informedConsent3,
+		timeline: [welcome, informedConsent1, informedConsent2, informedConsent3,
 					persCode_loop,
 					practice_overview,
-					intro_symmetry_practice,symmetry_loop_practice,*/
+					intro_symmetry_practice,symmetry_loop_practice,
 					intro_remember_practice,recall_loop_practice,
 					intro_RemAndSym_practice,RemAndSym_loop2,
 					intro_realTrials,Symspan_loop,
