@@ -91,7 +91,20 @@
 	<script>
 	//var trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
 	var trials = [2,3,6];
-	var trials_seq = jsPsych.randomization.repeat(trials, 1);
+	function trials_gene(){return (trials = [2,3,6])};
+	var trials_copy = trials;
+	//var trials = [2,2];
+	//var trials_seq = jsPsych.randomization.repeat(trials, 1);
+	for(t_i=0;t_i<trials_gene().length;t_i++){
+		if(t_i==0){trials_seq=[]}
+						t_i_sample = Math.floor(Math.random()*trials_copy.length)
+						t_i_sample_name = trials_copy[t_i_sample]
+						trials_seq.push(t_i_sample_name)
+						trials_copy.splice(t_i_sample,1)
+	}				
+	console.log(trials)
+	console.log(trials_copy)
+	console.log(trials_seq)
 	var maxSetSize = 6;
 	var nTrials = trials_seq.length;
 	var nPerSetSize = 3;
@@ -346,6 +359,7 @@
   	  	timing_response: function(){return(500*(t_SetSize))}, data: {phase: 'remember'},
   	  	is_html: true,
  	   	on_finish: function(data){
+ 	   		console.log(remememberCells_trial_x[rem_i])
  	   		rem_i+=1
  		},
 		
