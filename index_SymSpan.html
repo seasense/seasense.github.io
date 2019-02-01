@@ -278,10 +278,10 @@
 
 	var feedback_recall_0 = {
 		type: 'instructions',
-		pages: [ function(){return matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_RecIncorPos, cells_Missed, cells_FalseMem, accuracy_score_rem) } ],
+		pages: [ function(){return matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_RecIncorPos, cells_Missed, cells_FalseMem, accuracy_rem_current) } ],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
-			if(accuracy_score_rem==100){
+			if(accuracy_rem_current==100){
 				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist zu Ende.";
 				successCountr+=1;
 			}else{
