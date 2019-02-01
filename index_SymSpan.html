@@ -388,14 +388,15 @@
 
 	var feedback_RemAndSym_0 = {
 		type: 'instructions',
-		pages: [ function(){return matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_RecIncorPos, cells_Missed, cells_FalseMem, accuracy_score_rem) } ],
+		pages: [ function(){return matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_RecIncorPos, cells_Missed, cells_FalseMem, accuracy_rem_current) } ],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
-			accuracy_score_sym = Math.floor((successCountr_sym/symDecisions.length)*100)
-			if(accuracy_score_rem==100&accuracy_score_sym==100){
+			if(accuracy_rem_current==100&accuracy_sym_cumu==100){
 				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist nun beendet."
+				stop_practice = true
 			}else{
 				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen beide Aufgaben fehlerfrei absolviert werden.";
+				stop_practice = false
 			}
 		}
 	};
