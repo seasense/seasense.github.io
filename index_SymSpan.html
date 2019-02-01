@@ -481,6 +481,7 @@ var intro_realTrials = {
 
 				successCountr_sym = 0
 				sym_trials_total = 0
+				nSymDecisions_total = 0
 				symDecisions = []
 				symPatterns = []
 			},
@@ -496,7 +497,7 @@ var intro_realTrials = {
 			rem_i = 0
 			
 			//t_SetSize=1
-			remememberCells_trial_x = rememberCellsFx(t_SetSize);
+			//remememberCells_trial_x = rememberCellsFx(t_SetSize);
 			
 			//sym_decisions_total = sym_decisions_total+symDecisions.length
 			
@@ -504,7 +505,8 @@ var intro_realTrials = {
 			symPatterns = []
 			
 			t_SetSize = trials_seq[x]
-
+			remememberCells_trial_x = rememberCellsFx(t_SetSize);
+			console.log(remememberCells_trial_x)
 			/*console.log(accuracy_rem_cumu)
 			console.log(accuracy_rem_current)
 			console.log(accuracy_sym_cumu)*/
