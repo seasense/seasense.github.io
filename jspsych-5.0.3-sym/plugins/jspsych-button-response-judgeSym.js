@@ -52,7 +52,7 @@ jsPsych.plugins["judgeSym"] = (function() {
     var gene_matrix = matSymmetryFx();
     //var matrix = gene_matrix.mat;
     var pattern = gene_matrix.pattern;
-    console.log(pattern);
+    //console.log(pattern);
     //display buttons
     var buttons = [];
     if (Array.isArray(trial.button_html)) {

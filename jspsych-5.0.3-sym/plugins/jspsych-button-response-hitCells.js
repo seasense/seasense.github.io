@@ -187,8 +187,8 @@ jsPsych.plugins["button-response-hitCells"] = (function() {
         var clicked_cell_i = clicked_cells_num[ci];
         if(flashedCells_num.includes(clicked_cell_i)===false){cells_falseMemory.push(clicked_cell_i)}
       };
-      console.log("Correct: "+cells_recalled_correctPosition+", FalseMem: "+cells_falseMemory+", IncorPos: "+
-        cells_recalled_incorrectPosition+", Cells_missed: "+cells_missed+"")
+      /*console.log("Correct: "+cells_recalled_correctPosition+", FalseMem: "+cells_falseMemory+", IncorPos: "+
+        cells_recalled_incorrectPosition+", Cells_missed: "+cells_missed+"")*/
        // gather the data to store for the trial
 
       var trial_data = {

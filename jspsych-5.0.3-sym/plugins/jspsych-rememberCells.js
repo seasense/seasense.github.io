@@ -65,7 +65,7 @@ jsPsych.plugins["rememberCells-practice"] = (function() {
     var time_xx = 0;
     for(xx=0;xx<trial.flashingCells.length;xx++){
       timeout_On(trial.flashingCells[xx],time_xx);
-      console.log(trial.flashingCells[xx])
+      //console.log(trial.flashingCells[xx])
       time_xx+=1000
       timeout_Off(trial.flashingCells[xx],time_xx);
     }
