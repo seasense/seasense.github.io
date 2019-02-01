@@ -89,8 +89,8 @@
 	</script>
 	
 	<script>
-	var trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
-	//var trials = [2,2];
+	//var trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
+	var trials = [2,3,6];
 	var trials_seq = jsPsych.randomization.repeat(trials, 1);
 	var maxSetSize = 6;
 	var nTrials = trials_seq.length;
@@ -214,6 +214,12 @@
 				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
 				remememberCells_trial_x = rememberCellsFx(t_SetSize);
 				successCountr = 0;
+				
+				nCells_RecCorPos_total = 0;
+				nCells_RecIncorPos_total = 0;
+				nCells_Missed_total = 0;
+				nCells_FalseMem_total = 0;
+				nCells_total = 0;
 			},
 	};
 	var plusSign = {
@@ -251,8 +257,20 @@
         	cells_Missed = data.Cells_missed
         	cells_FalseMem = data.Cells_FalseMem
 
-        	accuracy_score_rem = cells_RecCorPos.length/(cells_RecCorPos.length+cells_RecIncorPos.length+cells_Missed.length+cells_FalseMem.length);
-        	accuracy_score_rem = Math.floor(accuracy_score_rem*100)
+        	nCells_RecCorPos_total = nCells_RecCorPos_total+cells_RecCorPos.length
+        	nCells_RecIncorPos_total = nCells_RecIncorPos_total+cells_RecIncorPos.length
+        	nCells_Missed_total = nCells_Missed_total+cells_Missed.length
+        	nCells_FalseMem_total = nCells_FalseMem_total+cells_FalseMem.length
+
+        	nCells_total = nCells_total+cells_presented.length
+
+
+        	accuracy_rem_current = cells_RecCorPos.length/(cells_RecCorPos.length+cells_RecIncorPos.length+cells_Missed.length+cells_FalseMem.length);
+        	accuracy_rem_current = Math.floor(accuracy_rem_current*100)
+        	//console.log(accuracy_rem_current)
+        	accuracy_rem_cumu = nCells_RecCorPos_total/(nCells_RecCorPos_total+nCells_RecIncorPos_total+nCells_Missed_total+nCells_FalseMem_total)
+        	accuracy_rem_cumu = Math.floor(accuracy_rem_cumu*100)
+        	//console.log(accuracy_rem_cumu)
         	
 		},	
 	};
@@ -300,13 +318,22 @@
 			pages: function(){return ["<p class='center-content'><b>Beide Aufgaben zugleich (SymSpan-Task): Instruktion</b></p> Jetzt sind ihre Multi-Tasking F&#xE4;higkeiten gefragt! <p>Die Aufgabe besteht nun darin abwechselnd eine Symmetrie-Aufgabe und eine Ged&#xE4;chtnisaufgabe zu absolvieren d.h.:<br>(a) zu entscheiden, ob das gezeigte Muster symmetrisch entlang seiner horizontalen ist oder nicht und <br>(b) sich die Reihenfolge der farbig aufleuchtenden Felder zu merken. <p class='center-content'> Klicken Sie <i>Weiter</i>, um die &#xDC;bung zu beginnen.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
+				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
+
 				successCountr_sym = 0
 				successCountr_rem = 0
-				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
-				remememberCells_trial_x = rememberCellsFx(t_SetSize);
-				rem_i = 0
+				
+				nSymDecisions_total = 0
 				symDecisions = []
 				symPatterns = []
+
+				remememberCells_trial_x = rememberCellsFx(t_SetSize);
+				rem_i = 0
+				nCells_RecCorPos_total = 0;
+				nCells_RecIncorPos_total = 0;
+				nCells_Missed_total = 0;
+				nCells_FalseMem_total = 0;
+				nCells_total = 0;
 				
 			},
 	};
@@ -332,9 +359,17 @@
 	 	   		pattern = data.matrixPattern
 				b_pressed = data.button_pressed
 				response = ["asymmetrical","symmetrical"][b_pressed]
-				if(pattern==response){successCountr_sym+=1}
+				if(pattern==response){
+					//sym_decision_curr = true
+					successCountr_sym += 1
+				}else{
+					//sym_decision_curr = false
+				}
 				symDecisions.push(response)
 				symPatterns.push(pattern)
+				nSymDecisions_total += 1
+				accuracy_sym_cumu = successCountr_sym/nSymDecisions_total
+				accuracy_sym_cumu = Math.floor(accuracy_sym_cumu*100)
 				
 	 	   	},
 		};
@@ -360,14 +395,14 @@
 			if(accuracy_score_rem==100&accuracy_score_sym==100){
 				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist nun beendet."
 			}else{
-				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen die aufleuchtenden Felder fehlerfrei erinnert werden.";
+				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen beide Aufgaben fehlerfrei absolviert werden.";
 			}
 		}
 	};
 
 	var feedback_RemAndSym_1 = {
 		type: 'instructions',
-		pages: [ function(){return ""+"<b>"+"Feedback Symmetrie-Aufgabe"+"</b>"+"<p>"+"Die pr&#xE4;sentierten Muster waren: "+symPatterns+"<br>"+"Ihre Antworten waren: "+symDecisions+"<p>"+"<b>"+"Genauigkeit: "+accuracy_score_sym+"%" } ],
+		pages: [ function(){return ""+"<b>"+"Feedback Symmetrie-Aufgabe"+"</b>"+"<p>"+"Die pr&#xE4;sentierten Muster waren: "+symPatterns+"<br>"+"Ihre Antworten waren: "+symDecisions+"<p>"+"<b>"+"Genauigkeit: "+accuracy_sym_cumu+"%" } ],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 				
@@ -387,6 +422,8 @@
 				successCountr_sym = 0
 				symDecisions = []
 				symPatterns = []
+				nSymDecisions_total = 0
+				accuracy_sym_cumu = 0
 			}
 		
 	};
@@ -395,7 +432,7 @@
 		timeline: [RemAndSym_loop,recall,feedback_RemAndSym_0,feedback_RemAndSym_1,feedback_RemAndSym_2],
 		loop_function: function(data){
 		        
-				if(accuracy_score_rem==100&accuracy_score_sym==100){
+				if(stop_practice==true){
 		            return false;
 		        } else {
 		            return true;
@@ -421,10 +458,10 @@ var intro_realTrials = {
 				//t_SetSize=1
 				remememberCells_trial_x = rememberCellsFx(t_SetSize);
 				rem_i = 0
-				cells_RecCorPos_total = 0
-				cells_RecIncorPos_total = 0
-				cells_Missed_total = 0
-				cells_FalseMem_total = 0
+				nCells_RecCorPos_total = 0
+				nCells_RecIncorPos_total = 0
+				nCells_Missed_total = 0
+				nCells_FalseMem_total = 0
 				nCells_total = 0
 
 				successCountr_sym = 0
@@ -435,31 +472,27 @@ var intro_realTrials = {
 	};
 	var feedback_progress = {
 		type: 'instructions',
-		pages: function(){if((x+1)<trials.length){return ["<p>***</p><p>Sie haben bisher <b>"+(x+1)+"</b> von <b>"+trials.length+"</b> Durchg&#xE4;ngen absolviert. </p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}else{return["<p>***</p><b> </b><br><b></b>Vielen Dank! Der SymSpan-Task ist nun zu Ende.<p>***</p><b>Punktestand</b><p></p><b>Symmetrie-Aufgabe:</b><p>Anzahl dargebotener Muster: <b>"+(sym_trials_total+symDecisions.length)+"</b><br>Richtige Antworten: <b>"+successCountr_sym+"</b><br>Genauigkeit: <b>"+ Math.round((successCountr_sym/(sym_trials_total+symDecisions.length))*10000)/100+"%</b><p>***</p> <p> <b>Ged&#xE4;chtnisaufgabe:</b><p>Anzahl zu merkender Felder: <b>"+(nCells_total+t_SetSize)+"</b><br>Anzahl richtig erinnert: <b>"+(cells_RecCorPos_total+cells_RecCorPos.length)+"</b><br>Genauigkeit: <b>"+Math.round((cells_RecCorPos_total+cells_RecCorPos.length)/(nCells_total+t_SetSize)*10000)/100+"%</b><p>***</p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}},
+		pages: function(){if((x+1)<trials.length){return ["<p>***</p><p>Sie haben bisher <b>"+(x+1)+"</b> von <b>"+trials.length+"</b> Durchg&#xE4;ngen absolviert. </p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}else{return["<p>***</p><b> </b><br><b></b>Vielen Dank! Der SymSpan-Task ist nun zu Ende.<p>***</p><b>Punktestand</b><p></p><b>Symmetrie-Aufgabe:</b><p>Anzahl dargebotener Muster: <b>"+nSymDecisions_total+"</b><br>Richtige Antworten: <b>"+successCountr_sym+"</b><br>Genauigkeit: <b>"+accuracy_sym_cumu+"%</b><p>***</p> <p> <b>Ged&#xE4;chtnisaufgabe:</b><p>Anzahl zu merkender Felder: <b>"+nCells_total+"</b><br>Anzahl richtig erinnerte Felder: <b>"+nCells_RecCorPos_total+"</b><br>Anzahl falsch erinnerte Felder: <b>"+(nCells_RecIncorPos_total+nCells_Missed_total+nCells_FalseMem_total)+"</b><br>Genauigkeit: <b>"+accuracy_rem_cumu+"%</b><p>***</p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}},
 		show_clickable_nav: true,
-		data: function(){var recall_accuracy = cells_RecCorPos.length/(cells_RecCorPos.length+cells_RecIncorPos.length+cells_Missed.length+cells_FalseMem.length);return{cells_RecCorPos:cells_RecCorPos.length, cells_RecIncorPos: cells_RecIncorPos.length, cells_Missed: cells_Missed.length, cells_FalseMem: cells_FalseMem.length, recall_accuracy: recall_accuracy, summary: "summary_realTask" }},
+		data: function(){return{cells_RecCorPos:cells_RecCorPos.length, cells_RecIncorPos: cells_RecIncorPos.length, cells_Missed: cells_Missed.length, cells_FalseMem: cells_FalseMem.length, recall_accuracy: accuracy_rem_current, summary: "summary_realTask" }},
 		on_finish: function(data) {
 			// for final feedback
 			x += 1 
 			rem_i = 0
-			t_SetSize = trials_seq[x]
+			
 			//t_SetSize=1
 			remememberCells_trial_x = rememberCellsFx(t_SetSize);
-			cells_RecCorPos_total = cells_RecCorPos_total+cells_RecCorPos.length
-			cells_RecIncorPos_total = cells_RecIncorPos_total+cells_RecIncorPos.length
-			cells_Missed_total = cells_Missed_total+cells_Missed.length
-			cells_FalseMem_total = cells_FalseMem_total+cells_FalseMem.length
 			
-			nCells_total = nCells_total+t_SetSize
-			current_accuracy_rem = cells_RecCorPos_total/nCells_total
-
-			sym_trials_total = sym_trials_total+symDecisions.length
+			//sym_decisions_total = sym_decisions_total+symDecisions.length
+			
 			symDecisions = []
 			symPatterns = []
-			current_accuracy_sym = successCountr_sym/sym_trials_total
+			
+			t_SetSize = trials_seq[x]
 
-			console.log(current_accuracy_rem)
-			console.log(current_accuracy_sym)
+			/*console.log(accuracy_rem_cumu)
+			console.log(accuracy_rem_current)
+			console.log(accuracy_sym_cumu)*/
 		},
 	}
 	var Symspan_loop = {
@@ -490,7 +523,7 @@ var intro_realTrials = {
 	   	on_finish: function(data){
 	   	jsPsych.data.displayData();
 	        jsPsych.data.displayData();
-	        jsPsych.data.localSave('myData_sendMeTo_seasenselab@gmail.com.txt', 'csv');
+	        jsPsych.data.localSave('SymSpan_sendMeTo_seasenselab@gmail.com.txt', 'csv');
 	        $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
 	   }
 	});
