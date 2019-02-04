@@ -7,6 +7,7 @@
 		<script src="jspsych-5.0.3-act/plugins/jspsych-instructions.js"></script>
 		<script src="jspsych-5.0.3-act/plugins/jspsych-survey-text.js"></script>
 		<script src="jspsych-5.0.3-act/plugins/jspsych-survey-text_persCode.js"></script>
+		<script src="jspsych-5.0.3-act/plugins/jspsych-survey-text_persDemos.js"></script>
 		<script src="jspsych-5.0.3-act/plugins/jspsych-survey-multi-choice.js"></script>
 		
 		<link href="jspsych-5.0.3-act/css/jspsych_act.css" rel="stylesheet" type="text/css"></link>
@@ -164,6 +165,12 @@
 		        }
 		  },
 
+	};
+	var persData_demos = ["Gender:<br>","Muttersprache(n):<br>","H&#xF6;chster erreichter Bildungsabschluss:<br>"];
+	var demographics2 = {
+	  		type: "survey-text-persDemos",
+	  		questions: persData_demos,
+			preamble: "Zu Beginn m&#xF6;chten wir Sie um einige Angaben zu Ihrer Person bitten. Lassen Sie jedoch die erste Frage unbeantwortet, wenn Ihnen das lieber ist.",
 	};
 ///////// Practice
 	var practice_overview = {
@@ -408,7 +415,7 @@
 	jsPsych.init({
 		timeline: [welcome,
 					informedConsent1,informedConsent2,informedConsent3,
-					persCode_loop,
+					persCode_loop,demographics2,
 					practice_overview,prepare_for_next_stimulus_training,training_loop,announce_endOfTraining,prepare_for_next_stimulus, stimulus_loop,
 					goodbye],
 	   	fullscreen: false,
