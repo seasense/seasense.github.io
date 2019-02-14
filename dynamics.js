@@ -375,13 +375,13 @@ function courses_cellFx(){
 
 
 				function point_in_listCourses_Fx(point_name,fullTitle,
-					unit0_slides,unit0_reflection){
+					unit0_slides,unit0_reflection,unit1_preparation){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
 					newPoint.setAttribute("class","LinkToImage");
 					
-						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection){
+						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,unit1_preparation){
 							
 							document.getElementById("project_info_box").remove();
 
@@ -415,13 +415,23 @@ function courses_cellFx(){
 							reflection_U0_a.href = unit0_reflection;
 							reflection_U0_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(reflection_U0_a);
+							document.getElementById("course_info_box").appendChild(document.createElement("p"));
+
+							var LinkToUnit1prep = document.createElement("strong");
+							LinkToUnit1prep.appendChild(document.createTextNode("Unit 1 Preparation: "));
+							document.getElementById("course_info_box").appendChild(LinkToUnit1prep);
+							var preparation_U1_a = document.createElement("a");
+							preparation_U1_a.appendChild(document.createTextNode("Preparation"));
+							preparation_U1_a.href = unit1_preparation;
+							preparation_U1_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(preparation_U1_a);
 
 						}
 					
 					
 						newPoint.onclick = function(){
 							
-								show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection)		
+								show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,unit1_preparation)		
 							
 						}
 
@@ -429,7 +439,7 @@ function courses_cellFx(){
 				}
 				
 				listCourses.appendChild(point_in_listCourses_Fx("CogDev","Typical & Atypical Cognitive Development",
-					"cogDev/Unit_0_CogDev.pdf","cogDev/Unit_0_Reflection_CogDev.pdf"));
+					"cogDev/Unit_0_CogDev.pdf","cogDev/Unit_0_Reflection_CogDev.pdf","cogDev/Unit_1_Preparation_cogDev.pdf"));
 
 
 				secondRow_state[0] = "on";
