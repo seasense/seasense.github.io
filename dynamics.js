@@ -45,6 +45,7 @@ function secondCellFx(secondCell_state){
 		list_of_links.appendChild(bullet_points_fx("about","about_cellFx()"));
 		list_of_links.appendChild(bullet_points_fx("related","related_cellFx()"));
 		list_of_links.appendChild(bullet_points_fx("instruments","battery_cellFx()"));
+		list_of_links.appendChild(bullet_points_fx("courses","courses_cellFx()"));
 
 		/*var closeButton = document.createElement("BUTTON");
 		closeButton.appendChild(document.createTextNode("close"));
@@ -335,7 +336,121 @@ function related_cellFx(){
 	
 };
 
+function courses_cellFx(){
+	
+	function courses_content_fx(){
+				var secondRow = document.getElementById("table").insertRow(1);
+				secondRow.setAttribute("id","row2")
 
+				var thirdCell = document.createElement("TD");
+				var fourthCell = document.createElement("TD");
+				thirdCell.setAttribute("id","ThirdCell");
+				fourthCell.setAttribute("id","FourthCell");
+
+				document.getElementById("row2").appendChild(thirdCell);
+				document.getElementById("row2").appendChild(fourthCell);
+				
+				var listCourses = document.createElement("UL");
+				listCourses.setAttribute("id","list_courses");
+				var list_courses_DIV = document.createElement("DIV");
+				list_courses_DIV.setAttribute("class","scrollable");
+				var stars = document.createElement("strong");
+				stars.appendChild(document.createTextNode("***"))
+				list_courses_DIV.appendChild(stars);
+				list_courses_DIV.appendChild(document.createElement("p"));
+				list_courses_DIV.appendChild(listCourses);
+				thirdCell.appendChild(list_courses_DIV);
+
+				var fourthCell_DIV = document.createElement("DIV");
+				fourthCell_DIV.setAttribute("class","scrollable_lexicon");
+				fourthCell_DIV.setAttribute("id","project_info_box");
+				fourthCell.appendChild(fourthCell_DIV);
+
+				var courseBoxTitle = document.createElement("strong");
+				courseBoxTitle.appendChild(document.createTextNode("Course information"));
+				fourthCell_DIV.appendChild(courseBoxTitle);
+				courseBoxTitle.appendChild(document.createElement("p"));
+				var lexicon_instruction = document.createTextNode("Hit a link in the left box.");
+				fourthCell_DIV.appendChild(lexicon_instruction);
+
+
+				function point_in_listCourses_Fx(point_name,fullTitle,
+					unit0_slides,unit0_reflection){
+					var newPoint = document.createElement("li");
+					var newPoint_name = document.createTextNode(point_name);
+					newPoint.appendChild(newPoint_name);
+					newPoint.setAttribute("class","LinkToImage");
+					
+						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection){
+							
+							document.getElementById("project_info_box").remove();
+
+							var fourthCell_DIV = document.createElement("DIV");
+							fourthCell_DIV.setAttribute("class","scrollable_lexicon");
+							fourthCell_DIV.setAttribute("id","course_info_box");
+							fourthCell.appendChild(fourthCell_DIV);
+
+							var fullTitle_I = document.createElement("strong");
+							fullTitle_I.appendChild(document.createTextNode("Course title: "))
+							document.getElementById("course_info_box").appendChild(fullTitle_I);
+							var fullTitle = document.createTextNode(fullTitle);
+							document.getElementById("course_info_box").appendChild(fullTitle);
+							document.getElementById("course_info_box").appendChild(document.createElement("p"));
+
+							var LinkToUnit0slides = document.createElement("strong");
+							LinkToUnit0slides.appendChild(document.createTextNode("Unit 0 Slides: "));
+							document.getElementById("course_info_box").appendChild(LinkToUnit0slides);
+							var slides_U0_a = document.createElement("a");
+							slides_U0_a.appendChild(document.createTextNode("Slides"));
+							slides_U0_a.href = unit0_slides;
+							slides_U0_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(slides_U0_a);
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+
+							var LinkToUnit0reflection = document.createElement("strong");
+							LinkToUnit0reflection.appendChild(document.createTextNode("Unit 0 Reflection: "));
+							document.getElementById("course_info_box").appendChild(LinkToUnit0reflection);
+							var reflection_U0_a = document.createElement("a");
+							reflection_U0_a.appendChild(document.createTextNode("Reflection"));
+							reflection_U0_a.href = unit0_reflection;
+							reflection_U0_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(reflection_U0_a);
+
+						}
+					
+					
+						newPoint.onclick = function(){
+							
+								show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection)		
+							
+						}
+
+					return(newPoint)
+				}
+				
+				listCourses.appendChild(point_in_listCourses_Fx("CogDev","Typical & Atypical Cognitive Development",
+					"cogDev/Unit_0_CogDev.pdf","cogDev/Unit_0_Reflection_CogDev.pdf"));
+
+
+				secondRow_state[0] = "on";
+				
+		}
+
+	if(secondRow_state=="off"){
+			
+		courses_content_fx()
+		
+	}else{
+			
+
+				document.getElementById("row2").remove();
+				
+				courses_content_fx()
+
+			
+		}
+	
+};
 
 function battery_cellFx(){
 	
