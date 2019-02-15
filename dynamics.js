@@ -47,6 +47,12 @@ function secondCellFx(secondCell_state){
 		list_of_links.appendChild(bullet_points_fx("instruments","battery_cellFx()"));
 		list_of_links.appendChild(bullet_points_fx("courses","courses_cellFx()"));
 
+		var stars = document.createElement("strong");
+		stars.appendChild(document.createElement("p"))
+		stars.appendChild(document.createTextNode("***"))
+		secondCell_DIV.appendChild(stars);
+		secondCell_DIV.appendChild(document.createElement("p"));
+
 		/*var closeButton = document.createElement("BUTTON");
 		closeButton.appendChild(document.createTextNode("close"));
 		closeButton.setAttribute("class","button");
@@ -375,13 +381,14 @@ function courses_cellFx(){
 
 
 				function point_in_listCourses_Fx(point_name,fullTitle,
-					unit0_slides,unit0_reflection,unit1_preparation){
+					unit0_slides,unit0_reflection,
+					unit1_article,unit1_questions){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
 					newPoint.setAttribute("class","LinkToImage");
 					
-						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,unit1_preparation){
+						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,unit1_article,unit1_questions){
 							
 							document.getElementById("project_info_box").remove();
 
@@ -398,31 +405,37 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
 
 							var LinkToUnit0slides = document.createElement("strong");
-							LinkToUnit0slides.appendChild(document.createTextNode("Unit 0 Slides: "));
+							LinkToUnit0slides.appendChild(document.createTextNode("Unit 0"));
 							document.getElementById("course_info_box").appendChild(LinkToUnit0slides);
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var slides_U0_a = document.createElement("a");
 							slides_U0_a.appendChild(document.createTextNode("Slides"));
 							slides_U0_a.href = unit0_slides;
 							slides_U0_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(slides_U0_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							var reflex_U0_a = document.createElement("a");
+							reflex_U0_a.appendChild(document.createTextNode("Reflection"));
+							reflex_U0_a.href = unit0_reflection;
+							reflex_U0_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(reflex_U0_a);
 
-							var LinkToUnit0reflection = document.createElement("strong");
-							LinkToUnit0reflection.appendChild(document.createTextNode("Unit 0 Reflection: "));
-							document.getElementById("course_info_box").appendChild(LinkToUnit0reflection);
-							var reflection_U0_a = document.createElement("a");
-							reflection_U0_a.appendChild(document.createTextNode("Reflection"));
-							reflection_U0_a.href = unit0_reflection;
-							reflection_U0_a.setAttribute("class","LinkToImage");
-							document.getElementById("course_info_box").appendChild(reflection_U0_a);
+							
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
 
 							var LinkToUnit1prep = document.createElement("strong");
-							LinkToUnit1prep.appendChild(document.createTextNode("Unit 1 Preparation: "));
+							LinkToUnit1prep.appendChild(document.createTextNode("Unit 1 "));
 							document.getElementById("course_info_box").appendChild(LinkToUnit1prep);
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							var article_U1_a = document.createElement("a");
+							article_U1_a.appendChild(document.createTextNode("Article"));
+							article_U1_a.href = unit1_article;
+							article_U1_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(article_U1_a);
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var preparation_U1_a = document.createElement("a");
-							preparation_U1_a.appendChild(document.createTextNode("Preparation"));
-							preparation_U1_a.href = unit1_preparation;
+							preparation_U1_a.appendChild(document.createTextNode("Questions"));
+							preparation_U1_a.href = unit1_questions;
 							preparation_U1_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(preparation_U1_a);
 
@@ -431,15 +444,16 @@ function courses_cellFx(){
 					
 						newPoint.onclick = function(){
 							
-								show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,unit1_preparation)		
+								show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,unit1_article,unit1_questions)		
 							
 						}
 
 					return(newPoint)
 				}
 				
-				listCourses.appendChild(point_in_listCourses_Fx("CogDev","Typical & Atypical Cognitive Development",
-					"cogDev/Unit_0_CogDev.pdf","cogDev/Unit_0_Reflection_CogDev.pdf","cogDev/Unit_1_Preparation_cogDev.pdf"));
+				listCourses.appendChild(point_in_listCourses_Fx("CogniDev","Typical & Atypical Cognitive Development",
+					"cogDev/Unit_0_slides_cogniDev.pdf","cogDev/Unit_0_reflection_cogniDev.pdf",
+					"cogDev/Tucker2013_Heritability.pdf","cogDev/Unit_1_questions_cogniDev.pdf"));
 
 
 				secondRow_state[0] = "on";
