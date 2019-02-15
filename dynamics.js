@@ -461,7 +461,7 @@ function courses_cellFx(){
 		}
 
 	if(secondRow_state=="off"){
-			
+
 		courses_content_fx()
 		
 	}else{
