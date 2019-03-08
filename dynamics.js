@@ -390,7 +390,8 @@ function courses_cellFx(){
 					newPoint.appendChild(newPoint_name);
 					newPoint.setAttribute("class","LinkToImage");
 					
-						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,unit1_article,unit1_questions,
+						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,
+							unit1_article,unit1_questions,
 							unit1_slides, unit1_reflection,
 							unit2_article,unit2_questions){
 							
