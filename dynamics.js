@@ -383,14 +383,16 @@ function courses_cellFx(){
 				function point_in_listCourses_Fx(point_name,fullTitle,
 					unit0_slides,unit0_reflection,
 					unit1_article,unit1_questions,
-					unit1_slides, unit1_reflection){
+					unit1_slides, unit1_reflection,
+					unit2_article,unit2_questions){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
 					newPoint.setAttribute("class","LinkToImage");
 					
 						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,unit1_article,unit1_questions,
-							unit1_slides, unit1_reflection){
+							unit1_slides, unit1_reflection,
+							unit2_article,unit2_questions){
 							
 							document.getElementById("project_info_box").remove();
 
@@ -460,13 +462,25 @@ function courses_cellFx(){
 							LinkToUnit2prep.appendChild(document.createTextNode("Unit 2"));
 							document.getElementById("course_info_box").appendChild(LinkToUnit2prep);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							var article_U2_a = document.createElement("a");
+							article_U2_a.appendChild(document.createTextNode("Article *"));
+							article_U2_a.href = unit2_article;
+							article_U2_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(article_U2_a);
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							var preparation_U2_a = document.createElement("a");
+							preparation_U2_a.appendChild(document.createTextNode("Questions *"));
+							preparation_U2_a.href = unit2_questions;
+							preparation_U2_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(preparation_U2_a);
 						}
 					
 					
 						newPoint.onclick = function(){
 							
 								show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,
-									unit1_article,unit1_questions,unit1_slides,unit1_reflection)		
+									unit1_article,unit1_questions,unit1_slides,unit1_reflection,
+									unit2_article,unit2_questions)		
 							
 						}
 
@@ -476,7 +490,8 @@ function courses_cellFx(){
 				listCourses.appendChild(point_in_listCourses_Fx("CogniDev","Typical & Atypical Cognitive Development",
 					"cogDev/Unit_0_slides_CogniDev.pdf","cogDev/Unit_0_reflection_cogniDev.pdf",
 					"cogDev/Tucker2013_Heritability.pdf","cogDev/Unit_1_questions_cogniDev.pdf","cogDev/Unit_1_slides_CogniDev.pdf",
-					"cogDev/Unit_1_reflection_cogniDev.pdf"));
+					"cogDev/Unit_1_reflection_cogniDev.pdf",
+					"cogDev/Westerman2011_Neuroconstructivism.pdf","cogDev/Unit_2_questions_cogniDev.pdf"));
 
 
 				secondRow_state[0] = "on";
