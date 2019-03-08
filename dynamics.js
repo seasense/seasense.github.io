@@ -490,7 +490,7 @@ function courses_cellFx(){
 				listCourses.appendChild(point_in_listCourses_Fx("CogniDev","Typical & Atypical Cognitive Development",
 					"cogDev/Unit_0_slides_CogniDev.pdf","cogDev/Unit_0_reflection_cogniDev.pdf",
 					"cogDev/Tucker2013_Heritability.pdf","cogDev/Unit_1_questions_cogniDev.pdf",
-					"cogDev/Unit_1_slides_CogniDev","cogDev/Unit_1_reflection_cogniDev.pdf",
+					"cogDev/Unit_One_slides_CogniDev.pdf","cogDev/Unit_1_reflection_cogniDev.pdf",
 					"cogDev/Westerman2011_Neuroconstructivism.pdf","cogDev/Unit_2_questions_cogniDev.pdf"));
 
 
