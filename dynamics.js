@@ -381,10 +381,10 @@ function courses_cellFx(){
 
 
 				function point_in_listCourses_Fx(point_name,fullTitle,
-					unit0_slides,unit0_reflection,
-					unit1_article,unit1_questions,
-					unit1_slides, unit1_reflection,
-					unit2_article,unit2_questions){
+													unit0_slides,unit0_reflection,
+													unit1_article,unit1_questions,
+													unit1_slides, unit1_reflection,
+													unit2_article,unit2_questions){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
@@ -489,7 +489,7 @@ function courses_cellFx(){
 				listCourses.appendChild(point_in_listCourses_Fx("CogniDev","Typical & Atypical Cognitive Development",
 					"cogDev/Unit_0_slides_CogniDev.pdf","cogDev/Unit_0_reflection_cogniDev.pdf",
 					"cogDev/Tucker2013_Heritability.pdf","cogDev/Unit_1_questions_cogniDev.pdf",
-					"cogDev/Unit_1_slides_CogniDev.pdf","cogDev/Unit_1_reflection_cogniDev.pdf",
+					"cogDev/Unit_0_slides_CogniDev.pdf","cogDev/Unit_1_reflection_cogniDev.pdf",
 					"cogDev/Westerman2011_Neuroconstructivism.pdf","cogDev/Unit_2_questions_cogniDev.pdf"));
 
 
