@@ -382,18 +382,17 @@ function courses_cellFx(){
 
 				function point_in_listCourses_Fx(point_name,fullTitle,
 													unit0_slides,unit0_reflection,
-													unit1_article,unit1_questions,
-													unit1_slides, unit1_reflection,
-													unit2_article,unit2_questions){
+													unit1_article,unit1_questions, unit1_slides, unit1_reflection,
+													unit2_article,unit2_questions, unit2_slides){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
 					newPoint.setAttribute("class","LinkToImage");
 					
-						function show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,
-							unit1_article,unit1_questions,
-							unit1_slides, unit1_reflection,
-							unit2_article,unit2_questions){
+						function show_info_in_fourthCell(fullTitle,
+							unit0_slides,unit0_reflection,
+							unit1_article,unit1_questions,unit1_slides, unit1_reflection,
+							unit2_article,unit2_questions,unit2_slides){
 							
 							document.getElementById("project_info_box").remove();
 
@@ -445,13 +444,13 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(preparation_U1_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var slides_U1_a = document.createElement("a");
-							slides_U1_a.appendChild(document.createTextNode("Slides *"));
+							slides_U1_a.appendChild(document.createTextNode("Slides"));
 							slides_U1_a.href = unit1_slides;
 							slides_U1_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(slides_U1_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var reflex_U1_a = document.createElement("a");
-							reflex_U1_a.appendChild(document.createTextNode("Reflection *"));
+							reflex_U1_a.appendChild(document.createTextNode("Reflection"));
 							reflex_U1_a.href = unit1_reflection;
 							reflex_U1_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(reflex_U1_a);
@@ -463,16 +462,23 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(LinkToUnit2prep);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var article_U2_a = document.createElement("a");
-							article_U2_a.appendChild(document.createTextNode("Article *"));
+							article_U2_a.appendChild(document.createTextNode("Article"));
 							article_U2_a.href = unit2_article;
 							article_U2_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(article_U2_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var preparation_U2_a = document.createElement("a");
-							preparation_U2_a.appendChild(document.createTextNode("Questions *"));
+							preparation_U2_a.appendChild(document.createTextNode("Questions"));
 							preparation_U2_a.href = unit2_questions;
 							preparation_U2_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(preparation_U2_a);
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							var slides_U2_a = document.createElement("a");
+							slides_U2_a.appendChild(document.createTextNode("Slides *"));
+							slides_U2_a.href = unit2_slides;
+							slides_U2_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(slides_U2_a);
+
 						}
 					
 					
@@ -480,7 +486,7 @@ function courses_cellFx(){
 							
 								show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,
 									unit1_article,unit1_questions,unit1_slides,unit1_reflection,
-									unit2_article,unit2_questions)		
+									unit2_article,unit2_questions,unit2_slides)		
 							
 						}
 
@@ -491,7 +497,8 @@ function courses_cellFx(){
 					"cogDev/Unit_0_slides_CogniDev.pdf","cogDev/Unit_0_reflection_cogniDev.pdf",
 					"cogDev/Tucker2013_Heritability.pdf","cogDev/Unit_1_questions_cogniDev.pdf",
 					"cogDev/Unit_One_slides_CogniDev.pdf","cogDev/Unit_1_reflection_cogniDev.pdf",
-					"cogDev/Westerman2011_Neuroconstructivism.pdf","cogDev/Unit_2_questions_cogniDev.pdf"));
+					"cogDev/Westerman2011_Neuroconstructivism.pdf","cogDev/Unit_2_questions_cogniDev.pdf",
+					"cogDev/Unit_2_slides_cogniDev.pdf"));
 
 
 				secondRow_state[0] = "on";
