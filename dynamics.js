@@ -495,7 +495,7 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var article_U3_a = document.createElement("a");
 							article_U3_a.appendChild(document.createTextNode("Article *"));
-							article_U3_a.href = unit2_article;
+							article_U3_a.href = unit3_article;
 							article_U3_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(article_U3_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
