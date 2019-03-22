@@ -476,13 +476,13 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(preparation_U2_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var slides_U2_a = document.createElement("a");
-							slides_U2_a.appendChild(document.createTextNode("Slides *"));
+							slides_U2_a.appendChild(document.createTextNode("Slides"));
 							slides_U2_a.href = unit2_slides;
 							slides_U2_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(slides_U2_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var reflex_U2_a = document.createElement("a");
-							reflex_U2_a.appendChild(document.createTextNode("Reflection *"));
+							reflex_U2_a.appendChild(document.createTextNode("Reflection"));
 							reflex_U2_a.href = unit2_reflection;
 							reflex_U2_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(reflex_U2_a);
