@@ -384,7 +384,7 @@ function courses_cellFx(){
 													unit0_slides,unit0_reflection,
 													unit1_article,unit1_questions, unit1_slides, unit1_reflection,
 													unit2_article,unit2_questions, unit2_slides, unit2_reflection,
-													unit3_article,unit3_questions){
+													unit3_article,unit3_questions, unit3_slides){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
@@ -394,7 +394,7 @@ function courses_cellFx(){
 							unit0_slides,unit0_reflection,
 							unit1_article,unit1_questions,unit1_slides, unit1_reflection,
 							unit2_article,unit2_questions,unit2_slides, unit2_reflection,
-							unit3_article,unit3_questions){
+							unit3_article,unit3_questions,unit3_slides){
 							
 							document.getElementById("project_info_box").remove();
 
@@ -504,6 +504,12 @@ function courses_cellFx(){
 							preparation_U3_a.href = unit3_questions;
 							preparation_U3_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(preparation_U3_a);
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							var slides_U3_a = document.createElement("a");
+							slides_U3_a.appendChild(document.createTextNode("Slides *"));
+							slides_U3_a.href = unit3_slides;
+							slides_U3_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(slides_U3_a);
 
 						}
 					
@@ -513,7 +519,7 @@ function courses_cellFx(){
 								show_info_in_fourthCell(fullTitle,unit0_slides,unit0_reflection,
 									unit1_article,unit1_questions,unit1_slides,unit1_reflection,
 									unit2_article,unit2_questions,unit2_slides,unit2_reflection,
-									unit3_article,unit3_questions)		
+									unit3_article,unit3_questions,unit3_slides)		
 							
 						}
 
@@ -526,7 +532,8 @@ function courses_cellFx(){
 					"cogDev/Unit_One_slides_CogniDev.pdf","cogDev/Unit_1_reflection_cogniDev.pdf",
 					"cogDev/Westerman2011_Neuroconstructivism.pdf","cogDev/Unit_2_questions_cogniDev.pdf",
 					"cogDev/Unit_2_slides_cogniDev.pdf","cogDev/Unit_2_reflection_cogniDev.pdf",
-					"cogDev/Morasch2013_CognitiveControlDevelopment.pdf","cogDev/Unit_3_questions_cogniDev.pdf"));
+					"cogDev/Morasch2013_CognitiveControlDevelopment.pdf","cogDev/Unit_3_questions_cogniDev.pdf",
+					"cogDev/Unit_3_slides_cogniDev.pdf"));
 
 
 				secondRow_state[0] = "on";
