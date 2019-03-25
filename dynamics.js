@@ -413,7 +413,7 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
 
 							var LinkToUnit0slides = document.createElement("strong");
-							LinkToUnit0slides.appendChild(document.createTextNode("Unit 0"));
+							LinkToUnit0slides.appendChild(document.createTextNode("Unit 0: Intro"));
 							document.getElementById("course_info_box").appendChild(LinkToUnit0slides);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var slides_U0_a = document.createElement("a");
@@ -432,7 +432,7 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
 
 							var LinkToUnit1prep = document.createElement("strong");
-							LinkToUnit1prep.appendChild(document.createTextNode("Unit 1 "));
+							LinkToUnit1prep.appendChild(document.createTextNode("Unit 1: Genes"));
 							document.getElementById("course_info_box").appendChild(LinkToUnit1prep);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var article_U1_a = document.createElement("a");
@@ -462,7 +462,7 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
 
 							var LinkToUnit2prep = document.createElement("strong");
-							LinkToUnit2prep.appendChild(document.createTextNode("Unit 2"));
+							LinkToUnit2prep.appendChild(document.createTextNode("Unit 2: Theories"));
 							document.getElementById("course_info_box").appendChild(LinkToUnit2prep);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var article_U2_a = document.createElement("a");
@@ -492,7 +492,7 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
 
 							var LinkToUnit3prep = document.createElement("strong");
-							LinkToUnit3prep.appendChild(document.createTextNode("Unit 3"));
+							LinkToUnit3prep.appendChild(document.createTextNode("Unit 3: Individual differences"));
 							document.getElementById("course_info_box").appendChild(LinkToUnit3prep);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var article_U3_a = document.createElement("a");
@@ -522,7 +522,7 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
 
 							var LinkToUnit4prep = document.createElement("strong");
-							LinkToUnit4prep.appendChild(document.createTextNode("Unit 4"));
+							LinkToUnit4prep.appendChild(document.createTextNode("Unit 4: Cognitive training"));
 							document.getElementById("course_info_box").appendChild(LinkToUnit4prep);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var article_U4_a = document.createElement("a");
