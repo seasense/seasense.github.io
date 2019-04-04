@@ -385,7 +385,7 @@ function courses_cellFx(){
 													unit1_article,unit1_questions, unit1_slides, unit1_reflection,
 													unit2_article,unit2_questions, unit2_slides, unit2_reflection,
 													unit3_article,unit3_questions, unit3_slides, unit3_reflection,
-													unit4_article,unit4_questions){
+													unit4_article,unit4_questions, unit4_slides, unit4_reflection){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
@@ -396,7 +396,7 @@ function courses_cellFx(){
 							unit1_article,unit1_questions,unit1_slides, unit1_reflection,
 							unit2_article,unit2_questions,unit2_slides, unit2_reflection,
 							unit3_article,unit3_questions,unit3_slides, unit3_reflection,
-							unit4_article,unit4_questions){
+							unit4_article,unit4_questions,unit4_slides, unit4_reflection){
 							
 							document.getElementById("project_info_box").remove();
 
@@ -508,13 +508,13 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(preparation_U3_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var slides_U3_a = document.createElement("a");
-							slides_U3_a.appendChild(document.createTextNode("Slides *"));
+							slides_U3_a.appendChild(document.createTextNode("Slides"));
 							slides_U3_a.href = unit3_slides;
 							slides_U3_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(slides_U3_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var reflex_U3_a = document.createElement("a");
-							reflex_U3_a.appendChild(document.createTextNode("Reflection *"));
+							reflex_U3_a.appendChild(document.createTextNode("Reflection"));
 							reflex_U3_a.href = unit3_reflection;
 							reflex_U3_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(reflex_U3_a);
@@ -526,17 +526,28 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(LinkToUnit4prep);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var article_U4_a = document.createElement("a");
-							article_U4_a.appendChild(document.createTextNode("Article *"));
+							article_U4_a.appendChild(document.createTextNode("Article"));
 							article_U4_a.href = unit4_article;
 							article_U4_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(article_U4_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 							var preparation_U4_a = document.createElement("a");
-							preparation_U4_a.appendChild(document.createTextNode("Questions *"));
+							preparation_U4_a.appendChild(document.createTextNode("Questions"));
 							preparation_U4_a.href = unit4_questions;
 							preparation_U4_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(preparation_U4_a);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							var slides_U4_a = document.createElement("a");
+							slides_U4_a.appendChild(document.createTextNode("Slides *"));
+							slides_U4_a.href = unit4_slides;
+							slides_U4_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(slides_U4_a);
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							var reflex_U4_a = document.createElement("a");
+							reflex_U4_a.appendChild(document.createTextNode("Reflection"));
+							reflex_U4_a.href = unit4_reflection;
+							reflex_U4_a.setAttribute("class","LinkToImage");
+							document.getElementById("course_info_box").appendChild(reflex_U4_a);
 
 						}
 					
@@ -547,7 +558,7 @@ function courses_cellFx(){
 									unit1_article,unit1_questions,unit1_slides,unit1_reflection,
 									unit2_article,unit2_questions,unit2_slides,unit2_reflection,
 									unit3_article,unit3_questions,unit3_slides,unit3_reflection,
-									unit4_article,unit4_questions)		
+									unit4_article,unit4_questions,unit4_slides,unit4_reflection)		
 							
 						}
 
@@ -562,7 +573,8 @@ function courses_cellFx(){
 					"cogDev/Unit_2_slides_cogniDev.pdf","cogDev/Unit_2_reflection_cogniDev.pdf",
 					"cogDev/Morasch2013_CognitiveControlDevelopment.pdf","cogDev/Unit_3_questions_cogniDev.pdf",
 					"cogDev/Unit_3_slides_cogniDev.pdf","cogDev/Unit_3_reflection_cogniDev.pdf",
-					"cogDev/Gathercole2008_WorkingMemInTheClassroom.pdf","cogDev/Unit_4_questions_cogniDev.pdf"));
+					"cogDev/Gathercole2008_WorkingMemInTheClassroom.pdf","cogDev/Unit_4_questions_cogniDev.pdf",
+					"cogDev/Unit_4_slides_cogniDev.pdf"));
 
 
 				secondRow_state[0] = "on";
