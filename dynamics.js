@@ -574,7 +574,7 @@ function courses_cellFx(){
 					"cogDev/Morasch2013_CognitiveControlDevelopment.pdf","cogDev/Unit_3_questions_cogniDev.pdf",
 					"cogDev/Unit_3_slides_cogniDev.pdf","cogDev/Unit_3_reflection_cogniDev.pdf",
 					"cogDev/Gathercole2008_WorkingMemInTheClassroom.pdf","cogDev/Unit_4_questions_cogniDev.pdf",
-					"cogDev/Unit_4_slides_cogniDev.pdf"));
+					"cogDev/Unit_4_slides_cogniDev.pdf","cogDev/Unit_4_reflection_cogniDev.pdf"));
 
 
 				secondRow_state[0] = "on";
