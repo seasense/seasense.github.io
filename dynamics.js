@@ -315,6 +315,9 @@ function related_cellFx(){
 					return(newPoint)
 				}
 				
+				listRelated.appendChild(point_in_listRelated_Fx("omfix",
+					"Overcoming Mental Fixation",
+					"Austrian Science Fund (FWF)","https://omfix.wordpress.com"));
 				listRelated.appendChild(point_in_listRelated_Fx("merits","MEmory Retrieval In Tagging Socially",
 					"Austrian Science Fund (FWF)","https://meritsblog.wordpress.com/"));
 				listRelated.appendChild(point_in_listRelated_Fx("ceiter",
