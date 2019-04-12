@@ -389,7 +389,6 @@ function courses_cellFx(){
 													unit2_article,unit2_questions, unit2_slides, unit2_reflection,
 													unit3_article,unit3_questions, unit3_slides, unit3_reflection,
 													unit4_article,unit4_questions, unit4_slides, unit4_reflection,
-													unit4_article_Jolles, unit4_article_Diamond,
 													unit5_slides){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
@@ -402,7 +401,6 @@ function courses_cellFx(){
 							unit2_article,unit2_questions,unit2_slides, unit2_reflection,
 							unit3_article,unit3_questions,unit3_slides, unit3_reflection,
 							unit4_article,unit4_questions,unit4_slides, unit4_reflection,
-							unit4_article_Jolles, unit4_article_Diamond,
 							unit5_slides){
 							
 							document.getElementById("project_info_box").remove();
@@ -555,18 +553,6 @@ function courses_cellFx(){
 							reflex_U4_a.href = unit4_reflection;
 							reflex_U4_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(reflex_U4_a);
-							document.getElementById("course_info_box").appendChild(document.createElement("br"));
-							var article_U4_a2 = document.createElement("a");
-							article_U4_a2.appendChild(document.createTextNode("Article_Jolles2012"));
-							article_U4_a2.href = unit4_article_Jolles;
-							article_U4_a2.setAttribute("class","LinkToImage");
-							document.getElementById("course_info_box").appendChild(article_U4_a2);
-							document.getElementById("course_info_box").appendChild(document.createElement("br"));
-							var article_U4_a3 = document.createElement("a");
-							article_U4_a3.appendChild(document.createTextNode("Article_Diamond2016"));
-							article_U4_a3.href = unit4_article_Diamond;
-							article_U4_a3.setAttribute("class","LinkToImage");
-							document.getElementById("course_info_box").appendChild(article_U4_a3);
 
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
 							var LinkToUnit5prep = document.createElement("strong");
@@ -590,7 +576,6 @@ function courses_cellFx(){
 									unit2_article,unit2_questions,unit2_slides,unit2_reflection,
 									unit3_article,unit3_questions,unit3_slides,unit3_reflection,
 									unit4_article,unit4_questions,unit4_slides,unit4_reflection,
-									unit4_article_Jolles,unit4_article_Diamond,
 									unit5_slides)		
 							
 						}
@@ -608,7 +593,6 @@ function courses_cellFx(){
 					"cogDev/Unit_3_slides_cogniDev.pdf","cogDev/Unit_3_reflection_cogniDev.pdf",
 					"cogDev/Gathercole2008_WorkingMemInTheClassroom.pdf","cogDev/Unit_4_questions_cogniDev.pdf",
 					"cogDev/Unit_4_slides_cogniDev.pdf","cogDev/Unit_4_reflection_cogniDev.pdf",
-					"cogDev/Jolles2012_NeuroTraining.pdf","cogDev/Diamond2016_EF_Training.pdf",
 					"cogDev/Unit_5_slides_cogniDev.pdf"));
 
 
