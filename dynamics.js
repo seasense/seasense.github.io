@@ -569,10 +569,10 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));
 
 							document.getElementById("course_info_box").appendChild(document.createElement("p"));
-							var LinkToExam = document.createElement("strong");
+							/*var LinkToExam = document.createElement("strong");
 							LinkToExam.appendChild(document.createTextNode("Exam"));
 							document.getElementById("course_info_box").appendChild(LinkToExam);
-							document.getElementById("course_info_box").appendChild(document.createElement("br"));
+							document.getElementById("course_info_box").appendChild(document.createElement("br"));*/
 							var exam_a = document.createElement("a");
 							exam_a.appendChild(document.createTextNode("Exam *"));
 							exam_a.href = exam;
