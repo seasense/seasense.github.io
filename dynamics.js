@@ -390,7 +390,7 @@ function courses_cellFx(){
 													unit3_article,unit3_questions, unit3_slides, unit3_reflection,
 													unit4_article,unit4_questions, unit4_slides, unit4_reflection,
 													unit5_slides,
-													exam){
+													extraA){
 					var newPoint = document.createElement("li");
 					var newPoint_name = document.createTextNode(point_name);
 					newPoint.appendChild(newPoint_name);
@@ -403,7 +403,7 @@ function courses_cellFx(){
 							unit3_article,unit3_questions,unit3_slides, unit3_reflection,
 							unit4_article,unit4_questions,unit4_slides, unit4_reflection,
 							unit5_slides,
-							exam){
+							extraA){
 							
 							document.getElementById("project_info_box").remove();
 
@@ -574,8 +574,8 @@ function courses_cellFx(){
 							document.getElementById("course_info_box").appendChild(LinkToExam);
 							document.getElementById("course_info_box").appendChild(document.createElement("br"));*/
 							var exam_a = document.createElement("a");
-							exam_a.appendChild(document.createTextNode("Exam *"));
-							exam_a.href = exam;
+							exam_a.appendChild(document.createTextNode("Extra Assignment *"));
+							exam_a.href = extraA;
 							exam_a.setAttribute("class","LinkToImage");
 							document.getElementById("course_info_box").appendChild(exam_a);
 
@@ -589,7 +589,7 @@ function courses_cellFx(){
 									unit2_article,unit2_questions,unit2_slides,unit2_reflection,
 									unit3_article,unit3_questions,unit3_slides,unit3_reflection,
 									unit4_article,unit4_questions,unit4_slides,unit4_reflection,
-									unit5_slides,exam)		
+									unit5_slides,extraA)		
 							
 						}
 
@@ -607,7 +607,7 @@ function courses_cellFx(){
 					"cogDev/Gathercole2008_WorkingMemInTheClassroom.pdf","cogDev/Unit_4_questions_cogniDev.pdf",
 					"cogDev/Unit_4_slides_cogniDev.pdf","cogDev/Unit_4_reflection_cogniDev.pdf",
 					"cogDev/Unit_5_slides_cogniDev.pdf",
-					"cogDev/Exam_CognitiveDevelopment_Spring2019.pdf"));
+					"cogDev/ExtraA_CognitiveDevelopment_Spring2019.pdf"));
 
 
 				secondRow_state[0] = "on";
