@@ -234,7 +234,7 @@
 			type: 'instructions',
 			//pages: function(){return ["<p class='center-content'><b>Meeldej&aumltmise &uumllesanne<br><b></b><br><b></b> Juhend:</b></p> Kohe kui oled klikkinud <i>EDASI</i> ilmub ekraani keskele <b>+</b> m&aumlrk. Seej&aumlrel ilmuvad samale kohale &uumlhe-kaupa erinevad t&aumlhed, iga t&aumlht on n&aumlhtav &uumlks sekund. P&uuml&uumla need samas j&aumlrjestuses meelde j&aumltta. Ts&uumlkli l&otildepus kliki nendel t&aumlhtedel, mis meelde j&aumlid ning samas j&aumlrjestuses nagu sulle esitati.</p> Ts&uumlkli edukaks l&aumlbimiseks on vaja meenutada k&otildeik t&aumlhed &otildeiges j&aumlrjekorras. Mittevastav (meenutades v&aumlhem v&otildei rohkem t&aumlhti, v&otildei vales j&aumlrjekorras) loetakse valeks. </p><p class='center-content'> Kliki <i>EDASI</i> ja alusta harjutamist.</p><p>"]},
 			show_clickable_nav: true,
-			pages: function(){return ["<p class='center-content'><b>Ged&#xE4;chtnis-Aufgabe: Aufgabenbeschreibung</b></p> Wenn Sie <i>Weiter</i> klicken, erscheint ein Plus-Zeichen <b>+</b>, gefolgt von hintereinander pr&#xE4;sentierten Buchstaben ( 1 Sekunde pro Buchstabe). <br>Nach der Pr&#xE4;sentation des letzten Buchstabens m&#xFC;ssen alle Buchstaben in der richtigen Reihenfolge wiederholt werden.</p> <p class='center-content'> Klicken Sie <i>Weiter</i> um den &#xDC;bungsdurchgang zu starten.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>Ged&#xE4;chtnis-Aufgabe: Aufgabenbeschreibung</b></p> Wenn Sie <i>Weiter</i> klicken, erscheint ein Plus-Zeichen <b>+</b>, gefolgt von hintereinander pr&#xE4;sentierten Buchstaben ( 1 Sekunde pro Buchstabe). <br>Nach der Pr&#xE4;sentation des letzten Buchstabens m&#xFC;ssen alle Buchstaben in der richtigen Reihenfolge wiederholt werden.</p> <p class='center-content'> Klicken Sie <i>Weiter</i>, um den &#xDC;bungsdurchgang zu starten.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				i = 0; // letter index, presentation
@@ -414,8 +414,8 @@
 				if((f1+f2)==2){successCountr += 1; feedback = "Der &#xDC;bungsdurchgang ist nun zu Ende."}else{
 				//if((f1+f2)==2){successCountr += 1; feedback = "Well done! This was a succesful trial."}else{
 					if((f1+f2)==0){feedback = "Versuchen Sie, in beiden Aufgaben genauer zu sein."}else{
-						if(f1==1){feedback = "Ihre Leistung in der Rechenufgabe ist sehr gut. In der Ged&#xE4;chtnisaufgabe m&#xFC;ssen Sie jedoch noch etwas genauer werden."}else{
-							feedback = "Ihre Leistung in der Ged&#xE4;chtnisaufgabe ist sehr gut. In der Rechenufgabe m&#xFC;ssen Sie jedoch noch etwas genauer werden."
+						if(f1==1){feedback = "Ihre Leistung in der Rechenaufgabe ist sehr gut. In der Ged&#xE4;chtnisaufgabe m&#xFC;ssen Sie jedoch noch etwas genauer werden."}else{
+							feedback = "Ihre Leistung in der Ged&#xE4;chtnisaufgabe ist sehr gut. In der Rechenaufgabe m&#xFC;ssen Sie jedoch noch etwas genauer werden."
 						}
 					}
 				}
@@ -466,7 +466,7 @@
 ///////// Real trials 
 	var intro_realTrials = {
 			type: 'instructions',
-			pages: function(){return ["<p>***</p><b> Ospan-Task:</b> Instruktion <p> Es folgen nun "+trials.length+" Durchg&#xE4;nge, in denen wie zuletzt beide Aufgaben simultan auszuf&#xFC;hren sind. <p>Bitte beachten Sie, dass einzelne Durchg&#xE4;nge sehr herausfordernd sind, da gelegentlich bis zu "+rangeOSpanSetSize.max+" Buchstaben dargeboten werden. <p>Ihr Ergebnis (in Punkten) erfahren Sie erst nach dem letzten Durchgang.</p><p><b>Versuchen Sie, so genau wie m&#xF6;glich zu arbeiten.</b><p>***</p><p>Klicken Sie  <i>Weiter</i>, um zu beginnen."]},
+			pages: function(){return ["<p>***</p><b> Ospan-Task:</b> Instruktion <p> Es folgen nun "+trials.length+" Durchg&#xE4;nge, in denen wie zuletzt beide Aufgaben simultan auszuf&#xFC;hren sind. <p>Bitte beachten Sie, dass einzelne Durchg&#xE4;nge sehr herausfordernd sind, da gelegentlich bis zu "+rangeOSpanSetSize.max+" Buchstaben dargeboten werden. <p>Ihr Ergebnis (in Punkten) erfahren Sie erst nach dem letzten Durchgang.</p><p><b>Versuchen Sie, so genau wie m&#xF6;glich zu arbeiten.</b><p>***</p><p>Klicken Sie <i>Weiter</i>, um zu beginnen."]},
 			show_clickable_nav: true,
 			on_finish: function(data) {
 				x = 0
