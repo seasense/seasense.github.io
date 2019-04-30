@@ -11,12 +11,12 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
 html {
   font-family: 'Open Sans', 'Arial', sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.6em;
 }
 body {
-  margin: 5;
-  padding: 5;
+  margin: 0;
+  padding: 0;
 }
 p {
   clear: both;
@@ -49,9 +49,9 @@ input[type="text"] {
 /* borrowing Bootstrap style for btn elements, but combining styles a bit */
 .jspsych-btn {
   /*display: block;*/
-  padding: 4px;
+  padding: 8px;
   margin: auto;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
   font-family: 'Open Sans', 'Arial', sans-serif;
   cursor: pointer;
@@ -73,14 +73,14 @@ input[type="text"] {
 /* Container holding jsPsych content */
 
 .jspsych-display-element {
-  width: 600px;
+  width: 800px;
   height: 0px;
   margin: 50px auto 50px auto;
   margin-left: auto;
   margin-right: auto;
   display: block;
   text-align: center;
-  font-size: 16;
+  font-size: 18;
 }
 
 /* PLUGIN: jspsych-instructions */
@@ -97,7 +97,7 @@ input[type="text"] {
 
 /* PLUGIN: jspsych-single-stim */
 #jspsych-single-stim-stimulus {
-  margin-top: 0em;
+  margin-top: 10em; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -107,7 +107,7 @@ input[type="text"] {
 }
 /* PLUGIN: jspsych-button-response */
 #jspsych-button-response-stimulus {
-  margin-top: 1em;
+  margin-top: 10em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -115,12 +115,12 @@ input[type="text"] {
   /*height: 100%;
   width: 100%;*/
   overflow-y: hidden;
-  font-size: 16;
+  font-size: 22;
 }
 .jspsych-button-response-button {
   width: 70px;
   padding: 4px;
-  font-size: 16px;
+  font-size: 22px;
   margin: 0.2em;
   /*margin-top: 6.5em;*/
 }
