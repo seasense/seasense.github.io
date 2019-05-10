@@ -755,15 +755,15 @@ function battery_cellFx(){
 				listTasks.appendChild(point_in_listTasks_Fx("ospan","Operation Span task",
 					"Remembering a sequence of consecutively presented letters while solving arithmetic problems",
 					"Working memory capacity","./index_OSpan.html",0,""));
-				listTasks.appendChild(point_in_listTasks_Fx("rspan","Reading Span task",
+				/*listTasks.appendChild(point_in_listTasks_Fx("rspan","Reading Span task",
 					"Remembering a sequence of consecutively presented letters while reading and judging sentences",
-					"Working memory capacity","./index_Rspan.html",0,""));
+					"Working memory capacity","./index_Rspan.html",0,""));*/
 				
-				listTasks.appendChild(addSectionFx("Category learning"))
+				/*listTasks.appendChild(addSectionFx("Category learning"))
 
 				listTasks.appendChild(point_in_listTasks_Fx("dinoNimi","dinoNimi",
 					"Self-guided search of a taxonomy of dinosaurs to learn certain dinosaur categories",
-					"Category learning","./dinoNimi_review.html",1,"./imgHP/dinoNimi.png"));
+					"Category learning","./dinoNimi_review.html",1,"./imgHP/dinoNimi.png"));*/
 
 
 				secondRow_state[0] = "on";

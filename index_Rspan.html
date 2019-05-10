@@ -164,12 +164,12 @@
 			required_SentenceResponse_i = sentences_and_responses_practice[readOnly_sentence_seq[i]].R
 			b_pressed = data.button_pressed
 			if(required_SentenceResponse_i==b_pressed){
-				if(required_SentenceResponse_i==1){feedback = "Richtig! <p><b>"+sentences_and_responses_practice[readOnly_sentence_seq[i]].S+"</b><p>Der Satz ist semantisch sinnvoll."}else{
-					feedback = "Richtig! <p><b>"+sentences_and_responses_practice[readOnly_sentence_seq[i]].S+"</b><p>Der Satz ist semantisch sinnlos."
+				if(required_SentenceResponse_i==1){feedback = "Richtig!<p>Der Satz:<br><b>"+sentences_and_responses_practice[readOnly_sentence_seq[i]].S+"</b><br>ist semantisch sinnvoll."}else{
+					feedback = "Richtig! <p>Der Satz: <br><b>"+sentences_and_responses_practice[readOnly_sentence_seq[i]].S+"</b><br>ist semantisch sinnlos."
 				}
 			}else{
-				if(required_SentenceResponse_i==1){feedback = "Falsch! <p><b>"+sentences_and_responses_practice[readOnly_sentence_seq[i]].S+"</b><p>Der Satz ist semantisch sinnvoll."}else{
-					feedback = "Falsch! <p><b>"+sentences_and_responses_practice[readOnly_sentence_seq[i]].S+"</b><p>Der Satz ist semantisch sinnlos."
+				if(required_SentenceResponse_i==1){feedback = "Falsch! <p>Der Satz: <br><b>"+sentences_and_responses_practice[readOnly_sentence_seq[i]].S+"</b><br>ist semantisch sinnvoll."}else{
+					feedback = "Falsch! <p>Der Satz: <br><b>"+sentences_and_responses_practice[readOnly_sentence_seq[i]].S+"</b><br>ist semantisch sinnlos."
 				}
 			}
 			i += 1
@@ -513,7 +513,7 @@
 	};
 
 	jsPsych.init({
-		timeline: [welcome, informedConsent1,informedConsent2,informedConsent3, persCode_loop, practice_overview,
+		timeline: [welcome, /*informedConsent1,informedConsent2,informedConsent3, persCode_loop, practice_overview,*/
 					intro_read_practice,read_loop_practice,feedback_read_1,
 					intro_recall_practice,recall_practice_loop2,
 					intro_RR_practice,RR_loop_practice2,
