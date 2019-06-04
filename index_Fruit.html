@@ -1,0 +1,772 @@
+<html>
+	<head>
+		<title>Fruit Stroop Task</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="jspsych-5.0.3-fruit/jspsych.js"></script>
+
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-text.js"></script>
+		
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-instructions.js"></script>
+		
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-survey-text_persCode.js"></script>
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-button-response.js"></script>
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-button-response-Fruit.js"></script>
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-survey-multi-choice.js"></script>
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-single-stim.js"></script>
+		
+		<link href="jspsych-5.0.3-fruit/css/jspsych_fruit.css" rel="stylesheet" type="text/css"></link>
+		
+		<style>
+			:root{
+				--normalTextSize: 20px;
+				--cellSize_symMat: 40px;
+				--cellSize_remMat: 60px;
+				--numberSize_remMat: 40px;
+				
+			}
+		</style>
+
+	</head>
+	
+	
+	<script>
+
+	var geoShapes = [ //combines categories 5,6 and 7,8
+		['jspsych-5.0.3-fruit/Shapes/pentagon_red.png','jspsych-5.0.3-fruit/Shapes/pentagon_yellow.png','jspsych-5.0.3-fruit/Shapes/pentagon_green.png'],
+		['jspsych-5.0.3-fruit/Shapes/triangle_red.png','jspsych-5.0.3-fruit/Shapes/triangle_yellow.png','jspsych-5.0.3-fruit/Shapes/triangle_green.png'],
+		['jspsych-5.0.3-fruit/Shapes/circle_red.png','jspsych-5.0.3-fruit/Shapes/circle_yellow.png','jspsych-5.0.3-fruit/Shapes/circle_green.png'],
+	];
+	var whiteFruits = [ //combines categories 5,6 and 7,8
+		['jspsych-5.0.3-fruit/Shapes/apple_white.png','jspsych-5.0.3-fruit/Shapes/banana_white.png','jspsych-5.0.3-fruit/Shapes/pear_white.png',]
+	];
+	var congruentFruits = [
+		['jspsych-5.0.3-fruit/Shapes/apple_red.png','jspsych-5.0.3-fruit/Shapes/banana_yellow.png','jspsych-5.0.3-fruit/Shapes/pear_green.png']
+	];
+	var incongruentFruits = [
+		['jspsych-5.0.3-fruit/Shapes/apple_green.png','jspsych-5.0.3-fruit/Shapes/banana_red.png','jspsych-5.0.3-fruit/Shapes/pear_yellow.png'],
+		['jspsych-5.0.3-fruit/Shapes/apple_yellow.png','jspsych-5.0.3-fruit/Shapes/banana_green.png','jspsych-5.0.3-fruit/Shapes/pear_red.png']
+	];
+
+	function averageFx(x){
+		sum_x=0
+		for(i=0;i<x.length;i++){
+			sum_x=sum_x+x[i]
+		}
+		average_x = sum_x/x.length
+		return(average_x)
+	}
+
+	var trials = [2,2,2];
+	var practice_criterion = 2;
+	var nStimuli = 5;
+	var time_limit = 15000;
+///////// Intro
+/////////
+	var welcome = {
+			type: 'instructions',
+			pages: [
+					"<p class='center-content'> <h2> Welcome to the <b> <span style='color: red'>f</span><span style='color: orange'>r</span><span style='color: green'>u</span>it stroop task!</b> </h2><p>Click <i>Continue</i>, to provide your informed consent."],
+			show_clickable_nav: true,
+			
+			};
+
+
+    var informedConsent1 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>Informed consent </b>1/3"],
+		options: [["I have read the task description and agree to participate."]],
+		required: [true]
+    };
+	var informedConsent2 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>Informed consent </b>2/3"],
+		options: [["I agree that my pseudonymized data can be used for the publishing of scientific papers."]],
+		required: [true]
+    };
+    var informedConsent3 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>Informed consent </b>3/3"],
+		options: function(){return([["I agree that, for the sake of scientific transparency, my pseudonymized data can be made freely available to other researchers within the <a href='https://osf.io/'> Open Science Framework </a>."]])},
+		required: [true]
+    };
+
+	var persData_code = ["<p> Generate your anonymized personal code:"];
+	var demographics = {
+	  		type: "survey-text-persCode",
+	  		questions: persData_code,
+			preamble: "<b>Instruction to generate your code</b>: <br> 1. Position: First letter of your mother's first name (e.g. <b>M</b>artha)<br>2. Position: First letter of your father's first name (e.g. <b>S</b>igmund) <br> Positions 3-4: Your year of birth (e.g. 18<b>95</b>) <br> 5. Position: First letter of your current address (e.g. <b>B</b>erggasse) <br> 6. Position: First digit of your street number (e.g. <b>1</b>9) <p> Example of complete code: <b>MS95B1</b>",
+			on_finish: function(data) { 
+		 		code_length = data.code_length;
+		 		if(code_length!=6){alert("Please enter a personal code with 6 digits.")}
+		 		
+		 	}
+	};
+	var persCode_loop = {
+		timeline: [demographics],
+		loop_function: function(data){
+				if(code_length!=6){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+
+	};
+///////// Page 1
+	var Instruction_Page1 = {
+		type: 'instructions',
+		pages: ["<p>***</p> Before performing the <b>first</b> out of <b>four</b> subtasks, you need to complete a short practice trial explaining the first subtask. <p> The practice will be completed, if you make "+practice_criterion+" correct responses in a row. <p>***</p>Click <i>Continue</i> to start practicing."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				i_shape = Math.floor(Math.random()*3)
+				i_color = Math.floor(Math.random()*3)
+				practice = true
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page1 = i
+				nErrors_Page1 = 0
+				RTs_Page1 = []
+				RTs_Page1_correct = []
+				RTs_Page1_wrong = []
+	 	   	},
+	};
+	
+	var color_buttons = [ [""] , [""], [""] ];
+	var Page1 = {
+		    type: 'BRFruit',
+			is_html: false, 
+			prompt: "What is the color of this figure?<p>",
+
+			stimulus: function(){
+					return geoShapes[i_shape][i_color]
+			},
+			
+		    choices: color_buttons,
+	 	   	on_finish: function(data){
+				
+				button_order = data.button_order
+				color_correct = data.color_correct
+				color_clicked = data.color_clicked
+
+				RTs_Page1.push(data.rt)
+				if(color_correct==color_clicked){
+					// i = counting items = number completed
+					i++
+					nCompleted_Page1=i
+					nC_inarow++
+					item_completed = true
+					i_shape = Math.floor(Math.random()*3)
+					i_color = Math.floor(Math.random()*3)
+					RTs_Page1_correct.push(data.rt)
+				}else{
+					nC_inarow = 0
+					item_completed = false
+					nErrors_Page1++
+					RTs_Page1_wrong.push(data.rt)
+				}
+				
+	 	   	},
+		};
+	var Feedback_Page1 = {
+		type: 'instructions',
+		pages: function(){if(item_completed==true){
+			feedback_text = "<p>***</p> <span style='color:green'>Right!</span><br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Wrong!</span> The color of the button must match the color of the figure. Let's try again!<br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."
+			}
+		 return[feedback_text]},
+		show_clickable_nav: true,
+		on_finish: function(data){
+				
+	 	   	},
+	};
+	var StimLoop_Page1_Practice = {
+		timeline: [Page1,Feedback_Page1],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page1_Loop_Practice = {
+		timeline: [StimLoop_Page1_Practice],
+		loop_function: function(data){
+		        
+		        if(nC_inarow==practice_criterion){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Filler_Page1 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>Well done!</b> <br>You are now ready to perform the <b>1</b>st out of <b>4</b> subtasks. <p>The figures will be presented as just practiced. Again, a new figure will appear, only if your current reponse has been correct. In contrast to the practice trials, you will not receive feedback on whether your response is correct or not. <b><br>The task lasts "+(time_limit/1000)+" seconds, and your goal should be to complete as many figures as possible!</b></p><p>***</p>Click <i>Continue</i> to start."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				i_shape = Math.floor(Math.random()*3)
+				i_color = Math.floor(Math.random()*3)
+				practice = false
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page1 = i
+				nErrors_Page1 = 0
+				RTs_Page1 = []
+				RTs_Page1_correct = []
+				RTs_Page1_wrong = []
+	 	   	},
+	};
+	var StimLoop_Page1_Test = {
+		timeline: [Page1],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page1_Loop_Test = {
+		timeline: [StimLoop_Page1_Test],
+		loop_function: function(data){
+		        
+		        if((new Date()-startTime)>=time_limit){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+
+	var Page1_finalFeedback = {
+		type: 'instructions',
+		pages: function(){
+				mean_RTs = Math.round((averageFx(RTs_Page1)/1000)*100)/100; nCompleted_Page1 = nCompleted_Page1;
+				if(RTs_Page1_correct.length==0){mean_RTs_right="No correct responses"}else{
+					mean_RTs_right_P1 = Math.round((averageFx(RTs_Page1_correct)/1000)*100)/100; 
+				}
+				if(RTs_Page1_wrong.length==0){mean_RTs_wrong="No wrong responses"}else{
+					mean_RTs_wrong = Math.round((averageFx(RTs_Page1_wrong)/1000)*100)/100; 
+				}
+				return["Number completed: <b>"+nCompleted_Page1+"</b><br>Number errors: <b>"+nErrors_Page1+"</b><br>Average RT (in seconds): <b>"+mean_RTs+"</b><br>RT correct (in seconds): <b>"+mean_RTs_right_P1+" </b><br>RT errors (in seconds): <b>"+mean_RTs_wrong+" "]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page1: nCompleted_Page1, nErrors_Page1: nErrors_Page1, RTs: RTs_Page1}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var Instruction_Page2 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b> Well done!</b> <p>Before performing the <b>second</b> out of <b>four subtasks</b>, again you need to complete a short practice trial, lasting until "+practice_criterion+" correct responses are given in a row. <p>***</p>Click <i>Continue</i> to start practicing."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				i_color = Math.floor(Math.random()*3)
+				practice = true
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page2 = i
+				nErrors_Page2 = 0
+				RTs_Page2 = []
+				RTs_Page2_correct = []
+				RTs_Page2_wrong = []
+
+	 	   	},
+	};
+	var Page2 = {
+		    type: 'BRFruit',
+			is_html: false, 
+			prompt: "What is the color of this fruit? <p>",
+			stimulus: function(){
+					return congruentFruits[0][i_color]
+			},
+		    choices: color_buttons,
+	 	   	on_finish: function(data){
+				button_order = data.button_order
+				color_correct = data.color_correct
+				color_clicked = data.color_clicked
+				console.log([color_correct,color_clicked])
+				RTs_Page2.push(data.rt)
+				if(color_correct==color_clicked){
+					// i = counting items = number completed
+					i++
+					nCompleted_Page2=i
+					nC_inarow++
+					item_completed = true
+					i_color = Math.floor(Math.random()*3)
+					RTs_Page2_correct.push(data.rt)
+				}else{
+					nC_inarow = 0
+					item_completed = false
+					nErrors_Page2++
+					RTs_Page2_wrong.push(data.rt)
+				}
+
+				
+	 	   	},
+		};
+
+	var Feedback_Page2 = {
+		type: 'instructions',
+		pages: function(){if(item_completed==true){
+			feedback_text = "<p>***</p> <span style='color:green'>Right!</span><br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Wrong!</span> The color of the button must match the color of the fruit. Let's try again!<br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."
+			}
+		 return[feedback_text]},
+		show_clickable_nav: true,
+		on_finish: function(data){
+				
+	 	   	},
+	};
+	var StimLoop_Page2_Practice = {
+		timeline: [Page2,Feedback_Page2],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page2_Loop_Practice = {
+		timeline: [StimLoop_Page2_Practice],
+		loop_function: function(data){
+		        
+		        if(nC_inarow==practice_criterion){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Filler_Page2 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>Well done!</b> <p>Let's do the <b>2</b>nd out of <b>4</b> subtasks. <b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				i_color = Math.floor(Math.random()*3)
+				practice = false
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page2 = i
+				nErrors_Page2 = 0
+				RTs_Page2 = []
+				RTs_Page2_correct = []
+				RTs_Page2_wrong = []
+	 	   	},
+	};
+	var StimLoop_Page2_Test = {
+		timeline: [Page2],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page2_Loop_Test = {
+		timeline: [StimLoop_Page2_Test],
+		loop_function: function(data){
+		        
+		        if((new Date()-startTime)>=time_limit){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+
+	var Page2_finalFeedback = {
+		type: 'instructions',
+		pages: function(){
+				mean_RTs = Math.round((averageFx(RTs_Page2)/1000)*100)/100; nCompleted_Page2 = nCompleted_Page2;
+				if(RTs_Page2_correct.length==0){mean_RTs_right="No correct responses"}else{
+					mean_RTs_right_P2 = Math.round((averageFx(RTs_Page2_correct)/1000)*100)/100; 
+				}
+				if(RTs_Page2_wrong.length==0){mean_RTs_wrong="No wrong responses"}else{
+					mean_RTs_wrong = Math.round((averageFx(RTs_Page2_wrong)/1000)*100)/100; 
+				}
+				return["Number completed: <b>"+nCompleted_Page2+"</b><br>Number errors: <b>"+nErrors_Page2+"</b><br>Average RT (in seconds): <b>"+mean_RTs+"</b><br>RT correct (in seconds): <b>"+mean_RTs_right_P2+" </b><br>RT errors (in seconds): <b>"+mean_RTs_wrong+" "]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page2: nCompleted_Page2, nErrors_Page2: nErrors_Page2, RTs: RTs_Page2}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var Instruction_Page3 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>Well done!</b> <p> You have already reached the <b>third</b> out of <b>four subtasks</b>. Now, the same fruits (apple, banana, and pear) will be displayed in black and white, and your task is to choose the correct color, i.e., red for apple, yellow for banana, and green for pear. <p>***</p>Click <i>Continue</i> to start practicing."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				i_color = Math.floor(Math.random()*3)
+				practice = true
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page3 = i
+				nErrors_Page3 = 0
+				RTs_Page3 = []
+				RTs_Page3_correct = []
+				RTs_Page3_wrong = []
+	 	   	},
+	};
+	var Page3 = {
+		    type: 'BRFruit',
+			is_html: false, 
+			prompt: "What is the color of this fruit?<p>",
+			stimulus: function(){
+					return whiteFruits[0][i_color]
+			},
+		    choices: color_buttons,
+	 	   	on_finish: function(data){
+				button_order = data.button_order
+				color_correct = data.color_correct
+				color_clicked = data.color_clicked
+				console.log([color_correct,color_clicked])
+				RTs_Page3.push(data.rt)
+				if(color_correct==color_clicked){
+					// i = counting items = number completed
+					i++
+					nCompleted_Page3=i
+					nC_inarow++
+					item_completed = true
+					i_color = Math.floor(Math.random()*3)
+					RTs_Page3_correct.push(data.rt)
+				}else{
+					nC_inarow = 0
+					item_completed = false
+					nErrors_Page3++
+					RTs_Page3_wrong.push(data.rt)
+				}
+	 	   	},
+		};
+
+	var Feedback_Page3 = {
+		type: 'instructions',
+		pages: function(){if(item_completed==true){
+			feedback_text = "<p>***</p> <span style='color:green'>Right!</span><br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Wrong!</span> The color of the button must match the color of the fruit (as practiced in the previous subtask). Let's try again!<br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."
+			}
+		 return[feedback_text]},
+		show_clickable_nav: true,
+		on_finish: function(data){
+				
+	 	   	},
+	};
+	var StimLoop_Page3_Practice = {
+		timeline: [Page3,Feedback_Page3],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page3_Loop_Practice = {
+		timeline: [StimLoop_Page3_Practice],
+		loop_function: function(data){
+		        
+		        if(nC_inarow==practice_criterion){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Filler_Page3 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>Well done!</b> <p>Let's do the <b>3</b>rd out of <b>4</b> subtasks. <b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				i_color = Math.floor(Math.random()*3)
+				practice = false
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page3 = i
+				nErrors_Page3 = 0
+				RTs_Page3 = []
+				RTs_Page3_correct = []
+				RTs_Page3_wrong = []
+	 	   	},
+	};
+	var StimLoop_Page3_Test = {
+		timeline: [Page3],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page3_Loop_Test = {
+		timeline: [StimLoop_Page3_Test],
+		loop_function: function(data){
+		        
+		        if((new Date()-startTime)>=time_limit){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Page3_finalFeedback = {
+		type: 'instructions',
+		pages: function(){
+				mean_RTs = Math.round((averageFx(RTs_Page3)/1000)*100)/100; nCompleted_Page3 = nCompleted_Page3;
+				if(RTs_Page3_correct.length==0){mean_RTs_right="No correct responses"}else{
+					mean_RTs_right_P3 = Math.round((averageFx(RTs_Page3_correct)/1000)*100)/100; 
+				}
+				if(RTs_Page3_wrong.length==0){mean_RTs_wrong="No wrong responses"}else{
+					mean_RTs_wrong = Math.round((averageFx(RTs_Page3_wrong)/1000)*100)/100; 
+				}
+				return["Number completed: <b>"+nCompleted_Page3+"</b><br>Number errors: <b>"+nErrors_Page3+"</b><br>Average RT (in seconds): <b>"+mean_RTs+"</b><br>RT correct (in seconds): <b>"+mean_RTs_right_P3+" </b><br>RT errors (in seconds): <b>"+mean_RTs_wrong+" "]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page3: nCompleted_Page3, nErrors_Page3: nErrors_Page3, RTs: RTs_Page3}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var Instruction_Page4 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b> Great!</b> <p> In the <b>fourth</b> and <b>final subtask</b>, the fruits are displayed in incorrect colors (e.g., red banana) and your task is to press the button with the 'true' color of the fruit (e.g., the yellow button for a red-colored banana). <p>***</p>Click <i>Continue</i> to start practicing."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				i_subset = Math.floor(Math.random()*2)
+				i_color = Math.floor(Math.random()*3)
+				practice = true
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page4 = i
+				nErrors_Page4 = 0
+				RTs_Page4 = []
+				RTs_Page4_correct = []
+				RTs_Page4_wrong = []
+	 	   	},
+	};
+	var Page4 = {
+		    type: 'BRFruit',
+			is_html: false, 
+			prompt: "What is the 'true' color of this fruit?<p>",
+			stimulus: function(){
+					return incongruentFruits[i_subset][i_color]
+			},
+		    choices: color_buttons,
+	 	   	on_finish: function(data){
+				button_order = data.button_order
+				color_correct = data.color_correct
+				color_clicked = data.color_clicked
+				console.log([color_correct,color_clicked])
+				RTs_Page4.push(data.rt)
+				if(color_correct==color_clicked){
+					// i = counting items = number completed
+					i++
+					nCompleted_Page4=i
+					nC_inarow++
+					item_completed = true
+					i_subset = Math.floor(Math.random()*2)
+					i_color = Math.floor(Math.random()*3)
+					RTs_Page4_correct.push(data.rt)
+				}else{
+					nC_inarow = 0
+					item_completed = false
+					nErrors_Page4++
+					RTs_Page4_wrong.push(data.rt)
+				}
+	 	   	},
+		};
+
+	var Feedback_Page4 = {
+		type: 'instructions',
+		pages: function(){if(item_completed==true){
+			feedback_text = "<p>***</p> <span style='color:green'>Right!</span><br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Wrong!</span> The color of the button must match the 'true' color of the fruit (as practiced in the previous subtasks). Let's try again!<br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."
+			}
+		 return[feedback_text]},
+		show_clickable_nav: true,
+		on_finish: function(data){
+				
+	 	   	},
+	};
+	var StimLoop_Page4_Practice = {
+		timeline: [Page4,Feedback_Page4],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page4_Loop_Practice = {
+		timeline: [StimLoop_Page4_Practice],
+		loop_function: function(data){
+		        
+		        if(nC_inarow==practice_criterion){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Filler_Page4 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>Well done!</b> <br>Let's do the <b>last subtask</b>.<b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				i_subset = Math.floor(Math.random()*2)
+				i_color = Math.floor(Math.random()*3)
+				practice = false
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page4 = i
+				nErrors_Page4 = 0
+				RTs_Page4 = []
+				RTs_Page4_correct = []
+				RTs_Page4_wrong = []
+	 	   	},
+	};
+	var StimLoop_Page4_Test = {
+		timeline: [Page4],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page4_Loop_Test = {
+		timeline: [StimLoop_Page4_Test],
+		loop_function: function(data){
+		        
+		        if((new Date()-startTime)>=time_limit){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Page4_finalFeedback = {
+		type: 'instructions',
+		pages: function(){
+				mean_RTs = Math.round((averageFx(RTs_Page4)/1000)*100)/100; nCompleted_Page4 = nCompleted_Page4;
+				if(RTs_Page4_correct.length==0){mean_RTs_right="No correct responses"}else{
+					mean_RTs_right_P4 = Math.round((averageFx(RTs_Page4_correct)/1000)*100)/100; 
+				}
+				if(RTs_Page4_wrong.length==0){mean_RTs_wrong="No wrong responses"}else{
+					mean_RTs_wrong = Math.round((averageFx(RTs_Page4_wrong)/1000)*100)/100; 
+				}
+				return["Number completed: <b>"+nCompleted_Page4+"</b><br>Number errors: <b>"+nErrors_Page4+"</b><br>Average RT (in seconds): <b>"+mean_RTs+"</b><br>RT correct (in seconds): <b>"+mean_RTs_right_P4+" </b><br>RT errors (in seconds): <b>"+mean_RTs_wrong+" "]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page4: nCompleted_Page4, nErrors_Page4: nErrors_Page4, RTs: RTs_Page4}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var Summary_Scoring = {
+		type: 'instructions',
+		pages: function(){
+				predicted_score = (nCompleted_Page1*nCompleted_Page3)/(nCompleted_Page1+nCompleted_Page3)
+				predicted_score = Math.round(predicted_score*100)/100
+				actual_score = nCompleted_Page4-predicted_score
+				actual_score = Math.round(actual_score*100)/100
+				interference_score = actual_score-predicted_score
+				interference_score = Math.round(interference_score*100)/100
+				return["<b>Your scoring: </b><p>N completed Subtask 1: <b>"+nCompleted_Page1+"</b><br> N completed Subtask 2: <b>"+nCompleted_Page2+"</b><br> N completed Subtask 3: <b>"+nCompleted_Page3+"</b><br> N completed Subtask 4: <b>"+nCompleted_Page4+"</b><p>Mean RT Subtask 1: <b>"+mean_RTs_right_P1+"</b> seconds<br>Mean RT Subtask 2: <b>"+mean_RTs_right_P2+"</b> seconds<br>Mean RT Subtask 3: <b>"+mean_RTs_right_P3+"</b> seconds<br>Mean RT Subtask 4: <b>"+mean_RTs_right_P4+"</b> seconds<p>Predicted performance score: <b>"+predicted_score+"</b><br>Actual performance score: <b>"+actual_score+"</b><br>Interference Score: <b>"+interference_score+""]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page1: nCompleted_Page1, nCompleted_Page2: nCompleted_Page2, nCompleted_Page3: nCompleted_Page3, nCompleted_Page4: nCompleted_Page4, mean_RTs_right_P1: mean_RTs_right_P1, mean_RTs_right_P2: mean_RTs_right_P2, mean_RTs_right_P3: mean_RTs_right_P3, mean_RTs_right_P4: mean_RTs_right_P4, predicted_score: predicted_score, actual_score: actual_score, interference_score: interference_score}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var goodbye = {
+			type: 'instructions',
+			pages: [function(){return("<h3>Thank you for your participation</h3> Click <i>Continue</i> to start the download of your data into the download folder. Please send this file to the address: <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>  <p>Note: If you have mistakenly worked with Safari, then please copy and paste the subsequently displayed data into a text file of your choice and send it also to the address <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>.</li><li>In any case, please notify us about your participation! </li></ul>")}],
+			show_clickable_nav: true,	
+	};
+
+
+
+/////////
+	jsPsych.init({
+		
+		timeline: [ welcome, informedConsent1, informedConsent2, informedConsent3,
+					persCode_loop,
+					Instruction_Page1, Page1_Loop_Practice, Filler_Page1, Page1_Loop_Test, Page1_finalFeedback,
+					Instruction_Page2, Page2_Loop_Practice, Filler_Page2, Page2_Loop_Test, Page2_finalFeedback,
+					Instruction_Page3, Page3_Loop_Practice, Filler_Page3, Page3_Loop_Test, Page3_finalFeedback,
+					Instruction_Page4, Page4_Loop_Practice, Filler_Page4, Page4_Loop_Test, Page4_finalFeedback,
+					Summary_Scoring,
+					goodbye
+				  ],
+
+	   	fullscreen: false,
+	   	on_finish: function(data){
+	   	jsPsych.data.displayData();
+	        jsPsych.data.displayData();
+	        jsPsych.data.localSave('FruitStroop_sendMeTo_seasenselab@gmail.com.txt', 'csv');
+	   }
+	});
+	
+	
+		
+	</script>
+		
+</html>
