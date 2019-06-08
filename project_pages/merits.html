@@ -18,7 +18,7 @@
 				    <script>
 				    	var ID_OfParagraph = "merits_text"
 				    	startPageFx("merits_cell",ID_OfParagraph)
-				    	titleFx(ID_OfParagraph,".merits","h3")
+				    	titleFx(ID_OfParagraph,".merits","h2")
 				    	
 				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
 
@@ -44,6 +44,8 @@
 						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
 
 				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+				    	piece_of_textFx(ID_OfParagraph,"***")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
 
 				    	buttonFx(ID_OfParagraph,".related","../related.html")
 				    	buttonFx(ID_OfParagraph,".directory","../directory.html")

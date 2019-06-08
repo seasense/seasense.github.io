@@ -15,6 +15,17 @@ function buttonFx(ID_OfParagraph,button_label,link){
 					
 					document.getElementById(ID_OfParagraph).appendChild(a_of_button)
 				}
+function backFx(ID_OfParagraph,back_label,link){
+					x_button = document.createElement("A")
+					x_button.appendChild(document.createTextNode(back_label))
+					x_button.setAttribute('class', 'back');
+					
+					a_of_button = document.createElement("A")
+					a_of_button.setAttribute("href",link)
+					a_of_button.appendChild(x_button)
+					
+					document.getElementById(ID_OfParagraph).appendChild(a_of_button)
+				}
 function titleFx(ID_OfParagraph,txtNode,typeOfElement){
 		name_of_element = document.createElement(typeOfElement);
 		name_of_element_txt = document.createTextNode(txtNode);
