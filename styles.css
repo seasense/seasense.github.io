@@ -81,6 +81,7 @@ p#contact_text {
 .button {
     font-family: courier;
     cursor: pointer;
+    font-size: 20px;
 }
 .button:active { 
     background:black; 
