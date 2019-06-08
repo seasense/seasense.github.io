@@ -30,6 +30,7 @@ p#about_text {
     padding-left: 15%;
     padding-right: 15%;
     line-height: 1.2em;
+    font-size: 20px;
 }
 p#act_text {
     border: 1px solid white;
