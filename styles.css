@@ -3,7 +3,7 @@ html, body {
     width:100%;
     padding:0;
     font-family: courier;
-    font-size: 30px;
+    font-size: 50px;
 }
 .table {
     display:table;
@@ -31,7 +31,7 @@ p#directory_text {
     padding-left: 15%;
     padding-right: 15%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
     
 }
 p#about_text {
@@ -39,63 +39,63 @@ p#about_text {
     padding-left: 15%;
     padding-right: 15%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 p#related_text {
     border: 1px solid white;
     padding-left: 15%;
     padding-right: 15%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 p#instruments_text {
     border: 1px solid white;
     padding-left: 15%;
     padding-right: 15%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 p#act_text {
     border: 1px solid white;
     padding-left: 20%;
     padding-right: 20%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 p#ospan_text {
     border: 1px solid white;
     padding-left: 20%;
     padding-right: 20%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 p#symspan_text {
     border: 1px solid white;
     padding-left: 20%;
     padding-right: 20%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 p#fruitstroop_text {
     border: 1px solid white;
     padding-left: 20%;
     padding-right: 20%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 p#dinonimi_text {
     border: 1px solid white;
     padding-left: 20%;
     padding-right: 20%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 p#dissemination_text {
     border: 1px solid white;
     padding-left: 10%;
     padding-right: 10%;
     line-height: 1.2em;
-    font-size: 14px;
+    font-size: 20px;
     text-align: left;
 }
 p#contact_text {
@@ -103,13 +103,13 @@ p#contact_text {
     padding-left: 15%;
     padding-right: 15%;
     line-height: 1.2em;
-    font-size: 20px;
+    font-size: 30px;
 }
 .button {
     font-family: courier;
     cursor: pointer;
     border: 1px solid black;
-    font-size: 14px;
+    font-size: 20px;
     padding: 5px;
     background-color: black;
     color: white;
@@ -117,7 +117,7 @@ p#contact_text {
 .button:active { 
     background:black; 
     border: none;
-    font-size: 14px;
+    font-size: 20px;
 }
 .back {
     font-family: courier;
