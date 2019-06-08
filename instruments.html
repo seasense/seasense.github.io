@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>seasense.instruments</title>
+	<link href="styles.css" rel="stylesheet" type="text/css"></link>
+	<script src="FxExtra.js"></script>
+</head>
+<body>
+
+	<div class='table'>
+			    <div class='cell' id="instruments_cell">
+			        
+				    <script>
+				    	var ID_OfParagraph = "instruments_text"
+				    	startPageFx("instruments_cell",ID_OfParagraph)
+				    	titleFx(ID_OfParagraph,"seasense.instruments","h3")
+				    	
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	titleFx(ID_OfParagraph,".word association","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"));
+						linkInternalFx(ID_OfParagraph,"ACT","instrument_pages/act.html")
+
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	titleFx(ID_OfParagraph,".complex span","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"));
+						linkInternalFx(ID_OfParagraph,"Ospan","instrument_pages/ospan.html")					
+						document.getElementById(ID_OfParagraph).appendChild(document.createTextNode(" "));
+						linkInternalFx(ID_OfParagraph,"symSpan","instrument_pages/symspan.html")
+
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	titleFx(ID_OfParagraph,".executive functions","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"));
+						linkInternalFx(ID_OfParagraph,"fruitStroop","instrument_pages/fruitstroop.html")
+
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	titleFx(ID_OfParagraph,".categoryLearning","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"));
+						linkInternalFx(ID_OfParagraph,"dinoNimi","instrument_pages/dinonimi.html")
+
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	buttonFx(ID_OfParagraph,".directory","directory.html")
+
+				    </script>
+			        
+
+			    </div>
+		</div>
+</body>
+</html>

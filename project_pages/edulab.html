@@ -1,0 +1,54 @@
+<html>
+	
+	<head>
+		<title>seasense.edulab</title>
+		<link href="../styles.css" rel="stylesheet" type="text/css"></link>
+
+		<script src="../FxExtra.js"></script>
+	</head>
+
+	<body>
+		
+		<script>
+
+		</script>
+		<div class='table'>
+			    <div class='cell' id="edulab_cell">
+			        
+				    <script>
+				    	var ID_OfParagraph = "edulab_text"
+				    	startPageFx("edulab_cell",ID_OfParagraph)
+				    	titleFx(ID_OfParagraph,".eduLab","h3")
+				    	
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Focus:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						description = "Co-creating Educational Innovations with Estonian Schools"
+						piece_of_textFx(ID_OfParagraph,description)
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Affiliation","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						piece_of_textFx(ID_OfParagraph,"School of Educational Sciences (Tallinn University)")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"More details:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						linkExternalFx(ID_OfParagraph,"project homepage","http://ceiter.tlu.ee/living-labs/")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	buttonFx(ID_OfParagraph,".related","../related.html")
+				    	buttonFx(ID_OfParagraph,".directory","../directory.html")
+
+				    </script>
+			        
+
+			    </div>
+		</div>
+
+	</body>
+
+</html>

@@ -1,0 +1,64 @@
+<html>
+	
+	<head>
+		
+		<title>seasense.css</title>
+
+		<link href="../styles.css" rel="stylesheet" type="text/css"></link>
+
+		<script src="../FxExtra.js"></script>
+		
+	</head>
+
+	<body>
+		
+		<script>
+
+		</script>
+		<div class='table'>
+			    <div class='cell' id="act_cell">
+			        
+				    <script>
+				    	var ID_OfParagraph = "act_text"
+				    	startPageFx("act_cell",ID_OfParagraph)
+				    	titleFx(ID_OfParagraph,".act","h3")
+				    	
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Task name:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						taskName = "Associative Chaining Task"
+						piece_of_textFx(ID_OfParagraph,taskName)
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Description:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						description = "Quickly generating a diverse sequence of words each connecting to its predecessor"
+						piece_of_textFx(ID_OfParagraph,description)
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Targeted construct:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						construct = "Verbal flexibility"
+						piece_of_textFx(ID_OfParagraph,construct)
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Participate:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						linkExternalFx(ID_OfParagraph,"Link to task","https://seasense.github.io/index_ACT.html")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	buttonFx(ID_OfParagraph,".instruments","../instruments.html")
+				    	buttonFx(ID_OfParagraph,".directory","../directory.html")
+
+				    </script>
+			        
+
+			    </div>
+		</div>
+
+	</body>
+
+</html>

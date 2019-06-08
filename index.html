@@ -3,40 +3,28 @@
 	<html>
 		<head>
 			<title>seasense</title>
-			<script src = "./dynamics.js"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-			<link href="./styles.css" rel="stylesheet" type="text/css"></link>
-			<base target="_blank">
-			<style>
-				:root{
-					--boxSize: 300px; 
-	
-					--main-textSize: 20px;
-					--main-lineHeight: 40px;
-	
-					--scrollBox-textSize: 20px;
-					--scrollBox-lineHeight: 30px;
-	
-					--lexicon-textSize: 20px;
-				}
-			</style>
+			
+			<script src="FxExtra.js"></script>
+			
+			<link href="styles.css" rel="stylesheet" type="text/css"></link>
+
 		</head>
 	
 		<body>	
-			<script> 
-				var secondCell_state = ["off"];
-				var secondRow_state = ["off"];
-	
-							
-			</script> 
-			<table class="center" style="text-align:center" id="table">
-	
-				<tr id = "row1" >
-					<td id="about" onclick="secondCellFx(secondCell_state)" style="cursor:pointer" >
-						<img class="image", src="./imgHP/logo.png" >
-					</td>
-	
-			</table>
+			
+			<script>
+				function directoryFx (){
+					
+					document.getElementById("home_cell_content").remove();
+
+
+				}
+			</script>
+			<div class='table'>
+			    <div class='cell' id="home_cell">
+			        <a href="directory.html"><image id="home_cell_content" src="logo.png" style="cursor: pointer; width: 200px;"></image></a>
+			    </div>
+			</div>
 	
 		</body>
 	

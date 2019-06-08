@@ -31,37 +31,13 @@ p#about_text {
     padding-right: 15%;
     line-height: 1.2em;
 }
-p#act_text {
+p#task_text {
     border: 1px solid white;
     padding-left: 20%;
     padding-right: 20%;
     line-height: 1.2em;
 }
-p#ospan_text {
-    border: 1px solid white;
-    padding-left: 20%;
-    padding-right: 20%;
-    line-height: 1.2em;
-}
-p#symspan_text {
-    border: 1px solid white;
-    padding-left: 20%;
-    padding-right: 20%;
-    line-height: 1.2em;
-}
-p#fruitstroop_text {
-    border: 1px solid white;
-    padding-left: 20%;
-    padding-right: 20%;
-    line-height: 1.2em;
-}
-p#dinonimi_text {
-    border: 1px solid white;
-    padding-left: 20%;
-    padding-right: 20%;
-    line-height: 1.2em;
-}
-p#dissemination_text {
+p#dissem_text {
     border: 1px solid white;
     padding-left: 10%;
     padding-right: 10%;
@@ -71,10 +47,11 @@ p#dissemination_text {
 }
 p#contact_text {
     border: 1px solid white;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
     line-height: 1.2em;
-    font-size: 14px;
+    font-size: 10px;
+    text-align: left;
 }
 dissem_text
 .button {

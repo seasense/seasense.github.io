@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>seasense.related</title>
+	<link href="styles.css" rel="stylesheet" type="text/css"></link>
+	<script src="FxExtra.js"></script>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+
+
+	</script>
+
+	<div class='table'>
+			    <div class='cell' id="related_cell">
+			        
+				    <script>
+				    	var ID_OfParagraph = "related_text"
+				    	startPageFx("related_cell",ID_OfParagraph)
+				    	titleFx(ID_OfParagraph,"seasense.related","h3")
+				    	
+				    	related_text.appendChild(document.createElement("P"));
+
+				    	titleFx(ID_OfParagraph,".projects","strong")
+						related_text.appendChild(document.createElement("br"));
+
+						linkInternalFx(ID_OfParagraph,"omfix","project_pages/omfix.html")
+						
+						related_text.appendChild(document.createTextNode(" "));
+
+						linkInternalFx(ID_OfParagraph,"merits","project_pages/merits.html")
+
+						related_text.appendChild(document.createElement("P"));
+
+				    	titleFx(ID_OfParagraph,".researchGroups","strong")
+						related_text.appendChild(document.createElement("br"));
+
+						linkInternalFx(ID_OfParagraph,"eduLab","project_pages/eduLab.html")
+						
+						related_text.appendChild(document.createTextNode(" "));
+
+						linkInternalFx(ID_OfParagraph,"css","project_pages/css.html")
+
+						related_text.appendChild(document.createElement("P"));
+
+				    	buttonFx(ID_OfParagraph,".directory","directory.html")
+
+				    </script>
+			        
+
+			    </div>
+		</div>
+</body>
+</html>

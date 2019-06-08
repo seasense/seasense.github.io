@@ -1,0 +1,46 @@
+<html>
+	
+	<head>
+		<title>seasense.contact</title>
+		<link href="styles.css" rel="stylesheet" type="text/css"></link>
+
+		<script src="FxExtra.js"></script>
+	</head>
+
+	<body>
+		
+		<script>
+
+		</script>
+		<div class='table'>
+			    <div class='cell' id="contact_cell">
+			        
+				    <script>
+				    	var ID_OfParagraph = "contact_text"
+				    	startPageFx("contact_cell",ID_OfParagraph)
+				    	titleFx(ID_OfParagraph,"seasense.contact","h3")
+				    	
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	titleFx(ID_OfParagraph,"Do you have questions about our research work?","strong")
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"));
+				    	piece_of_textFx(ID_OfParagraph,"Please contact paul.seitlinger(at)tlu.ee")
+
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+						titleFx(ID_OfParagraph,"Do you have questions about an ongoing online study","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"));
+				    	piece_of_textFx(ID_OfParagraph,"Please send your questions to seasenselab(at)gmail.com")
+
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+				    	
+				    	buttonFx(ID_OfParagraph,".directory","directory.html")
+
+				    </script>
+			        
+
+			    </div>
+		</div>
+
+	</body>
+
+</html>
