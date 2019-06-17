@@ -75,7 +75,7 @@ input[type="text"] {
 }
 
 .jspsych-btn:hover {
-  background-color: #ddd;
+  /*background-color: #ddd;*/
   border-color: #aaa;
 }
 
@@ -128,7 +128,7 @@ input[type="text"] {
   margin: 0.2em;
   padding:30px;
   color: red;
-  background-color: red;
+  background-color: yellow;
   /*margin-top: 6.5em;*/
 }
 .jspsych-button-response-Page1B2 {
@@ -136,7 +136,7 @@ input[type="text"] {
   margin: 0.2em;
   padding:30px;
   color: yellow;
-  background-color: yellow;
+  background-color: green;
   /*margin-top: 6.5em;*/
 }
 .jspsych-button-response-Page1B3 {
@@ -144,7 +144,15 @@ input[type="text"] {
   margin: 0.2em;
   padding:30px;
   color: green;
-  background-color: green;
+  background-color: red;
+  /*margin-top: 6.5em;*/
+}
+.jspsych-button-response-Page1B4 {
+  font-size: 22px;
+  margin: 0.2em;
+  padding:30px;
+  color: green;
+  background-color: blue;
   /*margin-top: 6.5em;*/
 }
 

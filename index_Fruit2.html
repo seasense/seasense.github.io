@@ -31,20 +31,23 @@
 	
 	<script>
 
-	var geoShapes = [ //combines categories 5,6 and 7,8
-		['jspsych-5.0.3-fruit/Shapes/pentagon_red.png','jspsych-5.0.3-fruit/Shapes/pentagon_yellow.png','jspsych-5.0.3-fruit/Shapes/pentagon_green.png'],
-		['jspsych-5.0.3-fruit/Shapes/triangle_red.png','jspsych-5.0.3-fruit/Shapes/triangle_yellow.png','jspsych-5.0.3-fruit/Shapes/triangle_green.png'],
-		['jspsych-5.0.3-fruit/Shapes/circle_red.png','jspsych-5.0.3-fruit/Shapes/circle_yellow.png','jspsych-5.0.3-fruit/Shapes/circle_green.png'],
-	];
-	var transparentFruits = [ //combines categories 5,6 and 7,8
-		['jspsych-5.0.3-fruit/Obst/apple_white.png','jspsych-5.0.3-fruit/Shapes/banana_white.png','jspsych-5.0.3-fruit/Shapes/pear_white.png',]
+	var geoShapes = [ 
+		['jspsych-5.0.3-fruit/Shapes/pentagon_yellow.png','jspsych-5.0.3-fruit/Shapes/pentagon_green.png','jspsych-5.0.3-fruit/Shapes/pentagon_red.png','jspsych-5.0.3-fruit/Shapes/pentagon_blue.png'],
+		['jspsych-5.0.3-fruit/Shapes/triangle_yellow.png','jspsych-5.0.3-fruit/Shapes/triangle_green.png','jspsych-5.0.3-fruit/Shapes/triangle_red.png','jspsych-5.0.3-fruit/Shapes/triangle_blue.png'],
+		['jspsych-5.0.3-fruit/Shapes/circle_yellow.png','jspsych-5.0.3-fruit/Shapes/circle_green.png','jspsych-5.0.3-fruit/Shapes/circle_red.png','jspsych-5.0.3-fruit/Shapes/circle_blue.png'],
+		['jspsych-5.0.3-fruit/Shapes/parallelogram_yellow.png','jspsych-5.0.3-fruit/Shapes/parallelogram_green.png','jspsych-5.0.3-fruit/Shapes/parallelogram_red.png','jspsych-5.0.3-fruit/Shapes/parallelogram_blue.png']
 	];
 	var congruentFruits = [
-		['jspsych-5.0.3-fruit/Shapes/apple_red.png','jspsych-5.0.3-fruit/Shapes/banana_yellow.png','jspsych-5.0.3-fruit/Shapes/pear_green.png']
+		['jspsych-5.0.3-fruit/Fruits/banana_yellow.png','jspsych-5.0.3-fruit/Fruits/pear_green.png','jspsych-5.0.3-fruit/Fruits/strawberry_red.png','jspsych-5.0.3-fruit/Fruits/grapes_blue.png']
+	];
+	var transparentFruits = [ 
+		['jspsych-5.0.3-fruit/Fruits/banana_transparent.png','jspsych-5.0.3-fruit/Fruits/pear_transparent.png','jspsych-5.0.3-fruit/Fruits/strawberry_transparent.png','jspsych-5.0.3-fruit/Fruits/grapes_transparent.png']
 	];
 	var incongruentFruits = [
-		['jspsych-5.0.3-fruit/Shapes/apple_green.png','jspsych-5.0.3-fruit/Shapes/banana_red.png','jspsych-5.0.3-fruit/Shapes/pear_yellow.png'],
-		['jspsych-5.0.3-fruit/Shapes/apple_yellow.png','jspsych-5.0.3-fruit/Shapes/banana_green.png','jspsych-5.0.3-fruit/Shapes/pear_red.png']
+		['jspsych-5.0.3-fruit/Fruits/banana_green.png','jspsych-5.0.3-fruit/Fruits/pear_red.png','jspsych-5.0.3-fruit/Fruits/strawberry_blue.png','jspsych-5.0.3-fruit/Fruits/grapes_yellow.png'],
+		['jspsych-5.0.3-fruit/Fruits/banana_red.png','jspsych-5.0.3-fruit/Fruits/pear_blue.png','jspsych-5.0.3-fruit/Fruits/strawberry_yellow.png','jspsych-5.0.3-fruit/Fruits/grapes_green.png'],
+		['jspsych-5.0.3-fruit/Fruits/banana_blue.png','jspsych-5.0.3-fruit/Fruits/pear_yellow.png','jspsych-5.0.3-fruit/Fruits/strawberry_green.png','jspsych-5.0.3-fruit/Fruits/grapes_red.png']
+
 	];
 
 	function averageFx(x){
@@ -56,9 +59,9 @@
 		return(average_x)
 	}
 
-	var trials = [2,2,2];
+	var trials = [4,4,4];
 	var practice_criterion = 2;
-	var nStimuli = 5;
+	//var nStimuli = 5;
 	var time_limit = 15000;
 ///////// Intro
 /////////
@@ -119,8 +122,8 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_shape = Math.floor(Math.random()*3)
-				i_color = Math.floor(Math.random()*3)
+				i_shape = Math.floor(Math.random()*4)
+				i_color = Math.floor(Math.random()*4)
 				practice = true
 				nC_inarow = 0
 				startTime = new Date()
@@ -134,7 +137,7 @@
 	 	   	},
 	};
 	
-	var color_buttons = [ [""] , [""], [""] ];
+	var color_buttons = [ [""] , [""] , [""] , [""] ];
 	var Page1 = {
 		    type: 'BRFruit',
 			is_html: false, 
@@ -158,8 +161,8 @@
 					nCompleted_Page1=i
 					nC_inarow++
 					item_completed = true
-					i_shape = Math.floor(Math.random()*3)
-					i_color = Math.floor(Math.random()*3)
+					i_shape = Math.floor(Math.random()*color_buttons.length)
+					i_color = Math.floor(Math.random()*color_buttons.length)
 					RTs_Page1_correct.push(data.rt)
 				}else{
 					nC_inarow = 0
@@ -211,8 +214,8 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_shape = Math.floor(Math.random()*3)
-				i_color = Math.floor(Math.random()*3)
+				i_shape = Math.floor(Math.random()*color_buttons.length)
+				i_color = Math.floor(Math.random()*color_buttons.length)
 				practice = false
 				nC_inarow = 0
 				startTime = new Date()
@@ -275,7 +278,7 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_color = Math.floor(Math.random()*3)
+				i_color = Math.floor(Math.random()*color_buttons.length)
 				practice = true
 				nC_inarow = 0
 				startTime = new Date()
@@ -304,12 +307,11 @@
 				console.log([color_correct,color_clicked])
 				RTs_Page2.push(data.rt)
 				if(color_correct==color_clicked){
-					// i = counting items = number completed
 					i++
 					nCompleted_Page2=i
 					nC_inarow++
 					item_completed = true
-					i_color = Math.floor(Math.random()*3)
+					i_color = Math.floor(Math.random()*color_buttons.length)
 					RTs_Page2_correct.push(data.rt)
 				}else{
 					nC_inarow = 0
@@ -363,7 +365,7 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_color = Math.floor(Math.random()*3)
+				i_color = Math.floor(Math.random()*color_buttons.length)
 				practice = false
 				nC_inarow = 0
 				startTime = new Date()
@@ -426,7 +428,7 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_color = Math.floor(Math.random()*3)
+				i_color = Math.floor(Math.random()*color_buttons.length)
 				practice = true
 				nC_inarow = 0
 				startTime = new Date()
@@ -444,7 +446,7 @@
 			is_html: false, 
 			prompt: "What is the color of this fruit?<p>",
 			stimulus: function(){
-					return whiteFruits[0][i_color]
+					return transparentFruits[0][i_color]
 			},
 		    choices: color_buttons,
 	 	   	on_finish: function(data){
@@ -459,7 +461,7 @@
 					nCompleted_Page3=i
 					nC_inarow++
 					item_completed = true
-					i_color = Math.floor(Math.random()*3)
+					i_color = Math.floor(Math.random()*color_buttons.length)
 					RTs_Page3_correct.push(data.rt)
 				}else{
 					nC_inarow = 0
@@ -573,8 +575,8 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_subset = Math.floor(Math.random()*2)
-				i_color = Math.floor(Math.random()*3)
+				i_subset = Math.floor(Math.random()*(color_buttons.length-1))
+				i_color = Math.floor(Math.random()*color_buttons.length)
 				practice = true
 				nC_inarow = 0
 				startTime = new Date()
@@ -607,8 +609,8 @@
 					nCompleted_Page4=i
 					nC_inarow++
 					item_completed = true
-					i_subset = Math.floor(Math.random()*2)
-					i_color = Math.floor(Math.random()*3)
+					i_subset = Math.floor(Math.random()*(color_buttons.length-1))
+					i_color = Math.floor(Math.random()*color_buttons.length)
 					RTs_Page4_correct.push(data.rt)
 				}else{
 					nC_inarow = 0
@@ -660,8 +662,8 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_subset = Math.floor(Math.random()*2)
-				i_color = Math.floor(Math.random()*3)
+				i_subset = Math.floor(Math.random()*(color_buttons.length-1))
+				i_color = Math.floor(Math.random()*color_buttons.length)
 				practice = false
 				nC_inarow = 0
 				startTime = new Date()

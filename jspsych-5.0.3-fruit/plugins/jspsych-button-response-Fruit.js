@@ -77,15 +77,15 @@ jsPsych.plugins["BRFruit"] = (function() {
     display_element.append('<div id="jspsych-button-response-btngroup" class="center-content block-center"></div>')
     
     // randomizing order of color buttons
-    for(var x=0; x<3; x++){
+    for(var x=0; x<4; x++){
         if(x==0){
-            unsampled_indices = [0,1,2]
+            unsampled_indices = [0,1,2,3]
             sampled_indices = []
             button_order = []
           }
           sampled_position = Math.floor(Math.random()*unsampled_indices.length);
           sampled_index = unsampled_indices[sampled_position]
-          button_order.push(["red","yellow","green"][sampled_index])
+          button_order.push(["yellow","green","red","blue"][sampled_index])
           sampled_indices.push(sampled_index)
           unsampled_indices.splice(sampled_position,1) 
         }
@@ -119,7 +119,15 @@ jsPsych.plugins["BRFruit"] = (function() {
           })
         );
       }
-      
+      if(sampled_indices[i]==3){
+        var str = buttons[i].replace(/%choice%/g, trial.choices[i]);
+          $('#jspsych-button-response-btngroup').append(
+          $(str).attr('id', 'jspsych-button-response-Page1B4-' + i).data('choice', i).addClass('jspsych-button-response-Page1B4').on('click', function(e) {
+            var choice = $('#' + this.id).data('choice');
+            after_response(choice);
+          })
+        );
+      }
       
     }
 
@@ -164,7 +172,7 @@ jsPsych.plugins["BRFruit"] = (function() {
         clearTimeout(setTimeoutHandlers[i]);
       }
 
-      var color_correct = ["red","yellow","green"][i_color];
+      var color_correct = ["yellow","green","red","blue"][i_color];
       var color_clicked = button_order[response.button]
       if(color_correct==color_clicked){
         right_or_wrong="right"
