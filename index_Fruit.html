@@ -68,7 +68,7 @@
 	var welcome = {
 			type: 'instructions',
 			pages: [
-					"<p class='center-content'> <h2> Welcome to the <b> <span style='color: red'>f</span><span style='color: orange'>r</span><span style='color: green'>u</span>it stroop task!</b> </h2><p>Click <i>Continue</i>, to provide your informed consent."],
+					"<p class='center-content'> <h2> Welcome to the <b> <span style='color: red'>f</span><span style='color: orange'>r</span><span style='color: green'>u</span>it stroop task!</b></h2> <p>The Fruit Stroop task is used to assess inhibitory control - a cognitive process for the effective control of behavior. In the following, you are presented with line drawings of fruits and geometrical figures in canonical colors (e.g., blue grapes or green pears). Your task will be to name the color according to four different rules/conditions.<p><p>***</p>The entire Fruit Stroop task (including practice trials) takes 15 minutes. <p><li>Please make sure that you work either with Firefox or Google Chrome. The use of Safari and Windows Internet Explorer will provide damage in the data files.<li>Please participate only if you feel concentrated and rested. <li>Please be careful to not press the Escape Button, which would terminate the task immediately without storing any data. <li>Note that your data will be saved locally as a text file in your download folder after completing the entire task. Please send this file to <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a> <p>Click <i>Continue</i>, to give your informed consent and receive further details on the task in form of practice trials."],
 			show_clickable_nav: true,
 			
 			};
@@ -118,7 +118,7 @@
 ///////// Page 1
 	var Instruction_Page1 = {
 		type: 'instructions',
-		pages: ["<p>***</p> Before performing the <b>first</b> out of <b>four</b> subtasks, you need to complete a short practice trial explaining the first subtask. <p> The practice will be completed, if you make "+practice_criterion+" correct responses in a row. <p>***</p>Click <i>Continue</i> to start practicing."],
+		pages: ["The Fruit Stroop task consists of the following <b>four subtasks</b>: <p> <b>(a)</b> Naming the ink colors (i.e., pressing color buttons) of geometrical figures (e.g., 'green' in the example below).<br><img src='jspsych-5.0.3-fruit/Shapes/pentagon_green.png' width='80px'> <p><b>(b)</b> Naming the ink colors of fruit drawings ('red' in the example). <br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_red.png' width='100px'><p><b>(c)</b> Naming the 'true' colors of black-and-white fruit drawings ('red' in the example).<br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_transparent.png' width='100px'> <p><b>(d)</b> Naming the 'true' colors of wrongly inked fruit drawings ('red' in the example).<br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_blue.png' width='100px'> <p> <b>Try to perform every task as fast and accurate as possible. </b><p>Note that each task is preceded by a short practice trial to be completed by making "+practice_criterion+" correct responses in a row. <p>***</p>Click <i>Continue</i> to start practicing the first subtask."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
@@ -424,7 +424,7 @@
 
 	var Instruction_Page3 = {
 		type: 'instructions',
-		pages: ["<p>***</p> <b>Well done!</b> <p> You have already reached the <b>third</b> out of <b>four subtasks</b>. Now, the same fruits (apple, banana, and pear) will be displayed in black and white, and your task is to choose the correct color, i.e., red for apple, yellow for banana, and green for pear. <p>***</p>Click <i>Continue</i> to start practicing."],
+		pages: ["<p>***</p> <b>Well done!</b> <p> You have already reached the <b>third</b> out of <b>four subtasks</b>. Now, the same fruits (banana, pear, strawberry, grapes) will be displayed in black and white, and your task is to choose the correct color, i.e., yellow for banana, green for pear, red for strawberry, and blue for grapes. <p>***</p>Click <i>Continue</i> to start practicing."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
@@ -749,8 +749,8 @@
 /////////
 	jsPsych.init({
 		
-		timeline: [ welcome, informedConsent1, informedConsent2, informedConsent3,
-					persCode_loop,
+		timeline: [ /*welcome, informedConsent1, informedConsent2, informedConsent3,
+					persCode_loop,*/
 					Instruction_Page1, Page1_Loop_Practice, Filler_Page1, Page1_Loop_Test, Page1_finalFeedback,
 					Instruction_Page2, Page2_Loop_Practice, Filler_Page2, Page2_Loop_Test, Page2_finalFeedback,
 					Instruction_Page3, Page3_Loop_Practice, Filler_Page3, Page3_Loop_Test, Page3_finalFeedback,
