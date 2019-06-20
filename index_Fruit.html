@@ -184,6 +184,7 @@
 
 					RTs_Page1_correct.push(data.rt)
 				}else{
+					if(practice==true){i=0}
 					nC_inarow = 0
 					item_completed = false
 					nErrors_Page1++
@@ -351,6 +352,7 @@
 					}
 					RTs_Page2_correct.push(data.rt)
 				}else{
+					if(practice==true){i=0}
 					nC_inarow = 0
 					item_completed = false
 					nErrors_Page2++
@@ -517,6 +519,7 @@
 					}
 					RTs_Page3_correct.push(data.rt)
 				}else{
+					if(practice==true){i=0}
 					nC_inarow = 0
 					item_completed = false
 					nErrors_Page3++
@@ -688,6 +691,7 @@
 					}
 					RTs_Page4_correct.push(data.rt)
 				}else{
+					if(practice==true){i=0}
 					nC_inarow = 0
 					item_completed = false
 					nErrors_Page4++
@@ -826,9 +830,9 @@
 /////////
 	jsPsych.init({
 		
-		timeline: [ welcome, informedConsent1, informedConsent2, informedConsent3,
+		timeline: [ /*welcome, informedConsent1, informedConsent2, informedConsent3,
 					persCode_loop,
-					Instruction_Page1, Page1_Loop_Practice, Filler_Page1, Page1_Loop_Test, Page1_finalFeedback,
+					Instruction_Page1, Page1_Loop_Practice, Filler_Page1, Page1_Loop_Test, Page1_finalFeedback,*/
 					Instruction_Page2, Page2_Loop_Practice, Filler_Page2, Page2_Loop_Test, Page2_finalFeedback,
 					Instruction_Page3, Page3_Loop_Practice, Filler_Page3, Page3_Loop_Test, Page3_finalFeedback,
 					Instruction_Page4, Page4_Loop_Practice, Filler_Page4, Page4_Loop_Test, Page4_finalFeedback,
