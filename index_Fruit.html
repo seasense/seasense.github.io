@@ -59,9 +59,9 @@
 	}
 
 	var trials = [4,4,4];
-	var practice_criterion = 2;
+	var practice_criterion = 4;
 	//var nStimuli = 5;
-	var time_limit = 15000;
+	var time_limit = 45000;
 ///////// Intro
 /////////
 	var welcome = {
@@ -119,8 +119,13 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_shape = Math.floor(Math.random()*4)
-				i_color = Math.floor(Math.random()*4)
+				practice = true
+				shapes_practice = [0,1,2,3]
+				colors_practice = [0,1,2,3]
+				//i_shape = Math.floor(Math.random()*4)
+				//i_color = Math.floor(Math.random()*4)
+				i_shape = shapes_practice[0]
+				i_color = colors_practice[0]
 				button_pressed = Math.floor(Math.random()*4)
 				practice = true
 				nC_inarow = 0
@@ -160,17 +165,22 @@
 					nCompleted_Page1=i
 					nC_inarow++
 					item_completed = true
-					var stim_turned_new = false;
-					while(stim_turned_new == false){
-						i_shape_next = Math.floor(Math.random()*color_buttons.length)
-						i_color_next = Math.floor(Math.random()*color_buttons.length)	
-						if((i_shape_next!= i_shape)&&(i_color_next!=i_color)){
-							i_shape=i_shape_next
-							i_color=i_color_next
-							stim_turned_new=true
+					
+					if(practice==false){
+						var stim_turned_new = false;
+						while(stim_turned_new == false){
+							i_shape_next = Math.floor(Math.random()*color_buttons.length)
+							i_color_next = Math.floor(Math.random()*color_buttons.length)	
+							if((i_shape_next!= i_shape)&&(i_color_next!=i_color)){
+								i_shape=i_shape_next
+								i_color=i_color_next
+								stim_turned_new=true
+							}
 						}
+					}else{
+						i_shape = shapes_practice[i]
+						i_color = colors_practice[i]
 					}
-					console.log([i_shape,i_color])
 
 					RTs_Page1_correct.push(data.rt)
 				}else{
@@ -222,6 +232,7 @@
 		pages: ["<p>***</p> <b>Well done!</b> <br>You are now ready to perform the <b>1</b>st out of <b>4</b> subtasks. <p>The figures will be presented as just practiced. Again, a new figure will appear, only if your current response has been correct. In contrast to the practice trials, you will not receive feedback on whether your response is correct or not. <b><br>The task lasts "+(time_limit/1000)+" seconds, and your goal should be to complete as many figures as possible!</b></p><p>***</p>Click <i>Continue</i> to start."],
 		show_clickable_nav: true,
 		on_finish: function(data){
+				practice = false;
 				i = 0;	
 				i_shape = Math.floor(Math.random()*color_buttons.length)
 				i_color = Math.floor(Math.random()*color_buttons.length)
@@ -287,8 +298,11 @@
 		pages: ["<p>***</p> <b> Well done!</b> <p>Before performing the <b>second</b> out of <b>four subtasks</b>, again you need to complete a short practice trial, lasting until "+practice_criterion+" correct responses are given in a row. <p>***</p>Click <i>Continue</i> to start practicing."],
 		show_clickable_nav: true,
 		on_finish: function(data){
+				practice=true;
 				i = 0;	
-				i_color = Math.floor(Math.random()*color_buttons.length)
+				//i_color = Math.floor(Math.random()*color_buttons.length)
+				colors_practice = [0,1,2,3]
+				i_color = colors_practice[0]
 				button_pressed = Math.floor(Math.random()*4)
 				practice = true
 				nC_inarow = 0
@@ -323,13 +337,17 @@
 					nCompleted_Page2=i
 					nC_inarow++
 					item_completed = true
-					var stim_turned_new = false;
-					while(stim_turned_new== false){
-						i_color_next = Math.floor(Math.random()*color_buttons.length)	
-						if(i_color_next!= i_color){
-							i_color=i_color_next
-							stim_turned_new=true
+					if(practice==false){
+						var stim_turned_new = false;
+						while(stim_turned_new== false){
+							i_color_next = Math.floor(Math.random()*color_buttons.length)	
+							if(i_color_next!= i_color){
+								i_color=i_color_next
+								stim_turned_new=true
+							}
 						}
+					}else{
+						i_color = colors_practice[i]
 					}
 					RTs_Page2_correct.push(data.rt)
 				}else{
@@ -383,6 +401,7 @@
 		pages: ["<p>***</p> <b>Well done!</b> <p>Let's do the <b>2</b>nd out of <b>4</b> subtasks. <b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
 		show_clickable_nav: true,
 		on_finish: function(data){
+				practice=false;
 				i = 0;	
 				i_color = Math.floor(Math.random()*color_buttons.length)
 				button_pressed = Math.floor(Math.random()*color_buttons.length)
@@ -448,7 +467,9 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_color = Math.floor(Math.random()*color_buttons.length)
+				// i_color = Math.floor(Math.random()*color_buttons.length)
+				colors_practice = [0,1,2,3]
+				i_color = colors_practice[0]
 				button_pressed = Math.floor(Math.random()*color_buttons.length)
 				practice = true
 				nC_inarow = 0
@@ -482,13 +503,17 @@
 					nCompleted_Page3=i
 					nC_inarow++
 					item_completed = true
-					var stim_turned_new = false;
-					while(stim_turned_new== false){
-						i_color_next = Math.floor(Math.random()*color_buttons.length)	
-						if(i_color_next!=i_color){
-							i_color=i_color_next
-							stim_turned_new=true
+					if(practice==false){
+						var stim_turned_new = false;
+						while(stim_turned_new== false){
+							i_color_next = Math.floor(Math.random()*color_buttons.length)	
+							if(i_color_next!=i_color){
+								i_color=i_color_next
+								stim_turned_new=true
+							}
 						}
+					}else{
+						i_color = colors_practice[i]
 					}
 					RTs_Page3_correct.push(data.rt)
 				}else{
@@ -540,6 +565,7 @@
 		pages: ["<p>***</p> <b>Well done!</b> <p>Let's do the <b>3</b>rd out of <b>4</b> subtasks. <b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
 		show_clickable_nav: true,
 		on_finish: function(data){
+				practice = false;
 				i = 0;	
 				i_color = Math.floor(Math.random()*3)
 				button_pressed = Math.floor(Math.random()*color_buttons.length)
@@ -604,8 +630,12 @@
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
-				i_subset = Math.floor(Math.random()*(color_buttons.length-1))
-				i_color = Math.floor(Math.random()*color_buttons.length)
+				subsets_practice = [0,1,2,2]
+				colors_practice = [0,1,2,3]
+				i_subset = subsets_practice[0]
+				i_color = colors_practice[0]
+				//i_subset = Math.floor(Math.random()*(color_buttons.length-1))
+				//i_color = Math.floor(Math.random()*color_buttons.length)
 				console.log([i_subset,i_color])
 				button_pressed = Math.floor(Math.random()*color_buttons.length)
 				practice = true
@@ -641,15 +671,20 @@
 					nCompleted_Page4=i
 					nC_inarow++
 					item_completed = true
-					var stim_turned_new = false;
-					while(stim_turned_new== false){
-						i_subset_next = Math.floor(Math.random()*(color_buttons.length-1))
-						i_color_next = Math.floor(Math.random()*color_buttons.length)
-						if((i_subset_next!= i_subset)&&(i_color_next!=i_color)){
-							i_subset=i_subset_next
-							i_color=i_color_next
-							stim_turned_new=true
+					if(practice==false){
+						var stim_turned_new = false;
+						while(stim_turned_new== false){
+							i_subset_next = Math.floor(Math.random()*(color_buttons.length-1))
+							i_color_next = Math.floor(Math.random()*color_buttons.length)
+							if((i_subset_next!= i_subset)&&(i_color_next!=i_color)){
+								i_subset=i_subset_next
+								i_color=i_color_next
+								stim_turned_new=true
+							}
 						}
+					}else{
+						i_subset = subsets_practice[i]
+						i_color = colors_practice[i]
 					}
 					RTs_Page4_correct.push(data.rt)
 				}else{
@@ -701,6 +736,7 @@
 		pages: ["<p>***</p> <b>Well done!</b> <br>Let's do the <b>last subtask</b>.<b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
 		show_clickable_nav: true,
 		on_finish: function(data){
+				practice = false;
 				i = 0;	
 				i_subset = Math.floor(Math.random()*(color_buttons.length-1))
 				i_color = Math.floor(Math.random()*color_buttons.length)
