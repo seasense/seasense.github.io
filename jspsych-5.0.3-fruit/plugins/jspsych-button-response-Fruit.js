@@ -77,18 +77,29 @@ jsPsych.plugins["BRFruit"] = (function() {
     display_element.append('<div id="jspsych-button-response-btngroup" class="center-content block-center"></div>')
     
     // randomizing order of color buttons
-    for(var x=0; x<4; x++){
-        if(x==0){
-            unsampled_indices = [0,1,2,3]
-            sampled_indices = []
-            button_order = []
+    
+    // button_pressed from i-1 must not be ith button_correct
+    var correct_button_switched = false;
+    while(correct_button_switched==false){
+      for(var x=0; x<4; x++){
+          if(x==0){
+              unsampled_indices = [0,1,2,3]
+              sampled_indices = []
+              button_order = []
+            }
+            sampled_position = Math.floor(Math.random()*unsampled_indices.length);
+            sampled_index = unsampled_indices[sampled_position]
+            button_order.push(["yellow","green","red","blue"][sampled_index])
+            sampled_indices.push(sampled_index)
+            unsampled_indices.splice(sampled_position,1) 
           }
-          sampled_position = Math.floor(Math.random()*unsampled_indices.length);
-          sampled_index = unsampled_indices[sampled_position]
-          button_order.push(["yellow","green","red","blue"][sampled_index])
-          sampled_indices.push(sampled_index)
-          unsampled_indices.splice(sampled_position,1) 
-        }
+      
+      var color_correct = ["yellow","green","red","blue"][i_color];
+      var button_correct = button_order.indexOf(color_correct) 
+      if(button_correct!=button_pressed){correct_button_switched=true}
+    }
+    console.log([button_pressed,button_correct])
+
     for (var i = 0; i < trial.choices.length; i++) {
       
 
@@ -173,6 +184,7 @@ jsPsych.plugins["BRFruit"] = (function() {
       }
 
       var color_correct = ["yellow","green","red","blue"][i_color];
+      var button_correct = button_order.indexOf(color_correct)
       var color_clicked = button_order[response.button]
       if(color_correct==color_clicked){
         right_or_wrong="right"
@@ -185,6 +197,7 @@ jsPsych.plugins["BRFruit"] = (function() {
         "stimulus": trial.stimulus,
         "button_order": button_order,
         "button_pressed": response.button,
+        "button_correct": button_correct,
         "color_correct": color_correct,
         "color_clicked": color_clicked,
         "right_or_wrong": right_or_wrong,

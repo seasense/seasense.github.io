@@ -22,7 +22,6 @@
 				--cellSize_symMat: 40px;
 				--cellSize_remMat: 60px;
 				--numberSize_remMat: 40px;
-				
 			}
 		</style>
 
@@ -101,7 +100,6 @@
 			on_finish: function(data) { 
 		 		code_length = data.code_length;
 		 		if(code_length!=6){alert("Please enter a personal code with 6 digits.")}
-		 		
 		 	}
 	};
 	var persCode_loop = {
@@ -113,7 +111,6 @@
 		            return false;
 		        }
 		  },
-
 	};
 ///////// Page 1
 	var Instruction_Page1 = {
@@ -124,6 +121,7 @@
 				i = 0;	
 				i_shape = Math.floor(Math.random()*4)
 				i_color = Math.floor(Math.random()*4)
+				button_pressed = Math.floor(Math.random()*4)
 				practice = true
 				nC_inarow = 0
 				startTime = new Date()
@@ -150,6 +148,7 @@
 		    choices: color_buttons,
 	 	   	on_finish: function(data){
 				
+				button_pressed = data.button_pressed
 				button_order = data.button_order
 				color_correct = data.color_correct
 				color_clicked = data.color_clicked
@@ -161,8 +160,18 @@
 					nCompleted_Page1=i
 					nC_inarow++
 					item_completed = true
-					i_shape = Math.floor(Math.random()*color_buttons.length)
-					i_color = Math.floor(Math.random()*color_buttons.length)
+					var stim_turned_new = false;
+					while(stim_turned_new == false){
+						i_shape_next = Math.floor(Math.random()*color_buttons.length)
+						i_color_next = Math.floor(Math.random()*color_buttons.length)	
+						if((i_shape_next!= i_shape)&&(i_color_next!=i_color)){
+							i_shape=i_shape_next
+							i_color=i_color_next
+							stim_turned_new=true
+						}
+					}
+					console.log([i_shape,i_color])
+
 					RTs_Page1_correct.push(data.rt)
 				}else{
 					nC_inarow = 0
@@ -216,6 +225,7 @@
 				i = 0;	
 				i_shape = Math.floor(Math.random()*color_buttons.length)
 				i_color = Math.floor(Math.random()*color_buttons.length)
+				button_pressed = Math.floor(Math.random()*4)
 				practice = false
 				nC_inarow = 0
 				startTime = new Date()
@@ -279,6 +289,7 @@
 		on_finish: function(data){
 				i = 0;	
 				i_color = Math.floor(Math.random()*color_buttons.length)
+				button_pressed = Math.floor(Math.random()*4)
 				practice = true
 				nC_inarow = 0
 				startTime = new Date()
@@ -302,6 +313,7 @@
 		    choices: color_buttons,
 	 	   	on_finish: function(data){
 				button_order = data.button_order
+				button_pressed = data.button_pressed
 				color_correct = data.color_correct
 				color_clicked = data.color_clicked
 				console.log([color_correct,color_clicked])
@@ -311,7 +323,14 @@
 					nCompleted_Page2=i
 					nC_inarow++
 					item_completed = true
-					i_color = Math.floor(Math.random()*color_buttons.length)
+					var stim_turned_new = false;
+					while(stim_turned_new== false){
+						i_color_next = Math.floor(Math.random()*color_buttons.length)	
+						if(i_color_next!= i_color){
+							i_color=i_color_next
+							stim_turned_new=true
+						}
+					}
 					RTs_Page2_correct.push(data.rt)
 				}else{
 					nC_inarow = 0
@@ -366,6 +385,7 @@
 		on_finish: function(data){
 				i = 0;	
 				i_color = Math.floor(Math.random()*color_buttons.length)
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
 				practice = false
 				nC_inarow = 0
 				startTime = new Date()
@@ -429,6 +449,7 @@
 		on_finish: function(data){
 				i = 0;	
 				i_color = Math.floor(Math.random()*color_buttons.length)
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
 				practice = true
 				nC_inarow = 0
 				startTime = new Date()
@@ -451,9 +472,9 @@
 		    choices: color_buttons,
 	 	   	on_finish: function(data){
 				button_order = data.button_order
+				button_pressed = data.button_pressed
 				color_correct = data.color_correct
 				color_clicked = data.color_clicked
-				console.log([color_correct,color_clicked])
 				RTs_Page3.push(data.rt)
 				if(color_correct==color_clicked){
 					// i = counting items = number completed
@@ -461,7 +482,14 @@
 					nCompleted_Page3=i
 					nC_inarow++
 					item_completed = true
-					i_color = Math.floor(Math.random()*color_buttons.length)
+					var stim_turned_new = false;
+					while(stim_turned_new== false){
+						i_color_next = Math.floor(Math.random()*color_buttons.length)	
+						if(i_color_next!=i_color){
+							i_color=i_color_next
+							stim_turned_new=true
+						}
+					}
 					RTs_Page3_correct.push(data.rt)
 				}else{
 					nC_inarow = 0
@@ -514,6 +542,7 @@
 		on_finish: function(data){
 				i = 0;	
 				i_color = Math.floor(Math.random()*3)
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
 				practice = false
 				nC_inarow = 0
 				startTime = new Date()
@@ -577,6 +606,8 @@
 				i = 0;	
 				i_subset = Math.floor(Math.random()*(color_buttons.length-1))
 				i_color = Math.floor(Math.random()*color_buttons.length)
+				console.log([i_subset,i_color])
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
 				practice = true
 				nC_inarow = 0
 				startTime = new Date()
@@ -599,6 +630,7 @@
 		    choices: color_buttons,
 	 	   	on_finish: function(data){
 				button_order = data.button_order
+				button_pressed = data.button_pressed
 				color_correct = data.color_correct
 				color_clicked = data.color_clicked
 				console.log([color_correct,color_clicked])
@@ -609,8 +641,16 @@
 					nCompleted_Page4=i
 					nC_inarow++
 					item_completed = true
-					i_subset = Math.floor(Math.random()*(color_buttons.length-1))
-					i_color = Math.floor(Math.random()*color_buttons.length)
+					var stim_turned_new = false;
+					while(stim_turned_new== false){
+						i_subset_next = Math.floor(Math.random()*(color_buttons.length-1))
+						i_color_next = Math.floor(Math.random()*color_buttons.length)
+						if((i_subset_next!= i_subset)&&(i_color_next!=i_color)){
+							i_subset=i_subset_next
+							i_color=i_color_next
+							stim_turned_new=true
+						}
+					}
 					RTs_Page4_correct.push(data.rt)
 				}else{
 					nC_inarow = 0
@@ -664,6 +704,7 @@
 				i = 0;	
 				i_subset = Math.floor(Math.random()*(color_buttons.length-1))
 				i_color = Math.floor(Math.random()*color_buttons.length)
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
 				practice = false
 				nC_inarow = 0
 				startTime = new Date()
@@ -749,8 +790,8 @@
 /////////
 	jsPsych.init({
 		
-		timeline: [ welcome, informedConsent1, informedConsent2, informedConsent3,
-					persCode_loop,
+		timeline: [ /*welcome, informedConsent1, informedConsent2, informedConsent3,
+					persCode_loop,*/
 					Instruction_Page1, Page1_Loop_Practice, Filler_Page1, Page1_Loop_Test, Page1_finalFeedback,
 					Instruction_Page2, Page2_Loop_Practice, Filler_Page2, Page2_Loop_Test, Page2_finalFeedback,
 					Instruction_Page3, Page3_Loop_Practice, Filler_Page3, Page3_Loop_Test, Page3_finalFeedback,
