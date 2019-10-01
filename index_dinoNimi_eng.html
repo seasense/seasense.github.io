@@ -1,0 +1,366 @@
+<html>
+	<head>
+		<title>Dinosaur guessing game</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="jspsych-5.0.3-dino/jspsych.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-text.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-button-response.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-instructions.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-survey-likert.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-survey-text.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-survey-multi-choice.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-survey-multi-choice-IC.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-single-stim.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/jspsych-categorize.js"></script>
+		<script src="jspsych-5.0.3-dino/plugins/catSetShuffleFx.js"></script>
+		<link href="jspsych-5.0.3-dino/css/jspsych_dino.css" rel="stylesheet" type="text/css"></link>
+			
+	</head>
+	
+	
+	<script>
+
+		var dim1_membrane = [ ["can't fly"] , ["can fly"] ]
+		var dim2_size = [ [ "small"] , [ "large"  ] ]
+		var dim3_crest = [["no crest"] , ["a crest"] ]
+		var numberCategorized = 0;
+		var numberCorrect = 0;
+		var numberJudgmentPhases = 8;
+		var numberGenerationPhases = 7;
+		var m = 2;
+		var n = 2;
+		var nExp = 10; // number of exemplars per category
+		var nSec = 60;
+		var geneDuration = 1000*nSec;
+		var iter = 0
+		var categories = ["Pisanosaur",'Rinchenia','Edmontosaur','Parasaurolophus','Rhamphorhynchus','Rhamphorhynchus','Pteranodontia','Pteranodontia']
+		var category_buttons = ["Pisanosaur",'Rinchenia','Edmontosaur','Parasaurolophus','Rhamphorhynchus','Pteranodontia']
+		var nCat = category_buttons.length
+		var genPhase = 1;
+		
+		var pictures = [ //combines categories 5,6 and 7,8
+			['img/Pisanosaurus1.png','img/Pisanosaurus2.png','img/Pisanosaurus3.png','img/Pisanosaurus4.png','img/Pisanosaurus5.png','img/Pisanosaurus6.png','img/Pisanosaurus7.png','img/Pisanosaurus8.png','img/Pisanosaurus9.png','img/Pisanosaurus10.png'],
+			['img/Rinchenia1.png','img/Rinchenia2.png','img/Rinchenia3.png','img/Rinchenia4.png','img/Rinchenia5.png','img/Rinchenia6.png','img/Rinchenia7.png','img/Rinchenia8.png','img/Rinchenia9.png','img/Rinchenia10.png'],
+			['img/Edmontosaurus1.png','img/Edmontosaurus2.png','img/Edmontosaurus3.png','img/Edmontosaurus4.png','img/Edmontosaurus5.png','img/Edmontosaurus6.png','img/Edmontosaurus7.png','img/Edmontosaurus8.png','img/Edmontosaurus9.png','img/Edmontosaurus10.png'],
+			['img/Parasaurolophus1.png','img/Parasaurolophus2.png','img/Parasaurolophus3.png','img/Parasaurolophus4.png','img/Parasaurolophus5.png','img/Parasaurolophus6.png','img/Parasaurolophus7.png','img/Parasaurolophus8.png','img/Parasaurolophus9.png','img/Parasaurolophus10.png'],
+			['img/Dorygnathus1.png','img/Dorygnathus1athus2.png','img/Dorygnathus3.png','img/Dorygnathus4.png','img/Dorygnathus5.png','img/Dorygnathus6.png','img/Dorygnathus7.png','img/Dorygnathus8.png','img/Dorygnathus9.png','img/Dorygnathus10.png'],
+			['img/Scaphognathus1.png','img/Scaphognathus2.png','img/Scaphognathus3.png','img/Scaphognathus4.png','img/Scaphognathus5.png','img/Scaphognathus6.png','img/Scaphognathus7.png','img/Scaphognathus8.png','img/Scaphognathus9.png','img/Scaphognathus10.png'],
+			['img/Istiodactylus1.png','img/Istiodactylus2.png','img/Istiodactylus3.png','img/Istiodactylus4.png','img/Istiodactylus5.png','img/Istiodactylus6.png','img/Istiodactylus7.png','img/Istiodactylus8.png','img/Istiodactylus9.png','img/Istiodactylus10.png'],
+			['img/Pteranodon1.png','img/Pteranodon2.png','img/Pteranodon3.png','img/Pteranodon4.png','img/Pteranodon5.png','img/Pteranodon6.png','img/Pteranodon7.png','img/Pteranodon8.png','img/Pteranodon9.png','img/Pteranodon10.png']
+		];
+					
+		var welcome = {
+				type: 'instructions',
+				pages: [
+						"<p class='center-content'>***</p><p class='center-content'> Welcome to <b style='color:MediumSeaGreen'>dinoNimi</b>! <p class='center-content'> Uurime inimeste tegevust tundmatute loomade ja nende nimede meeldej&aumltmisel. Eksperiment kestab 10 minutit, koosneb vaheldumisi (i) hindamise faasist ja (ii) genereerimise faasist - kus sa saad ise koostada pilte dinosaurustest. Sul palutakse klikkida sinu arvates &otildeigetel nimedel. <p class='center-content'> Kliki <i>Edasi</i>, et lugeda infot uuringu tulemuste kasutamise osas."],
+				show_clickable_nav: true
+					};
+					
+		var informedConsent = {
+			type: 'survey-multi-choice-IC',
+			questions: ["<b>Uuringu andmete t&ouml&oumltlemine ja informeeritud n&otildeusolek</b> <p> <i> Vabatahtlik </i> <br> Sa v&otildeid loobuda oma osalemise n&otildeusolekust igal ajal ilma, et peaksid seda selgitama. <p> <i> Andmed </i> <br>K&otildeik vajalikud andmed salvestuvad eksperimendi l&otildepuks automaatselt. <p> <i> Andmete privaatsus </i> <br> K&otildeik andmed on anon&uuml&uumlmsed. See t&aumlhendab, et sinu eksperimendi tulemusi ei ole v&otildeimalik sinu individuaalsete isikuandmetega seostada. Seos sinu personaalse koodiga (mille saad luua j&aumlrgmisel lehel) kustutatakse koheselt peale andmete kogumist. <p> <i> Tulemuste kasutamine </i> <br> Antud uuringu andmeid kasutatakse teadusliku artikli publitseerimiseks, kus on tagatud osalejate anon&uuml&uumlmsus. T&aumlielikult anon&uuml&uumlmsed andmed s&aumlilitatakse andmete arhiivis: <i> PsychData (Research Data for Psychology, Leibnitz Institute for Psychology Information ZPID) </i> <b> <br> <br> <p> N&otildeustumise kinnitamiseks vajuta <i>Edasta vastus</i>."],
+			options: [["K&aumlesolevaga kinnitan, et olen l&aumlbi lugenud ja n&otildeustun eksperimendi tingimustega."]],
+			required: [true]
+	    };
+		
+		var persData_code = ["***<p><b>Loo siia ise oma kood:"];
+		
+		var demographics = {
+  		  		type: "survey-text",
+  		  		questions: persData_code,
+				preamble: "<b>Kuidas koodi luua</b>: <br> 1: Esimene t&aumlht sinu ema nimest <br> 2: Esimene t&aumlht sinu isa nimest <br> 3: Kaks viimast numbrit sinu s&uumlnniaastast <br> 4: Esimene t&aumlht sinu kodu-aadressi t&aumlnavanimes <br> 5: Esimene number sinu kodu-maja numbris <p> N&aumlide: FC84M4"
+		};
+
+		var questionnaire_items = [["***<p><b>Milline on sinu lemmik &otildeppeaine?"],["<p><b>Mis on su lemmik vaba-aja tegevus?"]];
+		var questionnaire1 = {
+  		  		type: "survey-text",
+  		  		questions: questionnaire_items,
+		};
+		var options_knowledge = ["V&aumlga halb","Alla keskmise","Keskmine","Hea","V&aumlga hea"];
+		var questionnaire2 = {
+				type: 'survey-multi-choice',
+				questions: [["<b>Matemaatikas?"],["<b>Bioloogias?"]],
+				options: [options_knowledge,options_knowledge],
+				prompt: "<p>***</p><b>Kuidas hindad oma teadmisi",
+				required: [true,true]
+		    };
+		var options_happiness = ["V&aumlga &otildennelikuks","Natuke","Neutraalne","Mitte eriti","&Uumlldse mitte"];
+		var questionnaire3a = {
+				type: 'survey-multi-choice',
+				questions: [["<b>Uute asjade &otildeppimine"],["<b>Tegelemine mind huvitavate asjadega"],["<b>Mitte midagi tegemine"]],
+				options: [options_happiness,options_happiness,options_happiness],
+				prompt: "<p>***</p><b>Kuiv&otilderd &otildennelikuks teevad sind j&aumlrgmised asjaolud?",
+				required: [true,true,true]
+		    };
+		var questionnaire3b = {
+				type: 'survey-multi-choice',
+				questions: [["<b>Trendi-riiete ostmine"], ["<b>Raha saamine"]],
+				options: [options_happiness,options_happiness],
+				prompt: "<p>***</p><b>Kuiv&otilderd &otildennelikuks teevad sind j&aumlrgmised asjaolud?",
+				required: [true,true]
+		    };
+		
+		var goodBye = {
+				type: 'instructions',
+				pages: [
+					     function(){ return "<p class='center-content'>***</p><p class='center-content'>Oled l&aumlbinud viimase "+numberJudgmentPhases+". faasi </p> <p class='center-content'> <b>Suur t&aumlnu osaluse eest!</b> <p class='center-content'> Andmed salvestuvad sinu arvuti kaustas: downloads, peale seda kui klikid <i>EDASI</i>. <p class='center-content'>Andmefaili nimi on: <b> myData_sendMeTo_onne.uus@tlu.ee.txt</b> <p class='center-content'> Palun saada antud fail e-mail aadressile: <b>onne.uus@tlu.ee</p> </b> <p class='center-content'> Kui mingil p&otildehjusel andmefail ei salvestu automaatselt, siis kasuta funktsiooni Copy, et kopeerida k&otildeik andmed (mida n&aumled j&aumlrgmisel lehel) ning Paste need oma e-maili tekstina ning saada samale aadressile. <p class='center-content'> Kliki <i>EDASI</i>, et alustada andmete laadimist."; },
+					   ],
+				show_clickable_nav: true,
+				data: function(){return { matchNomatch: matchNomatch, judgments: judgments, presentedNamesDigits: presentedNamesDigits, presentedNamesLabels: presentedNamesLabels, presentedPicturesDigits: presentedPicturesDigits, presentedPicturesLabels: presentedPicturesLabels, judgments: judgments, judgmentsLabels: judgmentsLabels, summary_judgment: "summary_judgment"}},
+					};
+		
+		var timeline = []; 
+		//timeline.push(welcome);
+		
+		
+		var announceGenePhase1 = {
+				type: 'instructions',
+				pages: [
+					     function(){ return "<p class='center-content'>***<p class='center-content'>N&uuml&uumld oled n&aumlinud erinevate dinosauruste pilte, l&aumlbinud <b>"+(iter+1)+". faasi " +numberJudgmentPhases+"</b> hulgast ning andnud oma hinnangud</b>.</p> <p class='center-content'>Kliki Edasi, et liikuda j&aumlrgmisse faasi <b>"+(iter+1)+".  "+numberGenerationPhases+" </b>, kus sa saad ise valida dinosauruste omadusi ja sel moel ise koostada erinevate liikide n&aumlidised ja seej&aumlrel arvata &aumlra nende nimed. See v&otildeimaldab sul t&aumliendada oma teadmisi dinosauruste kohta.<p class='center-content'>Selleks on aega <b>"+nSec+"</b> sekundit."; },
+					   ],
+				show_clickable_nav: true,
+				data: function(){return {matchNomatch: matchNomatch, judgments: judgments, presentedNamesDigits: presentedNamesDigits, presentedNamesLabels: presentedNamesLabels, presentedPicturesDigits: presentedPicturesDigits, presentedPicturesLabels: presentedPicturesLabels, judgments: judgments, judgmentsLabels: judgmentsLabels, summary_judgment: "summary_judgment"}},
+		   		on_finish: function(data) { 
+		   				startTime = new Date()
+		   			}
+				};
+				
+				var announceGenePhase2 = {
+						type: 'instructions',
+						pages: [
+							     function(){ return "<p class='center-content'>***</p><p class='center-content'>N&uuml&uumld oled l&aumlbinud <b>"+(iter+1)+". ts&uumlkli "+numberJudgmentPhases+" </b>hulgast.</p> <p class='center-content'>J&aumltkamiseks kliki Edasi <b>"+(iter+1)+". "+numberGenerationPhases+" </b>.<p class='center-content'>Aega selleks <b>"+nSec+"</b> sekundit."; },
+							   ],
+						show_clickable_nav: true,
+						data: function(){return { matchNomatch: matchNomatch, judgments: judgments, presentedNamesDigits: presentedNamesDigits, presentedNamesLabels: presentedNamesLabels, presentedPicturesDigits: presentedPicturesDigits, presentedPicturesLabels: presentedPicturesLabels, judgments: judgments, judgmentsLabels: judgmentsLabels, summary_judgment: "summary_judgment"}},
+				   		on_finish: function(data) { 
+				   				startTime = new Date()
+				   				genPhase +=1
+				   			}
+						};
+					
+				var announceGameStart = {
+						type: 'instructions',
+						pages: [
+								"<p class='center-content'>***</p><p class='center-content'> <b>J&aumlrgnevalt saad sa t&aumliendada oma teadmisi dinosauruste ja pterosauruste (lendavate dinosauruste) kohta.</b> <p class='center-content'> K&otildeigepealt soovime n&aumlha sinu eelnevaid teadmisi dinosaurustest, milleks palume sul hinnata millisesse kategooriasse ehk alamliiki kuuluvad need kuus olendit mida j&aumlrgnevalt n&aumled. <p class='center-content'> Kliki <i>Edasi</i> kui oled valmis alustama.",
+							   ],
+						show_clickable_nav: true,
+		   		   			on_finish: function(data) { 
+		   		   				j_i=0
+								labelSeq = catsForJudgFx()
+								presentedNamesDigits = []
+								presentedNamesLabels = []
+								presentedPicturesDigits = []
+								presentedPicturesLabels = []
+								matchNomatch = []
+								judgments = []
+								judgmentsLabels = []
+		   		   			},
+							};
+					
+			
+			var optionsJudgment = ["Kindlasti jah","Pigem jah","Ei tea","Pigem ei","Kindlasti ei"];
+			var judgment = {
+				type: 'survey-multi-choice',
+				stimulus: function(){
+						// determine category of picture
+						coin = (Math.floor(Math.random() * 2) == 0)
+						//alert(coin);
+					    if(coin){
+							matchNomatch.push(1)
+					    	catOfPic = labelSeq[j_i]
+					    }else{
+							matchNomatch.push(0);
+							//DisplayedLabel = categories[labelSeq[j_i]]
+							catOfPic = labelSeq[j_i_for_noMatchFx(j_i)];
+							/*DisplayedPic = categories[catOfPic]
+							alertText = [DisplayedLabel,DisplayedPic]
+							alert(alertText)*/
+					    }
+					    presentedPicturesDigits.push(catOfPic)
+					    //presentedPicturesLabels.push(category_buttons[catOfPic])
+					    presentedPicturesLabels.push(categories[catOfPic]) 
+					    presentedNamesDigits.push(labelSeq[j_i])
+					    presentedNamesLabels.push(categories[labelSeq[j_i]])
+						// determine exemplar
+						expx = Math.floor(Math.random() * (nExp - 0) ) + 0;
+						return pictures[catOfPic][expx]
+				},
+				/*questions: function (){ return ["<b>Kui suure t&otildeen&aumlosusega kuulub antud loom kategooriasse:<b style='color:MediumSeaGreen;'> "+category_buttons[labelSeq[j_i]]+" </b>?"]},*/
+				questions: function (){ return ["<b>Kui suure t&otildeen&aumlosusega kuulub antud loom kategooriasse:<b style='color:MediumSeaGreen;'> "+categories[labelSeq[j_i]]+" </b>?"]},
+				options: [optionsJudgment],
+				required: [true], 
+	   			prompt: function(){return"<p> <b> Hindamine  "+(j_i+1)+" /  "+category_buttons.length+"</p>"},
+				on_finish: function(data) { 
+	   				j_i += 1
+	   				//judgments.push(data.responses)
+	   				judgments.push(data.RadioPressed)
+	   				judgmentsLabels.push(optionsJudgment[data.RadioPressed])
+	   			},
+		    };
+		
+		var judgement_loop_node = {
+			timeline: [judgment,judgment,judgment,judgment,judgment,judgment],
+			loop_function: function(data){
+			        
+					if(j_i < 5){
+			            return true;
+			        } else {
+			            return false;
+			        }
+			  },
+			 
+		};
+		
+		
+		var selectMembrane = {
+		    type: 'button-response',
+			is_html: true, 
+		    stimulus: "<p class='center-content'>***<p class='center-content'>  The animal I want so study next ...  </p>", 
+		    choices: dim1_membrane,
+			on_finish: function(data) { 
+				ind1 = data.button_pressed
+				timeElapsed = new Date() - startTime
+				labelSequence_judgment = jsPsych.randomization.repeat(category_buttons, 1)
+				if ( timeElapsed > geneDuration ) { 
+					iter += 1
+				}
+			}
+		};
+		timeline.push(selectMembrane);
+		
+		var selectSize = {
+			type: 'button-response',
+			is_html: true,
+			stimulus: "<p class='center-content'>***<p class='center-content'> it is ... </p>",
+			choices: dim2_size,
+			on_finish: function(data) { 
+				ind2 = data.button_pressed
+			}
+		};
+		timeline.push(selectSize); 
+		
+		var selectCrest = {
+			type: 'button-response',
+			is_html: true,
+			stimulus: "<p class='center-content'>***<p class='center-content'> and it has ...  </p>",
+			choices: dim3_crest,
+			on_finish: function(data) { 
+				ind3 = data.button_pressed
+				exemplar = Math.floor(Math.random() * (nExp))
+			}
+		};
+		timeline.push(selectCrest); 
+		
+		var categorize = {
+			type: 'button-response',
+			is_html: false,
+			stimulus: function(){
+					x = n*(ind1*m + ind2) + ind3
+					return pictures[x][exemplar]
+			},
+			choices: function(){return labelSequence_judgment},
+			prompt: function(){return "<p class='center-content'>That's how an animal looks like that <b>"+dim1_membrane[ind1]+"</b>, is <b> "+dim2_size[ind2]+"</b>, and has <b>"+dim3_crest[ind3]+"</b>.<p class='center-content'> What's its name? Click on the correct label!" 
+				"<p class='center-content'>That's how an animal looks like, which has <b>"+dim1_membrane[ind1]+"</b>, is <b> "+dim2_size[ind2]+"</b>, and has <b>"+dim3_crest[ind3]+"</b>.<p class='center-content'> What do you think is the correct name of this animal? Provide your answer by clicking on the corresponding name-button below!" ;},
+			on_finish: function(data) { 
+				ind_cat = data.button_pressed
+				chosenButton = labelSequence_judgment[ind_cat]
+				x = n*(ind1*m + ind2) + ind3
+				requiredButton = categories[x]
+				if(chosenButton==requiredButton){correctCategorization=1}else{correctCategorization=0}
+			}
+		};
+		timeline.push(categorize); 
+		
+		
+		var feedback = {
+			type: 'button-response',
+			is_html: false,
+			stimulus: function(){
+				
+					x = n*(ind1*m + ind2) + ind3
+					return pictures[x][exemplar]
+				
+				},
+			choices: ["Edasi"],
+			prompt: function(){ 
+		
+				x = n*(ind1*m + ind2) + ind3
+				chosenLabel = labelSequence_judgment[ind_cat]
+				correctLabel = categories[x]
+				if(chosenLabel==correctLabel){var correctCategorization = 1}else{var correctCategorization = 0}
+				// if(chosenLabel==correctLabel)
+				if(correctCategorization==1){return "<p class='center-content', style='color:#04B404;'> Tubli! &Otildeige nimi on <b>"+correctLabel+"</b>.</p>"}else{
+					return "<p class='center-content', style='color:#FF0000;'> Vale vastus. &otildeige nimi on <b>"+correctLabel+"</b>. </p> "
+				}
+				},
+			data: function(){return{requiredButton: requiredButton, chosenButton: chosenButton, correctCategorization: correctCategorization, summary_categorization:"summary_categorization", genPhase: genPhase}},
+			on_finish: function(data) { 
+				ind_cat = data.button_pressed
+				numberCategorized += 1
+				if(chosenLabel==correctLabel){numberCorrect += 1}
+			}
+		};
+		
+		
+
+		
+		var current_score = {
+				type: 'instructions',
+				pages: [ function(){if(timeElapsed < geneDuration){return "<p class='center-content'>***</p><p class='center-content'> <b>Sinu praegune tulemus: "+Math.round((100*numberCorrect/numberCategorized))+ "%.</b><p class='center-content'>J&aumltkamiseks kliki <i>Edasi</i> !"}else{return "<p class='center-content'>N&uuml&uumld on sul l&aumlbitud <b>"+iter+". ts&uumlkkel  "+numberGenerationPhases+" </b> hulgast.</p> <p class='center-content'> Kliki <i>Edasi</i> kui oled valmis j&aumlrgmiseks hindamists&uumlkliks. Selleks on aega 60 sekundit.";}}, 
+					   ],
+				show_clickable_nav: true
+					};
+				
+			
+		var loop_node = {
+			timeline: [selectMembrane,selectSize,selectCrest,categorize,feedback,current_score],
+			loop_function: function(data){
+			        
+					if(timeElapsed < geneDuration){
+			            return true;
+			        } else {
+			            return false;
+			        }
+			  },
+   			on_finish: function(data) { 
+   				j_i=0
+				labelSeq = [0,1,2,3,4,5]
+				labelSeq = jsPsych.randomization.repeat(labelSeq, 1)
+				 
+		   		presentedNamesDigits = []
+				presentedNamesLabels = []
+				presentedPicturesDigits = []
+				presentedPicturesLabels = []
+				matchNomatch = []
+				judgments = []
+		   		judgmentsLabels = []
+   			}
+			  
+		};
+		
+		jsPsych.init({
+			fullscreen: false,
+			timeline: [
+				announceGameStart,
+				/*judgement_loop_node,*/
+				announceGenePhase1,loop_node,
+				judgement_loop_node,announceGenePhase2,loop_node,
+				judgement_loop_node,announceGenePhase2,loop_node,
+				judgement_loop_node,announceGenePhase2,loop_node,
+				judgement_loop_node,announceGenePhase2,loop_node,
+				judgement_loop_node,announceGenePhase2,loop_node,
+				judgement_loop_node,announceGenePhase2,loop_node,
+				judgement_loop_node,
+				goodBye
+			],
+				  on_finish: function() {                                                                 					  /*jsPsych.data.displayData();
+			      alert('Your data' +' have been stored as a textfile in your download folder with the name ' +
+			        '"myData_sendMeTo_onne.uus@tlu.ee.txt"' +'. Please send this file to onne.uus@tlu.ee. If the download has not worked, just copy and paste the data (displayed after closing this message) into your email.'
+				  );*/
+					  jsPsych.data.localSave('myData_sendMeTo_onne.uus@tlu.ee.txt', 'csv');
+					  $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
+				  }
+			    });
+		
+	</script>
+</html>
