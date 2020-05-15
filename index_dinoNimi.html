@@ -492,6 +492,7 @@
 
     var SetOfDinoButtons = {
       type: 'selectExemplar',
+      stimulus: [],
       choices: function(){return dino_pics_reshuffled_sdl},
       prompt: function(){return "<p>Click on the animal that you would like to explore! <br><b>"+(n_trials_sdl-t_sdl)+"</b> trials remaining until the next knowledge test. </p>"},
       on_finish: function(data) { 
