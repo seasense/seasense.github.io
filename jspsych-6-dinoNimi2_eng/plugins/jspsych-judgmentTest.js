@@ -113,8 +113,8 @@ jsPsych.plugins["judgmentTest"] = (function() {
 
     var html = '<div></div>';
     // display number of test item
-    html += "<h2>Otsustamise test (tsükkel "+(count_judgment+1)+"): küsimus "+((t_judge+1)+(t_judge_block*(n_families*n_subFamilies)))+ " - kokku " 
-      +n_families*n_subFamilies*n_blocks_judgment+" küsimust</h2>";
+    html += "<h2>Judgment Knowlege Test (Round "+(count_judgment+1)+"): Question "+((t_judge+1)+(t_judge_block*(n_families*n_subFamilies)))+ " out of " 
+      +n_families*n_subFamilies*n_blocks_judgment+"</h2>";
 
     // display stimulus
     html += '<p><img src="'+trial.stimulus+'" id="jspsych-image-button-response-stimulus" '
@@ -134,8 +134,8 @@ jsPsych.plugins["judgmentTest"] = (function() {
     html +='"></img>';
     
     //show prompt
-    var prompt_judgmentTest = "<p id='prompt_judgmentTest'>Kas see dinosaurus kuulub <b>"
-    +names_tobeDisplayed_judgment_curBlock[t_judge]+"</b> perekonda?</p>";
+    var prompt_judgmentTest = "<p id='prompt_judgmentTest'>Does this dinosaur belong to the family of <b>"
+    +names_tobeDisplayed_judgment_curBlock[t_judge]+"</b>?</p>";
     html += prompt_judgmentTest;
 
     //display buttons
@@ -229,7 +229,7 @@ jsPsych.plugins["judgmentTest"] = (function() {
       }
 
      
-      document.getElementById('prompt_confRating').innerHTML='Kui kindel oled oma otsuses?';
+      document.getElementById('prompt_confRating').innerHTML='How certain are you in your judgment?';
       
       for (var i = 0; i < trial.choices_conf.length; i++) {
         var str_i = buttonsConf[i].replace(/%choice%/g, trial.choices_conf[i]);

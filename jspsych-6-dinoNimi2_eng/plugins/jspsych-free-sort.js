@@ -64,7 +64,7 @@ jsPsych.plugins['free-sort'] = (function() {
       button_label: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Button label',
-        default:  'Edasi',
+        default:  'Continue',
         description: 'The text that appears on the button to continue to the next trial.'
       }
     }
@@ -99,10 +99,10 @@ jsPsych.plugins['free-sort'] = (function() {
       if (qi==1 || qi==3) {leftqi=20+360+20+80} //20+360+20+10
       if (qi==0 || qi==1) {topqi=20}
       if (qi==2 || qi==3) {topqi=20+260+20+80}
-      if (qi==0){qiText="Perekond 1"}
-      if (qi==1){qiText="Perekond 2"}
-      if (qi==2){qiText="Perekond 3"}
-      if (qi==3){qiText="Perekond 4"}
+      if (qi==0){qiText="Family 1"}
+      if (qi==1){qiText="Family 2"}
+      if (qi==2){qiText="Family 3"}
+      if (qi==3){qiText="Family 4"}
         // 370 270
       display_element.querySelector("#jspsych-free-sort-arena").innerHTML += '<rect '+
       'style="position: absolute; cursor: move; width:'+300+'px; height:'+200+'px; '+

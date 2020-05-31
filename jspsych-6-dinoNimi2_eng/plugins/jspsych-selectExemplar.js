@@ -8,7 +8,7 @@
  *
  **/
 
-jsPsych.plugins["judgmentTest"] = (function() {
+jsPsych.plugins["selectExemplar"] = (function() {
 
   var plugin = {};
 
@@ -49,24 +49,10 @@ jsPsych.plugins["judgmentTest"] = (function() {
         array: true,
         description: 'The labels for the buttons.'
       },
-      choices_conf: {
-        type: jsPsych.plugins.parameterType.STRING,
-        pretty_name: 'Choices_conf',
-        default: undefined,
-        array: true,
-        description: 'The labels for the buttons.'
-      },
       button_html: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Button HTML',
-        default: '<button class="jspsych-btn" >%choice%</button>',
-        array: true,
-        description: 'The html of the button. Can create own style.'
-      },
-      button_conf_html: {
-        type: jsPsych.plugins.parameterType.STRING,
-        pretty_name: 'Button HTML',
-        default: '<button class="jspsych-btn-confRating" style="color:black">%choice%</button>',
+        default: '<button style="width:260px;height:200px" class="jspsych-btn-dinoPic"><img src=%choice%></button>',
         array: true,
         description: 'The html of the button. Can create own style.'
       },
@@ -111,14 +97,8 @@ jsPsych.plugins["judgmentTest"] = (function() {
 
   plugin.trial = function(display_element, trial) {
 
-    var html = '<div></div>';
-    // display number of test item
-    html += "<h2>Otsustamise test (tsükkel "+(count_judgment+1)+"): küsimus "+((t_judge+1)+(t_judge_block*(n_families*n_subFamilies)))+ " - kokku " 
-      +n_families*n_subFamilies*n_blocks_judgment+" küsimust</h2>";
-
     // display stimulus
-    html += '<p><img src="'+trial.stimulus+'" id="jspsych-image-button-response-stimulus" '
-    +'style=" height:140px; border:4px solid black; ';
+    var html = '<img src="'+trial.stimulus+'" id="jspsych-image-button-response-stimulus" style="';
     if(trial.stimulus_height !== null){
       html += 'height:'+trial.stimulus_height+'px; '
       if(trial.stimulus_width == null && trial.maintain_aspect_ratio){
@@ -132,13 +112,14 @@ jsPsych.plugins["judgmentTest"] = (function() {
       }
     }
     html +='"></img>';
-    
-    //show prompt
-    var prompt_judgmentTest = "<p id='prompt_judgmentTest'>Kas see dinosaurus kuulub <b>"
-    +names_tobeDisplayed_judgment_curBlock[t_judge]+"</b> perekonda?</p>";
-    html += prompt_judgmentTest;
+
+    //show prompt if there is one
+    if (trial.prompt !== null) {
+      html += trial.prompt;
+    };
 
     //display buttons
+
     var buttons = [];
     if (Array.isArray(trial.button_html)) {
       if (trial.button_html.length == trial.choices.length) {
@@ -152,26 +133,45 @@ jsPsych.plugins["judgmentTest"] = (function() {
       }
     }
     html += '<div id="jspsych-image-button-response-btngroup">';
-    
 
     for (var i = 0; i < trial.choices.length; i++) {
       var str = buttons[i].replace(/%choice%/g, trial.choices[i]);
-      html += '<div class="jspsych-image-button-response-button" style="display: inline-block; margin:'
-      +trial.margin_vertical+' '
-      +trial.margin_horizontal+'" id="jspsych-image-button-response-button-' + i +'" data-choice="'+i+'">'+str+'</div>';
+      var i_dinoName = current_species_sequence_sdl[i];
+      /*var clicks_total = total_click_counter[i_dinoName];
+      var clicks_correct = correct_click_counter[i_dinoName];
+      var clicks_wrong = wrong_click_counter[i_dinoName];
+      var accuracy_i = Math.round(accuracy[i_dinoName]*100)/100;*/
+      var clicks_total = click_history_subFam[i_dinoName].length;
+      var colorcode = 0;
+      var pos_lastItem = clicks_total-1;
+      if(clicks_total>1){
+        colorcode += 1;
+        if(click_history_subFam[i_dinoName][pos_lastItem]==1){colorcode+=1};
+        if(click_history_subFam[i_dinoName][pos_lastItem-1]==1){colorcode+=1};
+      };
+      // Color of feedback: 0 = white, 1 = red, 2 = orange, 3 = green
+      if(colorcode==0){feedback_color="white"}else{
+        if(colorcode==1){feedback_color="red"}else{
+          if(colorcode==2){feedback_color="orange"}else{
+            if(colorcode==3){feedback_color="green"}
+          }
+        }
+      };
+
+      
+      html += '<div class="jspsych-image-button-response-button" style="display: inline-block; background-color:white; margin:'
+      +trial.margin_vertical+' '+trial.margin_horizontal+'" id="jspsych-image-button-response-button-' 
+      + i +'" data-choice="'+i+'"> <span style="background-color:'+feedback_color+'; padding: 2px 15px; border: 1px solid black;'
+      + 'border-radius: 20px;">'
+      +clicks_total+
+      /*' (<span style="color:green;">'
+      +clicks_correct+'</span> <span style="color:red;">'
+      +clicks_wrong+'</span>) '
+      +accuracy_i+*/'</span><p>'
+      +str+' </div>';
     }
     html += '</div>';
 
-    //display confidence buttons
-    html += '<p><div id="prompt_confRating"></div>';
-    var buttonsConf = [];
-    for (var i = 0; i < trial.choices_conf.length; i++) {
-        buttonsConf.push(trial.button_conf_html);
-        if(i==0){html += '<p>'};
-        html += '<div id="jspsych-image-conf_button-response-btngroup-'
-        +i+'" style="display: inline-block;  margin:'+trial.margin_horizontal+'" data-choice-conf="'+i+'"></div>';
-    };
-    
     display_element.innerHTML = html;
 
     // start timing
@@ -180,40 +180,29 @@ jsPsych.plugins["judgmentTest"] = (function() {
     for (var i = 0; i < trial.choices.length; i++) {
       display_element.querySelector('#jspsych-image-button-response-button-' + i).addEventListener('click', function(e){
         var choice = e.currentTarget.getAttribute('data-choice'); // don't use dataset for jsdom compatibility
-        after_response_yn(choice);
+        after_response(choice);
       });
     }
 
     // store response
     var response = {
       rt: null,
-      button: null,
-      rt_conf: null,
-      button_conf: null
+      button: null
     };
 
     // function to handle responses by the subject
-    function after_response_yn(choice) {
+    function after_response(choice) {
 
       // measure rt
       var end_time = performance.now();
       var rt = end_time - start_time;
       response.button = choice;
       response.rt = rt;
-      var choice_label = ['Yes','No'][choice]
-      var presentedSpecies = species_sequence_judgment_curBlock[t_judge]
-      var presentedLabel = names_tobeDisplayed_judgment_curBlock[t_judge]
-      var trueLabel = true_familyNames_judgment_curBlock[t_judge]
-      if(trueLabel==presentedLabel){
-        if(choice==0){var response_cat="Hit"}else{var response_cat="Miss"}
-      }else{
-        if(choice==0){var response_cat="FA"}else{var response_cat="CR"}
-      }
-      response.presentedSpecies = presentedSpecies;
-      response.presentedLabel = presentedLabel;
-      response.trueLabel = trueLabel;
-      response.response_cat = response_cat;
-      response.choice_label = choice_label;
+
+      var species_selected = current_species_sequence_sdl[choice];
+      var family_selected = tax_bottomUp[species_selected];
+      response.species_selected = species_selected;
+      response.family_selected = family_selected;
 
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
@@ -224,48 +213,13 @@ jsPsych.plugins["judgmentTest"] = (function() {
       for(var i=0; i<btns.length; i++){
         //btns[i].removeEventListener('click');
         btns[i].setAttribute('disabled', 'disabled');
-        if(i==choice){btns[i].setAttribute('style', 'color: black; border: solid black')};
-        
       }
-
-     
-      document.getElementById('prompt_confRating').innerHTML='Kui kindel oled oma otsuses?';
-      
-      for (var i = 0; i < trial.choices_conf.length; i++) {
-        var str_i = buttonsConf[i].replace(/%choice%/g, trial.choices_conf[i]);
-        document.getElementById('jspsych-image-conf_button-response-btngroup-'+i+'').innerHTML=str_i;
-      };
-      
-      // change color of confidence button
-      confbtns = document.getElementsByClassName("jspsych-btn-confRating");
-
-      confbtns_colors = ["red","orange","yellow","green"];
-      for(i=0;i<confbtns.length;i++){
-        confbtns[i].setAttribute('style','background-color:'+confbtns_colors[i]+'');
-      };
-
-      for (var i = 0; i < trial.choices_conf.length; i++) {
-        display_element.querySelector('#jspsych-image-conf_button-response-btngroup-' + i).addEventListener('click', function(e){
-          var choice = e.currentTarget.getAttribute('data-choice-conf'); // don't use dataset for jsdom compatibility
-          after_response_confRating(choice);
-        });
-      }
-      
-    };
-
-    function after_response_confRating(choice) {
-      
-      var end_time_conf = performance.now();
-      var rt_conf = end_time_conf - start_time;
-      response.button_conf = choice;
-      var chosen_confRating = trial.choices_conf[choice]
-      response.chosen_confRating = chosen_confRating;
-      response.rt_conf = rt_conf;
 
       if (trial.response_ends_trial) {
         end_trial();
       }
     };
+
 
     // function to end trial when it is time
     function end_trial() {
@@ -278,14 +232,8 @@ jsPsych.plugins["judgmentTest"] = (function() {
         "rt": response.rt,
         "stimulus": trial.stimulus,
         "button_pressed": response.button,
-        "choice_label": response.choice_label,
-        "presentedSpecies": response.presentedSpecies,
-        "presentedLabel": response.presentedLabel,
-        "trueLabel": response.trueLabel,
-        "response_cat": response.response_cat,
-        "button_pressed_conf": response.button_conf,
-        "chosen_confRating": response.chosen_confRating,
-        "rt_conf": response.rt_conf
+        "species_selected":response.species_selected,
+        "family_selected":response.family_selected
       };
 
       // clear the display

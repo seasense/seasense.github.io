@@ -70,7 +70,7 @@ jsPsych.plugins['survey-text-pcode'] = (function() {
       button_label: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Button label',
-        default:  'J&#228tka',
+        default:  'Continue',
         description: 'The text that appears on the button to finish the trial.'
       }
     }

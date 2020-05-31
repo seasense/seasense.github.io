@@ -122,14 +122,14 @@ jsPsych.plugins["labelExemplar"] = (function() {
     var props = '<p><b> Name: </b>'+species_clicked+'</p>';
     //html += props;
     var PropTab = '<table id="properties" align="center"> ';
-      PropTab += '<tr> <th>Dimension</th><th>Feature</th><th>Illustration</th></tr>';
-      PropTab += '<tr><td><b>Size</b></td><td>'+properties_species_clicked[0]+'</td><td><img src="'+props_illustrated_species_clicked[0]+'"></td></tr>';
-      PropTab += '<tr><td><b>Hip</b></td><td>'+properties_species_clicked[1]+'</td><td><img src="'+props_illustrated_species_clicked[1]+'"></td></tr>';
-      PropTab += '<tr><td><b>Gait</b></td><td>'+properties_species_clicked[2]+'</td><td>'+props_illustrated_species_clicked[2]+'</td></tr></table>';
+      PropTab += '<tr> <th>Dimensioon</th><th>Tunnus</th><th>Illustratsioon</th></tr>';
+      PropTab += '<tr><td><b>Suurus</b></td><td>'+properties_species_clicked[0]+'</td><td><img src="'+props_illustrated_species_clicked[0]+'"></td></tr>';
+      PropTab += '<tr><td><b>Vaagnaluu ehitus</b></td><td>'+properties_species_clicked[1]+'</td><td><img src="'+props_illustrated_species_clicked[1]+'"></td></tr>';
+      PropTab += '<tr><td><b>Kõndimisviis</b></td><td>'+properties_species_clicked[2]+'</td><td>'+props_illustrated_species_clicked[2]+'</td></tr></table>';
     html += PropTab
     //show prompt if there is one
-    //var prompt = "<p id='prompt' >Given this set of features, to which family does the "+species_clicked+" belong?</p>";
-    var prompt = "<p id='prompt' >Given this set of features, to which family does this species belong?</p>";
+    //var prompt = "<p id='prompt' >Arvestades neid tunnuseid, millisesse perekonda see "+species_clicked+" kuulub?</p>";
+    var prompt = "<p id='prompt' >Arvestades neid tunnuseid, millisesse perekonda see liik kuulub?</p>";
     html += prompt;
     //display buttons
     var buttons = [];
@@ -203,8 +203,8 @@ jsPsych.plugins["labelExemplar"] = (function() {
       
       btn_clickedLabel_index = response.button;
       clickedLabel_name = dino_labels_reshuffled_sdl[btn_clickedLabel_index];
-      if(clickedLabel_name==true_familyName){var feedback_text="Your answer is <span style='color:green'><b>correct</b></span>. The family name is <b>"+true_familyName+"</b>."}else{
-        feedback_text="Your answer is <span style='color:red'><b>wrong</b></span>. The correct family name is <b>"+true_familyName+"</b>."};
+      if(clickedLabel_name==true_familyName){var feedback_text="Sinu vastus on <span style='color:green'><b>õige</b></span>. Perekonna nimi on <b>"+true_familyName+"</b>."}else{
+        feedback_text="Sinu vastus on <span style='color:red'><b>vale</b></span>. Õige perekonna nimi on <b>"+true_familyName+"</b>."};
       removePrompt();
       feedback(feedback_text);
       

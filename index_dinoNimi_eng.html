@@ -23,7 +23,7 @@
     n_trials_freeSort = 4;
     n_blocks_judgment = 2;
 
-    n_sdl = 2;
+    n_sdl = 7;
     n_freeSort_phases=4;
     n_judgment_phases=4;
     n_tests=n_freeSort_phases+n_judgment_phases
@@ -55,24 +55,24 @@
     }
 
     var properties_of_species = {
-        Charachodontosaurus:["Suur","Sisalvaagnaline","Kahejalgne"],
-        Velociraptor:["V&#228ike","Sisalvaagnaline","Kahejalgne"],
-        Argentinosaurus:["Suur","Sisalvaagnaline","Neljajalgne"],
-        Saturnalia:["V&#228ike","Sisalvaagnaline","Neljajalgne"],
-        Macrogryphosaurus:["Suur (v&#245rreldes perekonna liikmetega)","Lindvaagnaline","Kahejalgne"],
-        Isasicursor:["V&#228ike","Lindvaagnaline","Kahejalgne"],
-        Barilium:["Suur","Lindvaagnaline","Neljajalgne"],
-        Uteodon:["V&#228ike","Lindvaagnaline","Neljajalgne"]
+        Charachodontosaurus:["Large","Reptile-hipped","Biped"],
+        Velociraptor:["Small","Reptile-hipped","Biped"],
+        Argentinosaurus:["Large","Reptile-hipped","Quadruped"],
+        Saturnalia:["Small","Reptile-hipped","Quadruped"],
+        Macrogryphosaurus:["Large (relative to its family members)","Bird-hipped","Biped"],
+        Isasicursor:["Small","Bird-hipped","Biped"],
+        Barilium:["Large","Bird-hipped","Quadruped"],
+        Uteodon:["Small","Bird-hipped","Quadruped"]
     };
     var properties_illustrated = {
-        Charachodontosaurus:["dino_pics/size_carcharodontosaurus.png","dino_pics/reptileHip.png","K&#245nnib kahel jalal"],
-        Velociraptor:["dino_pics/size_velociraptor.png","dino_pics/reptileHip.png","K&#245nnib kahel jalal"],
-        Argentinosaurus:["dino_pics/size_argentinosaurus.png","dino_pics/reptileHip.png","K&#245nnib neljal jalal"],
-        Saturnalia:["dino_pics/size_saturnalia.png","dino_pics/reptileHip.png","K&#245nnib neljal jalal"],
-        Macrogryphosaurus:["dino_pics/size_macrogryphosaurus.png","dino_pics/birdHip.png","K&#245nnib kahel jalal"],
-        Isasicursor:["dino_pics/size_isasicursor.png","dino_pics/birdHip.png","K&#245nnib kahel jalal"],
-        Barilium:["dino_pics/size_barilium.png","dino_pics/birdHip.png","K&#245nnib neljal jalal"],
-        Uteodon:["dino_pics/size_uteodon.png","dino_pics/birdHip.png","K&#245nnib neljal jalal"]
+        Charachodontosaurus:["dino_pics/size_carcharodontosaurus.png","dino_pics/reptileHip.png","Walks on two legs"],
+        Velociraptor:["dino_pics/size_velociraptor.png","dino_pics/reptileHip.png","Walks on two legs"],
+        Argentinosaurus:["dino_pics/size_argentinosaurus.png","dino_pics/reptileHip.png","Walks on four legs"],
+        Saturnalia:["dino_pics/size_saturnalia.png","dino_pics/reptileHip.png","Walks on four legs"],
+        Macrogryphosaurus:["dino_pics/size_macrogryphosaurus.png","dino_pics/birdHip.png","Walks on two legs"],
+        Isasicursor:["dino_pics/size_isasicursor.png","dino_pics/birdHip.png","Walks on two legs"],
+        Barilium:["dino_pics/size_barilium.png","dino_pics/birdHip.png","Walks on four legs"],
+        Uteodon:["dino_pics/size_uteodon.png","dino_pics/birdHip.png","Walks on four legs"]
     };
 
     var Theropoda = {
@@ -367,13 +367,13 @@
     var welcome = {
       type: 'html-button-response',
       stimulus: "<img src='instruction_pics/dinoNimi.png' width=200 style='padding:0px; '>",
-      choices: ["Sisene"]
+      choices: ["Enter"]
     };
 
     var pcode = {
           type: "survey-text-pcode",
-          questions: [{prompt:"<p> Enne j&#228tkamist palun sisesta oma isiklik kood:",rows: 1, columns: 6}],
-          preamble: "<b>Juhised isikliku koodi loomiseks</b>: <br> Esimene s&#252mbol: Sinu ema eesnime esimene t&#228ht (nt <b>M</b>arta) <br> Teine s&#252mbol: Sinu isa eesnime esimene t&#228ht (nt <b>S</b>iim) <br> Kolmas ja neljas s&#252mbol: Sinu s&#252nniaasta kaks viimast numbrit (nt 18<b>95</b>)<br> Viies s&#252mbol: Sinu praeguse aadressi esimene t&#228ht (nt <b>P</b>argi) <br> Kuues s&#252mbol: Sinu majanumbri esimene number (nt <b>1</b>9) <p> N&#228ide t&#228ielikust isiklikust koodist: <b>MS95P1</b>",
+          questions: [{prompt:"<p> Before you proceed, please enter a valid personal code:",rows: 1, columns: 6}],
+          preamble: "<b>Instruction to generate your code</b>: <br> 1.Postion: First letter of your mother's forename (e.g., <b>M</b>artha) <br> 2.Postion: First letter of your father's forename (e.g., <b>S</b>igmund) <br> Postions 3-4: Your year of birth (e.g., 18<b>95</b>)<br> 5.Postion: First letter of your current address (e.g., <b>B</b>erggasse) <br> 6.Postion: First digit of your house number (e.g., <b>1</b>9) <p> Example complete code: <b>MS95B1</b>",
           on_finish: function(data) { 
             code_length = data.code_length;
             if(code_length!=6){alert("Please enter a 6-digit personal code.")}
@@ -396,44 +396,44 @@
     };
     var instruction = {
       type: 'instructions',
-      pages: [["<h3><span 'style = margin-left: 80'>Kui kiiresti suudad &#245ppida elusolendeid tunnuste alusel r&#252hmitama?</h3>"
-      +"<h3>Kui lihtne on Sul olulist informatsiooni m&#228rgata ja t&#228htsusetu info t&#228helepanuta j&#228tta?</h3>"],
-      ["<p> Haridusteadused &#252tlevad meile, et need v&#245imed on &#252liolulised uute asjade &#245ppimisel <br>ega s&#245ltu sellest, kas tegemist on spordi, matemaatika, loodusteaduste v&#245i kunstiga. <p>Selle &#252lesande eesm&#228rgiks on m&#245&#245ta neid v&#245imeid dinosauruste perekondade avastamise n&#228itel."
-      +"<p>&#220lesande lahendamine toimub lihtsas &#245pikeskkonnas, <br> kus saad vaadata erinevaid dinosauruste liike, et selgitada v&#228lja nende perekonda kuuluvus."],
-      ["<h3>Kuidas &#252lesannet sooritada?</h3>"],
-      ["<p class='largeMarginToTop'>&#220lesanne koosneb alaosadest ja iga osa koosneb j&#228rgmisest kolmest sammust:"
-      +"<p><b>(a)</b> Vali &#252ks kaheksast liigist"
+      pages: [["<h3><span 'style = margin-left: 80'>How quickly can you learn to group natural objects in a meaningful way?</h3>"
+      +"<h3>How easy is it for you to spot important information and neglect the unimportant?</h3>"],
+      ["<p> Educational sciences tell us that these abilities are cruical to learn new things, <br>no matter whether they are things of sports, mathematics, science or arts. <p>The purpose of the present task is to measure these abilities <br>by the example of a self-determined discovery of dinosaur families."
+      +"<p>The task takes place in a simple learning environment,<br> where you can review different dinosaur species to figure out their family memberships."],
+      ["<h3>How to perform the task?</h3>"],
+      ["<p class='largeMarginToTop'>There will be a series of learning episodes, and each episode consists of the following three steps:"
+      +"<p><b>(a)</b> Choose one of eight species yourself"
       +"<p><img src='instruction_pics/select_numbered.png' width=600 style='padding:10px; border: solid black 1px'>"
-      +"<p><b>(b)</b> Vaata &#252le sellele omased tunnused ja otsusta, millisesse perekonda see kuulub.<br>(N&#228ites tehakse otsus Theropoda perekonna kohta.)"
+      +"<p><b>(b)</b> Review its features and decide on its family membership.<br>(In the example, the decision is made on the family of the Theropoda.)"
       +"<p><img src='instruction_pics/review_numbered.png' width=600 style='padding:10px; border: solid black 1px'>"
-      +"<p><b>(c)</b> Alguses pead m&#245istatama. Aja jooksul aga <br> saad &#245igesse perekonda kuulumist &#245ppida katse-eksituse meetodil."
+      +"<p><b>(c)</b> At first, you will need to guess. Over time, however, <br> you can learn the correct family membership by trial and error."
       +"<p><img src='instruction_pics/feedback_numbered.png' width=600 style='padding:10px; border: solid black 1px'>"],
-      ["<h3>Kuidas saada suurep&#228rast tulemust?</h3>"],
-      ["<p class='largeMarginToTop'>Pead arvestama kahe eesm&#228rgiga:"
-      +"<li><b>Uurimise ulatus</b>: &#213pi tundma v&#245imalikult palju liike. &#196ra keskendu vaid &#252ksikutele.</li>"
-      +"<li><b>T&#228psus</b>: Tee valitud liikide perekonda m&#228&#228ramisel v&#245imalikult v&#228he vigu.</li>"
-      +"<p>Et oma tegemistel silma peal hoida, <br>n&#228itab iga pildi kohal olev number, kui sageli oled need liigid juba valinud" 
-      +"<br>ja v&#228rv n&#228itab Sinu t&#228psust senise liikmelisuse m&#228&#228ramisel. <br>V&#228rvidel on j&#228rgmine t&#228hendus:"
+      ["<h3>How to achieve a high performance score?</h3>"],
+      ["<p class='largeMarginToTop'>You need to balance two goals:"
+      +"<li><b>Breadth of exploration</b>: Get to know as many species as possible. Do not concentrate on just a few.</li>"
+      +"<li><b>Accuracy</b>: Make as few errors as possible in determining the family membership of a selected species.</li>"
+      +"<p>To help you keep track of your activities, <br>the number above each picture shows you how often you have already selected the species," 
+      +"<br>and the colour indices your accuracy in determining its membership so far. <br>The colors have the following meaning:"
       +"<table align='center' id='colorCode'> "
-      +"<tr><td style='background-color:white;border:solid 1px; border-radius: 45px' width='20'></td><td style:'text-align:left'>Oled valinud liigi ainult &#252hel korral</td></tr>"
-      +"<tr><td style='background-color:red;border:solid 1px; border-radius: 45px'></td><td >Ebapiisav t&#228psus (kaks viimast otsust olid valed)</td></tr>"
-      +"<tr><td style='background-color:orange;border:solid 1px; border-radius: 45px'></td><td>Rahuldav (&#252ks kahest viimasest otsusest oli &#245ige)</td></tr>"
-      +"<tr><td style='background-color:green;border:solid 1px; border-radius: 45px'></td><td>V&#228ga hea (kaks viimast otsust olid &#245iged)</td></tr></table>"
-      +"<p>Alltoodud n&#228ites peaks &#252lesande lahendaja p&#252&#252dma oma teadmisi t&#228iendada"
-      +"<br> liigi 3 (valitud ainult &#252ks kord) ja liigi 7 (kaks viimast otsust olid valed) osas."
+      +"<tr><td style='background-color:white;border:solid 1px; border-radius: 45px' width='20'></td><td style:'text-align:left'>You have selected the species only once</td></tr>"
+      +"<tr><td style='background-color:red;border:solid 1px; border-radius: 45px'></td><td >Poor accuracy (last two decisions were wrong)</td></tr>"
+      +"<tr><td style='background-color:orange;border:solid 1px; border-radius: 45px'></td><td>Fair (one of the last two decisions was right)</td></tr>"
+      +"<tr><td style='background-color:green;border:solid 1px; border-radius: 45px'></td><td>Very good (last two decisions were right)</td></tr></table>"
+      +"<p>In the example below, the learner should try to improve their understanding of "
+      +"<br> species 3 (only selected once) as well as 7 (last two decisions were wrong)."
       +"<p><img src='instruction_pics/select_numbered.png' width=600 style='padding:10px; border: solid black 1px'>"],
-      ["<h3>Teadmiste testid</h3>"
-      +"Aeg-ajalt pead tegema ka teadmiste testi."
-      +"<br>Sellega tahame uurida, kas erinevad liikide valimisel kasutatud strateegiad "
-      +"<br>on seotud erinevustega &#245piedukuses (Sinu edusammud teadmiste testides)."
-      +"<p>Kokkuv&#245ttes tuleb teha kaheksa kiiret teadmiste testi (iga&#252he t&#228itmiseks kulub umbes &#252ks minut)."
-      +"<p>Iga kord tuleb teha &#252ks kahest testi t&#252&#252bist:"
-      +"<li><b>Vaba sorteerimine</b>: Seda t&#252&#252pi testis pead moodustama pildil olevate liikide paarid <br>nii, et saadud paarid vastavad bioloogias tuntud perekondadele."
+      ["<h3>Knowledge tests</h3>"
+      +"From time to time, you will also have to take a knowledge test."
+      +"<br>That way, we want to explore, if different learning strategies (in choosing species) "
+      +"<br>relate to differences in learning success (improvements in knowledge tests)."
+      +"<p>In sum, there are eight quick knowledge tests (about one minute each)."
+      +"<p>Every time, one of two types of knowledge tests need to be taken:"
+      +"<li><b>Free sort</b>: In this type of test, you must form pairs of the pictured species <br>so that the resulting pairs correspond to known families within biology."
       +"<p><img src='instruction_pics/free_sort.png' width=300 style='padding:10px; border: solid black 1px'>"
-      +"<li><b>Otsustamine</b>: Siin esitatakse &#252ks pilt koos &#252he nimetusega <br>ja pead otsustama, kas see pildi ja nimetuse paar on &#245ige."
+      +"<li><b>Judgement</b>: Here, one picture is presented together with one label, <br>and you have to judge whether this picture-label pair is correct."
       +"<p><img src='instruction_pics/judgment.png' width=300 style='padding:10px; border: solid black 1px'>"
-      +"<p>Kui vajutad nuppu 'Edasi', algab esimene (eel-)teadmiste test."],
-      ["<p class='largeMarginToTop'><b>Kas oled esimese testi tegemiseks valmis?"]],
+      +"<p>When you click the Next button, the first (pre-)knowledge test begins."],
+      ["<p class='largeMarginToTop'><b>Are you ready to take the first test?"]],
       show_clickable_nav: true,
       on_finish: function(data){
         // counter set to zero only at the beginning
@@ -462,8 +462,8 @@
     
     var bridge_testToLearning = {
       type: 'html-button-response',
-      stimulus: function(){if(count_sdl==0){txt="<h3>J&#228rgnevalt saad uurida dinosauruse liikide m&#245ningaid tunnuseid, <br>et m&#245ista paremini nende kuulumist teatud perekonda.</h3>"}else{txt="<h3>J&#228rgnevalt saad edasi uurida dinosauruste tunnuseid <br>ja nende perekondadesse kuulumist.</h3>"} return [txt+"Kl&#245psa nuppu 'Edasi', et alustada "+(count_sdl+1)+". &#245ppets&#252kliga."]},
-      choices: ["Edasi"],
+      stimulus: function(){if(count_sdl==0){txt="<h3>In the following, you can explore some attributes of the dinosaur species <br>to better understand their family memberships.</h3>"}else{txt="<h3>In the following, you can continue to explore the dinosaurs' attributes <br>and their family memberships.</h3>"} return [txt+"Click Next to start the "+(count_sdl+1)+". learning round."]},
+      choices: ["Next"],
       on_finish(){
         t_sdl = 0;
       }
@@ -471,9 +471,9 @@
 
     var bridge_learningToTest = {
       type: 'html-button-response',
-      stimulus: function(){if(next_test == 'FS'){txt="Kl&#245psa nuppu 'Edasi', et teha j&#228rgmine vaba sorteerimise testi &#252lesanne."}else{txt="Kl&#245psa nuppu 'Edasi', et teha j&#228rgmine otsustamise testi &#252lesanne."}return ["<h2> Sul on l&#228bitud "+count_sdl+". &#245ppets&#252kkel (kokku "+n_sdl+" ts&#252klit).</h2>"
+      stimulus: function(){if(next_test == 'FS'){txt="Click next to take another Free-Sort test round."}else{txt="Click next to take another Judgement test round."}return ["<h2> The "+count_sdl+". out of "+n_sdl+" learning rounds is over.</h2>"
         +txt]},
-      choices: ["Edasi"],
+      choices: ["Next"],
       on_finish(){
         t_freeSort = 0;
         t_judge = 0;
@@ -492,8 +492,9 @@
 
     var SetOfDinoButtons = {
       type: 'selectExemplar',
+      stimulus: "instruction_pics/dinoNimi.png",
       choices: function(){return dino_pics_reshuffled_sdl},
-      prompt: function(){return "<p>Kl&#245psa loomal, keda soovid uurida! <br>J&#228rgmise teadmiste testini on j&#228&#228nud <b>"+(n_trials_sdl-t_sdl)+"</b> katset. </p>"},
+      prompt: function(){return "<p>Click on the animal that you would like to explore! <br><b>"+(n_trials_sdl-t_sdl)+"</b> trials remaining until the next knowledge test. </p>"},
       on_finish: function(data) { 
         btn_clickedPic_index = data.button_pressed
         species_clicked = current_species_sequence_sdl[btn_clickedPic_index]
@@ -536,8 +537,8 @@
     var test_judgment = {
       type: 'judgmentTest',
       stimulus: function(){return dino_pics_judgment_curBlock[t_judge]},
-      choices: ["Jah","Ei"],
-      choices_conf: ["V&#228ga ebakindel","Ebakindel","Kindel","V&#228ga kindel"],
+      choices: ["Yes","No"],
+      choices_conf: ["Very uncertain","Uncertain","Certain","Very Certain"],
       on_finish: function(data){
         btn_clicked_yn = data.button_pressed;
         btn_clicked_confRating = data.button_pressed_conf;
@@ -582,9 +583,9 @@
 
     var bridge_judgment = {
       type: 'html-button-response',
-      stimulus: function(){return "<h2> Oled l&#228binud "+count_judgment+". otsustamise testi ts&#252kli (kokku "+n_judgment_phases+" ts&#252klit).</h2>"
-        +"Tulemuste n&#228gemiseks kl&#245psa nuppu 'Edasi'.</h2>"},
-      choices: ["Edasi"],
+      stimulus: function(){return "<h2> You have passed the "+count_judgment+". out of "+n_judgment_phases+" rounds of the Judgment knowledge test.</h2>"
+        +"Click Next to see your results.</h2>"},
+      choices: ["Next"],
       on_finish(){
         t_sdl = 0;
           // For each of the four families, p_correct for each of the four rounds
@@ -620,7 +621,7 @@
                 }
             }
           }
-          xValues = ['Ts&#252kkel 1','Ts&#252kkel 2','Ts&#252kkel 3','Ts&#252kkel 4'];
+          xValues = ['Round 1','Round 2','Round 3','Round 4'];
           trace1 = {
             x: xValues.slice(0,count_judgment),
             y: dataFourTraces_judgment["Theropoda"].slice(0,count_judgment),
@@ -654,10 +655,10 @@
             textposition: 'outside'
           };
           layout = {
-            title: 'V&#245ta natuke aega, et oma tulemuse &#252le j&#228rele m&#245elda!',
+            title: 'Take some time to reflect on your learning progress!',
             barmode: 'group',
             xaxis: {title: '', autotick: false,ticks: 'outside',tick0: 0,dtick: 1,ticklen: 8,tickwidth: 4,tickcolor: '#000'},
-            yaxis: {title:'&#213igete vastuste osakaal',range:[0,1]},
+            yaxis: {title:'Proportion correct',range:[0,1]},
             autosize: false,
             width: 600,
             height: 500,
@@ -672,7 +673,7 @@
     var feedback_judgment = {
       
       type: 'graphs',
-      pages: ['<h3>Sinu senine tulemus otsustamise testis</h3>']
+      pages: ['<h3>Your performance so far in the Judgment knowledge test</h3>']
 
     };
     var judgmentTest_loop = {
@@ -691,9 +692,9 @@
       stimuli: function(){return dino_pics_reshuffled_freeSort},
       sort_area_height: 600,
       sort_area_width: 800,
-      prompt: function(){return "<h2>Vaba sorteerimise test (ts&#252kkel "+(count_freeSort+1)+"): k&#252simus "+(t_freeSort+1)+ "  - kokku " +n_trials_freeSort+" k&#252simust</h2>"
-        +"<h3>Millised neist loomadest kuuluvad &#252hte perekonda?</h3>"
-        +"Leia &#245iged paarid ja aseta need teineteise k&#245rvale (lohistades pilte hiirega) &#252hte neljast perekonna sektorist.</p>"},
+      prompt: function(){return "<h2>Free Sort Knowlege Test (Round "+(count_freeSort+1)+"): Question "+(t_freeSort+1)+ " out of " +n_trials_freeSort+"</h2>"
+        +"<h3>Which of these animals go together to form families?</h3>"
+        +"Find the correct pairs and place them next to each other (by drag and drop) in one of the four family quadrants.</p>"},
       on_finish: function(data){
         t_freeSort += 1;
         if (t_freeSort==n_trials_freeSort) {
@@ -706,9 +707,9 @@
     };    
     var bridge_freeSort = {
       type: 'html-button-response',
-      stimulus: function(){nLeft = (n_trials_freeSort-t_freeSort); if(nLeft==1){txt="<p><b>Suur t&#228nu!</b> <p>Selle ts&#252kli l&#245petamiseks on j&#228&#228nud &#252ks katse."};if(nLeft>1){txt="<p><b>Suur t&#228nu!</b> <p>Selle ts&#252kli l&#245petamiseks tuleb vastata veel "+nLeft+"-le k&#252simusele."};if(nLeft==0){txt="<h2> Oled l&#228binud "+count_freeSort+". vaba sorteerimise testi ts&#252kli (kokku "+n_freeSort_phases+" ts&#252klit).</h2>"
-        +"Tulemuste n&#228gemiseks kl&#245psa nuppu 'Edasi'."} return[txt]},
-      choices: ["Edasi"],
+      stimulus: function(){nLeft = (n_trials_freeSort-t_freeSort); if(nLeft==1){txt="<p><b>Thank you!</b> <p>One trial left to complete this round."};if(nLeft>1){txt="<p><b>Thank you!</b> <p>"+nLeft+" questions left to answer in this round."};if(nLeft==0){txt="<h2> You have passed the "+count_freeSort+". out of "+n_freeSort_phases+" rounds of the Free-Sort knowledge test.</h2>"
+        +"Click Next to see your results."} return[txt]},
+      choices: ["Next"],
       on_finish(){
         t_sdl = 0;
 
@@ -736,7 +737,7 @@
             dataFourTraces_txt.push(nCorrect_fx_perRound_txt)
           }
           console.log(dataFourTraces_txt)
-          xValues = ['Ts&#252kkel 1','Ts&#252kkel 2','Ts&#252kkel 3','Ts&#252kkel 4'];
+          xValues = ['Round 1','Round 2','Round 3','Round 4'];
           trace1 = {
             x: xValues.slice(0,count_freeSort),
             y: dataFourTraces[0].slice(0,count_freeSort),
@@ -773,13 +774,13 @@
             text: dataFourTraces_txt[3].slice(0,count_freeSort),
             textposition: 'outside'
           };
-          if(count_test==1){titletxt='V&#245ta natuke aega, et oma tulemuse &#252le j&#228rele m&#245elda!'}else{
-              titletxt='V&#245ta natuke aega, et oma &#245pitulemuse &#252le j&#228rele m&#245elda!'};
+          if(count_test==1){titletxt='Take some time to reflect on your scoring!'}else{
+              titletxt='Take some time to reflect on your learning progress!'};
           layout = {
             title: titletxt,
             barmode: 'group',
             xaxis: {title: '', autotick: false,ticks: 'outside',tick0: 0,dtick: 1,ticklen: 8,tickwidth: 4,tickcolor: '#000'},
-            yaxis: {title: '&#213igete vastuste osakaal',range:[0,1]},
+            yaxis: {title: 'Proportion correct',range:[0,1]},
             autosize: false,
             width: 600,
             height: 500,
@@ -794,7 +795,7 @@
     var feedback_freeSort = {
       
       type: 'graphs',
-      pages: ['<h3>Sinu senine tulemus vaba sorteerimise testis</h3>']
+      pages: ['<h3>Your performance so far in the Free-Sort knowledge test</h3>']
 
     };
 
