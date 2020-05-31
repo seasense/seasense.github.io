@@ -43,7 +43,7 @@ jsPsych.plugins.instructions = (function() {
         if (current_page != 0 && trial.allow_backward) {
           nav_html += "<button id='jspsych-instructions-back' class='jspsych-btn'>&lt; Previous</button>";
         }
-        nav_html += "<button id='jspsych-instructions-next' class='jspsych-btn'>J&#228tka</button></div>" /*Edasi*/
+        nav_html += "<button id='jspsych-instructions-next' class='jspsych-btn'>Continue</button></div>" /*Edasi*/
 
         display_element.append(nav_html);
 

@@ -65,7 +65,7 @@ jsPsych.plugins['survey-text-persCode'] = (function() {
       'id': 'jspsych-survey-text-next',
       'class': 'jspsych-btn jspsych-survey-text'
       }));
-      $("#jspsych-survey-text-next").html('Edasi');
+      $("#jspsych-survey-text-next").html('Weiter');
       $("#jspsych-survey-text-next").click(function() {
       // measure response time
       var endTime = (new Date()).getTime();

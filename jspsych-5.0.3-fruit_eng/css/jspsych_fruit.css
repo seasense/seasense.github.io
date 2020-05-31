@@ -1,0 +1,202 @@
+/*
+ * CSS for jsPsych experiments.
+ *
+ * This stylesheet provides minimal styling to make jsPsych
+ * experiments look polished without any additional styles.
+ */
+
+
+/* fonts and type */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+html {
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-size: 20px; /*20px*/
+  line-height: 1.6em; /*1.6em*/
+}
+html.numbers_recMat{
+  font-size: var(--numberSize_remMat);
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+p {
+  clear: both;
+}
+
+
+/* Classes for changing location of things */
+
+.shape {
+  height: 140px;
+  margin: 1em auto;
+  display: block;
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+.center-content {
+  text-align: center;
+}
+
+.block-center {
+  margin: 1em auto;
+  display: block;
+}
+/* Form elements like input fields and buttons */
+
+input[type="text"] {
+  font-family: 'Open Sans', 'Arial', sans-sefif;
+  font-size: 20px;
+}
+
+/* borrowing Bootstrap style for btn elements, but combining styles a bit */
+.jspsych-btn {
+  /*display: block;*/
+  padding: 8px;
+  margin: auto;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: 'Open Sans', 'Arial', sans-serif;
+  cursor: pointer;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 3px solid black;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.jspsych-btn:hover {
+  /*background-color: #ddd;*/
+  border-color: #aaa;
+}
+
+/* Container holding jsPsych content */
+
+.jspsych-display-element {
+  width: 800px; /*400*/
+  height: 0px;
+  margin: 50px auto 50px auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  text-align: center;
+  font-size: var(--normalTextSize);
+}
+
+/* PLUGIN: jspsych-instructions */
+.jspsych-instructions-nav {
+  text-align: center;
+  margin-top: 2em;
+  font-size: 12px;
+}
+.jspsych-instructions-nav button {
+  margin: 0px;
+}
+  
+
+/* PLUGIN: jspsych-single-stim */
+#jspsych-single-stim-stimulus {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /*height: 100%;
+  width: 100%;*/
+  overflow-y: hidden;
+  font-size: 22;
+}
+/* PLUGIN: jspsych-button-response */
+
+.jspsych-button-response-button {
+  font-size: 20px;
+  margin: 0.2em;
+  color: red;
+  /*margin-top: 6.5em;*/
+}
+.jspsych-button-response-Page1B1 {
+  font-size: 22px;
+  margin: 0.2em;
+  padding:30px;
+  color: red;
+  background-color: yellow;
+  /*margin-top: 6.5em;*/
+}
+.jspsych-button-response-Page1B2 {
+  font-size: 22px;
+  margin: 0.2em;
+  padding:30px;
+  color: yellow;
+  background-color: green;
+  /*margin-top: 6.5em;*/
+}
+.jspsych-button-response-Page1B3 {
+  font-size: 22px;
+  margin: 0.2em;
+  padding:30px;
+  color: green;
+  background-color: red;
+  /*margin-top: 6.5em;*/
+}
+.jspsych-button-response-Page1B4 {
+  font-size: 22px;
+  margin: 0.2em;
+  padding:30px;
+  color: green;
+  background-color: blue;
+  /*margin-top: 6.5em;*/
+}
+
+/* PLUGIN: jspsych-survey-text */
+
+.jspsych-survey-text {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  font-size: 20px;
+}
+.jspsych-survey-text-question {
+  margin: 2em ;
+  font-size: 20px;
+}
+.jspsych-survey-text-preamble {
+  font-size: 20px;
+}
+
+/* PLUGIN: jspsych-multi-choice */
+
+.jspsych-survey-multi-choice-question {
+  margin-top: 0em;
+  margin-bottom: 2em;
+ }
+
+.jspsych-survey-multi-choice-text span.required {
+  color: darkred;
+}
+
+.jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-text {
+  text-align: center;
+}
+
+.jspsych-survey-multi-choice-option {
+  line-height: 1.5;
+}
+.jspsych-survey-multi-choice-horizontal .jspsych-survey-multi-choice-option {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 1em;
+  vertical-align: top;
+}
+
+label.jspsych-survey-multi-choice-text input[type="radio"] {
+  margin-right: 0.5em;
+  font-size: 40;
+}
