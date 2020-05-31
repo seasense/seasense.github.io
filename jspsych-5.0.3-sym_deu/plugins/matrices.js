@@ -228,7 +228,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
             tdk.setAttribute("style","font-size: var(--normalTextSize)");
             row0.appendChild(tdk);
             if(k==0){
-                tdk.appendChild(document.createTextNode("Tagasiside: "));
+                tdk.appendChild(document.createTextNode("Feedback: "));
             }
     }
     var row1   = juxTable.insertRow(1);
@@ -249,7 +249,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
 		mat1_cell.appendChild(matCor);
 
 		var matCorCaption = document.createElement("CAPTION");
-		var captionText2 = document.createTextNode("Esitatud jada");
+		var captionText2 = document.createTextNode("Dargebotene Sequenz");
 		matCorCaption.setAttribute('style','color:black; font-size: var(--normalTextSize)'); 
 		matCorCaption.appendChild(captionText2);
 		matCor.appendChild(matCorCaption);
@@ -296,7 +296,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
 
         var matResponseCaption = document.createElement("CAPTION");
         matResponseCaption.setAttribute('style','color:black; font-size: var(--normalTextSize)'); 
-        var captionText3 = document.createTextNode("Sinu mäletatud jada");
+        var captionText3 = document.createTextNode("Ihre erinnerte Sequenz");
 
         matResponseCaption.appendChild(captionText3);
         matResponse.appendChild(matResponseCaption);
@@ -322,7 +322,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
 
         var row4   = juxTable.insertRow(4);
         row4.setAttribute("id", "row4");
-        var accu_title = document.createTextNode("Tulemus: ");
+        var accu_title = document.createTextNode("Punktestand: ");
         var accuTitle_td = document.createElement("TD");
         
         row4.setAttribute("style","font-weight:bold; font-size: var(--normalTextSize)");
@@ -342,10 +342,10 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
                     }
                 };
             }
-            bprintr(cells_RecCorPos,"green","Õ")
-            bprintr(cells_RecIncorPos,"red","V")
-            bprintr(cells_Missed,"red","P")
-            bprintr(cells_FalseMem,"red","E")
+            bprintr(cells_RecCorPos,"green","K")
+            bprintr(cells_RecIncorPos,"red","O")
+            bprintr(cells_Missed,"red","A")
+            bprintr(cells_FalseMem,"red","N")
         };
 
         
@@ -370,19 +370,19 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
                     };
                     var rx = 0;
                     if(cells_RecCorPos.length>0){
-                        addRow(AbbrevTab,rx,"Õ = Õige",td,"G");
+                        addRow(AbbrevTab,rx,"K = Korrekt",td,"G");
                         rx+=1;
                     }
                     if(cells_RecIncorPos.length>0){
-                        addRow(AbbrevTab,rx,"V = Vale järjekord",td,"R");
+                        addRow(AbbrevTab,rx,"O = Falsche Reihenfolge",td,"R");
                         rx+=1;
                     }
                     if(cells_Missed.length>0){
-                        addRow(AbbrevTab,rx,"P = Puudub",td,"R");
+                        addRow(AbbrevTab,rx,"A = Auslasser",td,"R");
                         rx+=1;
                     }
                     if(cells_FalseMem.length>0){
-                        addRow(AbbrevTab,rx,"E = Ei esitatud",td,"R");
+                        addRow(AbbrevTab,rx,"N = Nicht dargeboten",td,"R");
                         rx+=1;
                     }   
                         
@@ -404,7 +404,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
             var tdk = document.createElement("TD");
             row6.appendChild(tdk);
             if(k==0){
-                var accu_txtNode = document.createTextNode("Täpsus: "+accuracy_score+"%");
+                var accu_txtNode = document.createTextNode("Genauigkeit: "+accuracy_score+"%");
                 tdk.appendChild(accu_txtNode);
                 tdk.setAttribute("style","font-size: var(--normalTextSize)");
                 
