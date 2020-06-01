@@ -314,7 +314,7 @@ jsPsych.plugins['free-sort'] = (function() {
         "nCorrectPairs": nCorrectPairs,
         "rt": rt
       };
-      allMoved='yes';
+      //allMoved='yes';
       if(allMoved=='no'){alert("To proceed you need to assign every animal to one of the eight rectangles.");}else{
         // advance to next part
         display_element.innerHTML = '';

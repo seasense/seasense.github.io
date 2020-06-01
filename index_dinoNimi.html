@@ -370,6 +370,12 @@
       stimulus: "<img src='instruction_pics/dinoNimi.png' width=200 style='padding:0px; '>",
       choices: ["Sisene"]
     };
+    var goodbye = {
+        type: 'instructions',
+        pages: ["<h3>Suur t&aumlnu vastamise eest!</h3> <p>Sinu anonüümsed vastused on salvestatud &uumlhes Tallinna &Uumllikooli serveris. <br>Kui Sul on lisak&uumlsimusi uuringu eesm&aumlrgi v&otildei meie andmehalduse kohta, <br>saada palun meile e-kiri aadressil: <a href='mailto:seasenselab@gmail.com'> seasenselab@gmail.com</a>"],
+        show_clickable_nav: false
+    };
+
 
     var pcode = {
           type: "survey-text-pcode",
@@ -404,11 +410,11 @@
       ["<h3>Kuidas &#252lesannet sooritada?</h3>"],
       ["<p class='largeMarginToTop'>&#220lesanne koosneb alaosadest ja iga osa koosneb j&#228rgmisest kolmest sammust:"
       +"<p><b>(a)</b> Vali &#252ks kaheksast liigist"
-      +"<p><img src='instruction_pics/select_numbered.png' width=600 style='padding:10px; border: solid black 1px'>"
-      +"<p><b>(b)</b> Vaata &#252le sellele omased tunnused ja otsusta, millisesse perekonda see kuulub.<br>(N&#228ites tehakse otsus Theropoda perekonna kohta.)"
-      +"<p><img src='instruction_pics/review_numbered.png' width=600 style='padding:10px; border: solid black 1px'>"
+      +"<p><img src='instruction_pics/select_numbered_estonian.png' width=600 style='padding:10px; border: solid black 1px'>"
+      +"<p><b>(b)</b> Vaata &#252le sellele omased tunnused ja otsusta, millisesse perekonda see kuulub.<br>(N&#228ites tehakse otsus Styracosterna perekonna kohta.)"
+      +"<p><img src='instruction_pics/review_numbered_estonian.png' width=600 style='padding:10px; border: solid black 1px'>"
       +"<p><b>(c)</b> Alguses pead m&#245istatama. Aja jooksul aga <br> saad &#245igesse perekonda kuulumist &#245ppida katse-eksituse meetodil."
-      +"<p><img src='instruction_pics/feedback_numbered.png' width=600 style='padding:10px; border: solid black 1px'>"],
+      +"<p><img src='instruction_pics/feedback_numbered_estonian.png' width=600 style='padding:10px; border: solid black 1px'>"],
       ["<h3>Kuidas saada suurep&#228rast tulemust?</h3>"],
       ["<p class='largeMarginToTop'>Pead arvestama kahe eesm&#228rgiga:"
       +"<li><b>Uurimise ulatus</b>: &#213pi tundma v&#245imalikult palju liike. &#196ra keskendu vaid &#252ksikutele.</li>"
@@ -422,7 +428,7 @@
       +"<tr><td style='background-color:green;border:solid 1px; border-radius: 45px'></td><td>V&#228ga hea (kaks viimast otsust olid &#245iged)</td></tr></table>"
       +"<p>Alltoodud n&#228ites peaks &#252lesande lahendaja p&#252&#252dma oma teadmisi t&#228iendada"
       +"<br> liigi 3 (valitud ainult &#252ks kord) ja liigi 7 (kaks viimast otsust olid valed) osas."
-      +"<p><img src='instruction_pics/select_numbered.png' width=600 style='padding:10px; border: solid black 1px'>"],
+      +"<p><img src='instruction_pics/select_numbered_estonian.png' width=600 style='padding:10px; border: solid black 1px'>"],
       ["<h3>Teadmiste testid</h3>"
       +"Aeg-ajalt pead tegema ka teadmiste testi."
       +"<br>Sellega tahame uurida, kas erinevad liikide valimisel kasutatud strateegiad "
@@ -430,9 +436,9 @@
       +"<p>Kokkuv&#245ttes tuleb teha kaheksa kiiret teadmiste testi (iga&#252he t&#228itmiseks kulub umbes &#252ks minut)."
       +"<p>Iga kord tuleb teha &#252ks kahest testi t&#252&#252bist:"
       +"<li><b>Vaba sorteerimine</b>: Seda t&#252&#252pi testis pead moodustama pildil olevate liikide paarid <br>nii, et saadud paarid vastavad bioloogias tuntud perekondadele."
-      +"<p><img src='instruction_pics/free_sort_estonian.png' width=300 style='padding:10px; border: solid black 1px'>"
+      +"<p><img src='instruction_pics/free_sort_estonian.png' width=400 style='padding:10px; border: solid black 1px'>"
       +"<li><b>Otsustamine</b>: Siin esitatakse &#252ks pilt koos &#252he nimetusega <br>ja pead otsustama, kas see pildi ja nimetuse paar on &#245ige."
-      +"<p><img src='instruction_pics/judgment.png' width=300 style='padding:10px; border: solid black 1px'>"
+      +"<p><img src='instruction_pics/judgment_estonian.png' width=400 style='padding:10px; border: solid black 1px'>"
       +"<p>Kui vajutad nuppu 'Edasi', algab esimene (eel-)teadmiste test."],
       ["<p class='largeMarginToTop'><b>Kas oled esimese testi tegemiseks valmis?"]],
       show_clickable_nav: true,
@@ -621,7 +627,7 @@
                 }
             }
           }
-          xValues = ['Etapp 1','Etapp 2','Etapp 3','Etapp 4'];
+          xValues = ['Tsükkel 1','Tsükkel 2','Tsükkel 3','Tsükkel 4'];
           trace1 = {
             x: xValues.slice(0,count_judgment),
             y: dataFourTraces_judgment["Theropoda"].slice(0,count_judgment),
@@ -655,10 +661,10 @@
             textposition: 'outside'
           };
           layout = {
-            title: 'V&#245ta natuke aega, et oma tulemuse &#252le j&#228rele m&#245elda!',
+            title: 'Võta natuke aega, et oma tulemuse üle järele mõelda!',
             barmode: 'group',
             xaxis: {title: '', autotick: false,ticks: 'outside',tick0: 0,dtick: 1,ticklen: 8,tickwidth: 4,tickcolor: '#000'},
-            yaxis: {title:'&#213igete vastuste osakaal',range:[0,1]},
+            yaxis: {title:'Õigete vastuste osakaal',range:[0,1]},
             autosize: false,
             width: 600,
             height: 500,
@@ -737,7 +743,7 @@
             dataFourTraces_txt.push(nCorrect_fx_perRound_txt)
           }
           console.log(dataFourTraces_txt)
-          xValues = ['Etapp 1','Etapp 2','Etapp 3','Etapp 4'];
+          xValues = ['Tsükkel 1','Tsükkel 2','Tsükkel 3','Tsükkel 4'];
           trace1 = {
             x: xValues.slice(0,count_freeSort),
             y: dataFourTraces[0].slice(0,count_freeSort),
@@ -774,13 +780,13 @@
             text: dataFourTraces_txt[3].slice(0,count_freeSort),
             textposition: 'outside'
           };
-          if(count_test==1){titletxt='V&#245ta natuke aega, et oma tulemuse &#252le j&#228rele m&#245elda!'}else{
-              titletxt='V&#245ta natuke aega, et oma &#245pitulemuse &#252le j&#228rele m&#245elda!'};
+          if(count_test==1){titletxt='Võta natuke aega, et oma tulemuse üle järele mõelda!'}else{
+              titletxt='Võta natuke aega, et oma õpitulemuse üle järele mõelda!'};
           layout = {
             title: titletxt,
             barmode: 'group',
             xaxis: {title: '', autotick: false,ticks: 'outside',tick0: 0,dtick: 1,ticklen: 8,tickwidth: 4,tickcolor: '#000'},
-            yaxis: {title: '&#213igete vastuste osakaal',range:[0,1]},
+            yaxis: {title: 'Õigete vastuste osakaal',range:[0,1]},
             autosize: false,
             width: 600,
             height: 500,
@@ -844,9 +850,10 @@
         // Learning 7
         sdl_loop,bridge_learningToTest,
         // Test 8 Judgment 4
-        judgmentTest_loop,bridge_judgment,feedback_judgment
-        ],
-      on_finish: function() { jsPsych.data.displayData(); }
+        judgmentTest_loop,bridge_judgment,feedback_judgment,
+        goodbye
+        ]/*,
+      on_finish: function() { jsPsych.data.displayData(); }*/
     });
 
   </script>

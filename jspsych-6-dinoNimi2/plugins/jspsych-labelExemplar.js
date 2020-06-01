@@ -209,7 +209,7 @@ jsPsych.plugins["labelExemplar"] = (function() {
       feedback(feedback_text);
       
       function addBtn(){
-          document.getElementById('btnHolder').innerHTML = '<input type="button" class="jspsych-btn" id="doneButton2" value="Continue" />';
+          document.getElementById('btnHolder').innerHTML = '<input type="button" class="jspsych-btn" id="doneButton2" value="Edasi" />';
         };
       addBtn();
       display_element.querySelector('#doneButton2').addEventListener('click', function(e){
