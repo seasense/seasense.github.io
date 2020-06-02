@@ -315,7 +315,7 @@ jsPsych.plugins['free-sort'] = (function() {
         "rt": rt
       };
       //allMoved='yes';
-      if(allMoved=='no'){alert("To proceed you need to assign every animal to one of the eight rectangles.");}else{
+      if(allMoved=='no'){alert("Jätkamiseks pead iga looma asetama ühte kaheksast nelinurgast.");}else{
         // advance to next part
         display_element.innerHTML = '';
         jsPsych.finishTrial(trial_data);
