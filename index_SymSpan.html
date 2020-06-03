@@ -34,6 +34,9 @@
 	
 	
 	<script>
+		// helper functions
+		function scrollWin() {window.scrollTo(0, 0);};
+
 		function rememberCellsFx(t_SetSize){
 	
 			cells_trial_x = []
@@ -90,9 +93,10 @@
 	</script>
 	
 	<script>
-	var trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
-	//var trials = [2,3,6];
-	function trials_gene(){return (trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6])};
+	//var trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
+	var trials = [2,3,6];
+	//function trials_gene(){return (trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6])};
+	function trials_gene(){return (trials = [2,2])};
 	var trials_copy = trials;
 	//var trials = [2,2];
 	//var trials_seq = jsPsych.randomization.repeat(trials, 1);
@@ -153,7 +157,7 @@
 			preamble: "<b>Juhised isikliku koodi loomiseks</b>: <br> Esimene s&#252mbol: Sinu ema eesnime esimene t&#228ht (nt <b>M</b>arta) <br> Teine s&#252mbol: Sinu isa eesnime esimene t&#228ht (nt <b>S</b>iim) <br> Kolmas ja neljas s&#252mbol: Sinu s&#252nniaasta kaks viimast numbrit (nt 18<b>95</b>)<br> Viies s&#252mbol: Sinu praeguse aadressi esimene t&#228ht (nt <b>P</b>argi t&#228nav) <br> Kuues s&#252mbol: Sinu majanumbri esimene number (nt <b>1</b>9) <p> N&#228ide t&#228ielikust isiklikust koodist: <b>MS95P1</b>",
 			on_finish: function(data) { 
 		 		code_length = data.code_length;
-		 		if(code_length!=6){alert("Bitte geben Sie einen 6-stelligen Personencode ein.")}
+		 		if(code_length!=6){alert("Palun sisesta kuuekohaline isiklik kood.")}
 		 		
 		 	}
 	};
@@ -189,7 +193,7 @@
 	var symmetry = {
 		    type: 'judgeSym',
 			is_html: true, 
-			prompt: "Kas muster on s&#252mmeetriline?",
+			prompt: function(){return unescape("Kas muster on s%FCmmeetriline?") },
 		    choices: symmetry_buttons,
 	 	   	on_finish: function(data){
 	 	   		pattern = data.matrixPattern
@@ -369,7 +373,7 @@
 	var sym_RemAndSym = {
 		    type: 'judgeSym',
 			is_html: true, 
-			prompt: "Kas see muster on s&#252mmeetriline?",
+			prompt: function(){return unescape("Kas muster on s%FCmmeetriline?") },
 		    choices: symmetry_buttons,
 	 	   	on_finish: function(data){
 	 	   		pattern = data.matrixPattern
@@ -525,6 +529,11 @@ var intro_realTrials = {
 		        }
 		  },
 	};
+	var goodbye = {
+        type: 'instructions',
+        pages: ["<h3>Suur t&aumlnu vastamise eest!</h3> <p>Sinu anon&uuml&uumlmsed vastused on salvestatud &uumlhes Tallinna &Uumllikooli serveris. <br>Kui Sul on lisak&uumlsimusi uuringu eesm&aumlrgi v&otildei meie andmehalduse kohta, <br>saada palun meile e-kiri aadressil: <a href='mailto:seasenselab@gmail.com'> seasenselab@gmail.com</a>"],
+        show_clickable_nav: false
+    };
 
 /////////
 	jsPsych.init({
@@ -540,12 +549,12 @@ var intro_realTrials = {
 					],
 
 	   	fullscreen: false,
-	   	on_finish: function(data){
+	   	/*on_finish: function(data){
 	   	jsPsych.data.displayData();
 	        jsPsych.data.displayData();
 	        jsPsych.data.localSave('SymSpan_sendMeTo_seasenselab@gmail.com.txt', 'csv');
 	        $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
-	   }
+	   }*/
 	});
 	
 	

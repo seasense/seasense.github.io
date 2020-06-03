@@ -14,7 +14,7 @@ jsPsych.plugins.text = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-
+    scrollWin();
     trial.cont_key = trial.cont_key || [];
     
     // if any trial variables are functions

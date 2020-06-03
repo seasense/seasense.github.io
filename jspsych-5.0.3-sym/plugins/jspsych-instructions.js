@@ -14,7 +14,7 @@ jsPsych.plugins.instructions = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-
+    scrollWin();
     trial.key_forward = trial.key_forward || 'rightarrow';
     trial.key_backward = trial.key_backward || 'leftarrow';
     trial.allow_backward = (typeof trial.allow_backward === 'undefined') ? true : trial.allow_backward;

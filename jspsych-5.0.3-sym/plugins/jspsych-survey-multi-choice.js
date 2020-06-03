@@ -14,7 +14,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-
+    scrollWin();
     var plugin_id_name = "jspsych-survey-multi-choice";
     var plugin_id_selector = '#' + plugin_id_name;
     var _join = function( /*args*/ ) {

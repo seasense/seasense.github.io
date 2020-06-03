@@ -296,7 +296,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
 
         var matResponseCaption = document.createElement("CAPTION");
         matResponseCaption.setAttribute('style','color:black; font-size: var(--normalTextSize)'); 
-        var captionText3 = document.createTextNode("Sinu mäletatud jada");
+        var captionText3 = document.createTextNode(unescape("Sinu m%E4letatud jada"));
 
         matResponseCaption.appendChild(captionText3);
         matResponse.appendChild(matResponseCaption);
@@ -342,7 +342,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
                     }
                 };
             }
-            bprintr(cells_RecCorPos,"green","Õ")
+            bprintr(cells_RecCorPos,"green",unescape("%D5"))
             bprintr(cells_RecIncorPos,"red","V")
             bprintr(cells_Missed,"red","P")
             bprintr(cells_FalseMem,"red","E")
@@ -370,11 +370,11 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
                     };
                     var rx = 0;
                     if(cells_RecCorPos.length>0){
-                        addRow(AbbrevTab,rx,"Õ = Õige",td,"G");
+                        addRow(AbbrevTab,rx,unescape("%D5 = %D5ige"),td,"G");
                         rx+=1;
                     }
                     if(cells_RecIncorPos.length>0){
-                        addRow(AbbrevTab,rx,"V = Vale järjekord",td,"R");
+                        addRow(AbbrevTab,rx,unescape("V = Vale j%E4rjekord"),td,"R");
                         rx+=1;
                     }
                     if(cells_Missed.length>0){
@@ -404,7 +404,7 @@ function matFeedbackFx(cells_presented, cells_clicked, cells_RecCorPos, cells_Re
             var tdk = document.createElement("TD");
             row6.appendChild(tdk);
             if(k==0){
-                var accu_txtNode = document.createTextNode("Täpsus: "+accuracy_score+"%");
+                var accu_txtNode = document.createTextNode(unescape("T%E4psus: "+accuracy_score+"%"));
                 tdk.appendChild(accu_txtNode);
                 tdk.setAttribute("style","font-size: var(--normalTextSize)");
                 
