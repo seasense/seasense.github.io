@@ -146,7 +146,7 @@
     var informedConsent3 = {
 		type: 'survey-multi-choice',
 		questions: ["<b>N&#245usolek uuringus osalemiseks </b>3/3"],
-		options: function(){return([["Olen n&#245us, et teaduse l&#228bipaistvuse huvides tehakse mu anon&#252&#252msed andmed teistele teadlastele vabalt k&#228ttesaadavaks vastavalt Avatud Teaduse Raamistikule (vt <a href='https://osf.io/'> Open Science Framework </a>)."]])},
+		options: function(){return([["Olen n&#245us, et teaduse l&#228bipaistvuse huvides tehakse mu anon&#252&#252msed andmed teistele teadlastele vabalt k&#228ttesaadavaks vastavalt Avatud Teaduse Raamistikule (vt <a href='https://osf.io/'> Open Science Framework</a>)."]])},
 		required: [true]
     };
 
@@ -182,7 +182,7 @@
 	
 	var intro_symmetry_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>S&#252mmeetria&#252lesanne: juhised</b></p> J&#228rgnevalt n&#228idatakse Sulle mustadest ja valgetest ruutudest kokku pandud mustreid (maatrikseid). Oluline on otsustada, kas maatriksi muster on horisontaalselt s&#252mmeetriline v&#245i mitte (vt alltoodud pilti).</p></p><IMG src='symspan_example.png'></IMG></p> <p class='center-content'> Alustamiseks kl&#245psa nuppu <i>Edasi</i>.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>S&#252mmeetria&#252lesanne: juhised</b></p> J&#228rgnevalt n&#228idatakse Sulle mustadest ja valgetest ruutudest kokku pandud mustreid (maatrikseid). Oluline on otsustada, kas maatriksi muster on horisontaalselt s&#252mmeetriline v&#245i mitte (vt alltoodud pilti).</p></p><IMG src='img_symspan/symspan_example.png' width=400 style='border:solid black 1px'><IMG ></p> <p class='center-content'> Alustamiseks kl&#245psa nuppu <i>Edasi</i>.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				successCountr_sym = 0;
@@ -538,9 +538,9 @@ var intro_realTrials = {
 /////////
 	jsPsych.init({
 		
-		timeline: [welcome, informedConsent1, informedConsent2, informedConsent3,
+		timeline: [/*welcome, informedConsent1, informedConsent2, informedConsent3,
 					persCode_loop,
-					practice_overview,
+					practice_overview,*/
 					intro_symmetry_practice,symmetry_loop_practice,
 					intro_remember_practice,recall_loop_practice,
 					intro_RemAndSym_practice,RemAndSym_loop2,
