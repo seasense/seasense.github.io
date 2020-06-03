@@ -13,7 +13,7 @@ jsPsych.plugins["Page1"] = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-
+    scrollWin();
     // default trial parameters
     trial.button_html = trial.button_html || '<button class="jspsych-btn">%choice%</button>';
     trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;

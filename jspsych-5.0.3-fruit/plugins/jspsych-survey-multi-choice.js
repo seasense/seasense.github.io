@@ -14,7 +14,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-
+    scrollWin();
     var plugin_id_name = "jspsych-survey-multi-choice";
     var plugin_id_selector = '#' + plugin_id_name;
     var _join = function( /*args*/ ) {
@@ -108,7 +108,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       }
     }
 
-    var nameOfButton = "Next";
+    var nameOfButton = "Edasi";
     // add submit button
     $trial_form.append($('<input>', {
       'type': 'submit',

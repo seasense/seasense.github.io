@@ -29,6 +29,8 @@
 	
 	
 	<script>
+	// helper functions
+	function scrollWin() {window.scrollTo(0, 0);};
 
 	var geoShapes = [ 
 		['jspsych-5.0.3-fruit/Shapes/pentagon_yellow.png','jspsych-5.0.3-fruit/Shapes/pentagon_green.png','jspsych-5.0.3-fruit/Shapes/pentagon_red.png','jspsych-5.0.3-fruit/Shapes/pentagon_blue.png'],
@@ -60,8 +62,8 @@
 
 	var trials = [4,4,4];
 	var practice_criterion = 4;
-	//var nStimuli = 5;
-	var time_limit = 45000;
+	//var time_limit = 45000;
+	var time_limit = 5000;
 ///////// Intro
 /////////
 	var welcome = {
@@ -88,7 +90,7 @@
     var informedConsent3 = {
 		type: 'survey-multi-choice',
 		questions: ["<b>N&#245usolek uuringus osalemiseks </b>3/3"],
-		options: function(){return([["Olen n&#245us, et teaduse l&#228bipaistvuse huvides tehakse mu anon&#252&#252msed andmed teistele teadlastele vabalt k&#228ttesaadavaks vastavalt Avatud Teaduse Raamistikule (vt <a href='https://osf.io/'> Open Science Framework </a>)."]])},
+		options: function(){return([["Olen n&#245us, et teaduse l&#228bipaistvuse huvides tehakse mu anon&#252&#252msed andmed teistele teadlastele vabalt k&#228ttesaadavaks vastavalt Avatud Teaduse Raamistikule (vt <a href='https://osf.io/'> Open Science Framework</a>)."]])},
 		required: [true]
     };
 
@@ -99,7 +101,7 @@
 			preamble: "<b>Juhised isikliku koodi loomiseks</b>: <br> Esimene s&#252mbol: Sinu ema eesnime esimene t&#228ht (nt <b>M</b>arta)<br>Teine s&#252mbol: Sinu isa eesnime esimene t&#228ht (nt <b>S</b>iim) <br> Kolmas ja neljas s&#252mbol: Sinu s&#252nniaasta kaks viimast numbrit (nt 18<b>95</b>) <br> Viies s&#252mbol: Sinu praeguse aadressi esimene t&#228ht (nt <b>P</b>argi t&#228nav) <br> Kuues s&#252mbol: Sinu majanumbri esimene number (nt <b>1</b>9) <p> N&#228ide t&#228ielikust isiklikust koodist: <b>MS95P1</b>",
 			on_finish: function(data) { 
 		 		code_length = data.code_length;
-		 		if(code_length!=6){alert("Please enter a personal code with 6 digits.")}
+		 		if(code_length!=6){alert("Palun sisesta kuuekohaline isiklik kood.")}
 		 	}
 	};
 	var persCode_loop = {
@@ -819,11 +821,16 @@
 	 	   	},
 	}
 
-	var goodbye = {
+	/*var goodbye = {
 			type: 'instructions',
 			pages: [function(){return("<h3>Suur t&#228nu vastamise eest!</h3> Kl&#245psa nuppu <i>J&#228tka</i>, et alustada andmete allalaadimist allalaetud failide kausta. Palun saada see fail aadressile: <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>  <p>Kui mingil p&#245hjusel allalaadimine ei t&#246&#246ta, siis palun kopeeri ja kleebi ekraanil kuvatud andmed oma valitud tekstifaili ja saada see samuti aadressile <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>.<p><b>Igal juhul palun teavita meid oma osalemisest! </li></ul>")}],
 			show_clickable_nav: true,	
-	};
+	};*/
+	var goodbye = {
+        type: 'instructions',
+        pages: ["<h3>Suur t&aumlnu vastamise eest!</h3> <p>Sinu anon&uuml&uumlmsed vastused on salvestatud &uumlhes Tallinna &Uumllikooli serveris. <br>Kui Sul on lisak&uumlsimusi uuringu eesm&aumlrgi v&otildei meie andmehalduse kohta, <br>saada palun meile e-kiri aadressil: <a href='mailto:seasenselab@gmail.com'> seasenselab@gmail.com</a>"],
+        show_clickable_nav: false
+    };
 
 
 
