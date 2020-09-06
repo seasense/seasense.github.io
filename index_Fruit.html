@@ -2,19 +2,19 @@
 	<head>
 		<title>Fruit Stroop Task</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="jspsych-5.0.3-fruit/jspsych.js"></script>
+		<script src="jspsych-5.0.3-fruit_eng/jspsych.js"></script>
 
-		<script src="jspsych-5.0.3-fruit/plugins/jspsych-text.js"></script>
+		<script src="jspsych-5.0.3-fruit_eng/plugins/jspsych-text.js"></script>
 		
-		<script src="jspsych-5.0.3-fruit/plugins/jspsych-instructions.js"></script>
+		<script src="jspsych-5.0.3-fruit_eng/plugins/jspsych-instructions.js"></script>
 		
-		<script src="jspsych-5.0.3-fruit/plugins/jspsych-survey-text_persCode.js"></script>
-		<script src="jspsych-5.0.3-fruit/plugins/jspsych-button-response.js"></script>
-		<script src="jspsych-5.0.3-fruit/plugins/jspsych-button-response-Fruit.js"></script>
-		<script src="jspsych-5.0.3-fruit/plugins/jspsych-survey-multi-choice.js"></script>
-		<script src="jspsych-5.0.3-fruit/plugins/jspsych-single-stim.js"></script>
+		<script src="jspsych-5.0.3-fruit_eng/plugins/jspsych-survey-text_persCode.js"></script>
+		<script src="jspsych-5.0.3-fruit_eng/plugins/jspsych-button-response.js"></script>
+		<script src="jspsych-5.0.3-fruit_eng/plugins/jspsych-button-response-Fruit.js"></script>
+		<script src="jspsych-5.0.3-fruit_eng/plugins/jspsych-survey-multi-choice.js"></script>
+		<script src="jspsych-5.0.3-fruit_eng/plugins/jspsych-single-stim.js"></script>
 		
-		<link href="jspsych-5.0.3-fruit/css/jspsych_fruit.css" rel="stylesheet" type="text/css"></link>
+		<link href="jspsych-5.0.3-fruit_eng/css/jspsych_fruit.css" rel="stylesheet" type="text/css"></link>
 		
 		<style>
 			:root{
@@ -29,8 +29,6 @@
 	
 	
 	<script>
-	// helper functions
-	function scrollWin() {window.scrollTo(0, 0);};
 
 	var geoShapes = [ 
 		['jspsych-5.0.3-fruit/Shapes/pentagon_yellow.png','jspsych-5.0.3-fruit/Shapes/pentagon_green.png','jspsych-5.0.3-fruit/Shapes/pentagon_red.png','jspsych-5.0.3-fruit/Shapes/pentagon_blue.png'],
@@ -62,14 +60,14 @@
 
 	var trials = [4,4,4];
 	var practice_criterion = 4;
+	//var nStimuli = 5;
 	var time_limit = 45000;
-	//var time_limit = 5000;
 ///////// Intro
 /////////
 	var welcome = {
 			type: 'instructions',
 			pages: [
-					"<p class='center-content'> <h2> Tere tulemast lahendama <b> <span style='color: red'>p</span><span style='color: orange'>u</span><span style='color: green'>u</span><span style='color: blue'>v</span><span style='color: red'>i</span><span style='color: orange'>l</span><span style='color: green'>j</span><span style='color: blue'>a</span> &#252lesannet!</b></h2> <p>Puuvilja &#252lesannet kasutatakse pidurduskontrolli hindamiseks - see on kognitiivne protsess t&#228helepanu t&#245husaks kontrollimiseks. J&#228rgnevalt n&#228idatakse Sulle puuviljade pilte ja v&#228rvilisi geomeetrilisi kujundeid (n&#228iteks sinised viinamarjad v&#245i rohelised pirnid). Sinu &#252lesandeks on nimetada v&#228rv, mis vastab neljale reeglile/tingimusele.<p><p>***</p>Terve puuvilja &#252lesande lahendamine (sh harjutuskatsed) v&#245tab aega 8 minutit. <p><li>Palun &#228ra kasuta &#252lesande lahendamisel Windows Internet Explorerit, kuna teadlased ei ole seda andmete salvestamise ja s&#228ilitamise osas testinud. <li>Palun osale ainult siis, kui tunned end keskendunult ja puhanuna. <li>Palun ole ettevaatlik, et Sa kogemata ei vajutaks Escape-nuppu, mis l&#245petaks &#252lesande ilma andmeid salvestamata. <li>Pea meeles, et p&#228rast terve &#252lesande lahendamist salvestatakse Sinu andmed lokaalselt tekstifailina Sinu allalaaditavate failide kausta. Palun saada see fail j&#228rgmisele e-posti aadressile: <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a> <p>Oma n&#245usoleku andmiseks ja &#252lesande lahendamise kohta edasiste juhiste saamiseks kl&#245psa nuppu <i>J&#228tka</i>."],
+					"<p class='center-content'> <h2> Welcome to the <b> <span style='color: red'>f</span><span style='color: orange'>r</span><span style='color: green'>u</span><span style='color: blue'>i</span>t stroop task!</b></h2> <p>The Fruit Stroop task is used to assess inhibitory control - a cognitive process for the effective control of attention. In the following, you are presented with line drawings of fruits and geometrical figures in canonical colors (e.g., blue grapes or green pears). Your task will be to name the color according to four different rules/conditions.<p><p>***</p>The entire Fruit Stroop task (including practice trials) takes 8 minutes. <p><li>Please avoid working with Windows Internet Explorer, which we haven't tested with respect to data storage.<li>Please participate only if you feel concentrated and rested. <li>Please be careful to not press the Escape Button, which would terminate the task immediately without storing any data. <li>Note that your data will be saved locally as a text file in your download folder after completing the entire task. Please send this file to <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a> <p>Click <i>Continue</i>, to give your informed consent and receive further details on the task in form of practice trials."],
 			show_clickable_nav: true,
 			
 			};
@@ -77,31 +75,31 @@
 
     var informedConsent1 = {
 		type: 'survey-multi-choice',
-		questions: ["<b>N&#245usolek uuringus osalemiseks </b>1/3"],
-		options: [["Olen &#252lesande kirjelduse l&#228bi lugenud ja n&#245ustun osalema."]],
+		questions: ["<b>Informed consent </b>1/3"],
+		options: [["I have read the task description and agree to participate."]],
 		required: [true]
     };
 	var informedConsent2 = {
 		type: 'survey-multi-choice',
-		questions: ["<b>N&#245usolek uuringus osalemiseks </b>2/3"],
-		options: [["Olen n&#245us, et minu anon&#252&#252mseid andmeid kasutatakse teadusartiklite avaldamisel."]],
+		questions: ["<b>Informed consent </b>2/3"],
+		options: [["I agree that my pseudonymized data can be used for the publishing of scientific papers."]],
 		required: [true]
     };
     var informedConsent3 = {
 		type: 'survey-multi-choice',
-		questions: ["<b>N&#245usolek uuringus osalemiseks </b>3/3"],
-		options: function(){return([["Olen n&#245us, et teaduse l&#228bipaistvuse huvides tehakse mu anon&#252&#252msed andmed teistele teadlastele vabalt k&#228ttesaadavaks vastavalt Avatud Teaduse Raamistikule (vt <a href='https://osf.io/'> Open Science Framework</a>)."]])},
+		questions: ["<b>Informed consent </b>3/3"],
+		options: function(){return([["I agree that, for the sake of scientific transparency, my pseudonymized data can be made freely available to other researchers within the <a href='https://osf.io/'> Open Science Framework </a>."]])},
 		required: [true]
     };
 
-	var persData_code = ["<p> Loo oma anon&#252&#252mne isiklik kood:"];
+	var persData_code = ["<p> Generate your anonymized personal code:"];
 	var demographics = {
 	  		type: "survey-text-persCode",
 	  		questions: persData_code,
-			preamble: "<b>Juhised isikliku koodi loomiseks</b>: <br> Esimene s&#252mbol: Sinu ema eesnime esimene t&#228ht (nt <b>M</b>arta)<br>Teine s&#252mbol: Sinu isa eesnime esimene t&#228ht (nt <b>S</b>iim) <br> Kolmas ja neljas s&#252mbol: Sinu s&#252nniaasta kaks viimast numbrit (nt 18<b>95</b>) <br> Viies s&#252mbol: Sinu praeguse aadressi esimene t&#228ht (nt <b>P</b>argi t&#228nav) <br> Kuues s&#252mbol: Sinu majanumbri esimene number (nt <b>1</b>9) <p> N&#228ide t&#228ielikust isiklikust koodist: <b>MS95P1</b>",
+			preamble: "<b>Instruction to generate your code</b>: <br> 1. Position: First letter of your mother's first name (e.g. <b>M</b>artha)<br>2. Position: First letter of your father's first name (e.g. <b>S</b>igmund) <br> Positions 3-4: Your year of birth (e.g. 18<b>95</b>) <br> 5. Position: First letter of your current address (e.g. <b>B</b>erggasse) <br> 6. Position: First digit of your street number (e.g. <b>1</b>9) <p> Example of complete code: <b>MS95B1</b>",
 			on_finish: function(data) { 
 		 		code_length = data.code_length;
-		 		if(code_length!=6){alert("Palun sisesta kuuekohaline isiklik kood.")}
+		 		if(code_length!=6){alert("Please enter a personal code with 6 digits.")}
 		 	}
 	};
 	var persCode_loop = {
@@ -117,7 +115,7 @@
 ///////// Page 1
 	var Instruction_Page1 = {
 		type: 'instructions',
-		pages: ["Puuvilja &#252lesanne koosneb j&#228rgmisest <b>neljast alam&#252lesandest</b>: <p> <b>(a)</b> Geomeetriliste kujundite v&#228rvide nimetamine (st vastavat v&#228rvi nuppudele vajutamine). N&#228iteks alltoodud n&#228ites 'roheline'. <br><img src='jspsych-5.0.3-fruit/Shapes/pentagon_green.png' width='80px'> <p><b>(b)</b> Puuvilja piltide v&#228rvide nimetamine (alltoodud n&#228ites 'punane'). <br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_red.png' width='100px'><p><b>(c)</b> Must-valgelt kujutatud puuviljade piltidel 't&#245eliste' v&#228rvide nimetamine (alltoodud n&#228ites 'punane').<br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_transparent.png' width='100px'> <p><b>(d)</b> Vale v&#228rviga kujutatud puuviljade piltidel 't&#245eliste' v&#228rvide nimetamine (alltoodud n&#228ites 'punane').<br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_blue.png' width='100px'> <p> <b>P&#252&#252a t&#228ita iga &#252lesanne v&#245imalikult kiiresti ja t&#228pselt. </b><p>Pane t&#228hele, et igale &#252lesandele eelneb l&#252hike harjutuskatse, mis tuleb sooritada nii, et annad j&#228rjest "+practice_criterion+" &#245iget vastust. <p>***</p>Esimese alam&#252lesande harjutamise alustamiseks kl&#245psa nuppu <i>J&#228tka</i>."],
+		pages: ["The Fruit Stroop task consists of the following <b>four subtasks</b>: <p> <b>(a)</b> Naming the ink colors (i.e., pressing color buttons) of geometrical figures (e.g., 'green' in the example below).<br><img src='jspsych-5.0.3-fruit/Shapes/pentagon_green.png' width='80px'> <p><b>(b)</b> Naming the ink colors of fruit drawings ('red' in the example). <br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_red.png' width='100px'><p><b>(c)</b> Naming the 'true' colors of black-and-white fruit drawings ('red' in the example).<br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_transparent.png' width='100px'> <p><b>(d)</b> Naming the 'true' colors of wrongly inked fruit drawings ('red' in the example).<br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_blue.png' width='100px'> <p> <b>Try to perform every task as fast and accurate as possible. </b><p>Note that each task is preceded by a short practice trial to be completed by making "+practice_criterion+" correct responses in a row. <p>***</p>Click <i>Continue</i> to start practicing the first subtask."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
@@ -146,7 +144,7 @@
 	var Page1 = {
 		    type: 'BRFruit',
 			is_html: false, 
-			prompt: "Mis v&#228rvi see kujund on?<p>",
+			prompt: "What is the color of this figure?<p>",
 
 			stimulus: function(){
 					return geoShapes[i_shape][i_color]
@@ -198,8 +196,8 @@
 	var Feedback_Page1 = {
 		type: 'instructions',
 		pages: function(){if(item_completed==true){
-			feedback_text = "<p>***</p> <span style='color:green'>&#213ige vastus!</span><br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."}else{
-				feedback_text="<p>***</p> <span style='color:red'>Vale vastus!</span> Nupu v&#228rv peab vastama kujutise v&#228rvile. Proovi uuesti!<br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."
+			feedback_text = "<p>***</p> <span style='color:green'>Right!</span><br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Wrong!</span> The color of the button must match the color of the figure. Let's try again!<br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."
 			}
 		 return[feedback_text]},
 		show_clickable_nav: true,
@@ -232,7 +230,7 @@
 	}
 	var Filler_Page1 = {
 		type: 'instructions',
-		pages: ["<p>***</p> <b>H&#228sti tehtud!</b> <br>Oled n&#252&#252d valmis lahendama <b>1</b>. alam&#252lesannet (kokku <b>4</b> &#252lesannet). <p>Kujutised esitatakse nii, nagu just harjutasid. Samamoodi nagu varem, ilmub uus kujutis ainult siis, kui Su viimane vastus oli &#245ige. Vastupidiselt harjutuskatsetele ei saa Sa aga tagasisidet selle kohta, kas Su vastus on &#245ige v&#245i mitte. <b><br>&#220lesande tegemiseks kulub "+(time_limit/1000)+" sekundit ja Sinu eesm&#228rk peaks olema v&#245imalikult paljude kujutiste &#252lesannete t&#228itmine!</b></p><p>***</p>Alustamiseks kl&#245psa nuppu <i>J&#228tka</i>."],
+		pages: ["<p>***</p> <b>Well done!</b> <br>You are now ready to perform the <b>1</b>st out of <b>4</b> subtasks. <p>The figures will be presented as just practiced. Again, a new figure will appear, only if your current response has been correct. In contrast to the practice trials, you will not receive feedback on whether your response is correct or not. <b><br>The task lasts "+(time_limit/1000)+" seconds, and your goal should be to complete as many figures as possible!</b></p><p>***</p>Click <i>Continue</i> to start."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				practice = false;
@@ -280,13 +278,13 @@
 		type: 'instructions',
 		pages: function(){
 				mean_RTs = Math.round((averageFx(RTs_Page1)/1000)*100)/100; nCompleted_Page1 = nCompleted_Page1;
-				if(RTs_Page1_correct.length==0){mean_RTs_right="&#213iged vastused puuduvad"}else{
+				if(RTs_Page1_correct.length==0){mean_RTs_right="No correct responses"}else{
 					mean_RTs_right_P1 = Math.round((averageFx(RTs_Page1_correct)/1000)*100)/100; 
 				}
-				if(RTs_Page1_wrong.length==0){mean_RTs_wrong="Valed vastused puuduvad"}else{
+				if(RTs_Page1_wrong.length==0){mean_RTs_wrong="No wrong responses"}else{
 					mean_RTs_wrong = Math.round((averageFx(RTs_Page1_wrong)/1000)*100)/100; 
 				}
-				return["Tehtud &#252lesannete arv: <b>"+nCompleted_Page1+"</b><br>Vigade arv: <b>"+nErrors_Page1+"</b><br>Keskmine vastamise aeg (sekundites): <b>"+mean_RTs+"</b><br>Vastamise aeg (&#245iged katsed): <b>"+mean_RTs_right_P1+" </b><br>Vastamise aeg (valed katsed): <b>"+mean_RTs_wrong+" "]},
+				return["Number completed: <b>"+nCompleted_Page1+"</b><br>Number errors: <b>"+nErrors_Page1+"</b><br>Average RT (in seconds): <b>"+mean_RTs+"</b><br>RT correct (in seconds): <b>"+mean_RTs_right_P1+" </b><br>RT errors (in seconds): <b>"+mean_RTs_wrong+" "]},
 		show_clickable_nav: true,
 		data: function(){
 				return{nCompleted_Page1: nCompleted_Page1, nErrors_Page1: nErrors_Page1, RTs: RTs_Page1}
@@ -298,7 +296,7 @@
 
 	var Instruction_Page2 = {
 		type: 'instructions',
-		pages: ["<p>***</p> <b> Tubli!</b> <p>Enne <b>teise</b> alam&#252lesande (kokku <b>neli</b>) t&#228itmist pead uuesti tegema l&#252hikese harjutuskatse, mis kestab niikaua, kuni saad "+practice_criterion+" &#245iget vastust j&#228rjest. <p>***</p>Harjutamise alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		pages: ["<p>***</p> <b> Well done!</b> <p>Before performing the <b>second</b> out of <b>four subtasks</b>, again you need to complete a short practice trial, lasting until "+practice_criterion+" correct responses are given in a row. <p>***</p>Click <i>Continue</i> to start practicing."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				practice=true;
@@ -323,7 +321,7 @@
 	var Page2 = {
 		    type: 'BRFruit',
 			is_html: false, 
-			prompt: "Mis v&#228rvi see puuvili on? <p>",
+			prompt: "What is the color of this fruit? <p>",
 			stimulus: function(){
 					return congruentFruits[0][i_color]
 			},
@@ -368,8 +366,8 @@
 	var Feedback_Page2 = {
 		type: 'instructions',
 		pages: function(){if(item_completed==true){
-			feedback_text = "<p>***</p> <span style='color:green'>&#213ige vastus!</span><br> J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."}else{
-				feedback_text="<p>***</p> <span style='color:red'>Vale vastus!</span> Nupu v&#228rv peab vastama puuvilja v&#228rvile. Proovi uuesti!<br> J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."
+			feedback_text = "<p>***</p> <span style='color:green'>Right!</span><br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Wrong!</span> The color of the button must match the color of the fruit. Let's try again!<br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."
 			}
 		 return[feedback_text]},
 		show_clickable_nav: true,
@@ -402,7 +400,7 @@
 	}
 	var Filler_Page2 = {
 		type: 'instructions',
-		pages: ["<p>***</p> <b>V&#228ga hea!</b> <p>Tee n&#252&#252d <b>2</b>. alam&#252lesanne (kokku <b>4</b>). <b><br>T&#228ida "+(time_limit/1000)+" sekundi jooksul v&#245imalikult palju puuvilja &#252lesandeid!</b></p><p>***</p>Alustamiseks kl&#245psa nuppu <i>J&#228tka</i>."],
+		pages: ["<p>***</p> <b>Well done!</b> <p>Let's do the <b>2</b>nd out of <b>4</b> subtasks. <b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				practice=false;
@@ -449,13 +447,13 @@
 		type: 'instructions',
 		pages: function(){
 				mean_RTs = Math.round((averageFx(RTs_Page2)/1000)*100)/100; nCompleted_Page2 = nCompleted_Page2;
-				if(RTs_Page2_correct.length==0){mean_RTs_right="&#213iged vastused puuduvad"}else{
+				if(RTs_Page2_correct.length==0){mean_RTs_right="No correct responses"}else{
 					mean_RTs_right_P2 = Math.round((averageFx(RTs_Page2_correct)/1000)*100)/100; 
 				}
-				if(RTs_Page2_wrong.length==0){mean_RTs_wrong="Valed vastused puuduvad"}else{
+				if(RTs_Page2_wrong.length==0){mean_RTs_wrong="No wrong responses"}else{
 					mean_RTs_wrong = Math.round((averageFx(RTs_Page2_wrong)/1000)*100)/100; 
 				}
-				return["Tehtud &#252lesannete arv: <b>"+nCompleted_Page2+"</b><br>Vigade arv: <b>"+nErrors_Page2+"</b><br>Keskmine vastamise aeg (sekundites): <b>"+mean_RTs+"</b><br>Vastamise aeg (&#245iged katsed): <b>"+mean_RTs_right_P2+" </b><br>Vastamise aeg (valed katsed): <b>"+mean_RTs_wrong+" "]},
+				return["Number completed: <b>"+nCompleted_Page2+"</b><br>Number errors: <b>"+nErrors_Page2+"</b><br>Average RT (in seconds): <b>"+mean_RTs+"</b><br>RT correct (in seconds): <b>"+mean_RTs_right_P2+" </b><br>RT errors (in seconds): <b>"+mean_RTs_wrong+" "]},
 		show_clickable_nav: true,
 		data: function(){
 				return{nCompleted_Page2: nCompleted_Page2, nErrors_Page2: nErrors_Page2, RTs: RTs_Page2}
@@ -467,7 +465,7 @@
 
 	var Instruction_Page3 = {
 		type: 'instructions',
-		pages: ["<p>***</p> <b>Tubli t&#246&#246!</b> <p> Oled j&#245udnud juba <b>kolmanda</b> alam&#252lesandeni (kokku <b>neli</b> alam&#252lesannet). N&#252&#252d kuvatakse samad puuviljad (banaan, pirn, maasikas, viinamarjad) must-valgelt ja Sinu &#252lesandeks on valida &#245ige v&#228rv, st banaani jaoks valid kollase, pirni jaoks rohelise, maasika jaoks punase ja viinamarjade jaoks sinise v&#228rvi. <p>***</p>Harjutamise alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		pages: ["<p>***</p> <b>Well done!</b> <p> You have already reached the <b>third</b> out of <b>four subtasks</b>. Now, the same fruits (banana, pear, strawberry, grapes) will be displayed in black and white, and your task is to choose the correct color, i.e., yellow for banana, green for pear, red for strawberry, and blue for grapes. <p>***</p>Click <i>Continue</i> to start practicing."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
@@ -490,7 +488,7 @@
 	var Page3 = {
 		    type: 'BRFruit',
 			is_html: false, 
-			prompt: "Mis v&#228rvi see puuvili on?<p>",
+			prompt: "What is the color of this fruit?<p>",
 			stimulus: function(){
 					return transparentFruits[0][i_color]
 			},
@@ -533,8 +531,8 @@
 	var Feedback_Page3 = {
 		type: 'instructions',
 		pages: function(){if(item_completed==true){
-			feedback_text = "<p>***</p> <span style='color:green'>&#213ige vastus!</span><br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."}else{
-				feedback_text="<p>***</p> <span style='color:red'>Vale vastus!</span> Nupu v&#228rv peab vastama puuvilja v&#228rvile (nagu eelmises alam&#252lesandes harjutasid). Proovi uuesti!<br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."
+			feedback_text = "<p>***</p> <span style='color:green'>Right!</span><br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Wrong!</span> The color of the button must match the color of the fruit (as practiced in the previous subtask). Let's try again!<br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."
 			}
 		 return[feedback_text]},
 		show_clickable_nav: true,
@@ -567,7 +565,7 @@
 	}
 	var Filler_Page3 = {
 		type: 'instructions',
-		pages: ["<p>***</p> <b>Tubli!</b> <p>Tee n&#252&#252d <b>3</b>. alam&#252lesanne (kokku <b>4</b>). <b><br>T&#228ida "+(time_limit/1000)+" sekundi jooksul v&#245imalikult palju puuvilja &#252lesandeid!</b></p><p>***</p>Alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		pages: ["<p>***</p> <b>Well done!</b> <p>Let's do the <b>3</b>rd out of <b>4</b> subtasks. <b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				practice = false;
@@ -613,13 +611,13 @@
 		type: 'instructions',
 		pages: function(){
 				mean_RTs = Math.round((averageFx(RTs_Page3)/1000)*100)/100; nCompleted_Page3 = nCompleted_Page3;
-				if(RTs_Page3_correct.length==0){mean_RTs_right="&#213iged vastused puuduvad"}else{
+				if(RTs_Page3_correct.length==0){mean_RTs_right="No correct responses"}else{
 					mean_RTs_right_P3 = Math.round((averageFx(RTs_Page3_correct)/1000)*100)/100; 
 				}
-				if(RTs_Page3_wrong.length==0){mean_RTs_wrong="Valed vastused puuduvad"}else{
+				if(RTs_Page3_wrong.length==0){mean_RTs_wrong="No wrong responses"}else{
 					mean_RTs_wrong = Math.round((averageFx(RTs_Page3_wrong)/1000)*100)/100; 
 				}
-				return["Tehtud &#252lesannete arv: <b>"+nCompleted_Page3+"</b><br>Vigade arv: <b>"+nErrors_Page3+"</b><br>Keskmine vastamise aeg (sekundites): <b>"+mean_RTs+"</b><br>Vastamise aeg (&#245iged katsed): <b>"+mean_RTs_right_P3+" </b><br>Vastamise aeg (valed katsed): <b>"+mean_RTs_wrong+" "]},
+				return["Number completed: <b>"+nCompleted_Page3+"</b><br>Number errors: <b>"+nErrors_Page3+"</b><br>Average RT (in seconds): <b>"+mean_RTs+"</b><br>RT correct (in seconds): <b>"+mean_RTs_right_P3+" </b><br>RT errors (in seconds): <b>"+mean_RTs_wrong+" "]},
 		show_clickable_nav: true,
 		data: function(){
 				return{nCompleted_Page3: nCompleted_Page3, nErrors_Page3: nErrors_Page3, RTs: RTs_Page3}
@@ -631,7 +629,7 @@
 
 	var Instruction_Page4 = {
 		type: 'instructions',
-		pages: ["<p>***</p> <b> Suurep&#228rane!</b> <p> <b>Neljandas</b> ja &#252htlasi <b>viimases alam&#252lesandes</b> kuvatakse puuviljad valedes v&#228rvides (nt punane banaan) ja Sinu &#252lesandeks on vajutada nuppu, kus on kujutatud puuvilja 't&#245eline' v&#228rv (nt punase v&#228rviga banaani puhul tuleks valida kollane nupp). <p>***</p>Harjutamise alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		pages: ["<p>***</p> <b> Great!</b> <p> In the <b>fourth</b> and <b>final subtask</b>, the fruits are displayed in incorrect colors (e.g., red banana) and your task is to press the button with the 'true' color of the fruit (e.g., the yellow button for a red-colored banana). <p>***</p>Click <i>Continue</i> to start practicing."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				i = 0;	
@@ -658,7 +656,7 @@
 	var Page4 = {
 		    type: 'BRFruit',
 			is_html: false, 
-			prompt: "Mis on selle puuvilja 't&#245eline' v&#228rv?<p>",
+			prompt: "What is the 'true' color of this fruit?<p>",
 			stimulus: function(){
 					return incongruentFruits[i_subset][i_color]
 			},
@@ -705,8 +703,8 @@
 	var Feedback_Page4 = {
 		type: 'instructions',
 		pages: function(){if(item_completed==true){
-			feedback_text = "<p>***</p> <span style='color:green'>&#213ige vastus!</span><br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."}else{
-				feedback_text="<p>***</p> <span style='color:red'>Vale vastus!</span> Nupu v&#228rv peab vastama puuvilja 't&#245elisele' v&#228rvile (nagu eelmistes alam&#252lesannetes harjutasid). Proovi uuesti!<br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."
+			feedback_text = "<p>***</p> <span style='color:green'>Right!</span><br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Wrong!</span> The color of the button must match the 'true' color of the fruit (as practiced in the previous subtasks). Let's try again!<br><b>"+nC_inarow +"</b> out of <b>"+practice_criterion+"</b> correct responses in a row.<p>***</p>Click <i>Continue</i> to proceed."
 			}
 		 return[feedback_text]},
 		show_clickable_nav: true,
@@ -739,7 +737,7 @@
 	}
 	var Filler_Page4 = {
 		type: 'instructions',
-		pages: ["<p>***</p> <b>H&#228sti tehtud!</b> <br>Tee n&#252&#252d <b>viimane alam&#252lesanne</b>.<b><br>T&#228ida "+(time_limit/1000)+" sekundi jooksul v&#245imalikult palju puuvilja &#252lesandeid!</b></p><p>***</p>Alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		pages: ["<p>***</p> <b>Well done!</b> <br>Let's do the <b>last subtask</b>.<b><br>Complete as many fruits as possible within "+(time_limit/1000)+" seconds!</b></p><p>***</p>Click <i>Continue</i> to start."],
 		show_clickable_nav: true,
 		on_finish: function(data){
 				practice = false;
@@ -786,13 +784,13 @@
 		type: 'instructions',
 		pages: function(){
 				mean_RTs = Math.round((averageFx(RTs_Page4)/1000)*100)/100; nCompleted_Page4 = nCompleted_Page4;
-				if(RTs_Page4_correct.length==0){mean_RTs_right="&#213iged vastused puuduvad"}else{
+				if(RTs_Page4_correct.length==0){mean_RTs_right="No correct responses"}else{
 					mean_RTs_right_P4 = Math.round((averageFx(RTs_Page4_correct)/1000)*100)/100; 
 				}
-				if(RTs_Page4_wrong.length==0){mean_RTs_wrong="Valed vastused puuduvad"}else{
+				if(RTs_Page4_wrong.length==0){mean_RTs_wrong="No wrong responses"}else{
 					mean_RTs_wrong = Math.round((averageFx(RTs_Page4_wrong)/1000)*100)/100; 
 				}
-				return["Tehtud &#252lesannete arv: <b>"+nCompleted_Page4+"</b><br>Vigade arv: <b>"+nErrors_Page4+"</b><br>Keskmine vastamise aeg (sekundites): <b>"+mean_RTs+"</b><br>Vastamise aeg (&#245iged katsed): <b>"+mean_RTs_right_P4+" </b><br>Vastamise aeg (valed katsed): <b>"+mean_RTs_wrong+" "]},
+				return["Number completed: <b>"+nCompleted_Page4+"</b><br>Number errors: <b>"+nErrors_Page4+"</b><br>Average RT (in seconds): <b>"+mean_RTs+"</b><br>RT correct (in seconds): <b>"+mean_RTs_right_P4+" </b><br>RT errors (in seconds): <b>"+mean_RTs_wrong+" "]},
 		show_clickable_nav: true,
 		data: function(){
 				return{nCompleted_Page4: nCompleted_Page4, nErrors_Page4: nErrors_Page4, RTs: RTs_Page4}
@@ -811,7 +809,7 @@
 				actual_score = Math.round(actual_score*100)/100
 				interference_score = actual_score-predicted_score
 				interference_score = Math.round(interference_score*100)/100
-				return["<b>Sinu tulemused: </b><p>Tehtud &#252lesannete arv (alam&#252lesanne 1): <b>"+nCompleted_Page1+"</b><br> Tehtud &#252lesannete arv (alam&#252lesanne 2): <b>"+nCompleted_Page2+"</b><br> Tehtud &#252lesannete arv (alam&#252lesanne 3): <b>"+nCompleted_Page3+"</b><br> Tehtud &#252lesannete arv (alam&#252lesanne 4): <b>"+nCompleted_Page4+"</b><p>Keskmine vastamise aeg (alam&#252lesanne 1): <b>"+mean_RTs_right_P1+"</b> sekundit<br>Keskmine vastamise aeg (alam&#252lesanne 2): <b>"+mean_RTs_right_P2+"</b> sekundit<br>Keskmine vastamise aeg (alam&#252lesanne 3): <b>"+mean_RTs_right_P3+"</b> sekundit<br>Keskmine vastamise aeg (alam&#252lesanne 4): <b>"+mean_RTs_right_P4+"</b> sekundit<p>Prognoositud tulemus: <b>"+predicted_score+"</b><br>Tegelik tulemus: <b>"+actual_score+"</b><br>Erinevus: <b>"+interference_score+""]},
+				return["<b>Your scoring: </b><p>N completed Subtask 1: <b>"+nCompleted_Page1+"</b><br> N completed Subtask 2: <b>"+nCompleted_Page2+"</b><br> N completed Subtask 3: <b>"+nCompleted_Page3+"</b><br> N completed Subtask 4: <b>"+nCompleted_Page4+"</b><p>Mean RT Subtask 1: <b>"+mean_RTs_right_P1+"</b> seconds<br>Mean RT Subtask 2: <b>"+mean_RTs_right_P2+"</b> seconds<br>Mean RT Subtask 3: <b>"+mean_RTs_right_P3+"</b> seconds<br>Mean RT Subtask 4: <b>"+mean_RTs_right_P4+"</b> seconds<p>Predicted performance score: <b>"+predicted_score+"</b><br>Actual performance score: <b>"+actual_score+"</b><br>Interference score: <b>"+interference_score+""]},
 		show_clickable_nav: true,
 		data: function(){
 				return{nCompleted_Page1: nCompleted_Page1, nCompleted_Page2: nCompleted_Page2, nCompleted_Page3: nCompleted_Page3, nCompleted_Page4: nCompleted_Page4, mean_RTs_right_P1: mean_RTs_right_P1, mean_RTs_right_P2: mean_RTs_right_P2, mean_RTs_right_P3: mean_RTs_right_P3, mean_RTs_right_P4: mean_RTs_right_P4, predicted_score: predicted_score, actual_score: actual_score, interference_score: interference_score}
@@ -821,16 +819,11 @@
 	 	   	},
 	}
 
-	/*var goodbye = {
-			type: 'instructions',
-			pages: [function(){return("<h3>Suur t&#228nu vastamise eest!</h3> Kl&#245psa nuppu <i>J&#228tka</i>, et alustada andmete allalaadimist allalaetud failide kausta. Palun saada see fail aadressile: <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>  <p>Kui mingil p&#245hjusel allalaadimine ei t&#246&#246ta, siis palun kopeeri ja kleebi ekraanil kuvatud andmed oma valitud tekstifaili ja saada see samuti aadressile <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>.<p><b>Igal juhul palun teavita meid oma osalemisest! </li></ul>")}],
-			show_clickable_nav: true,	
-	};*/
 	var goodbye = {
-        type: 'instructions',
-        pages: ["<h3>Suur t&aumlnu vastamise eest!</h3> <p>Sinu anon&uuml&uumlmsed vastused on salvestatud &uumlhes Tallinna &Uumllikooli serveris. <br>Kui Sul on lisak&uumlsimusi uuringu eesm&aumlrgi v&otildei meie andmehalduse kohta, <br>saada palun meile e-kiri aadressil: <a href='mailto:seasenselab@gmail.com'> seasenselab@gmail.com</a>"],
-        show_clickable_nav: false
-    };
+			type: 'instructions',
+			pages: [function(){return("<h3>Thank you for your participation!</h3> Click <i>Continue</i> to start the download of your data into the download folder. Please send this file to <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>  <p>If, for some reason, the download does not work, then please copy and paste the subsequently displayed data into a text file of your choice and send it also to <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>.<p><b>In any case, please notify us about your participation! </li></ul>")}],
+			show_clickable_nav: true,	
+	};
 
 
 
