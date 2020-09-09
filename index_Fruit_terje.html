@@ -848,11 +848,10 @@
 				  ],
 
 	   	fullscreen: false,
-	   	on_finish: function(data){
-	   	jsPsych.data.displayData();
-	        jsPsych.data.displayData();
-	        jsPsych.data.localSave('FruitStroop_sendMeTo_seasenselab@gmail.com.txt', 'csv');
-	   }
+	   	on_finish: function() {
+					  //jsPsych.data.localSave('myData_sendMeTo_onne.uus@tlu.ee.txt', 'csv');
+					  $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
+				  }
 	});
 	
 	
