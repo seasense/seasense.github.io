@@ -1,0 +1,862 @@
+<html>
+	<head>
+		<title>Fruit Stroop Task</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="jspsych-5.0.3-fruit/jspsych.js"></script>
+
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-text.js"></script>
+		
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-instructions.js"></script>
+		
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-survey-text_persCode.js"></script>
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-button-response.js"></script>
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-button-response-Fruit.js"></script>
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-survey-multi-choice.js"></script>
+		<script src="jspsych-5.0.3-fruit/plugins/jspsych-single-stim.js"></script>
+		
+		<link href="jspsych-5.0.3-fruit/css/jspsych_fruit.css" rel="stylesheet" type="text/css"></link>
+		
+		<style>
+			:root{
+				--normalTextSize: 20px;
+				--cellSize_symMat: 40px;
+				--cellSize_remMat: 60px;
+				--numberSize_remMat: 40px;
+			}
+		</style>
+
+	</head>
+	
+	
+	<script>
+	// helper functions
+	function scrollWin() {window.scrollTo(0, 0);};
+
+	var geoShapes = [ 
+		['jspsych-5.0.3-fruit/Shapes/pentagon_yellow.png','jspsych-5.0.3-fruit/Shapes/pentagon_green.png','jspsych-5.0.3-fruit/Shapes/pentagon_red.png','jspsych-5.0.3-fruit/Shapes/pentagon_blue.png'],
+		['jspsych-5.0.3-fruit/Shapes/triangle_yellow.png','jspsych-5.0.3-fruit/Shapes/triangle_green.png','jspsych-5.0.3-fruit/Shapes/triangle_red.png','jspsych-5.0.3-fruit/Shapes/triangle_blue.png'],
+		['jspsych-5.0.3-fruit/Shapes/circle_yellow.png','jspsych-5.0.3-fruit/Shapes/circle_green.png','jspsych-5.0.3-fruit/Shapes/circle_red.png','jspsych-5.0.3-fruit/Shapes/circle_blue.png'],
+		['jspsych-5.0.3-fruit/Shapes/parallelogram_yellow.png','jspsych-5.0.3-fruit/Shapes/parallelogram_green.png','jspsych-5.0.3-fruit/Shapes/parallelogram_red.png','jspsych-5.0.3-fruit/Shapes/parallelogram_blue.png']
+	];
+	var congruentFruits = [
+		['jspsych-5.0.3-fruit/Fruits/banana_yellow.png','jspsych-5.0.3-fruit/Fruits/pear_green.png','jspsych-5.0.3-fruit/Fruits/strawberry_red.png','jspsych-5.0.3-fruit/Fruits/grapes_blue.png']
+	];
+	var transparentFruits = [ 
+		['jspsych-5.0.3-fruit/Fruits/banana_transparent.png','jspsych-5.0.3-fruit/Fruits/pear_transparent.png','jspsych-5.0.3-fruit/Fruits/strawberry_transparent.png','jspsych-5.0.3-fruit/Fruits/grapes_transparent.png']
+	];
+	var incongruentFruits = [
+		['jspsych-5.0.3-fruit/Fruits/banana_green.png','jspsych-5.0.3-fruit/Fruits/pear_red.png','jspsych-5.0.3-fruit/Fruits/strawberry_blue.png','jspsych-5.0.3-fruit/Fruits/grapes_yellow.png'],
+		['jspsych-5.0.3-fruit/Fruits/banana_red.png','jspsych-5.0.3-fruit/Fruits/pear_blue.png','jspsych-5.0.3-fruit/Fruits/strawberry_yellow.png','jspsych-5.0.3-fruit/Fruits/grapes_green.png'],
+		['jspsych-5.0.3-fruit/Fruits/banana_blue.png','jspsych-5.0.3-fruit/Fruits/pear_yellow.png','jspsych-5.0.3-fruit/Fruits/strawberry_green.png','jspsych-5.0.3-fruit/Fruits/grapes_red.png']
+
+	];
+
+	function averageFx(x){
+		sum_x=0
+		for(i=0;i<x.length;i++){
+			sum_x=sum_x+x[i]
+		}
+		average_x = sum_x/x.length
+		return(average_x)
+	}
+
+	var trials = [4,4,4];
+	var practice_criterion = 3;
+	var time_limit = 45000;
+	//var time_limit = 5000;
+///////// Intro
+/////////
+	var welcome = {
+			type: 'instructions',
+			pages: [
+					"<p class='center-content'> <h2> Tere tulemast lahendama puuvilja &uumllesannet!</b></h2> Terve puuvilja &uumllesande lahendamine v&#245tab aega 8 minutit. <p><li>Palun &aumlra kasuta &uumllesande lahendamisel Windows Internet Explorerit, see ei pruugi vastuseid salvestada. <li>Palun ole ettevaatlik, et Sa kogemata ei vajutaks Escape-nuppu, mis l&#245petaks &uumllesande ilma andmeid salvestamata.<p>Edasiste juhiste saamiseks kl&#245psa nuppu J&aumltka."],
+			show_clickable_nav: true,
+			
+			};
+
+
+    /* var informedConsent1 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>N&#245usolek uuringus osalemiseks </b>1/3"],
+		options: [["Olen &#252lesande kirjelduse l&#228bi lugenud ja n&#245ustun osalema."]],
+		required: [true]
+    };
+	var informedConsent2 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>N&#245usolek uuringus osalemiseks </b>2/3"],
+		options: [["Olen n&#245us, et minu anon&#252&#252mseid andmeid kasutatakse teadusartiklite avaldamisel."]],
+		required: [true]
+    };
+    var informedConsent3 = {
+		type: 'survey-multi-choice',
+		questions: ["<b>N&#245usolek uuringus osalemiseks </b>3/3"],
+		options: function(){return([["Olen n&#245us, et teaduse l&#228bipaistvuse huvides tehakse mu anon&#252&#252msed andmed teistele teadlastele vabalt k&#228ttesaadavaks vastavalt Avatud Teaduse Raamistikule (vt <a href='https://osf.io/'> Open Science Framework</a>)."]])},
+		required: [true]
+    };*/
+
+	var persData_code = ["<p> Loo oma anon&#252&#252mne isiklik kood:"];
+	var demographics = {
+	  		type: "survey-text-persCode",
+	  		questions: persData_code,
+			preamble: "<b>Juhised isikliku koodi loomiseks</b>: <br> Esimene s&#252mbol: Sinu eesnime teine t&aumlht (nt M<b>a</b>rta)<br>Teine s&#252mbol: Sinu perekonnanime kolmas t&aumlht (nt Me<b>t</b>s) <br> Sinu telefoninumbri kaks viimast numbrit (nt 5376<b>92</b>) <p> N&#228ide t&#228ielikust isiklikust koodist: <b>at92</b>",
+			on_finish: function(data) { 
+		 		code_length = data.code_length;
+		 		if(code_length!=4){alert("Palun sisesta kuuekohaline isiklik kood.")}
+		 	}
+	};
+	var persCode_loop = {
+		timeline: [demographics],
+		loop_function: function(data){
+				if(code_length!=4){
+		            return true;
+		        } else {
+		            return false;
+		        }
+		  },
+	};
+///////// Page 1
+	var Instruction_Page1 = {
+		type: 'instructions',
+		pages: ["Puuvilja &#252lesanne koosneb j&#228rgmisest <b>neljast alam&#252lesandest</b>: <p> <b>(a)</b> Geomeetriliste kujundite v&#228rvide nimetamine (st vastavat v&#228rvi nuppudele vajutamine). N&#228iteks alltoodud n&#228ites 'roheline'. <br><img src='jspsych-5.0.3-fruit/Shapes/pentagon_green.png' width='80px'> <p><b>(b)</b> Puuvilja piltide v&#228rvide nimetamine (alltoodud n&#228ites 'punane'). <br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_red.png' width='100px'><p><b>(c)</b> Must-valgelt kujutatud puuviljade piltidel 't&#245eliste' v&#228rvide nimetamine (alltoodud n&#228ites 'punane').<br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_transparent.png' width='100px'> <p><b>(d)</b> Vale v&#228rviga kujutatud puuviljade piltidel 't&#245eliste' v&#228rvide nimetamine (alltoodud n&#228ites 'punane').<br><img src='jspsych-5.0.3-fruit/Fruits/strawberry_blue.png' width='100px'> <p> <b>P&#252&#252a t&#228ita iga &#252lesanne v&#245imalikult kiiresti ja t&#228pselt. </b><p>Pane t&#228hele, et igale &#252lesandele eelneb l&#252hike harjutuskatse, mis tuleb sooritada nii, et annad j&#228rjest "+practice_criterion+" &#245iget vastust. <p>***</p>Esimese alam&#252lesande harjutamise alustamiseks kl&#245psa nuppu <i>J&#228tka</i>."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				practice = true
+				shapes_practice = [0,1,2,3]
+				colors_practice = [0,1,2,3]
+				//i_shape = Math.floor(Math.random()*4)
+				//i_color = Math.floor(Math.random()*4)
+				i_shape = shapes_practice[0]
+				i_color = colors_practice[0]
+				button_pressed = Math.floor(Math.random()*4)
+				practice = true
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page1 = i
+				nErrors_Page1 = 0
+				RTs_Page1 = []
+				RTs_Page1_correct = []
+				RTs_Page1_wrong = []
+	 	   	},
+	};
+	
+	var color_buttons = [ [""] , [""] , [""] , [""] ];
+	var Page1 = {
+		    type: 'BRFruit',
+			is_html: false, 
+			prompt: "Mis v&#228rvi see kujund on?<p>",
+
+			stimulus: function(){
+					return geoShapes[i_shape][i_color]
+			},
+			
+		    choices: color_buttons,
+	 	   	on_finish: function(data){
+				
+				button_pressed = data.button_pressed
+				button_order = data.button_order
+				color_correct = data.color_correct
+				color_clicked = data.color_clicked
+
+				RTs_Page1.push(data.rt)
+				if(color_correct==color_clicked){
+					// i = counting items = number completed
+					i++
+					nCompleted_Page1=i
+					nC_inarow++
+					item_completed = true
+					
+					if(practice==false){
+						var stim_turned_new = false;
+						while(stim_turned_new == false){
+							i_shape_next = Math.floor(Math.random()*color_buttons.length)
+							i_color_next = Math.floor(Math.random()*color_buttons.length)	
+							if((i_shape_next!= i_shape)&&(i_color_next!=i_color)){
+								i_shape=i_shape_next
+								i_color=i_color_next
+								stim_turned_new=true
+							}
+						}
+					}else{
+						i_shape = shapes_practice[i]
+						i_color = colors_practice[i]
+					}
+
+					RTs_Page1_correct.push(data.rt)
+				}else{
+					if(practice==true){i=0}
+					nC_inarow = 0
+					item_completed = false
+					nErrors_Page1++
+					RTs_Page1_wrong.push(data.rt)
+				}
+				
+	 	   	},
+		};
+	var Feedback_Page1 = {
+		type: 'instructions',
+		pages: function(){if(item_completed==true){
+			feedback_text = "<p>***</p> <span style='color:green'>&#213ige vastus!</span><br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Vale vastus!</span> Nupu v&#228rv peab vastama kujutise v&#228rvile. Proovi uuesti!<br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."
+			}
+		 return[feedback_text]},
+		show_clickable_nav: true,
+		on_finish: function(data){
+				
+	 	   	},
+	};
+	var StimLoop_Page1_Practice = {
+		timeline: [Page1,Feedback_Page1],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page1_Loop_Practice = {
+		timeline: [StimLoop_Page1_Practice],
+		loop_function: function(data){
+		        
+		        if(nC_inarow==practice_criterion){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Filler_Page1 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>H&#228sti tehtud!</b> <br>Oled n&#252&#252d valmis lahendama <b>1</b>. alam&#252lesannet (kokku <b>4</b> &#252lesannet). <p>Kujutised esitatakse nii, nagu just harjutasid. Samamoodi nagu varem, ilmub uus kujutis ainult siis, kui Su viimane vastus oli &#245ige. Vastupidiselt harjutuskatsetele ei saa Sa aga tagasisidet selle kohta, kas Su vastus on &#245ige v&#245i mitte. <b><br>&#220lesande tegemiseks kulub "+(time_limit/1000)+" sekundit ja Sinu eesm&#228rk peaks olema v&#245imalikult paljude kujutiste &#252lesannete t&#228itmine!</b></p><p>***</p>Alustamiseks kl&#245psa nuppu <i>J&#228tka</i>."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				practice = false;
+				i = 0;	
+				i_shape = Math.floor(Math.random()*color_buttons.length)
+				i_color = Math.floor(Math.random()*color_buttons.length)
+				button_pressed = Math.floor(Math.random()*4)
+				practice = false
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page1 = i
+				nErrors_Page1 = 0
+				RTs_Page1 = []
+				RTs_Page1_correct = []
+				RTs_Page1_wrong = []
+	 	   	},
+	};
+	var StimLoop_Page1_Test = {
+		timeline: [Page1],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page1_Loop_Test = {
+		timeline: [StimLoop_Page1_Test],
+		loop_function: function(data){
+		        
+		        if((new Date()-startTime)>=time_limit){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+
+	var Page1_finalFeedback = {
+		type: 'instructions',
+		pages: function(){
+				mean_RTs = Math.round((averageFx(RTs_Page1)/1000)*100)/100; nCompleted_Page1 = nCompleted_Page1;
+				if(RTs_Page1_correct.length==0){mean_RTs_right="&#213iged vastused puuduvad"}else{
+					mean_RTs_right_P1 = Math.round((averageFx(RTs_Page1_correct)/1000)*100)/100; 
+				}
+				if(RTs_Page1_wrong.length==0){mean_RTs_wrong="Valed vastused puuduvad"}else{
+					mean_RTs_wrong = Math.round((averageFx(RTs_Page1_wrong)/1000)*100)/100; 
+				}
+				return["Tehtud &#252lesannete arv: <b>"+nCompleted_Page1+"</b><br>Vigade arv: <b>"+nErrors_Page1+"</b><br>Keskmine vastamise aeg (sekundites): <b>"+mean_RTs+"</b><br>Vastamise aeg (&#245iged katsed): <b>"+mean_RTs_right_P1+" </b><br>Vastamise aeg (valed katsed): <b>"+mean_RTs_wrong+" "]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page1: nCompleted_Page1, nErrors_Page1: nErrors_Page1, RTs: RTs_Page1}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var Instruction_Page2 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b> Tubli!</b> <p>Enne <b>teise</b> alam&#252lesande (kokku <b>neli</b>) t&#228itmist pead uuesti tegema l&#252hikese harjutuskatse, mis kestab niikaua, kuni saad "+practice_criterion+" &#245iget vastust j&#228rjest. <p>***</p>Harjutamise alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				practice=true;
+				i = 0;	
+				//i_color = Math.floor(Math.random()*color_buttons.length)
+				colors_practice = [0,1,2,3]
+				i_color = colors_practice[0]
+				button_pressed = Math.floor(Math.random()*4)
+				practice = true
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page2 = i
+				nErrors_Page2 = 0
+				RTs_Page2 = []
+				RTs_Page2_correct = []
+				RTs_Page2_wrong = []
+
+	 	   	},
+	};
+	var Page2 = {
+		    type: 'BRFruit',
+			is_html: false, 
+			prompt: "Mis v&#228rvi see puuvili on? <p>",
+			stimulus: function(){
+					return congruentFruits[0][i_color]
+			},
+		    choices: color_buttons,
+	 	   	on_finish: function(data){
+				button_order = data.button_order
+				button_pressed = data.button_pressed
+				color_correct = data.color_correct
+				color_clicked = data.color_clicked
+				console.log([color_correct,color_clicked])
+				RTs_Page2.push(data.rt)
+				if(color_correct==color_clicked){
+					i++
+					nCompleted_Page2=i
+					nC_inarow++
+					item_completed = true
+					if(practice==false){
+						var stim_turned_new = false;
+						while(stim_turned_new== false){
+							i_color_next = Math.floor(Math.random()*color_buttons.length)	
+							if(i_color_next!= i_color){
+								i_color=i_color_next
+								stim_turned_new=true
+							}
+						}
+					}else{
+						i_color = colors_practice[i]
+					}
+					RTs_Page2_correct.push(data.rt)
+				}else{
+					if(practice==true){i=0}
+					nC_inarow = 0
+					item_completed = false
+					nErrors_Page2++
+					RTs_Page2_wrong.push(data.rt)
+				}
+
+				
+	 	   	},
+		};
+
+	var Feedback_Page2 = {
+		type: 'instructions',
+		pages: function(){if(item_completed==true){
+			feedback_text = "<p>***</p> <span style='color:green'>&#213ige vastus!</span><br> J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Vale vastus!</span> Nupu v&#228rv peab vastama puuvilja v&#228rvile. Proovi uuesti!<br> J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."
+			}
+		 return[feedback_text]},
+		show_clickable_nav: true,
+		on_finish: function(data){
+				
+	 	   	},
+	};
+	var StimLoop_Page2_Practice = {
+		timeline: [Page2,Feedback_Page2],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page2_Loop_Practice = {
+		timeline: [StimLoop_Page2_Practice],
+		loop_function: function(data){
+		        
+		        if(nC_inarow==practice_criterion){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Filler_Page2 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>V&#228ga hea!</b> <p>Tee n&#252&#252d <b>2</b>. alam&#252lesanne (kokku <b>4</b>). <b><br>T&#228ida "+(time_limit/1000)+" sekundi jooksul v&#245imalikult palju puuvilja &#252lesandeid!</b></p><p>***</p>Alustamiseks kl&#245psa nuppu <i>J&#228tka</i>."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				practice=false;
+				i = 0;	
+				i_color = Math.floor(Math.random()*color_buttons.length)
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
+				practice = false
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page2 = i
+				nErrors_Page2 = 0
+				RTs_Page2 = []
+				RTs_Page2_correct = []
+				RTs_Page2_wrong = []
+	 	   	},
+	};
+	var StimLoop_Page2_Test = {
+		timeline: [Page2],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page2_Loop_Test = {
+		timeline: [StimLoop_Page2_Test],
+		loop_function: function(data){
+		        
+		        if((new Date()-startTime)>=time_limit){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+
+	var Page2_finalFeedback = {
+		type: 'instructions',
+		pages: function(){
+				mean_RTs = Math.round((averageFx(RTs_Page2)/1000)*100)/100; nCompleted_Page2 = nCompleted_Page2;
+				if(RTs_Page2_correct.length==0){mean_RTs_right="&#213iged vastused puuduvad"}else{
+					mean_RTs_right_P2 = Math.round((averageFx(RTs_Page2_correct)/1000)*100)/100; 
+				}
+				if(RTs_Page2_wrong.length==0){mean_RTs_wrong="Valed vastused puuduvad"}else{
+					mean_RTs_wrong = Math.round((averageFx(RTs_Page2_wrong)/1000)*100)/100; 
+				}
+				return["Tehtud &#252lesannete arv: <b>"+nCompleted_Page2+"</b><br>Vigade arv: <b>"+nErrors_Page2+"</b><br>Keskmine vastamise aeg (sekundites): <b>"+mean_RTs+"</b><br>Vastamise aeg (&#245iged katsed): <b>"+mean_RTs_right_P2+" </b><br>Vastamise aeg (valed katsed): <b>"+mean_RTs_wrong+" "]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page2: nCompleted_Page2, nErrors_Page2: nErrors_Page2, RTs: RTs_Page2}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var Instruction_Page3 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>Tubli t&#246&#246!</b> <p> Oled j&#245udnud juba <b>kolmanda</b> alam&#252lesandeni (kokku <b>neli</b> alam&#252lesannet). N&#252&#252d kuvatakse samad puuviljad (banaan, pirn, maasikas, viinamarjad) must-valgelt ja Sinu &#252lesandeks on valida &#245ige v&#228rv, st banaani jaoks valid kollase, pirni jaoks rohelise, maasika jaoks punase ja viinamarjade jaoks sinise v&#228rvi. <p>***</p>Harjutamise alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				// i_color = Math.floor(Math.random()*color_buttons.length)
+				colors_practice = [0,1,2,3]
+				i_color = colors_practice[0]
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
+				practice = true
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page3 = i
+				nErrors_Page3 = 0
+				RTs_Page3 = []
+				RTs_Page3_correct = []
+				RTs_Page3_wrong = []
+	 	   	},
+	};
+	var Page3 = {
+		    type: 'BRFruit',
+			is_html: false, 
+			prompt: "Mis v&#228rvi see puuvili on?<p>",
+			stimulus: function(){
+					return transparentFruits[0][i_color]
+			},
+		    choices: color_buttons,
+	 	   	on_finish: function(data){
+				button_order = data.button_order
+				button_pressed = data.button_pressed
+				color_correct = data.color_correct
+				color_clicked = data.color_clicked
+				RTs_Page3.push(data.rt)
+				if(color_correct==color_clicked){
+					// i = counting items = number completed
+					i++
+					nCompleted_Page3=i
+					nC_inarow++
+					item_completed = true
+					if(practice==false){
+						var stim_turned_new = false;
+						while(stim_turned_new== false){
+							i_color_next = Math.floor(Math.random()*color_buttons.length)	
+							if(i_color_next!=i_color){
+								i_color=i_color_next
+								stim_turned_new=true
+							}
+						}
+					}else{
+						i_color = colors_practice[i]
+					}
+					RTs_Page3_correct.push(data.rt)
+				}else{
+					if(practice==true){i=0}
+					nC_inarow = 0
+					item_completed = false
+					nErrors_Page3++
+					RTs_Page3_wrong.push(data.rt)
+				}
+	 	   	},
+		};
+
+	var Feedback_Page3 = {
+		type: 'instructions',
+		pages: function(){if(item_completed==true){
+			feedback_text = "<p>***</p> <span style='color:green'>&#213ige vastus!</span><br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Vale vastus!</span> Nupu v&#228rv peab vastama puuvilja v&#228rvile (nagu eelmises alam&#252lesandes harjutasid). Proovi uuesti!<br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."
+			}
+		 return[feedback_text]},
+		show_clickable_nav: true,
+		on_finish: function(data){
+				
+	 	   	},
+	};
+	var StimLoop_Page3_Practice = {
+		timeline: [Page3,Feedback_Page3],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page3_Loop_Practice = {
+		timeline: [StimLoop_Page3_Practice],
+		loop_function: function(data){
+		        
+		        if(nC_inarow==practice_criterion){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Filler_Page3 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>Tubli!</b> <p>Tee n&#252&#252d <b>3</b>. alam&#252lesanne (kokku <b>4</b>). <b><br>T&#228ida "+(time_limit/1000)+" sekundi jooksul v&#245imalikult palju puuvilja &#252lesandeid!</b></p><p>***</p>Alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				practice = false;
+				i = 0;	
+				i_color = Math.floor(Math.random()*3)
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
+				practice = false
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page3 = i
+				nErrors_Page3 = 0
+				RTs_Page3 = []
+				RTs_Page3_correct = []
+				RTs_Page3_wrong = []
+	 	   	},
+	};
+	var StimLoop_Page3_Test = {
+		timeline: [Page3],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page3_Loop_Test = {
+		timeline: [StimLoop_Page3_Test],
+		loop_function: function(data){
+		        
+		        if((new Date()-startTime)>=time_limit){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Page3_finalFeedback = {
+		type: 'instructions',
+		pages: function(){
+				mean_RTs = Math.round((averageFx(RTs_Page3)/1000)*100)/100; nCompleted_Page3 = nCompleted_Page3;
+				if(RTs_Page3_correct.length==0){mean_RTs_right="&#213iged vastused puuduvad"}else{
+					mean_RTs_right_P3 = Math.round((averageFx(RTs_Page3_correct)/1000)*100)/100; 
+				}
+				if(RTs_Page3_wrong.length==0){mean_RTs_wrong="Valed vastused puuduvad"}else{
+					mean_RTs_wrong = Math.round((averageFx(RTs_Page3_wrong)/1000)*100)/100; 
+				}
+				return["Tehtud &#252lesannete arv: <b>"+nCompleted_Page3+"</b><br>Vigade arv: <b>"+nErrors_Page3+"</b><br>Keskmine vastamise aeg (sekundites): <b>"+mean_RTs+"</b><br>Vastamise aeg (&#245iged katsed): <b>"+mean_RTs_right_P3+" </b><br>Vastamise aeg (valed katsed): <b>"+mean_RTs_wrong+" "]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page3: nCompleted_Page3, nErrors_Page3: nErrors_Page3, RTs: RTs_Page3}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var Instruction_Page4 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b> Suurep&#228rane!</b> <p> <b>Neljandas</b> ja &#252htlasi <b>viimases alam&#252lesandes</b> kuvatakse puuviljad valedes v&#228rvides (nt punane banaan) ja Sinu &#252lesandeks on vajutada nuppu, kus on kujutatud puuvilja 't&#245eline' v&#228rv (nt punase v&#228rviga banaani puhul tuleks valida kollane nupp). <p>***</p>Harjutamise alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				i = 0;	
+				subsets_practice = [0,1,2,2]
+				colors_practice = [0,1,2,3]
+				i_subset = subsets_practice[0]
+				i_color = colors_practice[0]
+				//i_subset = Math.floor(Math.random()*(color_buttons.length-1))
+				//i_color = Math.floor(Math.random()*color_buttons.length)
+				console.log([i_subset,i_color])
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
+				practice = true
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page4 = i
+				nErrors_Page4 = 0
+				RTs_Page4 = []
+				RTs_Page4_correct = []
+				RTs_Page4_wrong = []
+	 	   	},
+	};
+	var Page4 = {
+		    type: 'BRFruit',
+			is_html: false, 
+			prompt: "Mis on selle puuvilja 't&#245eline' v&#228rv?<p>",
+			stimulus: function(){
+					return incongruentFruits[i_subset][i_color]
+			},
+		    choices: color_buttons,
+	 	   	on_finish: function(data){
+				button_order = data.button_order
+				button_pressed = data.button_pressed
+				color_correct = data.color_correct
+				color_clicked = data.color_clicked
+				console.log([color_correct,color_clicked])
+				RTs_Page4.push(data.rt)
+				if(color_correct==color_clicked){
+					// i = counting items = number completed
+					i++
+					nCompleted_Page4=i
+					nC_inarow++
+					item_completed = true
+					if(practice==false){
+						var stim_turned_new = false;
+						while(stim_turned_new== false){
+							i_subset_next = Math.floor(Math.random()*(color_buttons.length-1))
+							i_color_next = Math.floor(Math.random()*color_buttons.length)
+							if((i_subset_next!= i_subset)&&(i_color_next!=i_color)){
+								i_subset=i_subset_next
+								i_color=i_color_next
+								stim_turned_new=true
+							}
+						}
+					}else{
+						i_subset = subsets_practice[i]
+						i_color = colors_practice[i]
+					}
+					RTs_Page4_correct.push(data.rt)
+				}else{
+					if(practice==true){i=0}
+					nC_inarow = 0
+					item_completed = false
+					nErrors_Page4++
+					RTs_Page4_wrong.push(data.rt)
+				}
+	 	   	},
+		};
+
+	var Feedback_Page4 = {
+		type: 'instructions',
+		pages: function(){if(item_completed==true){
+			feedback_text = "<p>***</p> <span style='color:green'>&#213ige vastus!</span><br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."}else{
+				feedback_text="<p>***</p> <span style='color:red'>Vale vastus!</span> Nupu v&#228rv peab vastama puuvilja 't&#245elisele' v&#228rvile (nagu eelmistes alam&#252lesannetes harjutasid). Proovi uuesti!<br>J&#228rjest antud &#245igeid vastuseid: <b>"+nC_inarow +"</b> (kokku <b>"+practice_criterion+"</b> &#252lesannet).<p>***</p>J&#228tkamiseks kl&#245psa nuppu <i>J&#228tka</i>."
+			}
+		 return[feedback_text]},
+		show_clickable_nav: true,
+		on_finish: function(data){
+				
+	 	   	},
+	};
+	var StimLoop_Page4_Practice = {
+		timeline: [Page4,Feedback_Page4],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page4_Loop_Practice = {
+		timeline: [StimLoop_Page4_Practice],
+		loop_function: function(data){
+		        
+		        if(nC_inarow==practice_criterion){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Filler_Page4 = {
+		type: 'instructions',
+		pages: ["<p>***</p> <b>H&#228sti tehtud!</b> <br>Tee n&#252&#252d <b>viimane alam&#252lesanne</b>.<b><br>T&#228ida "+(time_limit/1000)+" sekundi jooksul v&#245imalikult palju puuvilja &#252lesandeid!</b></p><p>***</p>Alustamiseks kl&#245psa <i>J&#228tka</i>."],
+		show_clickable_nav: true,
+		on_finish: function(data){
+				practice = false;
+				i = 0;	
+				i_subset = Math.floor(Math.random()*(color_buttons.length-1))
+				i_color = Math.floor(Math.random()*color_buttons.length)
+				button_pressed = Math.floor(Math.random()*color_buttons.length)
+				practice = false
+				nC_inarow = 0
+				startTime = new Date()
+
+				item_completed = false
+				nCompleted_Page4 = i
+				nErrors_Page4 = 0
+				RTs_Page4 = []
+				RTs_Page4_correct = []
+				RTs_Page4_wrong = []
+	 	   	},
+	};
+	var StimLoop_Page4_Test = {
+		timeline: [Page4],
+		loop_function: function(data){
+			if(item_completed==true){
+				return false
+			}else{
+				return true
+			}
+		}
+	}
+	var Page4_Loop_Test = {
+		timeline: [StimLoop_Page4_Test],
+		loop_function: function(data){
+		        
+		        if((new Date()-startTime)>=time_limit){
+		        	return false;
+		        }else{
+		        	return true;
+		        }
+
+		  }
+
+	}
+	var Page4_finalFeedback = {
+		type: 'instructions',
+		pages: function(){
+				mean_RTs = Math.round((averageFx(RTs_Page4)/1000)*100)/100; nCompleted_Page4 = nCompleted_Page4;
+				if(RTs_Page4_correct.length==0){mean_RTs_right="&#213iged vastused puuduvad"}else{
+					mean_RTs_right_P4 = Math.round((averageFx(RTs_Page4_correct)/1000)*100)/100; 
+				}
+				if(RTs_Page4_wrong.length==0){mean_RTs_wrong="Valed vastused puuduvad"}else{
+					mean_RTs_wrong = Math.round((averageFx(RTs_Page4_wrong)/1000)*100)/100; 
+				}
+				return["Tehtud &#252lesannete arv: <b>"+nCompleted_Page4+"</b><br>Vigade arv: <b>"+nErrors_Page4+"</b><br>Keskmine vastamise aeg (sekundites): <b>"+mean_RTs+"</b><br>Vastamise aeg (&#245iged katsed): <b>"+mean_RTs_right_P4+" </b><br>Vastamise aeg (valed katsed): <b>"+mean_RTs_wrong+" "]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page4: nCompleted_Page4, nErrors_Page4: nErrors_Page4, RTs: RTs_Page4}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	var Summary_Scoring = {
+		type: 'instructions',
+		pages: function(){
+				predicted_score = (nCompleted_Page1*nCompleted_Page3)/(nCompleted_Page1+nCompleted_Page3)
+				predicted_score = Math.round(predicted_score*100)/100
+				actual_score = nCompleted_Page4-predicted_score
+				actual_score = Math.round(actual_score*100)/100
+				interference_score = actual_score-predicted_score
+				interference_score = Math.round(interference_score*100)/100
+				return["<b>Sinu tulemused: </b><p>Tehtud &#252lesannete arv (alam&#252lesanne 1): <b>"+nCompleted_Page1+"</b><br> Tehtud &#252lesannete arv (alam&#252lesanne 2): <b>"+nCompleted_Page2+"</b><br> Tehtud &#252lesannete arv (alam&#252lesanne 3): <b>"+nCompleted_Page3+"</b><br> Tehtud &#252lesannete arv (alam&#252lesanne 4): <b>"+nCompleted_Page4+"</b><p>Keskmine vastamise aeg (alam&#252lesanne 1): <b>"+mean_RTs_right_P1+"</b> sekundit<br>Keskmine vastamise aeg (alam&#252lesanne 2): <b>"+mean_RTs_right_P2+"</b> sekundit<br>Keskmine vastamise aeg (alam&#252lesanne 3): <b>"+mean_RTs_right_P3+"</b> sekundit<br>Keskmine vastamise aeg (alam&#252lesanne 4): <b>"+mean_RTs_right_P4+"</b> sekundit<p>Prognoositud tulemus: <b>"+predicted_score+"</b><br>Tegelik tulemus: <b>"+actual_score+"</b><br>Erinevus: <b>"+interference_score+""]},
+		show_clickable_nav: true,
+		data: function(){
+				return{nCompleted_Page1: nCompleted_Page1, nCompleted_Page2: nCompleted_Page2, nCompleted_Page3: nCompleted_Page3, nCompleted_Page4: nCompleted_Page4, mean_RTs_right_P1: mean_RTs_right_P1, mean_RTs_right_P2: mean_RTs_right_P2, mean_RTs_right_P3: mean_RTs_right_P3, mean_RTs_right_P4: mean_RTs_right_P4, predicted_score: predicted_score, actual_score: actual_score, interference_score: interference_score}
+			},
+		on_finish: function(data){
+				
+	 	   	},
+	}
+
+	/*var goodbye = {
+			type: 'instructions',
+			pages: [function(){return("<h3>Suur t&#228nu vastamise eest!</h3> Kl&#245psa nuppu <i>J&#228tka</i>, et alustada andmete allalaadimist allalaetud failide kausta. Palun saada see fail aadressile: <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>  <p>Kui mingil p&#245hjusel allalaadimine ei t&#246&#246ta, siis palun kopeeri ja kleebi ekraanil kuvatud andmed oma valitud tekstifaili ja saada see samuti aadressile <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>.<p><b>Igal juhul palun teavita meid oma osalemisest! </li></ul>")}],
+			show_clickable_nav: true,	
+	};*/
+	var goodbye = {
+        type: 'instructions',
+        pages: ["<h3>Suur t&aumlnu vastamise eest!</h3> <p>Sinu anon&uuml&uumlmsed vastused on salvestatud &uumlhes Tallinna &Uumllikooli serveris. <br>Kui Sul on lisak&uumlsimusi uuringu eesm&aumlrgi v&otildei meie andmehalduse kohta, <br>saada palun meile e-kiri aadressil: <a href='mailto:seasenselab@gmail.com'> seasenselab@gmail.com</a>"],
+        show_clickable_nav: false
+    };
+
+
+
+/////////
+	jsPsych.init({
+		
+		timeline: [ welcome, /*informedConsent1, informedConsent2, informedConsent3,*/
+					persCode_loop,
+					Instruction_Page1, Page1_Loop_Practice, Filler_Page1, Page1_Loop_Test, Page1_finalFeedback,
+					Instruction_Page2, Page2_Loop_Practice, Filler_Page2, Page2_Loop_Test, Page2_finalFeedback,
+					Instruction_Page3, Page3_Loop_Practice, Filler_Page3, Page3_Loop_Test, Page3_finalFeedback,
+					Instruction_Page4, Page4_Loop_Practice, Filler_Page4, Page4_Loop_Test, Page4_finalFeedback,
+					Summary_Scoring,
+					goodbye
+				  ],
+
+	   	fullscreen: false,
+	   	on_finish: function(data){
+	   	jsPsych.data.displayData();
+	        jsPsych.data.displayData();
+	        jsPsych.data.localSave('FruitStroop_sendMeTo_seasenselab@gmail.com.txt', 'csv');
+	   }
+	});
+	
+	
+		
+	</script>
+		
+</html>
