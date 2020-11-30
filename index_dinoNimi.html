@@ -20,13 +20,13 @@
   <script>
 
     
-    n_trials_sdl = 10;
-    n_trials_freeSort = 4;
-    n_blocks_judgment = 2;
+    n_trials_sdl = 10; //10
+    n_trials_freeSort = 1; //4
+    n_blocks_judgment = 1; //2
 
-    n_sdl = 7;
-    n_freeSort_phases=4;
-    n_judgment_phases=4;
+    n_sdl = 2; //7
+    n_freeSort_phases=2;//4
+    n_judgment_phases=2;//4
     n_tests=n_freeSort_phases+n_judgment_phases
 
     count_test = 0;
@@ -854,7 +854,12 @@
         judgmentTest_loop,bridge_judgment,feedback_judgment,
         goodbye
         ]
-      on_finish: function() { jsPsych.data.displayData(); }
+      //on_finish: function() { jsPsych.data.displayData(); }
+      on_finish: function(data){
+      jsPsych.data.displayData();
+          jsPsych.data.localSave('SymSpan_sendMeTo_abidabi@tlu.ee.txt', 'csv');
+          $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
+     }
     });
 
   </script>
