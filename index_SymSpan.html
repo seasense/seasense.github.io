@@ -531,8 +531,8 @@ var intro_realTrials = {
 	};
 	var goodbye = {
         type: 'instructions',
-        pages: ["<h3>Suur t&aumlnu vastamise eest!</h3> <p>Sinu anon&uuml&uumlmsed vastused on salvestatud &uumlhes Tallinna &Uumllikooli serveris. <br>Kui Sul on lisak&uumlsimusi uuringu eesm&aumlrgi v&otildei meie andmehalduse kohta, <br>saada palun meile e-kiri aadressil: <a href='mailto:seasenselab@gmail.com'> seasenselab@gmail.com</a>"],
-        show_clickable_nav: false
+        pages: ["<h3>Suur t&aumlnu vastamise eest!</h3> <p>Sinu anon&uuml&uumlmsed vastused on salvestatud &uumlhes Tallinna &Uumllikooli serveris. <br>Kui Sul on lisak&uumlsimusi uuringu eesm&aumlrgi v&otildei meie andmehalduse kohta, <br>saada palun meile e-kiri aadressil: <a href='mailto:abidabi@tlu.ee'> abidabi@tlu.ee</a>"],
+        show_clickable_nav: true
     };
 
 /////////
@@ -549,12 +549,8 @@ var intro_realTrials = {
 					],
 
 	   	fullscreen: false,
-	   	/*on_finish: function(data){
-	   	jsPsych.data.displayData();
-	        jsPsych.data.displayData();
-	        jsPsych.data.localSave('SymSpan_sendMeTo_seasenselab@gmail.com.txt', 'csv');
-	        $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
-	   }*/
+	   	on_finish: function(data){
+          jsPsych.data.get().localSave('csv','myData_sendMeTo_abidabi@tlu.ee.txt')}
 	});
 	
 	
