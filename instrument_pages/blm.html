@@ -1,0 +1,66 @@
+<html>
+	
+	<head>
+		
+		<title>seasense.symSpan</title>
+
+		<link href="../styles.css" rel="stylesheet" type="text/css"></link>
+
+		<script src="../FxExtra.js"></script>
+		
+	</head>
+
+	<body>
+		
+		<script>
+
+		</script>
+		<div class='table'>
+			    <div class='cell' id="symspan_cell">
+			        
+				    <script>
+				    	var ID_OfParagraph = "symspan_text"
+				    	startPageFx("blm_cell",ID_OfParagraph)
+				    	titleFx(ID_OfParagraph,"blm","h2")
+				    	
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Task name:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						taskName = "Black Lives Matter Survey"
+						piece_of_textFx(ID_OfParagraph,taskName)
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Description:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						description = "Answering questions on your news behavior and your position in the BLM discourse"
+						piece_of_textFx(ID_OfParagraph,description)
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Targeted construct:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						construct = "Information behavior"
+						piece_of_textFx(ID_OfParagraph,construct)
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+						titleFx(ID_OfParagraph,"Participate:","strong")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("br"))
+						linkExternalFx(ID_OfParagraph,"Link to task","../index_blm.html")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+				    	piece_of_textFx(ID_OfParagraph,"***")
+						document.getElementById(ID_OfParagraph).appendChild(document.createElement("P"));
+
+				    	buttonFx(ID_OfParagraph,".instruments","../instruments.html")
+				    	buttonFx(ID_OfParagraph,".directory","../directory.html")
+
+				    </script>
+			        
+
+			    </div>
+		</div>
+
+	</body>
+
+</html>
