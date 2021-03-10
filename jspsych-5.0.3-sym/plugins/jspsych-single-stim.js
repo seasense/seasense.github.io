@@ -16,7 +16,7 @@ jsPsych.plugins["single-stim"] = (function() {
   jsPsych.pluginAPI.registerPreload('single-stim', 'stimulus', 'image');
 
   plugin.trial = function(display_element, trial) {
-    scrollWin();
+
     // if any trial variables are functions
     // this evaluates the function and replaces
     // it with the output of the function

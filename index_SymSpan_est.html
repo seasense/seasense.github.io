@@ -34,7 +34,9 @@
 	
 	
 	<script>
+		// helper functions
 		function scrollWin() {window.scrollTo(0, 0);};
+
 		function rememberCellsFx(t_SetSize){
 	
 			cells_trial_x = []
@@ -64,19 +66,19 @@
 					if(b_pressed==1){
 						
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						if(nTrials_remaining==0){ feedText = "Richtig. Das pr&#xE4;sentierte Muster war symmetrisch."+"<p>"+"Der &#xDC;bungsdurchgang ist beendet!"+"<p>"+"Klicken Sie Weiter, um fortzufahren."}else{feedText = "Richtig. Das pr&#xE4;sentierte Muster war symmetrisch."+"<p>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Versuchen."}	
+						if(nTrials_remaining==0){feedText = "&#213ige. Esitatud muster oli s&#252mmeetriline."+"<p>"+"Harjutamissessioon on l&#245ppenud!"+"<p>"+"J&#228tkamiseks kl&#245psa nuppu Edasi"}else{feedText = "&#213ige. Esitatud muster oli s&#252mmeetriline."+"<p>"+nTrials_remaining+" vigadeta katse(t) on j&#228&#228nud (kokku "+(nErrorFreeTrials_symPractice-1)+" katset)."}	
 					}else{
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						feedText = "Falsch. Das pr&#xE4;sentierte Muster war symmetrisch."+"<p>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Versuchen."}
+						feedText = "Vale. Esitatud muster oli s&#252mmeetriline."+"<p>"+nTrials_remaining+" vigadeta katse(t) on j&#228&#228&#228nud (kokku "+(nErrorFreeTrials_symPractice-1)+" katset)."}
 				}
 				if(pattern=="asymmetrical"){
 					if(b_pressed==0){
 						
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						if(nTrials_remaining==0){feedText = "Richtig. Das gezeigte Muster war asymmetrisch."+"<p>"+"Vielen Dank! Der &#xDC;bungsdurchgang (a) ist nun zu Ende."+"<p>"+" Klicken Sie <i>Weiter</i>, um nun mit der &#xDC;bung (b) zu beginnen."}else{feedText = "Richtig. Das gezeigte Muster war asymmetrisch."+"<p>"+nTrials_remaining+" von "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Durchg&#xE4;ngen."}
+						if(nTrials_remaining==0){feedText = "&#213ige. N&#228idatud muster oli ebas&#252mmeetriline."+"<p>"+"Suur t&#228nu! &#220lesande (a) harjutamine on n&#252&#252d l&#245ppenud."+"<p>"+" Harjutuse (b) alustamiseks kl&#245psa nuppu <i>Edasi</i>."}else{feedText = "&#213ige. N&#228idatud muster oli ebas&#252mmeetriline."+"<p>"+nTrials_remaining+" vigadeta katse(t) on j&#228&#228nud (kokku "+(nErrorFreeTrials_symPractice-1)+" katset)."}
 					}else{
 						nTrials_remaining = nErrorFreeTrials_symPractice-successCountr_sym-1;
-						feedText = "Falsch. Das gezeigte Muster war asymmetrisch."+"<p>"+nTrials_remaining+" von of "+(nErrorFreeTrials_symPractice-1)+" verbleibenden fehlerfreien Versuchen."}
+						feedText = "Vale. N&#228idatud muster oli ebas&#252mmeetriline."+"<p>"+nTrials_remaining+" vigadeta katse(t) on j&#228&#228nud (kokku "+(nErrorFreeTrials_symPractice-1)+" katset)."}
 				}
 
 				return feedText
@@ -94,6 +96,7 @@
 	var trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6]
 	//var trials = [2,3,6];
 	function trials_gene(){return (trials = [2,2,2,3,3,3,4,4,4,5,5,5,6,6,6])};
+	//function trials_gene(){return (trials = [2,2])};
 	var trials_copy = trials;
 	//var trials = [2,2];
 	//var trials_seq = jsPsych.randomization.repeat(trials, 1);
@@ -122,7 +125,7 @@
 			type: 'instructions',
 			pages: [
 			//<p>Aus unserem allt&#xE4;glichen Leben ist uns wahrscheinlich allen bekannt, dass es schwierig sein kann mehrere Aufgaben gleichzeitig, zu absolvieren. 
-					"<p class='center-content'> <h2> Willkommen zum <b style='color:#008080'>SymSpan</b>-Task!</h2><p> Der <b style='color:#008080'>SymSpan</b>-Task stellt Ihre Multitasking-F&#xE4;higkeiten auf die Probe, indem er eine Situation simuliert, in der zwei Aufgaben parallel zu bew&#xe4;ltigen sind: <p>(a) In der Symmetrie-Aufgabe muss entschieden werden, ob ein gezeigtes Muster (bestehend aus schwarzen und wei&#xDF;en Quadraten) symmetrisch entlang seiner Horizontalen ist oder nicht. <br>(b) In der Ged&#xE4;chtnisaufgabe gilt es, sich die Positionen von farbig aufleuchtenden Feldern innerhalb einer 4x4-Matrix zu merken. <p>Der gesamte Task (inklusive &#xDC;bungsdurchgang) dauert etwa 15 Minuten.<ul><h3><li> Bitte vergewissern Sie sich, dass Sie den Task entweder mit dem Browser <i>Firefox</i> oder <i>Chrome</i> durchf&#xFC;ren. Bitte verwenden Sie weder <i>Safari</i> noch <i>Windows Internet Explorer</i>!</li><li>Au&#xDF;erdem m&#xF6;chten wir Sie bitten, den Task nur dann zu bearbeiten, wenn Sie sich ausreichend ausgeruht und konzentriert f&#XFC;hlen. </li><li>Keinesfalls sollten Sie bitte die Escape-Taste bet&#xE4;tigen. W&#xE4;hrend der Aufgabenbearbeitung h&#xE4;tte dies den Abbruch und Verlust Ihrer Daten zur Folge. </li></h3></ul><p>Klicken Sie <i>Weiter</i>, um fortzusetzen und zun&#xE4;chst Ihre Einverst&#xE4;ndniserkl&#xE4;rung zur Teilnahme abzugeben."],
+					"<p class='center-content'> <h2> Tere tulemast lahendama <b style='color:#008080'>SymSpan</b> &#252lesannet!</h2><p> <b style='color:#008080'>SymSpan</b> &#252lesanne paneb proovile Sinu r&#246&#246pr&#228hklemise (multitasking) oskused, simuleerides olukorda, kus kahte &#252lesannet tuleb teha paralleelselt: <p>(a)	S&#252mmeetria&#252lesandes tuleb otsustada, kas ekraanil esitatud mustadest ja valgetest ruutudest koosnev muster on horisontaalselt s&#252mmeetriline v&#245i mitte. <br>(b)	M&#228lu&#252lesandes on oluline meeles pidada v&#228rviliste vilkuvate v&#228ljade asukohad 4x4 maatriksis. <p>Kogu &#252lesande lahendamine (sh harjutamine) v&#245tab aega umbes 15 minutit.<ul><h3><li> Veendu, et lahendad &#252lesannet kas <i>Firefox</i> v&#245i <i>Chrome</i> brauseri abil. &#196ra kasuta <i>Safari</i> ega <i>Windows Internet Explorer</i> brauserit!</li><li>Palun osale ainult siis, kui tunned end puhanuna ja keskendunult. </li><li>Palun ole ettevaatlik, et Sa kogemata ei vajutaks Escape-nuppu, mis l&#245petaks &#252lesande ilma andmeid salvestamata. </li></h3></ul><p>Oma n&#245usoleku andmiseks ja &#252lesande lahendamise kohta edasiste juhiste saamiseks kl&#245psa nuppu <i>Edasi</i>."],
 			show_clickable_nav: true,
 			
 			};
@@ -130,31 +133,31 @@
 
     var informedConsent1 = {
 		type: 'survey-multi-choice',
-		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>1/3"],
-		options: [["Ich habe die Aufgabenbeschreibung gelesen und erkl&aumlre mich bereit zur Teilnahme."]],
+		questions: ["<b>N&#245usolek uuringus osalemiseks </b>1/3"],
+		options: [["Olen &#252lesande kirjelduse l&#228bi lugenud ja n&#245ustun osalema."]],
 		required: [true]
     };
 	var informedConsent2 = {
 		type: 'survey-multi-choice',
-		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>2/3"],
-		options: [["Ich stimme zu, dass meine pseudonymisierten Daten zur Ver&oumlffentlichung wissenschaftlicher Arbeiten verwendet werden."]],
+		questions: ["<b>N&#245usolek uuringus osalemiseks </b>2/3"],
+		options: [["Olen n&#245us, et minu anon&#252&#252mseid andmeid kasutatakse teadusartiklite avaldamisel."]],
 		required: [true]
     };
     var informedConsent3 = {
 		type: 'survey-multi-choice',
-		questions: ["<b>Einverst&#xE4;ndniserkl&#xE4;rung </b>3/3"],
-		options: function(){return([["Ich stimme zu, dass meine pseudonymisierten Daten zum Zweck der wissenschaftlichen Transparenz f&uumlr andere WissenschaftlerInnen im <a href='https://osf.io/'> Open Science Framework </a> verf&uumlgbar gemacht werden."]])},
+		questions: ["<b>N&#245usolek uuringus osalemiseks </b>3/3"],
+		options: function(){return([["Olen n&#245us, et teaduse l&#228bipaistvuse huvides tehakse mu anon&#252&#252msed andmed teistele teadlastele vabalt k&#228ttesaadavaks vastavalt Avatud Teaduse Raamistikule (vt <a href='https://osf.io/'> Open Science Framework</a>)."]])},
 		required: [true]
     };
 
-	var persData_code = ["<p> Generieren Sie Ihren anonymisierten Personencode:"];
+	var persData_code = ["<p> Loo oma anon&#252&#252mne isiklik kood:"];
 	var demographics = {
 	  		type: "survey-text-persCode",
 	  		questions: persData_code,
-			preamble: "<b>Anleitung zum Generieren des Codes</b>: <br> 1.Stelle: Erster Buchstabe des Vornamens Ihrer Mutter (z.B. <b>M</b>artha) <br> 2.Stelle: Erster Buchstabe des Vornamens Ihres Vaters (z.B. <b>S</b>igmund) <br> Stellen 3-4: Ihr Geburtsjahr (z.B. 18<b>95</b>)<br> 5.Stelle: Erster Buchstabe Ihrer aktuellen Wohnadresse (z.B. <b>B</b>erggasse) <br> 6.Stelle: Erste Ziffer Ihrer Hausnummer (z.B. <b>1</b>9) <p> Beispiel vollst&#xE4;ndiger Code: <b>MS95B1</b>",
+			preamble: "<b>Juhised isikliku koodi loomiseks</b>: <br> Esimene s&#252mbol: Sinu ema eesnime esimene t&#228ht (nt <b>M</b>arta) <br> Teine s&#252mbol: Sinu isa eesnime esimene t&#228ht (nt <b>S</b>iim) <br> Kolmas ja neljas s&#252mbol: Sinu s&#252nniaasta kaks viimast numbrit (nt 18<b>95</b>)<br> Viies s&#252mbol: Sinu praeguse aadressi esimene t&#228ht (nt <b>P</b>argi t&#228nav) <br> Kuues s&#252mbol: Sinu majanumbri esimene number (nt <b>1</b>9) <p> N&#228ide t&#228ielikust isiklikust koodist: <b>MS95P1</b>",
 			on_finish: function(data) { 
 		 		code_length = data.code_length;
-		 		if(code_length!=6){alert("Bitte geben Sie einen 6-stelligen Personencode ein.")}
+		 		if(code_length!=6){alert("Palun sisesta kuuekohaline isiklik kood.")}
 		 		
 		 	}
 	};
@@ -172,25 +175,25 @@
 ///////// Practice
 	var practice_overview = {
 		type: 'instructions',
-		pages: ["<p>***</p> Es folgen zun&#xE4;chst drei kurze &#xDC;bungseinheiten, welche den SymSpan-Task Schritt f&#xFC;r Schritt erkl&#xE4;ren:<p><b>(a)</b> Symmetrie-Aufgabe<br><b>(b)</b> Ged&#xE4;chtnisaufgabe<br><b>(ab)</b> Beide Aufgaben zugleich (SymSpan-Task) <p>***</p>Klicken Sie <i>Weiter</i>, um mit der ersten &#xDC;bungseinheit zu beginnen."],
+		pages: ["<p>***</p> N&#252&#252d j&#228rgnevad kolm esimest l&#252hikest harjutust, mis selgitavad sammhaaval SymSpan &#252lesannet:<p><b>(a)</b>	S&#252mmeetria&#252lesanne<br><b>(b)</b> M&#228lu&#252lesanne<br><b>(ab)</b> M&#245lemad &#252lesanded korraga (SymSpan &#252lesanne). <p>***</p>Esimese harjutuse alustamiseks kl&#245psa nuppu <i>Edasi</i>."],
 		show_clickable_nav: true,
 	};
 ///////// Practice Symmetry
 	
 	var intro_symmetry_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Symmetrie-Aufgabe: Instruktion</b></p> Nachfolgend werden Ihnen Muster (Matrizen) pr&#xE4;sentiert, die sich aus schwarzen und wei&#xDF;en Quadraten zusammensetzen. Es gilt jeweils zu entscheiden, ob das Muster der Matrix symmetrisch entlang seiner Horizontalen ist oder nicht (siehe untere Abbildung).</p></p><IMG src='symspan_example.png'></IMG></p> <p class='center-content'> Klicken Sie <i>Weiter</i>, um zu beginnen.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>S&#252mmeetria&#252lesanne: juhised</b></p> J&#228rgnevalt n&#228idatakse Sulle mustadest ja valgetest ruutudest kokku pandud mustreid (maatrikseid). Oluline on otsustada, kas maatriksi muster on horisontaalselt s&#252mmeetriline v&#245i mitte (vt alltoodud pilti).</p></p><IMG src='img_symspan/symspan_example.png' width=400 style='border:solid black 1px'><IMG ></p> <p class='center-content'> Alustamiseks kl&#245psa nuppu <i>Edasi</i>.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				successCountr_sym = 0;
 			},
 	};
 
-	var symmetry_buttons = [ ["Nein"] , ["Ja"] ];
+	var symmetry_buttons = [ ["Ei"] , ["Jah"] ];
 	var symmetry = {
 		    type: 'judgeSym',
 			is_html: true, 
-			prompt: "Ist das Muster symmetrisch?",
+			prompt: function(){return unescape("Kas muster on s%FCmmeetriline?") },
 		    choices: symmetry_buttons,
 	 	   	on_finish: function(data){
 	 	   		pattern = data.matrixPattern
@@ -223,7 +226,7 @@
 ///////// Practice Remember
 	var intro_remember_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Ged&#xE4;chtnisaufgabe: Instruktion</b></p> Wenn Sie auf <i>Weiter</i> klicken, erscheint eine 4x4-Matrix, innerhalb derer einzelne Felder hintereinander farbig aufleuchten werden. Anschlie&#xDF;end gilt es, alle zuvor aufgeleuchteten Felder in der dargebotenen Reihenfolge zu erinnern (durch Klicken der Felder der Matrix).</p></p><p class='center-content'> Klicken Sie <i>Weiter</i>, um den &#xDC;bungsdurchgang zu starten.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>M&#228lu&#252lesanne: juhised</b></p> Kl&#245psates nuppu <i>Edasi</i> ilmub ekraanile 4x4 maatriks, mille sees hakkavad &#252ksikud v&#228ljad &#252ksteise j&#228rel v&#228rviliselt vilkuma. Meelde tuleb j&#228tta k&#245ik eelnevalt vilkunud v&#228ljad nende esitamise j&#228rjekorras (kl&#245psates maatriksi v&#228ljadele). </p></p><p class='center-content'> Harjutamissessiooni alustamiseks kl&#245psa nuppu <i>Edasi</i>.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
@@ -260,7 +263,7 @@
 	var recall = {
   		type: 'button-response-hitCells',
   		is_html: true,
-		stimulus: "Klicken Sie die Felder in der pr&#xE4;sentierten Reihenfolge an!",
+		stimulus: "Kl&#245psa v&#228ljadel esitatud j&#228rjekorras!",
 		showEndButton: true,
 		flashedCells: function(){return remememberCells_trial_x},
 		response_ends_trial: false,
@@ -298,10 +301,10 @@
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 			if(accuracy_rem_current==100){
-				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist zu Ende.";
+				feedback_recall_message = "V&#228ga hea! Harjutamissessioon on l&#245ppenud.";
 				successCountr+=1;
 			}else{
-				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen die aufleuchtenden Felder fehlerfrei erinnert werden.";
+				feedback_recall_message = "Harjutamissessiooni l&#245petamiseks tuleb m&#245lemad &#252lesanded lahendada vigadeta.";
 				remememberCells_trial_x = rememberCellsFx(t_SetSize);
 			}
 		}
@@ -331,7 +334,7 @@
 ///////// Practice Symmetry & Remember
 	var intro_RemAndSym_practice = {
 			type: 'instructions',
-			pages: function(){return ["<p class='center-content'><b>Beide Aufgaben zugleich (SymSpan-Task): Instruktion</b></p> Jetzt sind ihre Multi-Tasking F&#xE4;higkeiten gefragt! <p>Die Aufgabe besteht nun darin abwechselnd eine Symmetrie-Aufgabe und eine Ged&#xE4;chtnisaufgabe zu absolvieren d.h.:<br>(a) zu entscheiden, ob das gezeigte Muster symmetrisch entlang seiner horizontalen ist oder nicht und <br>(b) sich die Reihenfolge der farbig aufleuchtenden Felder zu merken. <p class='center-content'> Klicken Sie <i>Weiter</i>, um die &#xDC;bung zu beginnen.</p><p>"]},
+			pages: function(){return ["<p class='center-content'><b>M&#245lemad &#252lesanded korraga (SymSpan &#252lesanne): juhised</b></p> N&#252&#252d testitakse Sinu r&#246&#246pr&#228hklemise (multitasking) oskusi! <p>&#220lesanne koosneb n&#252&#252d s&#252mmeetria&#252lesande ja m&#228lu&#252lesande vaheldumisi lahendamisest ehk Sul tuleb:<br>(a)	otsustada, kas n&#228idatav muster on horisontaalsuunas s&#252mmeetriline v&#245i mitte ja <br>(b) meelde j&#228tta v&#228rviliste vilkuvate v&#228ljade j&#228rjekord. <p class='center-content'> Harjutamise alustamiseks kl&#245psa nuppu <i>Edasi</i>.</p><p>"]},
 			show_clickable_nav: true,
 			on_finish: function(data) { 
 				t_SetSize = getRndInteger(rangePracticeSetSize.min,rangePracticeSetSize.max)
@@ -370,12 +373,12 @@
 	var sym_RemAndSym = {
 		    type: 'judgeSym',
 			is_html: true, 
-			prompt: "Ist das Muster symmetrisch?",
+			prompt: function(){return unescape("Kas muster on s%FCmmeetriline?") },
 		    choices: symmetry_buttons,
 	 	   	on_finish: function(data){
 	 	   		pattern = data.matrixPattern
 				b_pressed = data.button_pressed
-				response = ["asymmetrical","symmetrical"][b_pressed]
+				response = ["ebas&#252mmeetriline","s&#252mmeetriline"][b_pressed]
 				/*if(pattern==response){
 					//sym_decision_curr = true
 					successCountr_sym += 1
@@ -413,10 +416,10 @@
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 			if(accuracy_rem_current==100&accuracy_sym_cumu==100){
-				feedback_recall_message = "Sehr gut! Der &#xDC;bungsdurchgang ist nun beendet."
+				feedback_recall_message = "V&#228ga h&#228sti! Harjutamissessioon on n&#252&#252d l&#245ppenud."
 				stop_practice = true
 			}else{
-				feedback_recall_message = "Um den &#xDC;bungsdurchgang zu beenden, m&#xFC;ssen beide Aufgaben fehlerfrei absolviert werden.";
+				feedback_recall_message = "Harjutamissessiooni l&#245petamiseks tuleb m&#245lemad &#252lesanded lahendada vigadeta.";
 				stop_practice = false
 			}
 		}
@@ -424,7 +427,7 @@
 
 	var feedback_RemAndSym_1 = {
 		type: 'instructions',
-		pages: [ function(){return ""+"<b>"+"Feedback Symmetrie-Aufgabe"+"</b>"+"<p>"+"Die pr&#xE4;sentierten Muster waren: "+symPatterns+"<br>"+"Ihre Antworten waren: "+symDecisions+"<p>"+"<b>"+"Genauigkeit: "+accuracy_sym_cumu+"%" } ],
+		pages: [ function(){return ""+"<b>"+"Tagasiside s&#252mmeetria&#252lesandele"+"</b>"+"<p>"+"Esitatud mustrid olid: "+symPatterns+"<br>"+"Sinu vastused olid: "+symDecisions+"<p>"+"<b>"+"T&#228psus: "+accuracy_sym_cumu+"%" } ],
 		show_clickable_nav: true,
 		on_finish: function(data) { 
 				
@@ -465,14 +468,14 @@
 	
 	var goodbye = {
 			type: 'instructions',
-			pages: [function(){return("<h3>Vielen Dank f&#xFC;r Ihre Teilnahme!</h3> Klicken Sie <i>Weiter</i>, um den Download Ihrer Daten in Ihren Download-Folder zu starten. Senden Sie dieses File anschlie&#xDF;end an die E-Mail Adresse: <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>  <p>Hinweis: Wenn Sie irrt&#xFC;mlich mit Safari gearbeitet haben, dann <ul><li>markieren und kopieren Sie die nachfolgend angezeigten Daten mit den Befehlen cmd+a und cmd+s. F&#xFC;gen Sie anschlie&#xDF;end diese kopierten Daten in ein Textfile Ihrer Wahl, welches wir Sie bitten, ebenfalls an die Adresse <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a> zu schicken.</li><li>teilen Sie uns in jedem Fall bitte mit, dass Sie teilgenommen haben. </li></ul>")}],
+			pages: [function(){return("<h3>Suur t&#228nu vastamise eest!</h3> Kl&#245psa <i>Edasi</i>, et alustada andmete allalaadimist allalaetud failide kausta. Palun saada see fail e-posti aadressile: <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>  <p>Kui mingil p&#245hjusel allalaadimine ei t&#246&#246ta, siis palun kopeeri ja kleebi kuvatud andmed oma valitud tekstifaili ja saada see samuti aadressile <a href='mailto:seasenselab@gmail.com'>seasenselab@gmail.com</a>.</li><li>Igal juhul palun teavita meid oma osalemisest. </li></ul>")}],
 			show_clickable_nav: true,	
 	};
 
 ///////// Official Task
 var intro_realTrials = {
 			type: 'instructions',
-			pages: function(){return ["<p>***</p><b> SymSpan-Task:</b> Instruktion <p> Es folgen nun "+trials.length+" Durchg&#xE4;nge, in denen wie zuletzt beide Aufgaben simultan auszuf&#xFC;hren sind. <p>Bitte beachten Sie, dass einzelne Durchg&#xE4;nge sehr herausfordernd sind, da gelegentlich bis zu "+maxSetSize+" Felder der 4x4-Matrix zu merken sind. <p>Ihr Ergebnis (in Punkten) erfahren Sie erst nach dem letzten Durchgang.</p><p><b>Versuchen Sie, so genau wie m&#xF6;glich zu arbeiten.</b><p>***</p><p>Klicken Sie  <i>Weiter</i>, um zu beginnen."]},
+			pages: function(){return ["<p>***</p><b> SymSpan &#252lesanne:</b> juhised <p> N&#252&#252d j&#228rgneb "+trials.length+" sarnast &#252lesannet, kus nagu ka varem, tuleb m&#245lemad &#252lesanded teha samaaegselt. <p>Pane t&#228hele, et &#252ksikud &#252lesanded v&#245ivad olla &#252sna keerulised, kuna m&#245nikord tuleb 4x4 maatriksis meelde j&#228tta kuni "+maxSetSize+" v&#228lja. <p>Oma tulemuse (punktides) saad teada alles p&#228rast viimase &#252lesande lahendamist.</p><p><b>Proovi t&#246&#246tada v&#245imalikult t&#228pselt.</b><p>***</p><p>Alustamiseks kl&#245psa nuppu <i>Edasi</i>."]},
 			show_clickable_nav: true,
 			on_finish: function(data) {
 				x = 0
@@ -495,7 +498,7 @@ var intro_realTrials = {
 	};
 	var feedback_progress = {
 		type: 'instructions',
-		pages: function(){if((x+1)<trials.length){return ["<p>***</p><p>Sie haben bisher <b>"+(x+1)+"</b> von <b>"+trials.length+"</b> Durchg&#xE4;ngen absolviert. </p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}else{return["<p>***</p><b> </b><br><b></b>Vielen Dank! Der SymSpan-Task ist nun zu Ende.<p>***</p><b>Punktestand</b><p></p><b>Symmetrie-Aufgabe:</b><p>Anzahl dargebotener Muster: <b>"+nSymDecisions_total+"</b><br>Richtige Antworten: <b>"+successCountr_sym+"</b><br>Genauigkeit: <b>"+accuracy_sym_cumu+"%</b><p>***</p> <p> <b>Ged&#xE4;chtnisaufgabe:</b><p>In richtiger Reihenfolge geklickte Felder: <b>"+nCells_RecCorPos_total+"</b><br>In falscher Reihenfolge geklickte Felder: <b>"+nCells_RecIncorPos_total+"</b><br>Ausgelassene (zuvor aber pr&#xE4;sentierte) Felder: <b>"+nCells_Missed_total+"</b><br>Irrt&#xFC;mlich geklickte (zuvor aber nicht pr&#xE4;sentierte) Felder: <b>"+nCells_FalseMem_total+"</b><br>Genauigkeit: <b>"+accuracy_rem_cumu+"%</b><p>***</p>Klicken Sie <i>Weiter</i>, um fortzufahren."]}},
+		pages: function(){if((x+1)<trials.length){return ["<p>***</p><p>Praeguseks on Sul lahendatud <b>"+(x+1)+"</b> &#252lesannet (kokku <b>"+trials.length+"</b> &#252lesannet). </p>J&#228tkamiseks kl&#245psa <i>Edasi</i>."]}else{return["<p>***</p><b> </b><br><b></b>Suur t&#228nu! SymSpan &#252lesanne on n&#252&#252d l&#245ppenud.<p>***</p><b>Tulemus</b><p></p><b>S&#252mmeetria&#252lesanne:</b><p>Esitatud mustrite arv: <b>"+nSymDecisions_total+"</b><br>&#213iged vastused: <b>"+successCountr_sym+"</b><br>T&#228psus: <b>"+accuracy_sym_cumu+"%</b><p>***</p> <p> <b>M&#228lu&#252lesanne:</b><p>&#213iges j&#228rjekorras kl&#245psatud v&#228ljad: <b>"+nCells_RecCorPos_total+"</b><br>Vales j&#228rjekorras kl&#245psatud v&#228ljad: <b>"+nCells_RecIncorPos_total+"</b><br>Puuduvad (kuid esitatud) v&#228ljad: <b>"+nCells_Missed_total+"</b><br>Ekslikult kl&#245psatud (kuid mitte esitatud) v&#228ljad: <b>"+nCells_FalseMem_total+"</b><br>T&#228psus: <b>"+accuracy_rem_cumu+"%</b><p>***</p>J&#228tkamiseks kl&#245psa <i>Edasi</i>."]}},
 		show_clickable_nav: true,
 		data: function(){return{successCountr_sym: successCountr_sym, cells_RecCorPos:cells_RecCorPos.length, cells_RecIncorPos: cells_RecIncorPos.length, cells_Missed: cells_Missed.length, cells_FalseMem: cells_FalseMem.length, recall_accuracy: accuracy_rem_current, summary: "summary_symAndRem" }},
 		on_finish: function(data) {
@@ -526,6 +529,11 @@ var intro_realTrials = {
 		        }
 		  },
 	};
+	var goodbye = {
+        type: 'instructions',
+        pages: ["<h3>Suur t&aumlnu vastamise eest!</h3> <p>Sinu anon&uuml&uumlmsed vastused on salvestatud &uumlhes Tallinna &Uumllikooli serveris. <br>Kui Sul on lisak&uumlsimusi uuringu eesm&aumlrgi v&otildei meie andmehalduse kohta, <br>saada palun meile e-kiri aadressil: <a href='mailto:abidabi@tlu.ee'> abidabi@tlu.ee</a>"],
+        show_clickable_nav: true
+    };
 
 /////////
 	jsPsych.init({
@@ -542,11 +550,7 @@ var intro_realTrials = {
 
 	   	fullscreen: false,
 	   	on_finish: function(data){
-	   	jsPsych.data.displayData();
-	        jsPsych.data.displayData();
-	        jsPsych.data.localSave('SymSpan_sendMeTo_seasenselab@gmail.com.txt', 'csv');
-	        $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
-	   }
+          jsPsych.data.localSave('symSpanData_sendMeTo_abidabi@tlu.ee.txt','csv')}
 	});
 	
 	

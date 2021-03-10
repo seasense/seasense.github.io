@@ -13,7 +13,7 @@ jsPsych.plugins['survey-likert'] = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-    scrollWin();
+
     // default parameters for the trial
     trial.preamble = typeof trial.preamble === 'undefined' ? "" : trial.preamble;
 

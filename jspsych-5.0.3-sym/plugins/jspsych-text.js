@@ -14,7 +14,7 @@ jsPsych.plugins.text = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-    scrollWin();
+
     trial.cont_key = trial.cont_key || [];
     
     // if any trial variables are functions
@@ -27,7 +27,7 @@ jsPsych.plugins.text = (function() {
     
 
     var nav_html = "<div class='jspsych-instructions-nav'>";
-    nav_html += "<button id='jspsych-instructions-next' class='jspsych-btn'>Edasi</button></div>" /*Edasi*/
+    nav_html += "<button id='jspsych-instructions-next' class='jspsych-btn'>Weiter</button></div>" /*Edasi*/
     display_element.append(nav_html);
     $('#jspsych-instructions-next').on('click', function() {
           clear_button_handlers();

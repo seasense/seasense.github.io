@@ -14,7 +14,7 @@ jsPsych.plugins.instructions = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-    scrollWin();
+
     trial.key_forward = trial.key_forward || 'rightarrow';
     trial.key_backward = trial.key_backward || 'leftarrow';
     trial.allow_backward = (typeof trial.allow_backward === 'undefined') ? true : trial.allow_backward;
@@ -43,7 +43,7 @@ jsPsych.plugins.instructions = (function() {
         if (current_page != 0 && trial.allow_backward) {
           nav_html += "<button id='jspsych-instructions-back' class='jspsych-btn'>&lt; Previous</button>";
         }
-        nav_html += "<button id='jspsych-instructions-next' class='jspsych-btn'>Edasi</button></div>" /*Edasi*/
+        nav_html += "<button id='jspsych-instructions-next' class='jspsych-btn'>Weiter</button></div>" /*Edasi*/
 
         display_element.append(nav_html);
 

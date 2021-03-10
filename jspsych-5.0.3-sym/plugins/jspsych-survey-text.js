@@ -14,7 +14,7 @@ jsPsych.plugins['survey-text'] = (function() {
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-    scrollWin();
+
     trial.preamble = typeof trial.preamble == 'undefined' ? "" : trial.preamble;
     if (typeof trial.rows == 'undefined') {
       trial.rows = [];

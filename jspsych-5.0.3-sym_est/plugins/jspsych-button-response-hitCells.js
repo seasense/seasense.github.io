@@ -9,11 +9,11 @@
  **/
 
 jsPsych.plugins["button-response-hitCells"] = (function() {
-
+  
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
-
+    scrollWin();
     // default trial parameters
     
     trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
@@ -123,7 +123,7 @@ jsPsych.plugins["button-response-hitCells"] = (function() {
     
     //display doneButton
     if (trial.showEndButton) {
-      var doneButton = "<button id='doneButton' class='jspsych-btn' style='margin:20px'>Best&#xE4;tigen und Weiter </button></div>" /*Submit recalled letters*/
+      var doneButton = "<button id='doneButton' class='jspsych-btn' style='margin:20px'>Kinnita ja j&aumltka </button></div>" /*Submit recalled letters*/
       display_element.append(doneButton);
     }
     $("#doneButton").on('click', function(e) {
