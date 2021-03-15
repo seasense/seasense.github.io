@@ -6,21 +6,30 @@
     <script src="jspsych-6-blm/plugins/jspsych-instructions.js"></script>
     <script src="jspsych-6-blm/plugins/jspsych-survey-multi-choice.js"></script>
     <script src="jspsych-6-blm/plugins/jspsych-survey-likert.js"></script>
+    <script src="jspsych-6-blm/plugins/jspsych-external-html.js"></script>
+    <script src="jspsych-6-blm/plugins/jspsych-survey-text-blm.js"></script>
     <link rel="stylesheet" href="jspsych-6-blm/css/jspsych.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
 
-  <script>
+  
 
+  <script>
     
+
     // Helper functions and objects to store data
     function scrollWin() {window.scrollTo(0, 0);};
-
+    
+    function openwindow(link) {
+                      popup = window.open(link,'Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width='+1024+',height='+768+'');
+                    }
     function randomInteger(min, max) {return Math.floor(Math.random() * (max - min) + min);};
     function makeSeq(seqLength) {
       sequence = [];
       for (i = 0; i < seqLength; i++) {sequence.push(randomInteger(0,10));}
       return sequence
     };
+    
     participant_code = makeSeq(5);
     participant_code = participant_code.join('');
     console.log(participant_code);
@@ -41,7 +50,7 @@
       type: 'instructions',
       pages: [["<h3>About Black Lives Matter (BLM)</h3> The social movement #BlackLivesMatter started in 2013 in response to the acquittal of Trayvon Martin's murderer. <br>Black Lives Matter (BLM) is a decentralized political and social movement advocating for non-violent civil disobedience in protest against incidents of police brutality and all racially motivated violence against black people. <br>BLM is a movement to eradicate white supremacy and build local power to intervene in violence inflicted on Black communities by the state and vigilantes. The popularity of BLM has rapidly shifted over time. <p>In the following survey we will show you headlines/articles covering the movement. "],
         ["<h3>Data Privacy</h3> Your personal data, such as name, date of birth or email address will not be collected, meaning that the information you provide is completely anonymous. All data you provide will be further anonymized so that it cannot be traced back to a single account. <p>This study is part of a PhD dissertation and has been approved by the Social Sciences Ethics Review Board at the University of Nicosia in Cyprus. All information you provide will be strictly confidential and anonymous and will only be used for the purpose of the study. Only the researchers will see any raw data and no individual identifiers (i.e., your name or date of birth) will be collected. <p>Participation is completely voluntary, and you may withdraw at any time."],
-        ["Continuing with this questionnaire implies consent. <br>You will receive your MT code at the end of the survey."]],
+        ["Continuing with this questionnaire implies consent. <br>You will receive you can enter your MTurk Worker ID (located on the top right hand corner on MTurk) at the end of the survey."]],
       show_clickable_nav: true
     };
 
@@ -81,11 +90,54 @@
           ],
     };
 
-    // Article loop
-    var headlines = [["<b>Protests worldwide embrace Black Lives Matter movement</b>"],["<b>Activists paint 'defund the police' next to 'Black Lives Matter' outside White House</b>"],
-    ["<b>Can the American-led Black Lives Matter movement trigger an African awakening?</b>"],
-    ["<b>Tucker Carlson: Black Lives Matter is now a powerful politcal party and has nothing to do with black lives.</b>"]];
-    var text_of_headline = [["Article on 'Protests...'"],
+    // Block 1
+    var headlines_block1 = [["<b>Astrid Kruse Jensen</b>"],["<b>Seasense</b>"]];
+    
+    var urls_block1 = [["http://astridkrusejensen.com"],["https://seasense.github.io"]];
+    
+    var pick_headline = {
+      type: 'html-button-response',
+      stimulus: "<b>Read the headlines and pick one:</b>",
+      choices: headlines_block1,
+      on_finish(data){
+        n_headlines_clicked += 1
+        headline_picked = data.button_pressed
+      }
+    };
+    var present_page_of_headline = {
+      type: 'html-button-response',
+      stimulus: function(){page="<iframe src="+urls_block1[headline_picked]+" width='1000' height='400'></iframe>";return[page]},
+      choices: ["Continue"]
+    };
+    var comment_box = {
+      type: 'survey-text-blm',
+      questions: [
+        {prompt: "Please write a short comment referring to the article (max. 280 characters)?", rows: 7, columns: 40}],
+      minLength: 5,
+      maxLength: 280,
+      on_finish(data){
+        console.log(data.response_length);
+
+      }
+    };
+    headline_loop = {
+      timeline: [pick_headline,present_page_of_headline,comment_box],
+      loop_function: function(data){      
+          if(n_headlines_clicked < 2){
+                  return true;
+              } else {
+                  return false;
+              }
+        },
+       
+    };
+
+ // Article loop 2
+ /*
+    var headlines2 = [["<a href='https://seasense.github.io'><b>Public support for the Black Lives Matter movement has dropped since June, report finds</b><a>"],["<b>Virginia Black Lives Matter leader found guilty of two protest-related charges for blocking traffic</b>"],
+    ["<b>Despite Trump's 'law and order' rhetoric, protesters won't back down</b>"],
+    ["<b>Trump tries to link COVID-19 surge to Black Lives Matter protest.</b>"]];
+    var text_of_headline = [["Click below to read the article'"],
     ["Article on 'Activists paint...'"],["Article on 'Can the American-led ...'"],["Article on Tucker Carlson: ...'"]]
     var pick_headline = {
       type: 'html-button-response',
@@ -99,25 +151,63 @@
     var present_text_of_headline = {
       type: 'html-button-response',
       stimulus: function(){heading = headlines[headline_picked]; txt=text_of_headline[headline_picked];return[" "+heading+"<p>"+txt+""]},
-      choices: ["Enter"]
+      choices: ["Read"]
     };
     headline_loop = {
       timeline: [pick_headline,present_text_of_headline,BLM_rating],
       loop_function: function(data){      
-          if(n_headlines_clicked < 3){
+          if(n_headlines_clicked < 1){
                   return true;
               } else {
                   return false;
               }
-        },
-       
+        },*/
+
+     // Article loop 3
+    /*var headlines = [["<b>Support for Black Lives Matter reaches all-time high</b>"],["<b>How Black Lives Matter went from a hashtag to a global rallying cry</b>"],
+    ["<b>Rob Smith: Black Lives Matter doesn’t really care about Black lives lost unless group can blame police</b>"],
+    ["<b>US schools revamp curricula in response to Black Lives Matter</b>"]];
+    var text_of_headline = [["Click below to read the article'"],
+    ["Article on 'Activists paint...'"],["Article on 'Can the American-led ...'"],["Article on Tucker Carlson: ...'"]]
+    var pick_headline = {
+      type: 'html-button-response',
+      stimulus: "<b>Read the headlines and pick one:</b>",
+      choices: headlines,
+      on_finish(data){
+        n_headlines_clicked += 1
+        headline_picked = data.button_pressed
+      }
     };
-    var code_txt = "Please make note of the following code. You will input it through Mechanical Turk to indicate your completion of the study. Then click the button on the bottom of the page to submit your answers.";
+    var present_text_of_headline = {
+      type: 'html-button-response',
+      stimulus: function(){heading = headlines[headline_picked]; txt=text_of_headline[headline_picked];return[" "+heading+"<p>"+txt+""]},
+      choices: ["Read"]
+    };
+    headline_loop = {
+      timeline: [pick_headline,present_text_of_headline,BLM_rating],
+      loop_function: function(data){      
+          if(n_headlines_clicked < 1){
+                  return true;
+              } else {
+                  return false;
+              }
+        },  
+    };*/
+
+    var BLM_rating = {
+      type: 'survey-likert',
+      questions: [
+        {prompt: "How strongly do you feel about the Black Lives Matter Movement?", name: 'BLM_rating', labels: scale_BLM, required: true}
+      ],
+      randomize_question_order: false
+    };
+
+    /*var code_txt = "Please make note of the following code. You will input it through Mechanical Turk to indicate your completion of the study. Then click the button on the bottom of the page to submit your answers.";
     var code = {
       type: 'html-button-response',
       stimulus:function(){return[" "+code_txt+"<p>"+participant_code+""]},
       choices: ["Submit"]
-    }
+    }*/
 
     var goodbye = {
       type: 'html-button-response',
@@ -126,7 +216,7 @@
     }
 
     jsPsych.init({
-      timeline: [welcome,information,demographics_I,BLM_rating,newsBehavior,headline_loop,code,goodbye],
+      timeline: [welcome,headline_loop,/*information,demographics_I,BLM_rating,newsBehavior,code,*/goodbye],
       show_progress_bar: true,
       on_finish: function() { 
         jsPsych.data.get().localSave('csv', 'my_BLM_Data.csv');
