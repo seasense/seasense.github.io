@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jspsych-6-mathPilot/jspsych.js"></script>
+    <script src="jspsych-6-mathPilot/plugins/jspsych-html-button-response.js"></script>
+    <script src="jspsych-6-mathPilot/plugins/jspsych-instructions.js"></script>
+    <script src="jspsych-6-mathPilot/plugins/jspsych-survey-multi-choice.js"></script>
+    <script src="jspsych-6-mathPilot/plugins/jspsych-survey-likert.js"></script>
+    <script src="jspsych-6-mathPilot/plugins/jspsych-external-html.js"></script>
+    <script src="jspsych-6-mathPilot/plugins/jspsych-survey-text-blm.js"></script>
+    <script src="jspsych-6-mathPilot/plugins/equations.js"></script>
+    <link rel="stylesheet" href="jspsych-6-mathPilot/css/jspsych.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+
+  <script>
+    
+    // Helper functions and objects to store data
+    function scrollWin() {window.scrollTo(0, 0);};
+    
+    function openwindow(link) {
+                      popup = window.open(link,'Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width='+1024+',height='+768+'');
+                    }
+    function randomInteger(min, max) {return Math.floor(Math.random() * (max - min) + min);};
+    function makeSeq(seqLength) {
+      sequence = [];
+      for (i = 0; i < seqLength; i++) {sequence.push(randomInteger(0,10));}
+      return sequence
+    };
+
+    function eqGenerator (problem_type) {
+        var eq_array_display = []
+        var eq_array_respCorrect = []
+        var eq_array_correctEquation = []
+        for (j = 0; j < nEqs; j++){
+          eqGeneFx_result = eqGeneFx (problem_type)
+          display_j = eqGeneFx_result.displayed_equation
+          response_j = eqGeneFx_result.required_response
+          correct_equation = eqGeneFx_result.correct_equation
+          eq_array_display.push(display_j)
+          eq_array_respCorrect.push(response_j)
+          eq_array_correctEquation.push(correct_equation)
+        }
+        return {eq_array_display: eq_array_display, eq_array_respCorrect: eq_array_respCorrect, eq_array_correctEquation: eq_array_correctEquation}
+    };
+    
+    // Fixed parameters
+    nEqs = 2
+    n_Rounds_total = 4
+    //
+    participant_code = makeSeq(5);
+    participant_code = participant_code.join('');
+    console.log(participant_code);
+    // INSTRUKTIONEN
+    var welcome = {
+      type: 'html-button-response',
+      stimulus: "<h3>Welcome!</h3>In the following you can practice certain arithmetic problem types, namely<br> adding (+), subtracting (-), multiplying (*), and dividing (:) numbers.<p> <b>Be as accurate as possible! <p>Do not use any additional aids (e.g., a calculator), and do not search the Web!",
+      choices: ["Enter"],
+      on_finish(){
+        n_Rounds = 0;
+        n_Trials = 0;
+        numberEqsCorrect = 0;
+      }
+    };
+
+    var problem_types = [["<b>+</b>"],["<b>-</b>"],["<b>*</b>"],["<b>:</b>"]];
+    
+    var choose_problemType = {
+      type: 'html-button-response',
+      stimulus: "<b>Which type of problem do you want to practice?</b>",
+      choices: problem_types,
+      on_finish(data){
+        n_Rounds += 1
+        problemType_clicked = data.button_pressed
+        equations_and_responses_roundx = eqGenerator(problemType_clicked)
+        Eq_i = 0
+      }
+    };
+
+    var response_buttons = [ ["Yes"] , ["No"] ]
+    var present_equation = {
+      type: 'html-button-response', 
+      stimulus: function(){ var eq_Stimulus = equations_and_responses_roundx.eq_array_display[Eq_i]; return [ "<p>Is this equation correct? </p> <b>"+eq_Stimulus+"" ]},
+      choices: response_buttons,
+      response_ends_trial: true,
+      timing_post_trial: 500,
+      on_finish: function(data){
+        eq_displayed = equations_and_responses_roundx.eq_array_display[Eq_i]
+        required_Eq_Response = equations_and_responses_roundx.eq_array_respCorrect[Eq_i]
+        correct_equation = equations_and_responses_roundx.eq_array_correctEquation[Eq_i]
+        b_pressed = data.button_pressed
+        provided_Eq_Response = response_buttons[b_pressed]
+        if(required_Eq_Response==b_pressed){trial_correct = 1;numberEqsCorrect += 1;feedback = "<b style='color:green';>Correct</b>"}else{trial_correct = 0; feedback="<b style='color:red';>Wrong</b>"}
+        if(trial_correct==0){if(b_pressed==0){type_of_response = "FA"}else{type_of_response = "Miss"}}
+        if(trial_correct==1){if(b_pressed==0){type_of_response = "Hit"}else{type_of_response = "CR"}}
+        Eq_i += 1
+        n_Trials += 1
+        accuracy = numberEqsCorrect/n_Trials
+        console.log(type_of_response)
+      },
+    };
+
+    var present_feedback = {
+      type: 'html-button-response',
+      stimulus: function(){ 
+        if(trial_correct==1){
+          if(type_of_response=="Hit"){stim = ""+feedback+"<p style='color:black'>The presented equation was correct: <br>" +eq_displayed+" </b> <p>Current accuracy: <b>"+Math.round(accuracy*100)+"%</b><p>"}else{stim = ""+feedback+"<b></b><p style='color:black'>The presented equation was incorrect: <br>" +eq_displayed+" <p style='color:black'>The correct one would have been: <br>" +correct_equation+" <p> Current accuracy: <b>"+Math.round(accuracy*100)+"%</b><p>"}
+        }else{
+          if(type_of_response=="FA"){stim = ""+feedback+"<b></b><p style='color:black'>The presented equation was incorrect: <br>" +eq_displayed+" <p style='color:black'>The correct one would have been: <br>" +correct_equation+" <p> Current accuracy: <b>"+Math.round(accuracy*100)+"%</b><p>"}else{stim = ""+feedback+"<p style='color:black'>The presented equation was correct: <br>" +eq_displayed+" <p>Current accuracy: <b>"+Math.round(accuracy*100)+"%</b><p>"}}
+        ;return stim},
+      choices: ["Next"],
+      data: function(){return{displayedEquation: eq_displayed, correctResponse: response_buttons[required_Eq_Response], actualResponse: response_buttons[b_pressed], type_of_response: type_of_response, current_percentCorrect: accuracy}}
+    }
+
+    loop_1 = {
+      timeline: [present_equation,present_feedback],
+      loop_function: function(data){      
+          if(Eq_i < nEqs){
+                  return true;
+              } else {
+                  return false;
+              }
+        },
+       
+    };
+
+    loop_2 = {
+      timeline: [choose_problemType,loop_1],
+      loop_function: function(data){      
+          if(n_Rounds < n_Rounds_total){
+                  return true;
+              } else {
+                  return false;
+              }
+        },
+    }
+
+    var goodbye = {
+      type: 'html-button-response',
+      stimulus: "<h3>We would like to thank you very much for participating in this study.</h3> <p> Press Submit to save and send the data to our university server.",
+      choices: ["Submit"]
+    }
+
+    jsPsych.init({
+      timeline: [welcome,loop_2,goodbye],
+      show_progress_bar: true,
+      on_finish: function() { 
+        jsPsych.data.get().localSave('csv', 'my_math_Data.csv');
+      }
+    });
+
+  </script>
+</html>
