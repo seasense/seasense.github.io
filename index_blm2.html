@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jspsych-6-blm/jspsych.js"></script>
+    <script src="jspsych-6-blm/plugins/jspsych-html-button-response.js"></script>
+    <script src="jspsych-6-blm/plugins/jspsych-instructions.js"></script>
+    <script src="jspsych-6-blm/plugins/jspsych-survey-multi-choice.js"></script>
+    <script src="jspsych-6-blm/plugins/jspsych-survey-likert.js"></script>
+    <script src="jspsych-6-blm/plugins/jspsych-external-html.js"></script>
+    <script src="jspsych-6-blm/plugins/jspsych-survey-text-blm.js"></script>
+    <link rel="stylesheet" href="jspsych-6-blm/css/jspsych.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+
+  
+
+  <script>
+    
+
+    // Helper functions and objects to store data
+    function scrollWin() {window.scrollTo(0, 0);};
+    
+    function openwindow(link) {
+                      popup = window.open(link,'Popup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width='+1024+',height='+768+'');
+                    }
+    function randomInteger(min, max) {return Math.floor(Math.random() * (max - min) + min);};
+    function makeSeq(seqLength) {
+      sequence = [];
+      for (i = 0; i < seqLength; i++) {sequence.push(randomInteger(0,10));}
+      return sequence
+    };
+    
+    participant_code = makeSeq(5);
+    participant_code = participant_code.join('');
+    console.log(participant_code);
+    // INSTRUKTIONEN
+    var welcome = {
+      type: 'html-button-response',
+      stimulus: "<h3>Welcome!</h3>Thank you for picking our study. We are investigating current social movements, namely the 'Black Lives Matter' (referred to as BLM in this survey) movement. The questionnaire will take 25-30 minutes to complete and will involve multiple choice style questions which will link to articles and in some cases a short comment section. There are no right or wrong answers.",
+      choices: ["Enter"],
+      on_finish(){
+        n_headlines_clicked = 0;
+      }
+    };
+
+    var informedConsent={
+      
+    };
+    var information = {
+      type: 'instructions',
+      pages: [["<h3>About Black Lives Matter (BLM)</h3> The social movement #BlackLivesMatter started in 2013 in response to the acquittal of Trayvon Martin's murderer. <br>Black Lives Matter (BLM) is a decentralized political and social movement advocating for non-violent civil disobedience in protest against incidents of police brutality and all racially motivated violence against black people. <br>BLM is a movement to eradicate white supremacy and build local power to intervene in violence inflicted on Black communities by the state and vigilantes. The popularity of BLM has rapidly shifted over time. <p>In the following survey we will show you headlines/articles covering the movement. "],
+        ["<h3>Data Privacy</h3> Your personal data, such as name, date of birth or email address will not be collected, meaning that the information you provide is completely anonymous. All data you provide will be further anonymized so that it cannot be traced back to a single account. <p>This study is part of a PhD dissertation and has been approved by the Social Sciences Ethics Review Board at the University of Nicosia in Cyprus. All information you provide will be strictly confidential and anonymous and will only be used for the purpose of the study. Only the researchers will see any raw data and no individual identifiers (i.e., your name or date of birth) will be collected. <p>Participation is completely voluntary, and you may withdraw at any time."],
+        ["Continuing with this questionnaire implies consent. <br>You will receive you can enter your MTurk Worker ID (located on the top right hand corner on MTurk) at the end of the survey."]],
+      show_clickable_nav: true
+    };
+
+    var MC_gender = ["Female ", "Male ", "Other ", "Prefer not to answer "];
+    var MC_age = ["Under 18 ","18-24 ","25-34 ","35-44 ","45-54 ","55-64 ","65-74 ","75-84 ","85 or older "];
+    var MC_ethnicity = ["Black or African American ","American Indian or Alaska Native ","Asian ","Native Hawaiian or Pacific Islander ","White ","Other "];
+    var MC_schoolLevel = ["Less than a high school diploma ", "High school degree or equivalent (e.g., GED) ", "Some college, no degree ", "Associate degree (e.g., AA, AS) ", "Bachelor's degree (e.g., BA, BS) ","Master's degree (e.g., MA, MS, MEd) ","Doctorate or professional degree (e.g., MD, DDS, PhD) "];
+    var MC_vote = ["Yes ","No ","Prefer not to say "]
+    var MC_politicalView = ["Very liberal ","Slightly liberal ","Slightly conservative ","Very conservative ","Prefer not to say "]
+    var scale_BLM = ["0 (negative)", "1", "2", "3", "4", "5 (neutral)", "6", "7", "8", "9", "10 (positive)"];
+    var MC_news = ["Social media ","News outlets ","Social network (family, friends, etc.) "];
+
+    var demographics_I = {
+      type: 'survey-multi-choice',
+      questions: [
+          {prompt: "<b>What gender do you identify as?</b>", name: 'gender', options: MC_gender, required:true, horizontal: false}, 
+          {prompt: "<b>What is your age?</b>", name: 'age', options: MC_age, required: true},
+          {prompt: "<b>How would you describe yourself? Please select all that apply.</b>", name: 'ethnicity', options: MC_ethnicity, required: true},
+          {prompt: "<b>What is the highest degree or level of school you have completed?</b>", name: 'schoolDegree', options: MC_schoolLevel, required: true},
+          {prompt: "<b>Are you registered to vote?</b>", name: 'vote', options: MC_vote, required: true, horizontal: false},
+          {prompt: "<b>How would you describe your political view?</b>", name: 'politicalView', options: MC_politicalView, required: true}
+          ],
+    };
+
+    var BLM_rating = {
+      type: 'survey-likert',
+      questions: [
+        {prompt: "How strongly do you feel about the Black Lives Matter Movement?", name: 'BLM_rating', labels: scale_BLM, required: true}
+      ],
+      randomize_question_order: false
+    };
+
+    var newsBehavior = {
+      type: 'survey-multi-choice',
+      questions: [
+          {prompt: "<b>Where do you mostly get the news from about current events? Select all that apply:</b>", name: 'news', options: MC_news, required:true}, 
+          ],
+    };
+
+    // Block 1
+    var headlines_block1 = [["<b>Tucker Carlson: Black Lives Matter is now a powerful political party and has nothing to do with black lives</b>"],["<b>Can the American-led Black Lives Matter movement trigger an African awakening?</b>"]];
+    
+    var urls_block1 = [["blm_pages/TuckerCarlson.html"],["blm_pages/africanAwakening.html"]];
+    
+    var pick_headline = {
+      type: 'html-button-response',
+      stimulus: "<b>Read the headlines and pick one:</b>",
+      choices: headlines_block1,
+      on_finish(data){
+        n_headlines_clicked += 1
+        headline_picked = data.button_pressed
+      }
+    };
+    var present_page_of_headline = {
+      type: 'html-button-response',
+      stimulus: function(){page="<iframe src="+urls_block1[headline_picked]+" width='1000' height='400'></iframe>";return[page]},
+      choices: ["Continue"]
+    };
+    var comment_box = {
+      type: 'survey-text-blm',
+      questions: [
+        {prompt: "Please write a short comment referring to the article (max. 280 characters)?", rows: 7, columns: 40}],
+      minLength: 5,
+      maxLength: 280,
+      on_finish(data){
+        console.log(data.response_length);
+
+      }
+    };
+    headline_loop = {
+      timeline: [pick_headline,present_page_of_headline,comment_box],
+      loop_function: function(data){      
+          if(n_headlines_clicked < 2){
+                  return true;
+              } else {
+                  return false;
+              }
+        },
+       
+    };
+
+ // Article loop 2
+ /*
+    var headlines2 = [["<a href='https://seasense.github.io'><b>Public support for the Black Lives Matter movement has dropped since June, report finds</b><a>"],["<b>Virginia Black Lives Matter leader found guilty of two protest-related charges for blocking traffic</b>"],
+    ["<b>Despite Trump's 'law and order' rhetoric, protesters won't back down</b>"],
+    ["<b>Trump tries to link COVID-19 surge to Black Lives Matter protest.</b>"]];
+    var text_of_headline = [["Click below to read the article'"],
+    ["Article on 'Activists paint...'"],["Article on 'Can the American-led ...'"],["Article on Tucker Carlson: ...'"]]
+    var pick_headline = {
+      type: 'html-button-response',
+      stimulus: "<b>Read the headlines and pick one:</b>",
+      choices: headlines,
+      on_finish(data){
+        n_headlines_clicked += 1
+        headline_picked = data.button_pressed
+      }
+    };
+    var present_text_of_headline = {
+      type: 'html-button-response',
+      stimulus: function(){heading = headlines[headline_picked]; txt=text_of_headline[headline_picked];return[" "+heading+"<p>"+txt+""]},
+      choices: ["Read"]
+    };
+    headline_loop = {
+      timeline: [pick_headline,present_text_of_headline,BLM_rating],
+      loop_function: function(data){      
+          if(n_headlines_clicked < 1){
+                  return true;
+              } else {
+                  return false;
+              }
+        },*/
+
+     // Article loop 3
+    /*var headlines = [["<b>Support for Black Lives Matter reaches all-time high</b>"],["<b>How Black Lives Matter went from a hashtag to a global rallying cry</b>"],
+    ["<b>Rob Smith: Black Lives Matter doesn’t really care about Black lives lost unless group can blame police</b>"],
+    ["<b>US schools revamp curricula in response to Black Lives Matter</b>"]];
+    var text_of_headline = [["Click below to read the article'"],
+    ["Article on 'Activists paint...'"],["Article on 'Can the American-led ...'"],["Article on Tucker Carlson: ...'"]]
+    var pick_headline = {
+      type: 'html-button-response',
+      stimulus: "<b>Read the headlines and pick one:</b>",
+      choices: headlines,
+      on_finish(data){
+        n_headlines_clicked += 1
+        headline_picked = data.button_pressed
+      }
+    };
+    var present_text_of_headline = {
+      type: 'html-button-response',
+      stimulus: function(){heading = headlines[headline_picked]; txt=text_of_headline[headline_picked];return[" "+heading+"<p>"+txt+""]},
+      choices: ["Read"]
+    };
+    headline_loop = {
+      timeline: [pick_headline,present_text_of_headline,BLM_rating],
+      loop_function: function(data){      
+          if(n_headlines_clicked < 1){
+                  return true;
+              } else {
+                  return false;
+              }
+        },  
+    };*/
+
+    var BLM_rating = {
+      type: 'survey-likert',
+      questions: [
+        {prompt: "How strongly do you feel about the Black Lives Matter Movement?", name: 'BLM_rating', labels: scale_BLM, required: true}
+      ],
+      randomize_question_order: false
+    };
+
+    /*var code_txt = "Please make note of the following code. You will input it through Mechanical Turk to indicate your completion of the study. Then click the button on the bottom of the page to submit your answers.";
+    var code = {
+      type: 'html-button-response',
+      stimulus:function(){return[" "+code_txt+"<p>"+participant_code+""]},
+      choices: ["Submit"]
+    }*/
+
+    var goodbye = {
+      type: 'html-button-response',
+      stimulus: "<h3>We would like to thank you very much for participating in this study.</h3> This study shows how people's confirmation bias is influenced by immediate memory recall through coding retrieval when people write a short text after being confronted with their confirmation bias; in this case different news headlines & articles about BLM. We wanted to test whether people change their beliefs after being confronted with the memory recall or whether their beliefs get strengthened. The study is being conducted in the USA.<p>The information you have provided is strictly confidential. The results will be analysed and reported as a whole and as mentioned in the beginning no personal identifiers were collected during the survey.<p>If you have questions about the research, you may contact the researcher ari.trizia@gmail.com. If you have any ethical concerns about this study and would like to talk to an impartial person, please contact Dr Maria Koushiou (koushiou.m@unic.ac.cy) Co-Chair of the Social Sciences Ethics Review Board (SSERB).<p>By submitting your questions and hitting the final 'submit' button it indicates that you acknowledge this 'debrief'. Once you've submitted your answers you can enter your Code into Mechanical Turk for completion.",
+      choices: ["Submit"]
+    }
+
+    jsPsych.init({
+      timeline: [welcome,headline_loop,/*information,demographics_I,BLM_rating,newsBehavior,code,*/goodbye],
+      show_progress_bar: true,
+      on_finish: function() { 
+        jsPsych.data.get().localSave('csv', 'my_BLM_Data.csv');
+      }
+    });
+
+  </script>
+</html>
